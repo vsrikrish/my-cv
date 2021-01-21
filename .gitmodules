@@ -1,0 +1,4 @@
+[submodule "bibliography"]
+	path = bibliography
+	url = https://github.com/vsrikrish/bibliography.git
+	branch = main
