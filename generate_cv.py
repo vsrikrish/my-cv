@@ -1,0 +1,129 @@
+import os
+import sys
+import re
+
+import yaml  # parse YAML files
+import bibtexparser  # parse bibtex database
+from bibtexparser.bparser import BibTexParser
+import bibtexparser.customization as bc
+import jinja2  # templating for CV
+
+# add parent directory to system path
+try:
+    fileroot = os.path.realpath(__file__)
+except NameError:  # We are the main py2exe script, not a module
+    fileroot = os.path.realpath(os.getcwd())
+os.chdir('/Users/vxs914/Documents/my-cv')
+fileroot
+sys.path.append(fileroot)
+import filters  # filters for Jinja
+
+class CV(object):
+    """
+    Build CV in LaTeX and Markdown formats from YAML and BiBTeX inputs
+    """
+
+    def __init__(self, config_file, filters=None, templates=None):
+
+        self.filters = filters
+        # read config file
+        with open(config_file, 'r') as f:
+            config = yaml.load(f, Loader=yaml.FullLoader)
+
+        # read in section data files
+        sections = [
+            {'title': k['title'], 'entries': yaml.load(open(os.path.join(config['paths']['yaml_path'], k['file']), 'r'), Loader=yaml.FullLoader)}
+            for k in config['sections']
+        ]
+        # read in bibtex databases
+        # configure parser
+        parser = BibTexParser(common_strings=True)
+        parser.ignore_nonstandard_types = False
+        pubs = [
+            parser.parse_file(open(os.path.join(config['paths']['bib_path'], k['file']), 'r'))
+            for k in config['publications']
+        ]
+        pubs_all = [p for l in pubs for p in l.get_entry_list()]  # concatenate pub lists
+
+        # combine personal, sectional data, and publication data
+        self.data = {'person': config['person'], 'sections': sections, 'publications': pubs_all}
+
+        # load templates
+        templates = {} if templates is None else templates
+        self.loader = jinja2.loaders.DictLoader(templates)
+
+    def remove_newlines(self):
+        for pub in self.data['publications']:
+            for key, val in pub.items():
+                pub[key] = val.replace('\n', ' ')
+
+    #
+    def format_authors(self):
+        for pub in self.data['publications']:
+            authors = pub['author']
+            authors = authors.split(' and ')
+            for ia, author in enumerate(authors):
+                names = author.split(', ')
+                name_parts = names[1].split(' ')
+                inits = []
+                for name in name_parts:
+                    inits.append(name[0] + '.')
+                names[1] = ' '.join(inits).rstrip()
+                authors[ia] = ', '.join(names)
+            pub['authorlist'] = authors
+
+    @property
+    def jenv_md(self):
+        """
+        Set up HTML/Markdown Jinja environment
+        """
+        loader = jinja2.loaders.ChoiceLoader([
+            self.loader,
+            jinja2.FileSystemLoader(
+                os.path.join(os.path.dirname(os.path.realpath(__file__)), 'templates'))
+        ])
+        jenv = jinja2.Environment(loader=loader)
+        for f in self.filters:
+            jenv.filters[f.__name__] = f
+        return jenv
+
+    @property
+    def jenv_tex(self,):
+        """
+        Set up TeX environment
+        """
+        try:
+            fileroot = os.path.realpath(__file__)
+        except NameError:  # We are the main py2exe script, not a module
+            fileroot = os.path.realpath(os.getcwd())
+        loader = jinja2.ChoiceLoader([
+            self.loader,
+            jinja2.FileSystemLoader(
+                os.path.join(fileroot, 'templates'))
+        ])
+        jenv = jinja2.Environment(loader=loader)
+        # define new delimiters to avoid TeX conflicts
+        jenv.block_start_string = '((*'
+        jenv.block_end_string = '*))'
+        jenv.variable_start_string = '((('
+        jenv.variable_end_string = ')))'
+        jenv.comment_start_string = '((='
+        jenv.comment_end_string = '=))'
+        for f in self.filters:
+            jenv.filters[f.__name__] = f
+        return jenv
+
+    def render_tex(self, template, **kwargs):
+        return self.jenv_tex.get_template(template).render(
+            data=self.data, **kwargs)
+
+
+my_filters = [
+    filters.escape_tex,
+    filters.select_by_attr_name,
+    filters.sort_cast_int
+]
+cv = CV('_config.yml', filters=my_filters)
+cv.remove_newlines()
+with open('Srikrishnan-CV.tex', 'w') as f:
+    f.write(cv.render_tex("cv.tex"))

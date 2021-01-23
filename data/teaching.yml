@@ -1,0 +1,61 @@
+classes:
+  - title: Ordinary Differential Equations
+    course: Math 411
+    university: Pennsylvania State University
+    role: Primary Instructor
+    semester: Summer
+    year: 2008, 2010
+  - title: Ordinary and Partial Differential Equations
+    course: Math 251
+    role: Primary Instructor
+    university: Pennsylvania State University
+    semester: Fall and Spring
+    year: 2007, 2008, 2009
+  - title: Ordinary Differential Equations
+    course: Math 250
+    role: Primary Instructor
+    university: Pennsylvania State University
+    semester: Fall
+    year: 2006
+  - title: Integral Vector Calculus
+    course: Math 232
+    role: Primary Instructor
+    university: Pennsylvania State University
+    semester: Spring
+    year: 2010
+  - title: Calculus of Several Variables
+    course: Math 231
+    role: Primary Instructor
+    university: Pennsylvania State University
+    semester: Fall and Spring
+    year: 2004, 2006
+  - title: Calculus with Analytic Geometry II
+    course: Math 141
+    role: Primary Instructor
+    university: Pennsylvania State University
+    semester: Fall
+    year: 2009
+  - title: Calculus with Analytic Geometry I
+    course: Math 140
+    role: Primary Instructor
+    university: Pennsylvania State University
+    semester: Spring
+    year: 2011
+  - title: Trigonometry and Analytic Geometry
+    course: Math 41
+    role: Primary Instructor
+    university: Pennsylvania State University
+    semester: Fall
+    year: 2005, 2010
+  - title: Symplectic Geometry
+    course: Math 497
+    role: Teaching Assistant
+    university: Pennsylvania State University
+    semester: Fall
+    year: 2008
+  - title: Thermodynamics in Energy and Mineral Engineering
+    course: EME 301
+    role: Teaching Assistant
+    university: Pennsylvania State University
+    semester: Fall and Spring
+    year: 2014, 2015, 2016

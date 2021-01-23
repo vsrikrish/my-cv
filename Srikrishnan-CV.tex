@@ -1,0 +1,270 @@
+
+\documentclass[11pt,article,oneside]{memoir}
+\usepackage[english]{babel}
+\usepackage{titlesec}
+\usepackage{setspace}
+
+% margins
+\usepackage[left=1.25in, right=1.75in, top=1in, bottom=0.75in]{geometry}% adjust the page margins
+
+\RequirePackage{xcolor}
+\definecolor{CornellRed}{HTML}{b31b1b} % official Cornell blue color -- use for text etc
+\definecolor{CornellGray}{HTML}{222222} % official Cornell gray -- use for Section
+\definecolor{LightGray}{HTML}{F7F7F7} % background color -- do not use for anything else
+\definecolor{BrickRed}{HTML}{C04829} % backup color
+\definecolor{GrassGreen}{HTML}{359245}
+\definecolor{WarmYellow}{HTML}{E9A139}
+
+%% Choose fonts for use with xelatex
+\usepackage{fontspec}
+\setmainfont[Path=fonts/,
+Mapping={tex-text},
+Numbers={OldStyle},
+Ligatures={Common},
+UprightFont=*-Regular,
+BoldFont=*-Bold
+]{CrimsonText}
+\setsansfont[Path=fonts/,
+Mapping=tex-text,
+Colour=b31b1b,
+UprightFont=*-Regular,
+BoldFont=*-Bold,
+ItalicFont=*-Italic]{Lato}
+\setmonofont[Path=fonts/,
+Mapping=tex-text,
+Scale=0.9,
+UprightFont=*-Regular]{Inconsolata}
+
+%%------------------------------------------------------------------------
+%% Section styling
+%%------------------------------------------------------------------------
+
+%% This includes a fudge from the following link in order to get the
+%% subsection to align with a section
+%% http://tex.stackexchange.com/questions/19200/titlesec-remove-space-after-empty-margin-section
+
+\makeatletter
+\newif\ifaftersec\aftersecfalse
+
+\newcommand\setsubskip{%
+    \global\aftersectrue
+    \everypar{%
+        \global\aftersecfalse
+        \if@noskipsec
+            \global\@noskipsecfalse
+            \clubpenalty\@M
+            \hskip-\parindent
+            \begingroup
+                \@svsechd\unskip{\hspace{\@tempskipb}}%
+            \endgroup
+        \else
+            \clubpenalty\@clubpenalty\everypar{}%
+        \fi}}
+
+\newcommand\subskip{%
+  \ifaftersec
+     \removelastskip%         EDIT 2
+     \vspace{-\baselineskip}% EDIT 2 ??????????????
+  \fi
+  \global\aftersecfalse}
+
+% Section styling
+\titleformat{\section}[leftmargin]{\raggedleft\sffamily\bfseries\footnotesize}{}{0pt}{}[\setsubskip]
+\titlespacing*{\section}{2cm}{1ex}{0cm}
+
+% Subsection styling
+\titleformat{\subsection}{\subskip\itshape}{}{0pt}{}[]
+\titlespacing*{\subsection}{0em}{2.5ex}{1ex}
+
+\raggedbottom
+\makeatother
+
+% useful macro
+\newcommand{\dotspace}{\quad}
+
+% better lists
+\usepackage{enumitem}
+\setlist[itemize]{nosep, noitemsep, labelsep=0pt, after=\vspace{\baselineskip}}
+
+% Use BibLaTeX
+\usepackage{csquotes}
+\usepackage[
+	backend=biber,
+	style=publist,
+	plauthorfirstinit=true,
+	plauthorhandling=highlight,
+	plnumbered=false,
+	labeldateparts=false,
+	%linktitleall=true,
+	boldyear=false,
+	marginyear=false,
+	doi=true,
+	url=false,
+	isbn=false,
+	maxbibnames=99,
+	maxcitenames=99,
+]{biblatex}
+
+\nocite{*}
+
+\def\printbib#1{
+\newrefcontext[sorting=none]
+\printbibliography[category=#1,heading=#1,omitnumbers=false]}
+
+\DeclareFieldFormat{url}{\url{#1}}
+\DeclareFieldFormat[article]{pages}{#1}
+\DeclareFieldFormat[inproceedings]{pages}{\lowercase{pp.}#1}
+\DeclareFieldFormat[incollection]{pages}{\lowercase{pp.}#1}
+\DeclareFieldFormat[article]{volume}{\mkbibbold{#1}}
+\DeclareFieldFormat[article]{number}{\mkbibparens{#1}}
+\DeclareFieldFormat[article]{title}{\MakeCapital{#1}}
+\DeclareFieldFormat[article]{url}{}
+\DeclareFieldFormat[inproceedings]{title}{#1}
+\DeclareFieldFormat{shorthandwidth}{#1}
+\DeclareFieldFormat{extrayear}{}
+
+% Remove In: for an article.
+\renewbibmacro{in:}{%
+  \ifentrytype{article}{}{%
+  \printtext{\bibstring{in}\intitlepunct}}}
+
+% Bibliography categories
+\def\makebibcategory#1#2{\DeclareBibliographyCategory{#1}\defbibheading{#1}{\subsection*{#2}}}
+\makebibcategory{papers}{Peer-Reviewed Journal Articles}
+\makebibcategory{review}{Papers In Review or Forthcoming}
+\makebibcategory{books}{Books}
+\makebibcategory{chapters}{Book Chapters}
+\makebibcategory{conferences}{Conference Papers}
+\makebibcategory{talks}{Conference Talks}
+\makebibcategory{posters}{Conference Posters}
+\makebibcategory{editorials}{Editorials}
+\makebibcategory{phd}{PhD Theses}
+\makebibcategory{other}{Reviews, software \& other writing}
+
+
+
+
+
+
+
+\addbibresource[datatype=bibtex]{bibliography/library.bib}
+\addbibresource[datatype=bibtex]{bibliography/conferences.bib}
+
+\addtocategory{papers}{ Srikrishnan2019-xu ,   Morris2018-bj ,   Wong2018-kq ,   Srikrishnan2020-ky ,   Ruckert2019-di ,   Wong2017-oa ,   Oddo2017-dq ,   Srikrishnan2017-tn ,   Srikrishnan2015-ju ,   Srikrishnan2019-xu ,   Morris2018-bj ,   Wong2018-kq ,   Srikrishnan2020-ky ,   Ruckert2019-di ,   Wong2017-oa ,   Oddo2017-dq ,   Srikrishnan2017-tn ,   Srikrishnan2015-ju  }
+\addtocategory{review}{ Errickson_undated-wy ,   Srikrishnan_undated-vm ,   Helgeson_undated-ru ,   Srikrishnan_undated-cp ,   Srikrishnan_undated-cm ,   Errickson_undated-wy ,   Srikrishnan_undated-vm ,   Helgeson_undated-ru ,   Srikrishnan_undated-cp ,   Srikrishnan_undated-cm  }
+\addtocategory{conferences}{}
+\addtocategory{talks}{ Lucash_2019 ,   Srikrishnan_2015 ,   Srikrishnan_2014 ,   Lucash_2019 ,   Srikrishnan_2015 ,   Srikrishnan_2014  }
+\addtocategory{posters}{ Srikrishnan_2019a ,   Wong_2019 ,   Srikrishnan_2019b ,   Srikrishnan_2018a ,   Srikrishnan_2018b ,   Steinke_2018 ,   Srikrishnan_2017 ,   Spence_2017 ,   Srikrishnan_2016 ,   Srikrishnan_2015 ,   Srikrishnan_2019a ,   Wong_2019 ,   Srikrishnan_2019b ,   Srikrishnan_2018a ,   Srikrishnan_2018b ,   Steinke_2018 ,   Srikrishnan_2017 ,   Spence_2017 ,   Srikrishnan_2016 ,   Srikrishnan_2015  }
+
+%% other stuff
+% icons for the contact info
+\usepackage{fontawesome5}
+\usepackage{academicons}
+
+% macros and environments
+\newcommand{\Header}[1]{\\\multicolumn{3}{L{7in}}{\color{BrickRed}\Large{\spacedlowsmallcaps{#1}}}\\}
+\newcommand{\Publication}[1]{\fullcite{#1} & \citeyear{#1}}
+\newcommand{\CVEntry}[3]{#1 & #2 & #3}
+\newenvironment{cv}
+{
+	\noindent\begin{longtable}{ >{\em}R{1in} L{5in} >{\em}R{0.875in} }
+}{
+    \end{longtable}
+}
+
+% have to load this last
+\usepackage{hyperref} % Required for adding links	and customizing them
+\hypersetup{colorlinks, breaklinks, urlcolor=CornellRed, linkcolor=CornellRed}
+
+%---------------------------------------------------------------------
+
+\begin{document}
+
+%% Name and contact block
+
+\begin{minipage}[t]{2.8in}
+ \flushright {\footnotesize
+ \href{https://eesi.psu.edu}{Earth and Environmental Systems Institute}\\ \vspace{0in}
+ 319C Earth-Engineering Sciences Building\\ \vspace{0.01in} University Park, PA, 16802\\ \vspace{-0.04in} USA}
+ \end{minipage}%
+ \begin{minipage}[t]{2.5in}
+   \flushright {\footnotesize  \texttt{\href{mailto:vivek@psu.edu}{vivek@psu.edu}} \, \faEnvelope} \\ \vspace{-0.21in}
+   \flushright {\footnotesize  \texttt{\href{https://srikrishnan-lab.github.io/}{https://srikrishnan-lab.github.io/}} \, \faGlobe} \\ \vspace{-0.195in}
+   \flushright {\footnotesize
+   \texttt{\href{https://github.com/vsrikrish}{vsrikrish}} \, \faGithub} \\ \vspace{-0.185in}
+   \flushright {\footnotesize
+   \texttt{\href{https://scholar.google.com/citations?user=CY_JxugAAAAJ}{Vivek Srikrishnan}} \, \aiGoogleScholar}
+
+ \end{minipage}
+
+ \bigskip
+
+ %% Name
+ \quad\noindent{\LARGE\bfseries \textcolor{CornellGray}{Vivek Srikrishnan}}
+ \reversemarginpar
+
+\bigskip
+
+%% Research Interests
+
+\section{research interests}
+
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+
+\begin{itemize}[label={}]
+
+\item Climate risk management
+
+\item Coupled natural-human systems
+
+\item Complex system dynamics
+
+\item Decision-making under uncertainty
+
+\item Uncertainty characterization
+
+\end{itemize}
+
+%% Appointments
+
+\section{appointments}
+
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+
+\begin{itemize}[label={}]
+
+\item Visiting Assistant Professor, Department of Biological \& Environmental Engineering, Cornell University, 2020--present
+
+\item Assistant Research Professor, Earth \& Environmental Systems Institute, Pennsylvania State University, 2019--present
+
+\item Postdoctoral Scholar, Earth \& Environmental Systems Institute, Pennsylvania State University, 2018--2019
+
+\end{itemize}
+
+%% Education
+
+\section{education}
+
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+
+\begin{itemize}[label={}]
+
+\item Ph.D., Energy \& Mineral Engineering, Pennsylvania State University, 2018
+
+\item M.S., Energy \& Mineral Engineering, Pennsylvania State University, 2015
+
+\item B.S., Mathematics, University of Illinois at Urbana-Champaign, 2004
+
+\item B.A., Philosophy, University of Illinois at Urbana-Champaign, 2004
+
+\end{itemize}
+
+%% Publications
+\section{publications}
+\nocite{*}
+\printbibliography[title={Peer-Reviewed Journal Articles}, category=papers]
+
+\printbib{review}
+
+
+\end{document}

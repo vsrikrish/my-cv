@@ -1,0 +1,17 @@
+degrees:
+  - degree: Ph.D.
+    subject: Energy & Mineral Engineering
+    school: Pennsylvania State University
+    year: 2018
+  - degree: M.S.
+    subject: Energy & Mineral Engineering
+    school: Pennsylvania State University
+    year: 2015
+  - degree: B.S.
+    subject: Mathematics
+    school: University of Illinois at Urbana-Champaign
+    year: 2004
+  - degree: B.A.
+    subject: Philosophy
+    school: University of Illinois at Urbana-Champaign
+    year: 2004

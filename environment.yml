@@ -1,0 +1,8 @@
+name: cv
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.6
+  - bibtexparser
+  - jinja2
+  - pyyaml

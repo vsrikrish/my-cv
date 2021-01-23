@@ -1,0 +1,55 @@
+# Configuration for CV
+person:
+  first_name: Vivek
+  last_name: Srikrishnan
+  title: Assistant Research Professor
+  affiliation: Earth and Environmental Systems Institute
+  affiliation_link: https://eesi.psu.edu
+  email: vivek@psu.edu
+  web: https://srikrishnan-lab.github.io/
+  github: vsrikrish
+  googlescholar: CY_JxugAAAAJ
+  orcid: 0000-0003-0049-3805
+  subject: "climate, systems, engineering"
+  address:
+    line1: 319C Earth-Engineering Sciences Building
+    postcode: University Park, PA, 16802
+    country: USA
+
+paths:
+  bib_path: bibliography
+  yaml_path: data
+
+publications:
+  - title: Papers
+    file: library.bib
+  - title: Conferences
+    file: conferences.bib
+
+sections:
+  - title: Research Interests
+    file: interests.yml
+  - title: Appointments
+    file: appointments.yml
+  - title: Education
+    file: education.yml
+  - title: Invited Talks
+    file: talks.yml
+  - title: Workshops Organized
+    file: workshops.yml
+  - title: Grants and Contracts
+    file: grants.yml
+  - title: Networks and Projects
+    file: projects.yml
+  - title: Teaching
+    file: teaching.yml
+  - title: Advising
+    file: advising.yml
+  - title: Awards
+    file: awards.yml
+  - title: Outreach
+    file: outreach.yml
+  - title: Service
+    file: service.yml
+  - title: Professional Experience
+    file: experience.yml
