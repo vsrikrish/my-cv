@@ -3,9 +3,6 @@ import sys
 import re
 
 import yaml  # parse YAML files
-import bibtexparser  # parse bibtex database
-from bibtexparser.bparser import BibTexParser
-import bibtexparser.customization as bc
 import jinja2  # templating for CV
 
 # add parent directory to system path
@@ -35,42 +32,13 @@ class CV(object):
             {'title': k['title'], 'entries': yaml.load(open(os.path.join(config['paths']['yaml_path'], k['file']), 'r'), Loader=yaml.FullLoader)}
             for k in config['sections']
         ]
-        # read in bibtex databases
-        # configure parser
-        parser = BibTexParser(common_strings=True)
-        parser.ignore_nonstandard_types = False
-        pubs = [
-            parser.parse_file(open(os.path.join(config['paths']['bib_path'], k['file']), 'r'))
-            for k in config['publications']
-        ]
-        pubs_all = [p for l in pubs for p in l.get_entry_list()]  # concatenate pub lists
 
         # combine personal, sectional data, and publication data
-        self.data = {'person': config['person'], 'sections': sections, 'publications': pubs_all}
+        self.data = {'person': config['person'], 'paths': config['paths'], 'publications': config['publications'], 'sections': sections}
 
         # load templates
         templates = {} if templates is None else templates
         self.loader = jinja2.loaders.DictLoader(templates)
-
-    def remove_newlines(self):
-        for pub in self.data['publications']:
-            for key, val in pub.items():
-                pub[key] = val.replace('\n', ' ')
-
-    #
-    def format_authors(self):
-        for pub in self.data['publications']:
-            authors = pub['author']
-            authors = authors.split(' and ')
-            for ia, author in enumerate(authors):
-                names = author.split(', ')
-                name_parts = names[1].split(' ')
-                inits = []
-                for name in name_parts:
-                    inits.append(name[0] + '.')
-                names[1] = ' '.join(inits).rstrip()
-                authors[ia] = ', '.join(names)
-            pub['authorlist'] = authors
 
     @property
     def jenv_md(self):
@@ -118,12 +86,19 @@ class CV(object):
             data=self.data, **kwargs)
 
 
+import imp
+imp.reload(filters)
 my_filters = [
     filters.escape_tex,
     filters.select_by_attr_name,
-    filters.sort_cast_int
+    filters.sort_by_attr,
+    filters.sort_first_year
 ]
 cv = CV('_config.yml', filters=my_filters)
-cv.remove_newlines()
 with open('Srikrishnan-CV.tex', 'w') as f:
     f.write(cv.render_tex("cv.tex"))
+
+
+cv.data
+
+[t['event'] for t in cv.data['sections'][3]['entries']['talks']
