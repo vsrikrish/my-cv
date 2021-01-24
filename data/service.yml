@@ -1,4 +1,8 @@
 service:
+  - title: Associate Deputy Editor
+    journal: Climatic Change
+    start: 2021
+    end: present
   - title: Co-Chair
     org: MultiSector Dynamics Working Group on Uncertainty Quantification and Scenario Development
     start: 2019
@@ -10,8 +14,7 @@ service:
   - title: Co-Convener and Co-Chair
     org: "AGU Session on MultiSector Dynamics: Science and Modeling for Societal Transformations II"
     start: 2020
-    end:
   - title: Co-Guest Editor
-    org: "Special Issue of \emph{Water} on Climate Model Projections: Sea-Level Rise and Impacts on Coastal Defense Decision-Making"
-    start: forthcoming
-    end:
+    journal: Water
+    org: "Special Issue on 'Climate Model Projections: Sea-Level Rise and Impacts on Coastal Defense Decision-Making'"
+    start: Forthcoming
