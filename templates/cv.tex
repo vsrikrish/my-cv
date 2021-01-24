@@ -5,7 +5,7 @@
 \usepackage{setspace}
 
 % margins
-\usepackage[left=1.25in, right=1.75in, top=1in, bottom=0.75in]{geometry}% adjust the page margins
+\usepackage[left=1.5in, right=1.75in, top=1in, bottom=0.75in]{geometry}% adjust the page margins
 
 \RequirePackage{xcolor}
 \definecolor{CornellRed}{HTML}{b31b1b} % official Cornell blue color -- use for text etc
@@ -22,7 +22,9 @@ Mapping={tex-text},
 Numbers={OldStyle},
 Ligatures={Common},
 UprightFont=*-Regular,
-BoldFont=*-Bold
+BoldFont=*-Bold,
+ItalicFont=*-Italic,
+BoldItalicFont=*-BoldItalic
 ]{CrimsonText}
 \setsansfont[Path=fonts/,
 Mapping=tex-text,
@@ -70,7 +72,7 @@ UprightFont=*-Regular]{Inconsolata}
 
 % Section styling
 \titleformat{\section}[leftmargin]{\raggedleft\sffamily\bfseries\footnotesize}{}{0pt}{}[\setsubskip]
-\titlespacing*{\section}{2cm}{1ex}{0cm}
+\titlespacing*{\section}{2cm}{1ex}{0.25in}
 
 % Subsection styling
 \titleformat{\subsection}{\subskip\itshape}{}{0pt}{}[]
@@ -84,10 +86,10 @@ UprightFont=*-Regular]{Inconsolata}
 
 % better lists
 \usepackage{enumitem}
-\setlist[itemize]{nosep, noitemsep, labelsep=0pt, after=\vspace{\baselineskip}}
+\setlist[itemize, 1]{nosep, noitemsep, labelsep=-5pt, leftmargin=*, after=\vspace{\baselineskip}, itemindent=-15pt, labelindent=5pt}
 
 % Use BibLaTeX
-\usepackage{csquotes}
+\usepackage[autostyle=true, autopunct=true, english=american]{csquotes}
 \usepackage[
 	backend=biber,
 	style=publist,
@@ -103,14 +105,25 @@ UprightFont=*-Regular]{Inconsolata}
 	isbn=false,
 	maxbibnames=99,
 	maxcitenames=99,
+  defernumbers,
+  giveninits
 ]{biblatex}
 
+\setlength{\bibhang}{15pt}
+
+% add bib resources
+((* set bibpath = data.paths.bib_path *))
+((* for i in data.publications *))
+\addbibresource{(((bibpath)))/(((i.file)))}
+((* endfor *))
+
+% include everything in bibliography
 \nocite{*}
 
-\def\printbib#1{
-\newrefcontext[sorting=none]
-\printbibliography[category=#1,heading=#1,omitnumbers=false]}
+% bold my name
+\plauthorname[Vivek]{Srikrishnan}
 
+% make modifications to standard styles
 \DeclareFieldFormat{url}{\url{#1}}
 \DeclareFieldFormat[article]{pages}{#1}
 \DeclareFieldFormat[inproceedings]{pages}{\lowercase{pp.}#1}
@@ -122,39 +135,15 @@ UprightFont=*-Regular]{Inconsolata}
 \DeclareFieldFormat[inproceedings]{title}{#1}
 \DeclareFieldFormat{shorthandwidth}{#1}
 \DeclareFieldFormat{extrayear}{}
+\DeclareFieldFormat[misc]{title}{\mkbibquote{#1}}
 
 % Remove In: for an article.
 \renewbibmacro{in:}{%
   \ifentrytype{article}{}{%
   \printtext{\bibstring{in}\intitlepunct}}}
 
-% Bibliography categories
-\def\makebibcategory#1#2{\DeclareBibliographyCategory{#1}\defbibheading{#1}{\subsection*{#2}}}
-\makebibcategory{papers}{Peer-Reviewed Journal Articles}
-\makebibcategory{review}{Papers In Review or Forthcoming}
-\makebibcategory{books}{Books}
-\makebibcategory{chapters}{Book Chapters}
-\makebibcategory{conferences}{Conference Papers}
-\makebibcategory{talks}{Conference Talks}
-\makebibcategory{posters}{Conference Posters}
-\makebibcategory{editorials}{Editorials}
-\makebibcategory{phd}{PhD Theses}
-\makebibcategory{other}{Reviews, software \& other writing}
-
-((* set papers = data.publications | selectattr("ENTRYTYPE", "equalto", "article") *))
-((* set review = data.publications | selectattr("ENTRYTYPE", "equalto", "unpublished") *))
-((* set conference = data.publications | selectattr("ENTRYTYPE", "equalto", "inproceedings") *))
-((* set talks = data.publications | selectattr("ENTRYTYPE", "equalto", "talk") *))
-((* set posters = data.publications | selectattr("ENTRYTYPE", "equalto", "poster") *))
-
-\addbibresource[datatype=bibtex]{bibliography/library.bib}
-\addbibresource[datatype=bibtex]{bibliography/conferences.bib}
-
-\addtocategory{papers}{((* for i in papers *)) (((i.ID))) ((* if not loop.last *)), ((* endif *)) ((* endfor *))}
-\addtocategory{review}{((* for i in review  *)) (((i.ID))) ((* if not loop.last *)), ((* endif *)) ((* endfor *))}
-\addtocategory{conferences}{((* for i in conference  *)) (((i.ID))) ((* if not loop.last *)), ((* endif *)) ((* endfor *))}
-\addtocategory{talks}{((* for i in talks *)) (((i.ID))) ((* if not loop.last *)), ((* endif *)) ((* endfor *))}
-\addtocategory{posters}{((* for i in posters *)) (((i.ID))) ((* if not loop.last *)), ((* endif *)) ((* endfor *))}
+% Format sub-bibliography headings as subsections
+\defbibheading{subbibliography}[\refname]{\subsection*{#1}}
 
 %% other stuff
 % icons for the contact info
@@ -200,7 +189,7 @@ UprightFont=*-Regular]{Inconsolata}
  \bigskip
 
  %% Name
- \quad\noindent{\LARGE\bfseries \textcolor{CornellGray}{(((data.person.first_name))) (((data.person.last_name)))}}
+ \noindent{\LARGE\bfseries \textcolor{CornellGray}{(((data.person.first_name))) (((data.person.last_name)))}}
  \reversemarginpar
 
 \bigskip
@@ -224,7 +213,7 @@ UprightFont=*-Regular]{Inconsolata}
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
 \begin{itemize}[label={}]
-((* for i in sect.entries.appointments | sort_cast_int("start", reverse=True) *))
+((* for i in sect.entries.appointments | sort_by_attr(["start"], reverse=True) *))
 \item (((i.title))), (((i.dept | escape_tex))), (((i.univ))), (((i.start)))--(((i.end)))
 ((* endfor *))
 \end{itemize}
@@ -236,17 +225,155 @@ UprightFont=*-Regular]{Inconsolata}
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
 \begin{itemize}[label={}]
-((* for i in sect.entries.degrees | sort_cast_int("year", reverse=True) *))
+((* for i in sect.entries.degrees | sort_by_attr(["year"], reverse=True) *))
 \item (((i.degree))), (((i.subject | escape_tex))), (((i.school))), (((i.year)))
 ((* endfor *))
 \end{itemize}
 
 %% Publications
 \section{publications}
-\nocite{*}
-\printbibliography[title={Peer-Reviewed Journal Articles}, category=papers]
 
-\printbib{review}
+\printbibliography[type=article, title={Peer-Reviewed Journal Articles}, heading=subbibliography]
+
+\printbibliography[type=unpublished, title={Articles Under Review or Forthcoming}, heading=subbibliography]
+
+\printbibliography[type=inproceedings, title={Conference Proceedings}, heading=subbibliography]
+
+\printbibliography[type=misc, title={Conference Presentations}, heading=subbibliography, keyword=talk]
+
+\printbibliography[type=misc, title={Conference Posters}, heading=subbibliography, keyword=poster]
+
+%% Invited Talks
+((* set sect = data.sections | select_by_attr_name("title", "Invited Talks") *))
+\section{(((sect.title | lower)))}
+
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+
+\begin{itemize}[label={}]
+((* for i in sect.entries.talks | sort_by_attr(["year"], reverse=True) *))
+\item \enquote{(((i.title | escape_tex)))}, ((* if i.event *))(((i.event | escape_tex))), ((* endif *)) (((i.org))). (((i.location))). (((i.month)))((* if i.month != "May" *)).((* endif *)) (((i.year)))((* if i.coauthor *)) (with (((i.coauthor))))((* endif *)).
+((* endfor *))
+\end{itemize}
+
+%% Workshops
+((* set sect = data.sections | select_by_attr_name("title", "Workshops Organized") *))
+\section{(((sect.title | lower)))}
+
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+
+\begin{itemize}[label={}]
+((* for i in sect.entries.workshops | sort_by_attr(["year"], reverse=True) *))
+\item (((i.title | escape_tex))). (((i.location))). (((i.month)))((* if i.month != "May" *)).((* endif *)) (((i.year))).
+((* endfor *))
+\end{itemize}
+
+%% Grants and Contracts
+((* set sect = data.sections | select_by_attr_name("title", "Grants and Contracts") *))
+\section{(((sect.title | lower)))}
+
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+
+\begin{itemize}[label={}]
+((* for i in sect.entries.grants | sort_by_attr(["start"], reverse=True) *))
+\item (((i.role)))((* if i.PI *)) (PI: (((i.PI))))((* endif *)). (((i.funder))). \enquote{(((i.title | escape_tex)))}. \$(((i.amount))). (((i.start)))--(((i.end))).
+((* endfor *))
+\end{itemize}
+
+%% Networks and Projects
+((* set sect = data.sections | select_by_attr_name("title", "Networks and Projects") *))
+\section{(((sect.title | lower)))}
+
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+
+\begin{itemize}[label={}]
+((* for i in sect.entries.projects | sort_by_attr(["start"], reverse=True) *))
+\item (((i.title | escape_tex))). (((i.role))). PI: (((i.PI))). (((i.funder))). (((i.start)))--(((i.end))).
+((* endfor *))
+\end{itemize}
+
+%% Teaching
+((* set sect = data.sections | select_by_attr_name("title", "Teaching") *))
+\section{(((sect.title | lower)))}
+
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+
+\vspace{\baselineskip}
+
+((* set courses = sect.entries.classes *))
+((* for u, i in courses | groupby("university")  *))
+\subsection{(((u)))}
+\begin{itemize}[label={}]
+((* for x in i | sort_first_year("year", reverse=True) *))
+\item (((x.title | escape_tex))). (((x.role))). (((x. semester))) (((x.year))).
+((* endfor *))
+\end{itemize}
+((* endfor *))
+
+%% Advising
+((* set sect = data.sections | select_by_attr_name("title", "Advising") *))
+\section{(((sect.title | lower)))}
+
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+
+\vspace{\baselineskip}
+((* set advisees = sect.entries.advising *))
+((* for u, i in advisees | groupby("university") *))
+\subsection{(((u)))}
+\begin{itemize}[label={}]
+((* for x in i | sort_by_attr("end", reverse=True) *))
+\item (((x.name))), (((x.degree))) (((x.field))). (((x.role))). (((x.start)))--(((x.end))).
+((* endfor *))
+\end{itemize}
+((* endfor *))
+
+%% Awards
+((* set sect = data.sections | select_by_attr_name("title", "Awards") *))
+\section{(((sect.title | lower)))}
+
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+
+\begin{itemize}[label={}]
+((* for i in sect.entries.awards | sort_by_attr(["year"], reverse=True) *))
+\item (((i.title))), (((i.org))). (((i.year)))
+((* endfor *))
+\end{itemize}
+
+%% Outreach
+((* set sect = data.sections | select_by_attr_name("title", "Outreach") *))
+\section{(((sect.title | lower)))}
+
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+
+\begin{itemize}[label={}]
+((* for i in sect.entries.outreach | sort_first_year("year", reverse=True) *))
+\item (((i.activity))), (((i.org))). (((i.year))).
+((* endfor *))
+\end{itemize}
+
+%% Service
+((* set sect = data.sections | select_by_attr_name("title", "Service") *))
+\section{(((sect.title | lower)))}
+
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+
+\begin{itemize}[label={}]
+((* for i in sect.entries.service *))
+\item (((i.title | escape_tex))),((* if i.journal *)) \emph{(((i.journal)))}.((* endif *)) ((* if i.org *))(((i.org | escape_tex))).((* endif *)) (((i.start)))((* if i.end *))--(((i.end)))((* endif *)).
+((* endfor *))
+\end{itemize}
+
+%% Professional Experience
+((* set sect = data.sections | select_by_attr_name("title", "Professional Experience") *))
+\section{(((sect.title | lower)))}
+
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+
+\begin{itemize}[label={}]
+((* for i in sect.entries.experience | sort_by_attr(["end", "start"], reverse=True) *))
+\item (((i.title))), (((i.org)))). (((i.start)))--(((i.end)))
+((* endfor *))
+\end{itemize}
+
 
 
 \end{document}
