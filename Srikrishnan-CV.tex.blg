@@ -1,5 +1,0 @@
-[0] Config.pm:304> INFO - This is Biber 2.14
-[0] Config.pm:307> INFO - Logfile is 'Srikrishnan-CV.tex.blg'
-[80] biber-darwin:322> INFO - === Sat Jan 23, 2021, 10:17:12
-[231] Utils.pm:320> ERROR - Cannot find 'Srikrishnan-CV.tex.bcf'!
-[231] Biber.pm:132> INFO - ERRORS: 1
