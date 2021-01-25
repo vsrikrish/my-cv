@@ -62,7 +62,7 @@ jobs:
           GIT_CONFIG_EMAIL: actions@github.com
           COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
       - name: Copy CV File
-        uses: dmnemec@copy_file_to_another_repo_action@v1.0.4
+        uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
         env:
           API_TOKEN_GITHUB: ${{ secrets.PUSH_TOKEN }}
         with:
