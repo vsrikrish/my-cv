@@ -41,15 +41,6 @@ jobs:
           root_file: Srikrishnan-CV.tex
           args: "-bibtex-cond1 -pdfxe"
           post_compile: "latexmk -c"
-      - name: Commit and push
-        uses: JamesIves/github-pages-deploy-action@3.7.1
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: main
-          CLEAN: true
-          GIT_CONFIG_NAME: "Github Action"
-          GIT_CONFIG_EMAIL: actions@github.com
-          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
       - name: Copy CV File
         uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
         env:
