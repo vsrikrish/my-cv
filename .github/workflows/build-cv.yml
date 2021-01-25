@@ -20,20 +20,13 @@ jobs:
         python-version: [3.9]
 
     steps:
-      - name: Checkout submodule
+      - name: Checkout
         uses: actions/checkout@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          run: |
-            git submodule update --remote --init
-            git config user.email "actions@github.com"
-            git config user.name "Github Action"
-            git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/my-cv.git
-            git checkout main
-            git add .
-            git commit -m "updated submodule"
-            git push origin master
+          persist-credentials: false
+          submodules: true
       - name: Set up Conda Environment
         uses: conda-incubator/setup-miniconda@v2
         with:
@@ -46,6 +39,7 @@ jobs:
         uses: xu-cheng/texlive-action/full@v1
         with:
           run: |
+            cp bibliography/*.bib .
             xelatex Srikrishnan-CV.tex
             biber Srikrishnan-CV
             xelatex Srikrishnan-CV.tex

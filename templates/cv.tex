@@ -112,9 +112,8 @@ UprightFont=*-Regular]{Inconsolata}
 \setlength{\bibhang}{15pt}
 
 % add bib resources
-((* set bibpath = data.paths.bib_path *))
 ((* for i in data.publications *))
-\addbibresource{(((bibpath)))/(((i.file)))}
+\addbibresource{(((i.file)))}
 ((* endfor *))
 
 % include everything in bibliography
