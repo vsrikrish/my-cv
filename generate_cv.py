@@ -59,9 +59,7 @@ class CV(object):
         Set up TeX environment
         """
         loader = jinja2.ChoiceLoader([
-            self.loader,
-            jinja2.FileSystemLoader(
-                os.path.join('templates'))
+            self.loader, jinja2.FileSystemLoader('templates')
         ])
         jenv = jinja2.Environment(loader=loader)
         # define new delimiters to avoid TeX conflicts
