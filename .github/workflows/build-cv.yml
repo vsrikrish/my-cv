@@ -40,7 +40,7 @@ jobs:
         uses: xu-cheng/latex-action@v2
         with:
           root_file: Srikrishnan-CV.tex
-          args: -bibtex-cond1 -pdfxe
+          args: "-bibtex-cond1 -pdfxe"
           post_compile: "latexmk -c"
       - name: Commit
         run: |
