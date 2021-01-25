@@ -24,11 +24,11 @@ class CV(object):
         self.filters = filters
         # read config file
         with open(config_file, 'r') as f:
-            config = yaml.load(f, Loader=yaml.FullLoader)
+            config = yaml.load(f, Loader=yaml.BaseLoader)
 
         # read in section data files
         sections = [
-            {'title': k['title'], 'entries': yaml.load(open(os.path.join(config['paths']['yaml_path'], k['file']), 'r'), Loader=yaml.FullLoader)}
+            {'title': k['title'], 'entries': yaml.load(open(os.path.join(config['paths']['yaml_path'], k['file']), 'r'), Loader=yaml.BaseLoader)}
             for k in config['sections']
         ]
 
