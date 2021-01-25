@@ -36,20 +36,18 @@ jobs:
       - name: Generate Template
         run: python generate_cv.py
       - name: Build CV
-        uses: xu-cheng/texlive-action/full@v1
+        uses: xu-cheng/latex-action@v2
         with:
-          run: |
-            cp bibliography/*.bib .
-            xelatex Srikrishnan-CV.tex
-            biber Srikrishnan-CV
-            xelatex Srikrishnan-CV.tex
-            xelatex Srikrishnan-CV.tex
+          root_file: cv.tex
+          working_directory: .
+          latexmk_use_xelatex: true
+          args: -bibtex-cond1
+          post_compile: "latexmk -c"
       - name: Commit and push
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: _site
+          BRANCH: main
           CLEAN: true
           GIT_CONFIG_NAME: "Github Action"
           GIT_CONFIG_EMAIL: actions@github.com
