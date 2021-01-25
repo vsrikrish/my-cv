@@ -29,9 +29,10 @@ jobs:
           submodules: true
       - name: Update bibliography
         run: |
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git submodule foreach git pull origin main --allow-unrelated-histories
+          cd bibliography
+          git branch -u origin/main main
+          cd ..
+          git submodule update --remote --recursive
       - name: Set up Conda Environment
         uses: conda-incubator/setup-miniconda@v2
         with:
