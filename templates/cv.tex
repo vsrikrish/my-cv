@@ -124,7 +124,8 @@ UprightFont=*-Regular]{Inconsolata}
 \plauthorname[Vivek]{Srikrishnan}
 
 % make modifications to standard styles
-\DeclareFieldFormat{title}{\mkbibquote{\MakeCapital{#1}}
+\DeclareFieldFormat*{\titlecase}{\MakeSentenceCase{#1}}
+\DeclareFieldFormat{title}{\mkbibquote{#1}
 \DeclareFieldFormat{url}{\url{#1}}
 \DeclareFieldFormat[article]{pages}{#1}
 \DeclareFieldFormat[inproceedings]{pages}{\lowercase{pp.}#1}
