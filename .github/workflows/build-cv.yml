@@ -39,7 +39,6 @@ jobs:
         uses: xu-cheng/latex-action@v2
         with:
           root_file: cv.tex
-          working_directory: .
           latexmk_use_xelatex: true
           args: -bibtex-cond1
           post_compile: "latexmk -c"
