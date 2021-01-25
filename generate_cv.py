@@ -10,8 +10,7 @@ try:
     fileroot = os.path.realpath(__file__)
 except NameError:  # We are the main py2exe script, not a module
     fileroot = os.path.realpath(os.getcwd())
-os.chdir('/Users/vxs914/Documents/my-cv')
-fileroot
+print(fileroot)
 sys.path.append(fileroot)
 import filters  # filters for Jinja
 
