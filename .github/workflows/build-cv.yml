@@ -40,7 +40,8 @@ jobs:
         channels: conda-forge
         environment-file: environment.yml
         python-version: ${{ matrix.python-verison }}
-      run: python generate_cv.py
+      with:
+        run: python generate_cv.py
     - name: Build CV
       steps:
         - uses: xu-cheng@texlive-action/full@v1
