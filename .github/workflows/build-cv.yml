@@ -44,14 +44,13 @@ jobs:
       - name: Generate Template
         run: python generate_cv.py
       - name: Build CV
-        steps:
-          - uses: xu-cheng@texlive-action/full@v1
-            with:
-                run: |
-                  xelatex Srikrishnan-CV.tex
-                  biber Srikrishnan-CV
-                  xelatex Srikrishnan-CV.tex
-                  xelatex Srikrishnan-CV.tex
+        uses: xu-cheng@texlive-action/full@v1
+        with:
+          run: |
+            xelatex Srikrishnan-CV.tex
+            biber Srikrishnan-CV
+            xelatex Srikrishnan-CV.tex
+            xelatex Srikrishnan-CV.tex
       - name: Commit and push
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
