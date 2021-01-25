@@ -7,7 +7,7 @@ import jinja2  # templating for CV
 
 # add parent directory to system path
 try:
-    fileroot = os.path.realpath(__file__)
+    fileroot = os.dirname(os.path.realpath(__file__))
 except NameError:  # We are the main py2exe script, not a module
     fileroot = os.path.realpath(os.getcwd())
 print(fileroot)
