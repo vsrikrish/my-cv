@@ -50,7 +50,7 @@ jobs:
       - name: Push
         uses: ad-m/github-push-action@master
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
       - name: Copy CV File
         uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
