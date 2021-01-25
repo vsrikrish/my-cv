@@ -47,7 +47,7 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add Srikrishnan-CV.pdf
           git commit -m "update CV"
-      - name Push
+      - name: Push
         uses: ad-m/github-push-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -63,4 +63,3 @@ jobs:
           user_email: 'srikrish@gmail.com'
           user_name: 'vsrikrish'
           destination_branch: 'gh-pages'
-          commit_message: 'update CV'
