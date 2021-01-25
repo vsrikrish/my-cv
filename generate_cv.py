@@ -10,7 +10,6 @@ try:
     fileroot = os.path.dirname(os.path.realpath(__file__))
 except NameError:  # We are the main py2exe script, not a module
     fileroot = os.path.dirname(os.path.realpath(os.getcwd()))
-print(fileroot)
 sys.path.append(fileroot)
 import filters  # filters for Jinja
 
@@ -59,14 +58,10 @@ class CV(object):
         """
         Set up TeX environment
         """
-        try:
-            fileroot = os,path.dirname(os.path.realpath(__file__))
-        except NameError:  # We are the main py2exe script, not a module
-            fileroot = os.path.dirname(os.path.realpath(os.getcwd()))
         loader = jinja2.ChoiceLoader([
             self.loader,
             jinja2.FileSystemLoader(
-                os.path.join(fileroot, 'templates'))
+                os.path.join('templates'))
         ])
         jenv = jinja2.Environment(loader=loader)
         # define new delimiters to avoid TeX conflicts
@@ -93,4 +88,4 @@ my_filters = [
 ]
 cv = CV('_config.yml', filters=my_filters)
 with open('Srikrishnan-CV.tex', 'w') as f:
-    f.write(cv.render_tex(os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'templates', 'cv.tex')))
+    f.write(cv.render_tex('cv.tex'))
