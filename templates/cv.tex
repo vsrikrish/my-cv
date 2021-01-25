@@ -114,7 +114,7 @@ UprightFont=*-Regular]{Inconsolata}
 % add bib resources
 ((* set bibpath = data.paths.bib_path *))
 ((* for i in data.publications *))
-\addbibresource{(((bibpath)))(((i.file)))}
+\addbibresource{(((bibpath)))/(((i.file)))}
 ((* endfor *))
 
 % include everything in bibliography
