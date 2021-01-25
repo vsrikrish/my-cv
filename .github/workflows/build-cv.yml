@@ -27,7 +27,6 @@ jobs:
         with:
           persist-credentials: false
           submodules: true
-          fetch-depth: 0
       - name: Set up Conda Environment
         uses: conda-incubator/setup-miniconda@v2
         with:
@@ -40,18 +39,26 @@ jobs:
         uses: xu-cheng/latex-action@v2
         with:
           root_file: Srikrishnan-CV.tex
-          args: "-bibtex-cond1 -pdfxe"
+          args: -bibtex-cond1 -pdfxe
           post_compile: "latexmk -c"
-      - name: Commit
-        run: |
-          git config --local user.name "github-actions[bot]"
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add Srikrishnan-CV.pdf
-          git commit -m "update cv"
-      - name: Push to Website
-        uses: ad-m/github-push-action@master
+      - name: Commit and push
+        uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
-          github_token: ${{ secrets.PUSH_TOKEN }}
-          branch: "gh_pages"
-          directory: "assets/pdf"
-          repository: "srikrishnan-lab/srikrishnan-lab.github.io"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: main
+          CLEAN: true
+          GIT_CONFIG_NAME: "Github Action"
+          GIT_CONFIG_EMAIL: actions@github.com
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+      - name: Copy CV File
+        uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.PUSH_TOKEN }}
+        with:
+          source_file: 'Srikrishnan-CV.tex'
+          destination_repo: 'srikrishnan-lab/srikrishnan-lab.github.io'
+          destination_folder: 'assets/pdf'
+          user_email: 'srikrish@gmail.com'
+          user_name: 'vsrikrish'
+          destination_branch: 'gh-pages'
+          commit_message: 'update CV'
