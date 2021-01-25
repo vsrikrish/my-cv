@@ -41,6 +41,17 @@ jobs:
           root_file: Srikrishnan-CV.tex
           args: "-bibtex-cond1 -pdfxe"
           post_compile: "latexmk -c"
+      - name: Commit
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add Srikrishnan-CV.pdf
+          git commit -m "update CV"
+      - name Push
+        uses: ad-m/github-push-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
       - name: Copy CV File
         uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
         env:
