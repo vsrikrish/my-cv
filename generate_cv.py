@@ -85,8 +85,6 @@ class CV(object):
             data=self.data, **kwargs)
 
 
-import imp
-imp.reload(filters)
 my_filters = [
     filters.escape_tex,
     filters.select_by_attr_name,
@@ -95,4 +93,4 @@ my_filters = [
 ]
 cv = CV('_config.yml', filters=my_filters)
 with open('Srikrishnan-CV.tex', 'w') as f:
-    f.write(cv.render_tex("templates/cv.tex"))
+    f.write(cv.render_tex(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'templates', 'cv.tex')))
