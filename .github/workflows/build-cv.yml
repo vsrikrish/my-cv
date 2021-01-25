@@ -52,6 +52,6 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.PUSH_TOKEN }}
-          branch: gh_pages
+          branch: "gh_pages"
           directory: "assets/pdf"
           repository: "srikrishnan-lab/srikrishnan-lab.github.io"
