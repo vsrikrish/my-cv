@@ -38,7 +38,7 @@ jobs:
       - name: Build CV
         uses: xu-cheng/latex-action@v2
         with:
-          root_file: cv.tex
+          root_file: Srikrishnan-CV.tex
           args: -bibtex-cond1 -pdfxe
           post_compile: "latexmk -c"
       - name: Commit and push
