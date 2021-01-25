@@ -27,6 +27,8 @@ jobs:
         with:
           persist-credentials: false
           submodules: true
+      - name: Update bibliography
+        run: git submodule foreach git pull origin main
       - name: Set up Conda Environment
         uses: conda-incubator/setup-miniconda@v2
         with:
@@ -46,6 +48,7 @@ jobs:
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add Srikrishnan-CV.pdf
+          git add bibliography/
           git commit -m "update CV"
       - name: Push
         uses: ad-m/github-push-action@master
