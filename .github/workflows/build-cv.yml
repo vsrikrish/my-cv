@@ -28,7 +28,7 @@ jobs:
           persist-credentials: false
           submodules: true
       - name: Update bibliography
-        run: git submodule foreach git pull origin main
+        run: git submodule foreach git pull origin main --allow-unrelated-histories
       - name: Set up Conda Environment
         uses: conda-incubator/setup-miniconda@v2
         with:
