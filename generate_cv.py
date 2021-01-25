@@ -97,8 +97,3 @@ my_filters = [
 cv = CV('_config.yml', filters=my_filters)
 with open('Srikrishnan-CV.tex', 'w') as f:
     f.write(cv.render_tex("cv.tex"))
-
-
-cv.data
-
-[t['event'] for t in cv.data['sections'][3]['entries']['talks']
