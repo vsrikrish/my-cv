@@ -20,56 +20,56 @@ jobs:
         python-version: [3.9]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Checkout submodule
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        git submodule update --remote --init
-        git config user.email "actions@github.com"
-        git config user.name "Github Action"
-        git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/my-cv.git
-        git checkout main
-        git add .
-        git commit -m "updated submodule"
-        git push origin master
-    - name: Set up Conda Environment
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        activate-environment: anaconda-client-env
-        channels: conda-forge
-        environment-file: environment.yml
-        python-version: ${{ matrix.python-verison }}
-    - name: Generate Template
-      run: python generate_cv.py
-    - name: Build CV
-      steps:
-        - uses: xu-cheng@texlive-action/full@v1
-          with:
-              run: |
-                xelatex Srikrishnan-CV.tex
-                biber Srikrishnan-CV
-                xelatex Srikrishnan-CV.tex
-                xelatex Srikrishnan-CV.tex
-    - name: Commit and push
-      uses: JamesIves/github-pages-deploy-action@3.7.1
-      with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        BRANCH: gh-pages
-        FOLDER: _site
-        CLEAN: true
-        GIT_CONFIG_NAME: "Github Action"
-        GIT_CONFIG_EMAIL: actions@github.com
-        COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
-    - name: Copy CV File
-      uses: dmnemec@copy_file_to_another_repo_action@v1.0.4
-      env:
-        API_TOKEN_GITHUB: ${{ secrets.PUSH_TOKEN }}
-      with:
-        source_file: 'Srikrishnan-CV.tex'
-        destination_repo: 'srikrishnan-lab/srikrishnan-lab.github.io'
-        destination_folder: 'assets/pdf'
-        user_email: 'srikrish@gmail.com'
-        user_name: 'vsrikrish'
-        destination_branch: 'gh-pages'
-        commit_message: 'update CV'
+      - uses: actions/checkout@v2
+      - name: Checkout submodule
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git submodule update --remote --init
+          git config user.email "actions@github.com"
+          git config user.name "Github Action"
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/my-cv.git
+          git checkout main
+          git add .
+          git commit -m "updated submodule"
+          git push origin master
+      - name: Set up Conda Environment
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          activate-environment: anaconda-client-env
+          channels: conda-forge
+          environment-file: environment.yml
+          python-version: ${{ matrix.python-verison }}
+      - name: Generate Template
+        run: python generate_cv.py
+      - name: Build CV
+        steps:
+          - uses: xu-cheng@texlive-action/full@v1
+            with:
+                run: |
+                  xelatex Srikrishnan-CV.tex
+                  biber Srikrishnan-CV
+                  xelatex Srikrishnan-CV.tex
+                  xelatex Srikrishnan-CV.tex
+      - name: Commit and push
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: _site
+          CLEAN: true
+          GIT_CONFIG_NAME: "Github Action"
+          GIT_CONFIG_EMAIL: actions@github.com
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+      - name: Copy CV File
+        uses: dmnemec@copy_file_to_another_repo_action@v1.0.4
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.PUSH_TOKEN }}
+        with:
+          source_file: 'Srikrishnan-CV.tex'
+          destination_repo: 'srikrishnan-lab/srikrishnan-lab.github.io'
+          destination_folder: 'assets/pdf'
+          user_email: 'srikrish@gmail.com'
+          user_name: 'vsrikrish'
+          destination_branch: 'gh-pages'
+          commit_message: 'update CV'
