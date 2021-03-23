@@ -319,7 +319,7 @@ UprightFont=*-Regular]{Inconsolata}
 ((* for u, i in advisees | groupby("university") *))
 \subsection{(((u)))}
 \begin{itemize}[label={}]
-((* for x in i | sort_by_attr("end", reverse=True) *))
+((* for x in i | sort_by_attr("end", reverse=False) *))
 \item (((x.name))), (((x.degree))) (((x.field))). (((x.role))). (((x.start)))--(((x.end))).
 ((* endfor *))
 \end{itemize}
