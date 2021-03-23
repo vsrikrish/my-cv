@@ -59,6 +59,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
+          force: True
       - name: Copy CV File
         uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
         env:
