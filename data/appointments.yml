@@ -1,16 +1,11 @@
 appointments:
-  - univ: Cornell University
-    dept: Department of Biological & Environmental Engineering
-    title: Visiting Assistant Professor
-    start: 2020
-    end: present
-  - univ: Pennsylvania State University
-    dept: Earth & Environmental Systems Institute
-    title: Assistant Research Professor
-    start: 2019
+  - univ: Rice University
+    dept: Department of Civil & Environmental Engineering
+    title: Assistant Professor
+    start: 2021
     end: present
   - univ: Pennsylvania State University
     dept: Earth & Environmental Systems Institute
     title: Postdoctoral Scholar
-    start: 2018
-    end: 2019
+    start: 2020
+    end: 2020

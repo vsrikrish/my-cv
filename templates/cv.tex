@@ -8,13 +8,12 @@
 \usepackage[left=1.5in, right=1.75in, top=1in, bottom=0.75in]{geometry}% adjust the page margins
 
 \RequirePackage{xcolor}
-\definecolor{CornellRed}{HTML}{b31b1b} % official Cornell blue color -- use for text etc
-\definecolor{CornellGray}{HTML}{222222} % official Cornell gray -- use for Section
-\definecolor{LightGray}{HTML}{F7F7F7} % background color -- do not use for anything else
-\definecolor{BrickRed}{HTML}{C04829} % backup color
+\definecolor{RiceBlue}{HTML}{00205B} % official Rice blue color -- use for text etc
+\definecolor{RiceGray}{HTML}{7C7E7F} % official Rice gray -- use for Section
+\definecolor{LightGray}{HTML}{E0E2E6} % background color -- do not use for anything else
+\definecolor{BrickRed}{HTML}{C04829} % backup color 
 \definecolor{GrassGreen}{HTML}{359245}
 \definecolor{WarmYellow}{HTML}{E9A139}
-
 %% Choose fonts for use with xelatex
 \usepackage{fontspec}
 \setmainfont[Path=fonts/,
@@ -122,7 +121,7 @@ UprightFont=*-Regular]{Inconsolata}
 \nocite{*}
 
 % bold my name
-\plauthorname[Vivek]{Srikrishnan}
+\plauthorname[James]{Doss-Gollin}
 
 % make modifications to standard styles
 \DeclareFieldFormat{title}{\mkbibquote{#1}}
@@ -162,7 +161,7 @@ UprightFont=*-Regular]{Inconsolata}
 
 % have to load this last
 \usepackage{hyperref} % Required for adding links	and customizing them
-\hypersetup{colorlinks, breaklinks, urlcolor=CornellRed, linkcolor=CornellRed}
+\hypersetup{colorlinks, breaklinks, urlcolor=RiceGray, linkcolor=RiceGray}
 
 %---------------------------------------------------------------------
 
@@ -171,25 +170,27 @@ UprightFont=*-Regular]{Inconsolata}
 %% Name and contact block
 
 \begin{minipage}[t]{2.8in}
- \flushright {\footnotesize
- \href{(((data.person.affiliation_link)))}{(((data.person.affiliation)))}\\ \vspace{0in}
- (((data.person.address.line1)))\\ \vspace{0.01in} (((data.person.address.postcode)))\\ \vspace{-0.04in} (((data.person.address.country)))}
- \end{minipage}%
- \begin{minipage}[t]{2.5in}
-   \flushright {\footnotesize  \texttt{\href{mailto:(((data.person.email)))}{(((data.person.email)))}} \, \faEnvelope} \\ \vspace{-0.21in}
-   \flushright {\footnotesize  \texttt{\href{(((data.person.web)))}{(((data.person.web)))}} \, \faGlobe} \\ \vspace{-0.195in}
-   \flushright {\footnotesize
-   \texttt{\href{https://github.com/(((data.person.github)))}{(((data.person.github)))}} \, \faGithub} \\ \vspace{-0.185in}
-   \flushright {\footnotesize
-   \texttt{\href{https://scholar.google.com/citations?user=(((data.person.googlescholar)))}{(((data.person.first_name))) (((data.person.last_name)))}} \, \aiGoogleScholar}
+  \flushright {\footnotesize
+  (((data.person.university)))\\
+  (((data.person.department)))\\
+  (((data.person.address.line1)))\\ \vspace{0.01in}
+  (((data.person.address.postcode)))\\ \vspace{-0.04in}}
+\end{minipage}%
+\begin{minipage}[t]{2.5in}
+  \flushright {\footnotesize  \texttt{\href{mailto:(((data.person.email)))}{(((data.person.email)))}} \, \faEnvelope} \\ \vspace{-0.21in}
+  \flushright {\footnotesize  \texttt{\href{(((data.person.web)))}{(((data.person.web)))}} \, \faGlobe} \\ \vspace{-0.195in}
+  \flushright {\footnotesize
+    \texttt{\href{https://github.com/(((data.person.github)))}{(((data.person.github)))}} \, \faGithub} \\ \vspace{-0.185in}
+  \flushright {\footnotesize
+    \texttt{\href{https://scholar.google.com/citations?user=(((data.person.googlescholar)))}{(((data.person.first_name))) (((data.person.last_name)))}} \, \aiGoogleScholar}
 
- \end{minipage}
+\end{minipage}
 
- \bigskip
+\bigskip
 
- %% Name
- \noindent{\LARGE\bfseries \textcolor{CornellGray}{(((data.person.first_name))) (((data.person.last_name)))}}
- \reversemarginpar
+%% Name
+\noindent{\LARGE\bfseries \textcolor{BrickRed}{(((data.person.first_name))) (((data.person.last_name)))}}
+\reversemarginpar
 
 \bigskip
 
@@ -200,9 +201,9 @@ UprightFont=*-Regular]{Inconsolata}
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
 \begin{itemize}[label={}]
-((* for i in sect.entries.interests *))
-\item (((i.name)))
-((* endfor *))
+  ((* for i in sect.entries.interests *))
+  \item (((i.name)))
+        ((* endfor *))
 \end{itemize}
 
 %% Appointments
@@ -212,9 +213,9 @@ UprightFont=*-Regular]{Inconsolata}
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
 \begin{itemize}[label={}]
-((* for i in sect.entries.appointments | sort_by_attr(["start"], reverse=True) *))
-\item (((i.title))), (((i.dept | escape_tex))), (((i.univ))), (((i.start)))--(((i.end)))
-((* endfor *))
+  ((* for i in sect.entries.appointments | sort_by_attr(["start"], reverse=True) *))
+  \item \textbf{(((i.title)))}, (((i.dept | escape_tex))), (((i.univ))), (((i.start)))--(((i.end)))
+        ((* endfor *))
 \end{itemize}
 
 %% Education
@@ -224,9 +225,21 @@ UprightFont=*-Regular]{Inconsolata}
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
 \begin{itemize}[label={}]
-((* for i in sect.entries.degrees | sort_by_attr(["year"], reverse=True) *))
-\item (((i.degree))), (((i.subject | escape_tex))), (((i.school))), (((i.year)))
-((* endfor *))
+  ((* for i in sect.entries.degrees | sort_by_attr(["year"], reverse=True) *))
+  \item \textbf{(((i.degree)))}, (((i.subject | escape_tex))), (((i.school))), (((i.year)))
+        ((* endfor *))
+\end{itemize}
+
+%% Awards
+((* set sect = data.sections | select_by_attr_name("title", "Awards") *))
+\section{(((sect.title | lower)))}
+
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+
+\begin{itemize}[label={}]
+  ((* for i in sect.entries.awards | sort_by_attr(["year"], reverse=True) *))
+  \item \textbf{(((i.title)))}, (((i.org))). (((i.year)))
+        ((* endfor *))
 \end{itemize}
 
 %% Publications
@@ -234,13 +247,11 @@ UprightFont=*-Regular]{Inconsolata}
 
 \printbibliography[type=article, title={Peer-Reviewed Journal Articles}, heading=subbibliography]
 
-\printbibliography[type=misc, title={Articles Under Review or Forthcoming}, heading=subbibliography, keyword=unpublished]
+\printbibliography[type=unpublished, title={Articles Under Review or Forthcoming}, heading=subbibliography]
+
+\printbibliography[type=thesis, title={Dissertation}, heading=subbibliography]
 
 \printbibliography[type=inproceedings, title={Conference Proceedings}, heading=subbibliography]
-
-\printbibliography[type=misc, title={Conference Presentations}, heading=subbibliography, keyword=talk]
-
-\printbibliography[type=misc, title={Conference Posters}, heading=subbibliography, keyword=poster]
 
 %% Invited Talks
 ((* set sect = data.sections | select_by_attr_name("title", "Invited Talks") *))
@@ -249,46 +260,34 @@ UprightFont=*-Regular]{Inconsolata}
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
 \begin{itemize}[label={}]
-((* for i in sect.entries.talks | sort_by_attr(["year"], reverse=True) *))
-\item \enquote{(((i.title | escape_tex)))}, ((* if i.event *))(((i.event | escape_tex))), ((* endif *)) (((i.org))). (((i.location))). (((i.month)))((* if i.month != "May" *)).((* endif *)) (((i.year)))((* if i.coauthor *)) (with (((i.coauthor))))((* endif *)).
-((* endfor *))
+  ((* for i in sect.entries.talks | sort_by_attr(["year"], reverse=True) *))
+  \item \enquote{\textbf{(((i.title | escape_tex)))}}, ((* if i.event *))(((i.event | escape_tex))), ((* endif *)) \textit{(((i.org)))}. (((i.location))). (((i.month)))((* if i.month != "May" *)).((* endif *)) (((i.year)))((* if i.coauthor *)) (with (((i.coauthor))))((* endif *)).
+        ((* endfor *))
 \end{itemize}
 
 %% Workshops
-((* set sect = data.sections | select_by_attr_name("title", "Workshops Organized") *))
+((* set sect = data.sections | select_by_attr_name("title", "Workshop Presentations") *))
 \section{(((sect.title | lower)))}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
 \begin{itemize}[label={}]
-((* for i in sect.entries.workshops | sort_by_attr(["year"], reverse=True) *))
-\item (((i.title | escape_tex))). (((i.location))). (((i.month)))((* if i.month != "May" *)).((* endif *)) (((i.year))).
-((* endfor *))
+  ((* for i in sect.entries.workshops | sort_by_attr(["year"], reverse=True) *))
+  \item ((* if i.link *))\href{(((i.link)))}{\enquote{\textbf{(((i.title | escape_tex)))}}}((* else *))\enquote{\textbf{(((i.title | escape_tex)))}}((* endif *)), ((* if i.event *))(((i.event | escape_tex))), ((* endif *)) \textit{(((i.org)))}. (((i.location))). ((* if i.format *))(((i.format))).((* endif *)) (((i.month)))((* if i.month != "May" *)).((* endif *)) (((i.year)))((* if i.coauthor *)) (with (((i.coauthor))))((* endif *)).
+        ((* endfor *))
 \end{itemize}
 
 %% Grants and Contracts
-((* set sect = data.sections | select_by_attr_name("title", "Grants and Contracts") *))
-\section{(((sect.title | lower)))}
-
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
-
-\begin{itemize}[label={}]
-((* for i in sect.entries.grants | sort_by_attr(["start"], reverse=True) *))
-\item (((i.role)))((* if i.PI *)) (PI: (((i.PI))))((* endif *)). (((i.funder))). \enquote{(((i.title | escape_tex)))}. \$(((i.amount))). (((i.start)))--(((i.end))).
-((* endfor *))
-\end{itemize}
-
-%% Networks and Projects
-((* set sect = data.sections | select_by_attr_name("title", "Networks and Projects") *))
-\section{(((sect.title | lower)))}
-
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
-
-\begin{itemize}[label={}]
-((* for i in sect.entries.projects | sort_by_attr(["start"], reverse=True) *))
-\item (((i.title | escape_tex))). (((i.role))). PI: (((i.PI))). (((i.funder))). (((i.start)))--(((i.end))).
-((* endfor *))
-\end{itemize}
+%((* set sect = data.sections | select_by_attr_name("title", "Grants and Contracts") *))
+%\section{(((sect.title | lower)))}
+%
+%\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+%
+%\begin{itemize}[label={}]
+%  ((* for i in sect.entries.grants | sort_by_attr(["start"], reverse=True) *))
+%  \item (((i.role)))((* if i.PI *)) (PI: (((i.PI))))((* endif *)). (((i.funder))). \enquote{(((i.title | escape_tex)))}. \$(((i.amount))). (((i.start)))--(((i.end))).
+%        ((* endfor *))
+%\end{itemize}
 
 %% Teaching
 ((* set sect = data.sections | select_by_attr_name("title", "Teaching") *))
@@ -302,40 +301,28 @@ UprightFont=*-Regular]{Inconsolata}
 ((* for u, i in courses | groupby("university")  *))
 \subsection{(((u)))}
 \begin{itemize}[label={}]
-((* for x in i | sort_first_year("year", reverse=True) *))
-\item (((x.title | escape_tex))). (((x.role))). (((x. semester))) (((x.year))).
-((* endfor *))
+  ((* for x in i | sort_first_year("year", reverse=True) *))
+  \item (((x.title | escape_tex))). (((x.role))). (((x. semester))) (((x.year))).
+        ((* endfor *))
 \end{itemize}
 ((* endfor *))
 
 %% Advising
-((* set sect = data.sections | select_by_attr_name("title", "Advising") *))
-\section{(((sect.title | lower)))}
-
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
-
-\vspace{\baselineskip}
-((* set advisees = sect.entries.advising *))
-((* for u, i in advisees | groupby("university") *))
-\subsection{(((u)))}
-\begin{itemize}[label={}]
-((* for x in i | sort_by_attr(["end", "start"], reverse=True) *))
-\item (((x.name))), (((x.degree))) (((x.field))). (((x.role))). (((x.start)))--(((x.end))).
-((* endfor *))
-\end{itemize}
-((* endfor *))
-
-%% Awards
-((* set sect = data.sections | select_by_attr_name("title", "Awards") *))
-\section{(((sect.title | lower)))}
-
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
-
-\begin{itemize}[label={}]
-((* for i in sect.entries.awards | sort_by_attr(["year"], reverse=True) *))
-\item (((i.title))), (((i.org))). (((i.year)))
-((* endfor *))
-\end{itemize}
+%((* set sect = data.sections | select_by_attr_name("title", "Advising") *))
+%\section{(((sect.title | lower)))}
+%
+%\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+%
+%\vspace{\baselineskip}
+%((* set advisees = sect.entries.advising *))
+%((* for u, i in advisees | groupby("university") *))
+%\subsection{(((u)))}
+%\begin{itemize}[label={}]
+%  ((* for x in i | sort_by_attr(["end", "start"], reverse=True) *))
+%  \item (((x.name))), (((x.degree))) (((x.field))). (((x.role))). (((x.start)))--(((x.end))).
+%        ((* endfor *))
+%\end{itemize}
+%((* endfor *))
 
 %% Outreach
 ((* set sect = data.sections | select_by_attr_name("title", "Outreach") *))
@@ -344,9 +331,9 @@ UprightFont=*-Regular]{Inconsolata}
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
 \begin{itemize}[label={}]
-((* for i in sect.entries.outreach | sort_first_year("year", reverse=True) *))
-\item (((i.activity))), (((i.org))). (((i.year))).
-((* endfor *))
+  ((* for i in sect.entries.outreach | sort_first_year("year", reverse=True) *))
+  \item (((i.activity))), (((i.org))). (((i.year))).
+        ((* endfor *))
 \end{itemize}
 
 %% Service
@@ -356,9 +343,9 @@ UprightFont=*-Regular]{Inconsolata}
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
 \begin{itemize}[label={}]
-((* for i in sect.entries.service *))
-\item (((i.title | escape_tex))),((* if i.journal *)) \emph{(((i.journal)))}.((* endif *)) ((* if i.org *))(((i.org | escape_tex))).((* endif *)) (((i.start)))((* if i.end *))--(((i.end)))((* endif *)).
-((* endfor *))
+  ((* for i in sect.entries.service *))
+  \item (((i.title | escape_tex))),((* if i.journal *)) \emph{(((i.journal)))}.((* endif *)) ((* if i.org *))(((i.org | escape_tex))).((* endif *)) (((i.start)))((* if i.end *))--(((i.end)))((* endif *)).
+        ((* endfor *))
 \end{itemize}
 
 %% Professional Experience
@@ -368,9 +355,9 @@ UprightFont=*-Regular]{Inconsolata}
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
 \begin{itemize}[label={}]
-((* for i in sect.entries.experience | sort_by_attr(["end", "start"], reverse=True) *))
-\item (((i.title))), (((i.org)))). (((i.start)))--(((i.end)))
-((* endfor *))
+  ((* for i in sect.entries.experience | sort_by_attr(["end", "start"], reverse=True) *))
+  \item (((i.title))), (((i.org)))). (((i.start)))--(((i.end)))
+        ((* endfor *))
 \end{itemize}
 
 

@@ -1,30 +1,29 @@
 # Configuration for CV
 person:
-  first_name: Vivek
-  last_name: Srikrishnan
-  title: Assistant Research Professor
-  affiliation: Earth and Environmental Systems Institute
-  affiliation_link: https://eesi.psu.edu
-  email: vivek@psu.edu
-  web: https://srikrishnan-lab.github.io/
-  github: vsrikrish
-  googlescholar: CY_JxugAAAAJ
-  orcid: 0000-0003-0049-3805
-  subject: "climate, systems, engineering"
+  first_name: James
+  last_name: Doss-Gollin
+  title: Assistant Professor
+  university: Rice University
+  department: Department of Civil and Environmental Engineering
+  department_link: https://cee.rice.edu/
+  email: jdossgollin@rice.edu
+  web: https://dossgollin-lab.github.io/
+  github: jdossgollin
+  googlescholar: 6ifLBBsAAAAJ
+  orcid: 0000-0002-3428-2224
+  subject: "adaptive and resilient infrastructure"
   address:
-    line1: 319C Earth-Engineering Sciences Building
-    postcode: University Park, PA, 16802
+    line1: 6100 Main Street, Ryon Lab 204-MS 318
+    postcode: Houston, TX, 77005
     country: USA
 
 paths:
-  bib_path: bibliography
+  bib_path: my-papers
   yaml_path: data
 
 publications:
   - title: Papers
-    file: library.bib
-  - title: Conferences
-    file: conferences.bib
+    file: my-papers.bib
 
 sections:
   - title: Research Interests
@@ -35,12 +34,10 @@ sections:
     file: education.yml
   - title: Invited Talks
     file: talks.yml
-  - title: Workshops Organized
+  - title: Workshop Presentations
     file: workshops.yml
   - title: Grants and Contracts
     file: grants.yml
-  - title: Networks and Projects
-    file: projects.yml
   - title: Teaching
     file: teaching.yml
   - title: Advising

@@ -10,7 +10,7 @@ name: LaTeX
 on:
   repository_dispatch:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
@@ -29,7 +29,7 @@ jobs:
           submodules: true
       - name: Update bibliography
         run: |
-          cd bibliography
+          cd my-papers
           git branch -u origin/main main
           cd ..
           git submodule update --remote --recursive
@@ -44,15 +44,15 @@ jobs:
       - name: Build CV
         uses: xu-cheng/latex-action@v2
         with:
-          root_file: Srikrishnan-CV.tex
+          root_file: Doss-Gollin-CV.tex
           args: "-bibtex-cond1 -pdfxe"
           post_compile: "latexmk -c"
       - name: Commit
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add Srikrishnan-CV.pdf
-          git add bibliography/
+          git add Doss-Gollin-CV.pdf
+          git add my-papers/
           git commit -m "update CV"
       - name: Push
         uses: ad-m/github-push-action@master
@@ -65,9 +65,9 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.PUSH_TOKEN }}
         with:
-          source_file: 'Srikrishnan-CV.pdf'
-          destination_repo: 'srikrishnan-lab/srikrishnan-lab.github.io'
-          destination_folder: 'assets/pdf'
-          user_email: 'srikrish@gmail.com'
-          user_name: 'vsrikrish'
-          destination_branch: 'gh-pages'
+          source_file: "Doss-Gollin-CV.pdf"
+          destination_repo: "dossgollin-lab/dossgollin-lab.github.io"
+          destination_folder: "assets/pdf"
+          user_email: "james.dossgollin@gmail.com"
+          user_name: "jdossgollin"
+          destination_branch: "gh-pages"

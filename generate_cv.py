@@ -85,5 +85,5 @@ my_filters = [
     filters.sort_first_year
 ]
 cv = CV('_config.yml', filters=my_filters)
-with open('Srikrishnan-CV.tex', 'w') as f:
+with open('Doss-Gollin-CV.tex', 'w') as f:
     f.write(cv.render_tex('cv.tex'))

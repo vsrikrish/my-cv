@@ -1,64 +1,37 @@
 talks:
-  - title: "How Likely Are the Most Extreme CO$_2$ Emissions Scenarios?"
-    event: MIT Joint Program on the Science and Policy of Global Change Seminar
-    org: Massachusetts Institute of Technology
+  - title: "Towards Adaptive Resilience: Decision and Policy Support for Household Flood Risk Management"
+    event: Summer Seminar Series
+    org: Columbia University Department of Earth and Environmental Engineering
     location: Remote
     month: Aug
     year: 2020
-  - title: "How Likely Are the Most Extreme CO$_2$ Emissions Scenarios?"
-    event: Energy and Environmental Economics and Policy Seminar
-    org: Pennsylvania State University
-    location: University Park (PA), USA
-    month: Feb
+  - title: "Prediction and Implications of Structured Climate Risk for Sequential Adaptation under Deep Uncertainty"
+    event: Center for Climate Risk Management CLIMA Seminar
+    org: the Pennsylvania State University
+    location: State College, PA
+    month: Jan
     year: 2020
-  - title: "Climate Risk Management: A Decision-Centered Approach"
-    event: Tufts Civil and Environmental Engineering Seminar
-    org: Tufts University
-    location: Medford (MA), USA
-    month: Nov
-    year: 2019
-  - title: "Adaptive Multi-Objective Robust Decision-Making"
-    event: Carnegie Mellon-Penn State Workshop on Multi-Objective Robust Decision-Making
-    org: Pennsylvania State University
-    location: University Park (PA), USA
-    month: Aug
-    year: 2019
-  - title: "From Earth-System Science to Coastal Hazards and Back"
-    coauthor: Klaus Keller
-    event: Environmental and Sustainability Seminar
-    org: Carnegie Mellon University
-    location: Pittsburgh (PA), USA
-    month: May
-    year: 2019
-  - title: "Agent-Based Models: The New 'Plastic' or the Emperor's Clothes?"
-    coauthor: Klaus Keller
-    event: Program on Coupled Natural-Human Systems Research Seminar
-    org: Pennsylvania State University
-    location: University Park (PA), USA
-    month: Mar
-    year: 2019
-  - title: "From Earth-System Science to Coastal Hazards and Back"
-    coauthor: Klaus Keller
-    org: Pacific Northwest National Laboratory
-    location: Richland (WA), USA
-    month: Mar
-    year: 2019
-  - title: "From Earth-System Science to Coastal Hazards and Back"
-    coauthor: Klaus Keller
-    org: Joint Global Change Research Institute
-    location: College Park (MD), USA
-    month: Feb
-    year: 2019
-  - title: "Can We Avoid a (Rational) Route to Collapse?"
-    coauthor: Klaus Keller
-    event: Workshop on Managing Natural Resource Risk in the Modern and Prehistoric World
-    org: Santa Fe Institute
-    location: Santa Fe (NM), USA
-    month: Oct
-    year: 2018
-  - title: "Hedging Strategies for Electricity Investment Decisions Under Policy Uncertainty"
-    event: Energy and Mineral Engineering Graduate Seminar
-    org: Pennsylvania State University
-    location: University Park (PA), USA
-    month: Mar
+  - title: "Prediction and Implications of Structured Climate Risk for Sequential Adaptation under Deep Uncertainty"
+    event: Department of Civil and Environmental Engineering Seminar
+    org: Rice University
+    location: Houston, TX
+    month: Jan
+    year: 2020
+  - title: "Prediction and Implications of Structured Climate Risk for Sequential Adaptation under Deep Uncertainty"
+    event: Complex Systems Simulation and Optimization Group
+    org: National Renewable Energy Laboratory
+    location: Golden, CO
+    month: Jan
+    year: 2020
+  - title: "Drivers of Extreme Rainfall: Atmospheric Circulation Patterns and Regional Intense Rainfall in the Ohio River"
+    event: European Flood Awareness System Group
+    org: European Centre for Medium Range Weather Forecasting
+    location: Reading, England
     year: 2016
+    month: Sept
+  - title: "Understanding the Physical Drivers of Extreme Rainfall for Flood Prediction"
+    event: Oxford Water Network
+    org: Oxford University
+    location: Oxford, England
+    year: 2016
+    month: Aug

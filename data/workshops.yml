@@ -1,5 +1,53 @@
 workshops:
-  - title: Carnegie Mellon-Penn State Workshop on Multi-Objective Robust Decision-Making
-    location: University Park (PA), USA
-    month: Aug
+  - title: "Adaptive Resilience through Real Options and Deep Reinforecement Learning"
+    event: Doctoral Consortium on Computational Sustainability
+    org: Carnegie Mellon University
+    location: Pittsburgh,  PA
+    format: Oral Presentation
+    month: Oct
     year: 2019
+  - title: "Evaluating Staged Investments in Critical Infrastructure for Climate Adaptation"
+    event: Interdisciplinary Ph.D. Workshop in Sustainable Development
+    org: Columbia University
+    location: New York, NY
+    format: Oral Presentation
+    month: Apr
+    year: 2019
+  - title: Robust Adaptation to Multi-Scale Climate Variability
+    event: The Nexus of Climate Data, Insurance, and Adaptive Capacity
+    location: Asheville, NC
+    format: Poster Presentation
+    month: Nov
+    year: 2018
+    link: https://doi.org/10.6084/m9.figshare.8277002.v1
+  - title: "Extreme Rainfall in Paraguay during the 2015-16 Austral Summer: Causes and Predictive Skill"
+    event: North East Graduate Student Water Symposium
+    org: University of Massachusetts Amherst
+    location: Amherst, MA
+    format: Oral Presentation
+    month: Sept
+    year: 2017
+    link: https://doi.org/10.6084/m9.figshare.8277128.v2
+  - title: "Regional Intense Precipitation: Inferences From GCM Atmospheric Circulation Fields"
+    event: Modeling Research in the Cloud
+    org: National Center for Atmospheric Research
+    location: Boulder, CO
+    format: Poster Presentation
+    year: 2017
+    month: May
+    link: https://doi.org/10.6084/m9.figshare.8277167.v1
+  - title: "Statistical-Dynamical Analysis of Climate Projections for Flood Infrastructure Design"
+    event: Interdisciplinary Ph.D. Workshop in Sustainable Development 2017
+    org: Columbia University
+    location: New York, NY
+    format: Oral Presentation
+    year: 2017
+    month: Apr
+  - title: "Causes and Model Skill of the Persistent Intense Rainfall and Flooding in Paraguay during the Austral Summer 2015-2016"
+    event: Workshop on Subseasonal to Seasonal Predictability of Extreme Weather and Climate
+    org: Columbia University
+    location: New York, NY
+    format: Poster Presentation
+    year: 2016
+    month: Dec
+    link: 10.13140/RG.2.2.20146.30406
