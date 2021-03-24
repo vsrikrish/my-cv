@@ -30,7 +30,7 @@ jobs:
       - name: Update bibliography
         run: |
           cd my-papers
-          git branch -u origin/main main
+          git branch -u origin/master master
           cd ..
           git submodule update --remote --recursive
       - name: Set up Conda Environment
