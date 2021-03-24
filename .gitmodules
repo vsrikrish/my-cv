@@ -1,0 +1,3 @@
+[submodule "my-papers"]
+	path = my-papers
+	url = https://github.com/jdossgollin/my-papers
