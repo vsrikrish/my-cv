@@ -368,7 +368,7 @@ UprightFont=*-Regular]{Inconsolata}
 
 \begin{itemize}[label={}]
   ((* for i in sect.entries.experience | sort_by_attr(["end", "start"], reverse=True) *))
-  \item \textbf{(((i.title)))}, (((i.org)))). ((* if i.end == i.start *))(((i.end)))((* else *))(((i.start)))--(((i.end)))((* endif *))
+  \item \textbf{(((i.title)))}, (((i.org))). ((* if i.end == i.start *))(((i.end)))((* else *))(((i.start)))--(((i.end)))((* endif *))
         ((* endfor *))
 \end{itemize}
 
