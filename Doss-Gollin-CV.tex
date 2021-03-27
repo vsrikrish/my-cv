@@ -94,7 +94,6 @@ UprightFont=*-Regular]{Inconsolata}
 \newcolumntype{R}[1]{>{\PreserveBackslash\raggedleft}p{#1}}
 \newcolumntype{L}[1]{>{\PreserveBackslash\raggedright}p{#1}}
 
-% Use BibLaTeX
 \usepackage[autostyle=true, autopunct=true, english=american]{csquotes}
 \usepackage[
 	backend=biber,
@@ -110,60 +109,23 @@ UprightFont=*-Regular]{Inconsolata}
 	isbn=false,
 	maxbibnames=99,
 	maxcitenames=99,
-  defernumbers,
-  giveninits,
-	date=year
+	date=year,
 ]{biblatex}
-
 \setlength{\bibhang}{15pt}
 
-% add bib resources
-
-
+% add bib resource
 \addbibresource{my-papers/my-papers.bib}
-
-
-% include everything in bibliography
-\nocite{*}
 
 % bold my name
 \plauthorname[James]{Doss-Gollin}
 
-% make modifications to standard styles
-\DeclareFieldFormat{title}{\mkbibquote{#1}}
-\DeclareFieldFormat{url}{\url{#1}}
-\DeclareFieldFormat[article]{pages}{#1}
-\DeclareFieldFormat[inproceedings]{pages}{\lowercase{pp.}#1}
-\DeclareFieldFormat[incollection]{pages}{\lowercase{pp.}#1}
-\DeclareFieldFormat[article]{volume}{\mkbibbold{#1}}
-\DeclareFieldFormat[article]{number}{\mkbibparens{#1}}
-\DeclareFieldFormat[article]{url}{}
-\DeclareFieldFormat{shorthandwidth}{#1}
-\DeclareFieldFormat{extrayear}{}
-
-% Remove In: for an article.
-\renewbibmacro{in:}{%
-  \ifentrytype{article}{}{%
-  \printtext{\bibstring{in}\intitlepunct}}}
-
-% Format sub-bibliography headings as subsections
-\defbibheading{subbibliography}[\refname]{\subsection*{#1}}
+% include everything in bibliography
+\nocite{*}
 
 %% other stuff
 % icons for the contact info
 \usepackage{fontawesome5}
 \usepackage{academicons}
-
-% macros and environments
-\newcommand{\Header}[1]{\\\multicolumn{3}{L{7in}}{\color{BrickRed}\Large{\spacedlowsmallcaps{#1}}}\\}
-\newcommand{\Publication}[1]{\fullcite{#1} & \citeyear{#1}}
-\newcommand{\CVEntry}[3]{#1 & #2 & #3}
-\newenvironment{cv}
-{
-	\noindent\begin{longtable}{ >{\em}R{1in} L{5in} >{\em}R{0.875in} }
-}{
-    \end{longtable}
-}
 
 % have to load this last
 \usepackage{hyperref} % Required for adding links	and customizing them
