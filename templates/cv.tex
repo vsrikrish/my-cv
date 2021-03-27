@@ -87,6 +87,13 @@ UprightFont=*-Regular]{Inconsolata}
 \usepackage{enumitem}
 \setlist[itemize, 1]{nosep, noitemsep, labelsep=-5pt, leftmargin=*, after=\vspace{\baselineskip}, itemindent=-15pt, labelindent=5pt}
 
+% fixed width tables
+\usepackage{array}
+\newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
+\newcolumntype{C}[1]{>{\PreserveBackslash\centering}p{#1}}
+\newcolumntype{R}[1]{>{\PreserveBackslash\raggedleft}p{#1}}
+\newcolumntype{L}[1]{>{\PreserveBackslash\raggedright}p{#1}}
+
 % Use BibLaTeX
 \usepackage[autostyle=true, autopunct=true, english=american]{csquotes}
 \usepackage[
@@ -160,7 +167,7 @@ UprightFont=*-Regular]{Inconsolata}
 
 % have to load this last
 \usepackage{hyperref} % Required for adding links	and customizing them
-\hypersetup{colorlinks, breaklinks, urlcolor=RiceGray, linkcolor=RiceGray}
+\hypersetup{colorlinks, breaklinks, urlcolor=black, linkcolor=black}
 
 %---------------------------------------------------------------------
 
@@ -168,23 +175,15 @@ UprightFont=*-Regular]{Inconsolata}
 
 \thispagestyle{empty}
 %% Name and contact block
-
-\begin{minipage}[t]{2.8in}
-  \flushright {\footnotesize
-  (((data.person.university)))\\
-  (((data.person.department)))\\
-  (((data.person.address.line1)))\\ \vspace{0.01in}
-  (((data.person.address.postcode)))\\ \vspace{-0.04in}}
-\end{minipage}%
-\begin{minipage}[t]{2.5in}
-  \flushright {\footnotesize  \texttt{\href{mailto:(((data.person.email)))}{(((data.person.email)))}} \, \faEnvelope} \\ \vspace{-0.21in}
-  \flushright {\footnotesize  \texttt{\href{(((data.person.web)))}{(((data.person.web)))}} \, \faGlobe} \\ \vspace{-0.195in}
-  \flushright {\footnotesize
-    \texttt{\href{https://github.com/(((data.person.github)))}{(((data.person.github)))}} \, \faGithub} \\ \vspace{-0.185in}
-  \flushright {\footnotesize
-    \texttt{\href{https://scholar.google.com/citations?user=(((data.person.googlescholar)))}{(((data.person.first_name))) (((data.person.last_name)))}} \, \aiGoogleScholar}
-
-\end{minipage}
+\noindent{
+  \footnotesize
+  \begin{tabular}{L{0.5\textwidth}R{0.5\textwidth}}
+    (((data.person.university)))       & \texttt{\href{mailto:(((data.person.email)))}{(((data.person.email)))}} \, \faEnvelope                                                                                  \\
+    (((data.person.department)))       & \texttt{\href{(((data.person.web)))}{(((data.person.web)))}} \, \faGlobe                                                                                                \\
+    (((data.person.address.line1)))    & \texttt{\href{https://github.com/(((data.person.github)))}{(((data.person.github)))}} \, \faGithub                                                                      \\
+    (((data.person.address.postcode))) & \texttt{\href{https://scholar.google.com/citations?user=(((data.person.googlescholar)))}{(((data.person.first_name))) (((data.person.last_name)))}} \, \aiGoogleScholar \\
+  \end{tabular}
+}
 
 \bigskip
 
@@ -213,8 +212,14 @@ UprightFont=*-Regular]{Inconsolata}
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
 \begin{itemize}[label={}]
-  ((* for i in sect.entries.appointments | sort_by_attr(["start"], reverse=True) *))
-  \item \textbf{(((i.title)))}, (((i.dept | escape_tex))), (((i.univ))), (((i.start)))--(((i.end)))
+  ((* for univ, positions in sect.entries.items() *))
+  \item \textbf{(((univ | escape_tex)))}
+        ((* for pos in positions *))
+        \textit{((( pos.role | escape_tex )))}, ((( pos.org | escape_tex ))), ((* if pos.start == pos.end *))((( pos.start )))((* else *))((( pos.start )))--((( pos.end )))((* endif *)).
+        ((* if pos.notes *))
+        ((* for note in pos.notes *))((( note | escape_tex )))((* endfor *))
+        ((* endif *))
+        ((* endfor *))
         ((* endfor *))
 \end{itemize}
 
@@ -225,8 +230,14 @@ UprightFont=*-Regular]{Inconsolata}
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
 \begin{itemize}[label={}]
-  ((* for i in sect.entries.degrees | sort_by_attr(["year"], reverse=True) *))
-  \item \textbf{(((i.degree)))}, (((i.subject | escape_tex))), (((i.school))), (((i.year)))
+  ((* for univ, entry in sect.entries.items() *))
+  \item \textbf{(((univ | escape_tex)))}
+        ((* for deg in entry.degrees *))
+        \textit{((( deg.degree | escape_tex )))}, ((( deg.subject | escape_tex ))), ((( deg.year ))).
+        ((* endfor *))
+        ((* if entry.notes *))((* for note in entry.notes *))
+        ((( note )))
+        ((* endfor *))((* endif *))
         ((* endfor *))
 \end{itemize}
 
@@ -242,16 +253,39 @@ UprightFont=*-Regular]{Inconsolata}
         ((* endfor *))
 \end{itemize}
 
+
+%% Grants and Contracts
+%((* set sect = data.sections | select_by_attr_name("title", "Grants and Contracts") *))
+%\section{(((sect.title | lower)))}
+%
+%\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+%
+%\begin{itemize}[label={}]
+%  ((* for i in sect.entries.grants | sort_by_attr(["start"], reverse=True) *))
+%  \item (((i.role)))((* if i.PI *)) (PI: (((i.PI))))((* endif *)). (((i.funder))). \enquote{(((i.title | escape_tex)))}. \$(((i.amount))). (((i.start)))--(((i.end))).
+%        ((* endfor *))
+%\end{itemize}
+
 %% Publications
-\section{publications}
 
-\printbibliography[type=article, title={Peer-Reviewed Journal Articles}, heading=subbibliography]
+\section{journal articles}
 
-\printbibliography[type=unpublished, title={Articles Under Review or Forthcoming}, heading=subbibliography]
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+\vspace*{-1em}
 
-\printbibliography[type=thesis, title={Dissertation}, heading=subbibliography]
+\printbibliography[type=article, heading=none]
 
-\printbibliography[type=inproceedings, title={Conference Proceedings}, heading=subbibliography]
+\section{articles in review}
+
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+\vspace*{-1em}
+\printbibliography[type=unpublished, heading=none]
+
+\section{dissertation}
+
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+\vspace*{-1em}
+\printbibliography[type=thesis, heading=none]
 
 %% Invited Talks
 ((* set sect = data.sections | select_by_attr_name("title", "Invited Talks") *))
@@ -265,6 +299,12 @@ UprightFont=*-Regular]{Inconsolata}
         ((* endfor *))
 \end{itemize}
 
+\section{conference proceedings}
+
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+\vspace*{-1em}
+\printbibliography[type=inproceedings, heading=none]
+
 %% Workshops
 ((* set sect = data.sections | select_by_attr_name("title", "Workshop Presentations") *))
 \section{(((sect.title | lower)))}
@@ -276,18 +316,6 @@ UprightFont=*-Regular]{Inconsolata}
   \item ((* if i.link *))\href{(((i.link)))}{\enquote{\textbf{(((i.title | escape_tex)))}}}((* else *))\enquote{\textbf{(((i.title | escape_tex)))}}((* endif *)), ((* if i.event *))(((i.event | escape_tex))), ((* endif *)) \textit{(((i.org)))}. (((i.location))). ((* if i.format *))(((i.format))).((* endif *)) (((i.month)))((* if i.month != "May" *)).((* endif *)) (((i.year)))((* if i.coauthor *)) (with (((i.coauthor))))((* endif *)).
         ((* endfor *))
 \end{itemize}
-
-%% Grants and Contracts
-%((* set sect = data.sections | select_by_attr_name("title", "Grants and Contracts") *))
-%\section{(((sect.title | lower)))}
-%
-%\mbox{}\vspace{-\dimexpr\baselineskip\relax}
-%
-%\begin{itemize}[label={}]
-%  ((* for i in sect.entries.grants | sort_by_attr(["start"], reverse=True) *))
-%  \item (((i.role)))((* if i.PI *)) (PI: (((i.PI))))((* endif *)). (((i.funder))). \enquote{(((i.title | escape_tex)))}. \$(((i.amount))). (((i.start)))--(((i.end))).
-%        ((* endfor *))
-%\end{itemize}
 
 %% Teaching
 ((* set sect = data.sections | select_by_attr_name("title", "Teaching") *))

@@ -87,6 +87,13 @@ UprightFont=*-Regular]{Inconsolata}
 \usepackage{enumitem}
 \setlist[itemize, 1]{nosep, noitemsep, labelsep=-5pt, leftmargin=*, after=\vspace{\baselineskip}, itemindent=-15pt, labelindent=5pt}
 
+% fixed width tables
+\usepackage{array}
+\newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
+\newcolumntype{C}[1]{>{\PreserveBackslash\centering}p{#1}}
+\newcolumntype{R}[1]{>{\PreserveBackslash\raggedleft}p{#1}}
+\newcolumntype{L}[1]{>{\PreserveBackslash\raggedright}p{#1}}
+
 % Use BibLaTeX
 \usepackage[autostyle=true, autopunct=true, english=american]{csquotes}
 \usepackage[
@@ -160,7 +167,7 @@ UprightFont=*-Regular]{Inconsolata}
 
 % have to load this last
 \usepackage{hyperref} % Required for adding links	and customizing them
-\hypersetup{colorlinks, breaklinks, urlcolor=RiceGray, linkcolor=RiceGray}
+\hypersetup{colorlinks, breaklinks, urlcolor=black, linkcolor=black}
 
 %---------------------------------------------------------------------
 
@@ -168,23 +175,15 @@ UprightFont=*-Regular]{Inconsolata}
 
 \thispagestyle{empty}
 %% Name and contact block
-
-\begin{minipage}[t]{2.8in}
-  \flushright {\footnotesize
-    Rice University\\
-    Department of Civil and Environmental Engineering\\
-    6100 Main Street, Ryon Lab 204-MS 318\\ \vspace{0.01in}
-    Houston, TX, 77005\\ \vspace{-0.04in}}
-\end{minipage}%
-\begin{minipage}[t]{2.5in}
-  \flushright {\footnotesize  \texttt{\href{mailto:jdossgollin@rice.edu}{jdossgollin@rice.edu}} \, \faEnvelope} \\ \vspace{-0.21in}
-  \flushright {\footnotesize  \texttt{\href{https://dossgollin-lab.github.io/}{https://dossgollin-lab.github.io/}} \, \faGlobe} \\ \vspace{-0.195in}
-  \flushright {\footnotesize
-    \texttt{\href{https://github.com/jdossgollin}{jdossgollin}} \, \faGithub} \\ \vspace{-0.185in}
-  \flushright {\footnotesize
-    \texttt{\href{https://scholar.google.com/citations?user=6ifLBBsAAAAJ}{James Doss-Gollin}} \, \aiGoogleScholar}
-
-\end{minipage}
+\noindent{
+  \footnotesize
+  \begin{tabular}{L{0.5\textwidth}R{0.5\textwidth}}
+    Rice University                                   & \texttt{\href{mailto:jdossgollin@rice.edu}{jdossgollin@rice.edu}} \, \faEnvelope                              \\
+    Department of Civil and Environmental Engineering & \texttt{\href{https://dossgollin-lab.github.io}{https://dossgollin-lab.github.io}} \, \faGlobe                \\
+    6100 Main Street, Ryon Lab 204-MS 318             & \texttt{\href{https://github.com/jdossgollin}{jdossgollin}} \, \faGithub                                      \\
+    Houston, TX, 77005                                & \texttt{\href{https://scholar.google.com/citations?user=6ifLBBsAAAAJ}{James Doss-Gollin}} \, \aiGoogleScholar \\
+  \end{tabular}
+}
 
 \bigskip
 
@@ -220,9 +219,22 @@ UprightFont=*-Regular]{Inconsolata}
 
 \begin{itemize}[label={}]
 
-  \item \textbf{Assistant Professor}, Department of Civil \& Environmental Engineering, Rice University, 2021--present
+  \item \textbf{Rice University}
 
-  \item \textbf{Postdoctoral Scholar}, Earth \& Environmental Systems Institute, Pennsylvania State University, 2020--2020
+        \textit{Assistant Professor}, Department of Civil \& Environmental Engineering, 2021--present.
+
+
+        \textit{Adjunct Professor}, Department of Civil \& Environmental Engineering, 2020.
+
+
+
+  \item \textbf{Pennsylvania State University}
+
+        \textit{Postdoctoral Scholar}, Earth \& Environmental Systems Institute, 2020.
+
+        adviser: Klaus Keller
+
+
 
 \end{itemize}
 
@@ -234,11 +246,21 @@ UprightFont=*-Regular]{Inconsolata}
 
 \begin{itemize}[label={}]
 
-  \item \textbf{Ph.D.}, Earth \& Environmental Engineering, Columbia University, 2020
+  \item \textbf{Columbia University}
 
-  \item \textbf{M.S.}, Earth \& Environmental Engineering, Columbia University, 2016
+        \textit{Ph.D}, Earth \& Environmental Engineering, 2020.
 
-  \item \textbf{B.S.}, Mechanical Engineering, Yale University, 2011
+        \textit{M.S.}, Earth \& Environmental Engineering, 2016.
+
+
+        adviser: Upmanu Lall
+
+
+  \item \textbf{Yale University}
+
+        \textit{B.S.}, Mechanical Engineering, 2011.
+
+
 
 \end{itemize}
 
@@ -268,16 +290,41 @@ UprightFont=*-Regular]{Inconsolata}
 
 \end{itemize}
 
+
+%% Grants and Contracts
+%
+%\section{grants and contracts}
+%
+%\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+%
+%\begin{itemize}[label={}]
+%  
+%  \item Co-PI (PI: Klaus Keller at Penn State on subcontract from Battelle-Pacific Northwest National Laboratory). Department of Energy, Biological and Environmental Research. \enquote{Integrated Coastal Modeling (ICoM)}. \$1,200,000. 2019--2022.
+%        
+%  \item Co-PI (PI: Klaus Keller at Penn State on subcontract from Battelle-Pacific Northwest National Laboratory). Department of Energy, Biological and Environmental Research. \enquote{Integrated Multi-Scale Multi-Sector Modeling (IM3)}. \$25,000. 2019--2020.
+%        
+%\end{itemize}
+
 %% Publications
-\section{publications}
 
-\printbibliography[type=article, title={Peer-Reviewed Journal Articles}, heading=subbibliography]
+\section{journal articles}
 
-\printbibliography[type=unpublished, title={Articles Under Review or Forthcoming}, heading=subbibliography]
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+\vspace*{-1em}
 
-\printbibliography[type=thesis, title={Dissertation}, heading=subbibliography]
+\printbibliography[type=article, heading=none]
 
-\printbibliography[type=inproceedings, title={Conference Proceedings}, heading=subbibliography]
+\section{articles in review}
+
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+\vspace*{-1em}
+\printbibliography[type=unpublished, heading=none]
+
+\section{dissertation}
+
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+\vspace*{-1em}
+\printbibliography[type=thesis, heading=none]
 
 %% Invited Talks
 
@@ -300,6 +347,12 @@ UprightFont=*-Regular]{Inconsolata}
   \item \enquote{\textbf{Understanding the Physical Drivers of Extreme Rainfall for Flood Prediction}}, Oxford Water Network,  \textit{Oxford University}. Oxford, England. Aug. 2016.
 
 \end{itemize}
+
+\section{conference proceedings}
+
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+\vspace*{-1em}
+\printbibliography[type=inproceedings, heading=none]
 
 %% Workshops
 
@@ -324,20 +377,6 @@ UprightFont=*-Regular]{Inconsolata}
   \item \href{https://doi.org/10.13140/RG.2.2.20146.30406}{\enquote{\textbf{Causes and Model Skill of the Persistent Intense Rainfall and Flooding in Paraguay during the Austral Summer 2015-2016}}}, Workshop on Subseasonal to Seasonal Predictability of Extreme Weather and Climate,  \textit{Columbia University}. New York, NY. Poster Presentation. Dec. 2016.
 
 \end{itemize}
-
-%% Grants and Contracts
-%
-%\section{grants and contracts}
-%
-%\mbox{}\vspace{-\dimexpr\baselineskip\relax}
-%
-%\begin{itemize}[label={}]
-%  
-%  \item Co-PI (PI: Klaus Keller at Penn State on subcontract from Battelle-Pacific Northwest National Laboratory). Department of Energy, Biological and Environmental Research. \enquote{Integrated Coastal Modeling (ICoM)}. \$1,200,000. 2019--2022.
-%        
-%  \item Co-PI (PI: Klaus Keller at Penn State on subcontract from Battelle-Pacific Northwest National Laboratory). Department of Energy, Biological and Environmental Research. \enquote{Integrated Multi-Scale Multi-Sector Modeling (IM3)}. \$25,000. 2019--2020.
-%        
-%\end{itemize}
 
 %% Teaching
 
@@ -440,23 +479,23 @@ UprightFont=*-Regular]{Inconsolata}
 
 \begin{itemize}[label={}]
 
-  \item \textbf{Visiting Graduate Researcher}, Lamontagne Research Group, Department of Civil and Environmental Engineering, Tufts University, Medford, MA). 2019--2020
+  \item \textbf{Visiting Graduate Researcher}, Lamontagne Research Group, Department of Civil and Environmental Engineering, Tufts University, Medford, MA. 2019--2020
 
-  \item \textbf{Graduate Research Fellow}, Columbia Water Center, Department of Earth and Environmental Engineering, Columbia University, New York, NY). 2015--2020
+  \item \textbf{Graduate Research Fellow}, Columbia Water Center, Department of Earth and Environmental Engineering, Columbia University, New York, NY. 2015--2020
 
-  \item \textbf{Education Policy Intern}, Elm City Communities / New Haven Housing Authority, New Haven, CT). 2015
+  \item \textbf{Education Policy Intern}, Elm City Communities / New Haven Housing Authority, New Haven, CT. 2015
 
-  \item \textbf{Undergraduate Research Assistant}, Lab of Jaehong Kim, Department of Chemical and Environmental Engineering, Yale University, New Haven, CT). 2014--2015
+  \item \textbf{Undergraduate Research Assistant}, Lab of Jaehong Kim, Department of Chemical and Environmental Engineering, Yale University, New Haven, CT. 2014--2015
 
-  \item \textbf{President (2014), Design Lead (2013), Member (2012, 2015)}, Engineers Without Borders, Yale Student Chapter, New Haven, CT). 2012--2015
+  \item \textbf{President (2014), Design Lead (2013), Member (2012, 2015)}, Engineers Without Borders, Yale Student Chapter, New Haven, CT. 2012--2015
 
-  \item \textbf{Visiting Undergraduate Researcher}, Water and Climate Risk Lab, Department of Hydraulic and Environmental Engineering, Universidade Federal do Ceará, Fortaleza, Brazil). 2014
+  \item \textbf{Visiting Undergraduate Researcher}, Water and Climate Risk Lab, Department of Hydraulic and Environmental Engineering, Universidade Federal do Ceará, Fortaleza, Brazil. 2014
 
-  \item \textbf{Mechanical Design Intern}, Slingshot Team, DEKA Research \& Development, Manchester, NH). 2013
+  \item \textbf{Mechanical Design Intern}, Slingshot Team, DEKA Research \& Development, Manchester, NH. 2013
 
-  \item \textbf{Undergraduate Research Assistant}, Lab of Jan Schroers, Department of Mechanical Engineering and Materials Science, Yale University, New Haven, CT). 2012
+  \item \textbf{Undergraduate Research Assistant}, Lab of Jan Schroers, Department of Mechanical Engineering and Materials Science, Yale University, New Haven, CT. 2012
 
-  \item \textbf{Ikatú Agua Intern}, Fundación Paraguaya, Asunción, Paraguay). 2012
+  \item \textbf{Ikatú Agua Intern}, Fundación Paraguaya, Asunción, Paraguay. 2012
 
 \end{itemize}
 

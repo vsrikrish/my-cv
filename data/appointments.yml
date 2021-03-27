@@ -1,11 +1,17 @@
-appointments:
-  - univ: Rice University
-    dept: Department of Civil & Environmental Engineering
-    title: Assistant Professor
+Rice University:
+  - role: Assistant Professor
+    org: Department of Civil & Environmental Engineering
     start: 2021
     end: present
-  - univ: Pennsylvania State University
-    dept: Earth & Environmental Systems Institute
-    title: Postdoctoral Scholar
+  - role: Adjunct Professor
+    org: Department of Civil & Environmental Engineering
     start: 2020
     end: 2020
+
+Pennsylvania State University:
+  - role: Postdoctoral Scholar
+    org: Earth & Environmental Systems Institute
+    start: 2020
+    end: 2020
+    notes:
+      - "adviser: Klaus Keller"

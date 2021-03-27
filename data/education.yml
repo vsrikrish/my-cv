@@ -1,13 +1,16 @@
-degrees:
-  - degree: Ph.D.
-    subject: Earth & Environmental Engineering
-    school: Columbia University
-    year: 2020
-  - degree: M.S.
-    subject: Earth & Environmental Engineering
-    school: Columbia University
-    year: 2016
-  - degree: B.S.
-    subject: Mechanical Engineering
-    school: Yale University
-    year: 2011
+Columbia University:
+  degrees:
+    - degree: Ph.D
+      subject: Earth & Environmental Engineering
+      year: 2020
+    - degree: M.S.
+      subject: Earth & Environmental Engineering
+      year: 2016
+  notes:
+    - "adviser: Upmanu Lall"
+
+Yale University:
+  degrees:
+    - degree: B.S.
+      subject: Mechanical Engineering
+      year: 2011
