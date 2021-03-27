@@ -44,9 +44,11 @@ sections:
     file: advising.yml
   - title: Awards
     file: awards.yml
-  - title: Outreach
-    file: outreach.yml
-  - title: Service
-    file: service.yml
+  - title: Media Coverage
+    file: media.yml
+  - title: Peer Review
+    file: peerreview.yml
   - title: Professional Experience
     file: experience.yml
+  - title: Workshops and Sessions Organized
+    file: convene.yml
