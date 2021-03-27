@@ -1,8 +1,7 @@
+\documentclass[10pt,oneside]{article}
 
-\documentclass[11pt,article,oneside]{memoir}
+% language setup
 \usepackage[english]{babel}
-\usepackage{titlesec}
-\usepackage{setspace}
 
 % margins
 \usepackage[left=1.5in, right=1.75in, top=1in, bottom=0.75in]{geometry}% adjust the page margins
@@ -15,70 +14,34 @@
 \definecolor{GrassGreen}{HTML}{359245}
 \definecolor{WarmYellow}{HTML}{E9A139}
 %% Choose fonts for use with xelatex
+
+
 \usepackage{fontspec}
-\setmainfont[Path=fonts/,
-Mapping={tex-text},
-Numbers={OldStyle},
-Ligatures={Common},
-UprightFont=*-Regular,
-BoldFont=*-Bold,
-ItalicFont=*-Italic,
-BoldItalicFont=*-BoldItalic
-]{CrimsonText}
-\setsansfont[Path=fonts/,
-Mapping=tex-text,
-Colour=b31b1b,
-UprightFont=*-Regular,
-BoldFont=*-Bold,
-ItalicFont=*-Italic]{Lato}
-\setmonofont[Path=fonts/,
-Mapping=tex-text,
-Scale=0.9,
-UprightFont=*-Regular]{Inconsolata}
-
-%%------------------------------------------------------------------------
-%% Section styling
-%%------------------------------------------------------------------------
-
-%% This includes a fudge from the following link in order to get the
-%% subsection to align with a section
-%% http://tex.stackexchange.com/questions/19200/titlesec-remove-space-after-empty-margin-section
-
-\makeatletter
-\newif\ifaftersec\aftersecfalse
-
-\newcommand\setsubskip{%
-    \global\aftersectrue
-    \everypar{%
-        \global\aftersecfalse
-        \if@noskipsec
-            \global\@noskipsecfalse
-            \clubpenalty\@M
-            \hskip-\parindent
-            \begingroup
-                \@svsechd\unskip{\hspace{\@tempskipb}}%
-            \endgroup
-        \else
-            \clubpenalty\@clubpenalty\everypar{}%
-        \fi}}
-
-\newcommand\subskip{%
-  \ifaftersec
-     \removelastskip%         EDIT 2
-     \vspace{-\baselineskip}% EDIT 2 ??????????????
-  \fi
-  \global\aftersecfalse}
+\setromanfont[
+	Path = fonts/,
+  UprightFont = *-Regular, 
+	BoldFont = *-Bold,
+	ItalicFont = *-Italic,
+	BoldItalicFont = *-BoldItalic,
+	Extension = .ttf,
+]{Lato}
+\setsansfont[
+	Path = fonts/,
+  UprightFont = *-Regular, 
+	Extension = .ttf,
+]{Inconsolata}
 
 % Section styling
-\titleformat{\section}[leftmargin]{\raggedleft\sffamily\bfseries\footnotesize}{}{0pt}{}[\setsubskip]
+\usepackage{titlesec}
+\titleformat{\section}[leftmargin]{\raggedleft\sfamily\footnotesize\bfseries\color{BrickRed}}{}{0pt}{}
 \titlespacing*{\section}{2cm}{1ex}{0.25in}
 
-% Subsection styling
-\titleformat{\subsection}{\subskip\itshape}{}{0pt}{}[]
-\titlespacing*{\subsection}{0em}{2.5ex}{1ex}
+% Section styling
+\usepackage{titlesec}
+\titleformat{\section}[leftmargin]{\raggedleft\sffamily\footnotesize\bfseries\color{BrickRed}}{}{0pt}{}
+\titlespacing*{\section}{2cm}{1ex}{0.25in}
 
 \raggedbottom
-\makeatother
 
 % useful macro
 \newcommand{\dotspace}{\quad}
@@ -129,7 +92,7 @@ UprightFont=*-Regular]{Inconsolata}
 
 % have to load this last
 \usepackage{hyperref} % Required for adding links	and customizing them
-\hypersetup{colorlinks, breaklinks, urlcolor=black, linkcolor=black}
+\hypersetup{hidelinks, breaklinks}
 
 %---------------------------------------------------------------------
 
@@ -139,6 +102,7 @@ UprightFont=*-Regular]{Inconsolata}
 %% Name and contact block
 \noindent{
   \footnotesize
+  \color{RiceGray}
   \begin{tabular}{L{0.5\textwidth}R{0.5\textwidth}}
     Rice University                                   & \texttt{\href{mailto:jdossgollin@rice.edu}{jdossgollin@rice.edu}} \, \faEnvelope                              \\
     Department of Civil and Environmental Engineering & \texttt{\href{https://dossgollin-lab.github.io}{https://dossgollin-lab.github.io}} \, \faGlobe                \\
@@ -150,14 +114,14 @@ UprightFont=*-Regular]{Inconsolata}
 \bigskip
 
 %% Name
-\noindent{\LARGE\bfseries \textcolor{BrickRed}{James Doss-Gollin}}
+\noindent{\LARGE\bfseries \textcolor{RiceBlue}{James Doss-Gollin}}
 \reversemarginpar
 
 \bigskip
 
 %% Research Interests
 
-\section{research interests}
+\section{\color{BrickRed}research interests}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
@@ -175,7 +139,7 @@ UprightFont=*-Regular]{Inconsolata}
 
 %% Appointments
 
-\section{appointments}
+\section{\color{BrickRed}appointments}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
@@ -202,7 +166,7 @@ UprightFont=*-Regular]{Inconsolata}
 
 %% Education
 
-\section{education}
+\section{\color{BrickRed}education}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
@@ -228,34 +192,34 @@ UprightFont=*-Regular]{Inconsolata}
 
 %% Awards
 
-\section{awards}
+\section{\color{BrickRed}awards}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
 \begin{itemize}[label={}]
 
-  \item \textbf{Nickolas and Liliana Themelis Fellowship}, Fu Foundation School of Engineering and Applied Science, Columbia University. 2018
+  \item \textbf{Nickolas and Liliana Themelis Fellowship}, Fu Foundation School of Engineering and Applied Science, Columbia University, 2018.
 
-  \item \textbf{Graduate Research Fellowship, Climate and Large-Scale Atmospheric Dynamics}, National Science Foundation. 2017
+  \item \textbf{Graduate Research Fellowship, Climate and Large-Scale Atmospheric Dynamics}, National Science Foundation, 2017.
 
-  \item \textbf{Presidential Distinguished Fellowship}, Fu Foundation School of Engineering and Applied Science, Columbia University. 2015
+  \item \textbf{Presidential Distinguished Fellowship}, Fu Foundation School of Engineering and Applied Science, Columbia University, 2015.
 
-  \item \textbf{Distinction in Major}, Department of Mechanical Engineering and Materials Science, Yale University. 2015
+  \item \textbf{Distinction in Major}, Department of Mechanical Engineering and Materials Science, Yale University, 2015.
 
-  \item \textbf{Legacy Award}, New Haven Promise. 2015
+  \item \textbf{Legacy Award}, New Haven Promise, 2015.
 
-  \item \textbf{Larry Coben ’79 Fellowship}, Yale University. 2014
+  \item \textbf{Larry Coben ’79 Fellowship}, Yale University, 2014.
 
-  \item \textbf{Vance-Carter Travel Award}, Yale University. 2013
+  \item \textbf{Vance-Carter Travel Award}, Yale University, 2013.
 
-  \item \textbf{Thomas C. Barry Travel Award}, Yale University. 2012
+  \item \textbf{Thomas C. Barry Travel Award}, Yale University, 2012.
 
 \end{itemize}
 
 
 %% Grants and Contracts
 %
-%\section{grants and contracts}
+%\section{\color{BrickRed}grants and contracts}
 %
 %\mbox{}\vspace{-\dimexpr\baselineskip\relax}
 %
@@ -269,28 +233,28 @@ UprightFont=*-Regular]{Inconsolata}
 
 %% Publications
 
-\section{journal articles}
+\section{\color{BrickRed}journal articles}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 \vspace*{-1em}
 
 \printbibliography[type=article, heading=none]
 
-\section{articles in review}
-
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
-\vspace*{-1em}
-\printbibliography[type=unpublished, heading=none]
-
-\section{dissertation}
+\section{\color{BrickRed}dissertation}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 \vspace*{-1em}
 \printbibliography[type=thesis, heading=none]
 
+\section{\color{BrickRed}articles in review}
+
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+\vspace*{-1em}
+\printbibliography[type=unpublished, heading=none]
+
 %% Invited Talks
 
-\section{invited talks}
+\section{\color{BrickRed}invited talks}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
@@ -310,7 +274,7 @@ UprightFont=*-Regular]{Inconsolata}
 
 \end{itemize}
 
-\section{conference proceedings}
+\section{\color{BrickRed}conference proceedings}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 \vspace*{-1em}
@@ -318,7 +282,7 @@ UprightFont=*-Regular]{Inconsolata}
 
 %% Workshops
 
-\section{workshop presentations}
+\section{\color{BrickRed}workshop presentations}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
@@ -342,25 +306,23 @@ UprightFont=*-Regular]{Inconsolata}
 
 %% Teaching
 
-\section{teaching}
+\section{\color{BrickRed}teaching}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
-\vspace{\baselineskip}
 
-
-
-\subsection{Columbia University}
 \begin{itemize}[label={}]
 
-  \item Environmental Data Analysis and Modeling. Teaching Assistant. Spring 2018.
+  \item \textbf{Columbia University}
+
+        Environmental Data Analysis and Modeling. Teaching Assistant. Spring 2018.
+
 
 \end{itemize}
 
-
 %% Advising
 %
-%\section{advising}
+%\section{\color{BrickRed}advising}
 %
 %\mbox{}\vspace{-\dimexpr\baselineskip\relax}
 %
@@ -377,21 +339,21 @@ UprightFont=*-Regular]{Inconsolata}
 
 %% Media Coverage
 
-\section{media coverage}
+\section{\color{BrickRed}media coverage}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
 \begin{itemize}[label={}]
 
-  \item \href{https://newrepublic.com/article/155519/false-comfort-higher-seawalls}{The False Comfort of Higher Seawalls}, \textit{Paola Rosa-Aquino}, The New Republic. 2019-10-29.
+  \item \href{https://newrepublic.com/article/155519/false-comfort-higher-seawalls}{The False Comfort of Higher Seawalls}, \textit{Paola Rosa-Aquino}, \textbf{The New Republic}, 2019-10-29.
 
-  \item \href{https://blogs.ei.columbia.edu/2018/08/06/subseasonal-weather-forecasts-paraguay/}{New Study Shows Promise for Long-Term Weather Forecasts in South America}, \textit{Elisabeth Gawthrop}, State of the Planet. 2018-08-06.
+  \item \href{https://blogs.ei.columbia.edu/2018/08/06/subseasonal-weather-forecasts-paraguay/}{New Study Shows Promise for Long-Term Weather Forecasts in South America}, \textit{Elisabeth Gawthrop}, \textbf{State of the Planet}, 2018-08-06.
 
 \end{itemize}
 
 %% Workshops and sessions organized
 
-\section{workshops and sessions organized}
+\section{\color{BrickRed}workshops and sessions organized}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
@@ -407,7 +369,7 @@ UprightFont=*-Regular]{Inconsolata}
 
 %% PEER REVIEW
 
-\section{peer review}
+\section{\color{BrickRed}peer review}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
@@ -435,7 +397,7 @@ UprightFont=*-Regular]{Inconsolata}
 
 %% Professional Experience
 
-\section{professional experience}
+\section{\color{BrickRed}professional experience}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 

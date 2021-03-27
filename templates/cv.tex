@@ -1,8 +1,7 @@
+\documentclass[10pt,oneside]{article}
 
-\documentclass[11pt,article,oneside]{memoir}
+% language setup
 \usepackage[english]{babel}
-\usepackage{titlesec}
-\usepackage{setspace}
 
 % margins
 \usepackage[left=1.5in, right=1.75in, top=1in, bottom=0.75in]{geometry}% adjust the page margins
@@ -15,70 +14,34 @@
 \definecolor{GrassGreen}{HTML}{359245}
 \definecolor{WarmYellow}{HTML}{E9A139}
 %% Choose fonts for use with xelatex
+
+
 \usepackage{fontspec}
-\setmainfont[Path=fonts/,
-Mapping={tex-text},
-Numbers={OldStyle},
-Ligatures={Common},
-UprightFont=*-Regular,
-BoldFont=*-Bold,
-ItalicFont=*-Italic,
-BoldItalicFont=*-BoldItalic
-]{CrimsonText}
-\setsansfont[Path=fonts/,
-Mapping=tex-text,
-Colour=b31b1b,
-UprightFont=*-Regular,
-BoldFont=*-Bold,
-ItalicFont=*-Italic]{Lato}
-\setmonofont[Path=fonts/,
-Mapping=tex-text,
-Scale=0.9,
-UprightFont=*-Regular]{Inconsolata}
-
-%%------------------------------------------------------------------------
-%% Section styling
-%%------------------------------------------------------------------------
-
-%% This includes a fudge from the following link in order to get the
-%% subsection to align with a section
-%% http://tex.stackexchange.com/questions/19200/titlesec-remove-space-after-empty-margin-section
-
-\makeatletter
-\newif\ifaftersec\aftersecfalse
-
-\newcommand\setsubskip{%
-    \global\aftersectrue
-    \everypar{%
-        \global\aftersecfalse
-        \if@noskipsec
-            \global\@noskipsecfalse
-            \clubpenalty\@M
-            \hskip-\parindent
-            \begingroup
-                \@svsechd\unskip{\hspace{\@tempskipb}}%
-            \endgroup
-        \else
-            \clubpenalty\@clubpenalty\everypar{}%
-        \fi}}
-
-\newcommand\subskip{%
-  \ifaftersec
-     \removelastskip%         EDIT 2
-     \vspace{-\baselineskip}% EDIT 2 ??????????????
-  \fi
-  \global\aftersecfalse}
+\setromanfont[
+	Path = fonts/,
+  UprightFont = *-Regular, 
+	BoldFont = *-Bold,
+	ItalicFont = *-Italic,
+	BoldItalicFont = *-BoldItalic,
+	Extension = .ttf,
+]{Lato}
+\setsansfont[
+	Path = fonts/,
+  UprightFont = *-Regular, 
+	Extension = .ttf,
+]{Inconsolata}
 
 % Section styling
-\titleformat{\section}[leftmargin]{\raggedleft\sffamily\bfseries\footnotesize}{}{0pt}{}[\setsubskip]
+\usepackage{titlesec}
+\titleformat{\section}[leftmargin]{\raggedleft\sfamily\footnotesize\bfseries\color{BrickRed}}{}{0pt}{}
 \titlespacing*{\section}{2cm}{1ex}{0.25in}
 
-% Subsection styling
-\titleformat{\subsection}{\subskip\itshape}{}{0pt}{}[]
-\titlespacing*{\subsection}{0em}{2.5ex}{1ex}
+% Section styling
+\usepackage{titlesec}
+\titleformat{\section}[leftmargin]{\raggedleft\sffamily\footnotesize\bfseries\color{BrickRed}}{}{0pt}{}
+\titlespacing*{\section}{2cm}{1ex}{0.25in}
 
 \raggedbottom
-\makeatother
 
 % useful macro
 \newcommand{\dotspace}{\quad}
@@ -129,7 +92,7 @@ UprightFont=*-Regular]{Inconsolata}
 
 % have to load this last
 \usepackage{hyperref} % Required for adding links	and customizing them
-\hypersetup{colorlinks, breaklinks, urlcolor=black, linkcolor=black}
+\hypersetup{hidelinks, breaklinks}
 
 %---------------------------------------------------------------------
 
@@ -139,6 +102,7 @@ UprightFont=*-Regular]{Inconsolata}
 %% Name and contact block
 \noindent{
   \footnotesize
+  \color{RiceGray}
   \begin{tabular}{L{0.5\textwidth}R{0.5\textwidth}}
     (((data.person.university)))       & \texttt{\href{mailto:(((data.person.email)))}{(((data.person.email)))}} \, \faEnvelope                                                                                  \\
     (((data.person.department)))       & \texttt{\href{(((data.person.web)))}{(((data.person.web)))}} \, \faGlobe                                                                                                \\
@@ -150,14 +114,14 @@ UprightFont=*-Regular]{Inconsolata}
 \bigskip
 
 %% Name
-\noindent{\LARGE\bfseries \textcolor{BrickRed}{(((data.person.first_name))) (((data.person.last_name)))}}
+\noindent{\LARGE\bfseries \textcolor{RiceBlue}{(((data.person.first_name))) (((data.person.last_name)))}}
 \reversemarginpar
 
 \bigskip
 
 %% Research Interests
 ((* set sect = data.sections | select_by_attr_name("title", "Research Interests") *))
-\section{(((sect.title | lower)))}
+\section{\color{BrickRed}(((sect.title | lower)))}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
@@ -169,7 +133,7 @@ UprightFont=*-Regular]{Inconsolata}
 
 %% Appointments
 ((* set sect = data.sections | select_by_attr_name("title", "Appointments") *))
-\section{(((sect.title | lower)))}
+\section{\color{BrickRed}(((sect.title | lower)))}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
@@ -187,7 +151,7 @@ UprightFont=*-Regular]{Inconsolata}
 
 %% Education
 ((* set sect = data.sections | select_by_attr_name("title", "Education")*))
-\section{(((sect.title | lower)))}
+\section{\color{BrickRed}(((sect.title | lower)))}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
@@ -205,20 +169,20 @@ UprightFont=*-Regular]{Inconsolata}
 
 %% Awards
 ((* set sect = data.sections | select_by_attr_name("title", "Awards") *))
-\section{(((sect.title | lower)))}
+\section{\color{BrickRed}(((sect.title | lower)))}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
 \begin{itemize}[label={}]
-  ((* for i in sect.entries.awards | sort_by_attr(["year"], reverse=True) *))
-  \item \textbf{(((i.title)))}, (((i.org))). (((i.year)))
+  ((* for award in sect.entries.awards | sort_by_attr(["year"], reverse=True) *))
+  \item \textbf{(((award.title)))}, (((award.org))), (((award.year))).
         ((* endfor *))
 \end{itemize}
 
 
 %% Grants and Contracts
 %((* set sect = data.sections | select_by_attr_name("title", "Grants and Contracts") *))
-%\section{(((sect.title | lower)))}
+%\section{\color{BrickRed}(((sect.title | lower)))}
 %
 %\mbox{}\vspace{-\dimexpr\baselineskip\relax}
 %
@@ -230,28 +194,28 @@ UprightFont=*-Regular]{Inconsolata}
 
 %% Publications
 
-\section{journal articles}
+\section{\color{BrickRed}journal articles}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 \vspace*{-1em}
 
 \printbibliography[type=article, heading=none]
 
-\section{articles in review}
-
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
-\vspace*{-1em}
-\printbibliography[type=unpublished, heading=none]
-
-\section{dissertation}
+\section{\color{BrickRed}dissertation}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 \vspace*{-1em}
 \printbibliography[type=thesis, heading=none]
 
+\section{\color{BrickRed}articles in review}
+
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+\vspace*{-1em}
+\printbibliography[type=unpublished, heading=none]
+
 %% Invited Talks
 ((* set sect = data.sections | select_by_attr_name("title", "Invited Talks") *))
-\section{(((sect.title | lower)))}
+\section{\color{BrickRed}(((sect.title | lower)))}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
@@ -261,7 +225,7 @@ UprightFont=*-Regular]{Inconsolata}
         ((* endfor *))
 \end{itemize}
 
-\section{conference proceedings}
+\section{\color{BrickRed}conference proceedings}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 \vspace*{-1em}
@@ -269,7 +233,7 @@ UprightFont=*-Regular]{Inconsolata}
 
 %% Workshops
 ((* set sect = data.sections | select_by_attr_name("title", "Workshop Presentations") *))
-\section{(((sect.title | lower)))}
+\section{\color{BrickRed}(((sect.title | lower)))}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
@@ -281,25 +245,23 @@ UprightFont=*-Regular]{Inconsolata}
 
 %% Teaching
 ((* set sect = data.sections | select_by_attr_name("title", "Teaching") *))
-\section{(((sect.title | lower)))}
+\section{\color{BrickRed}(((sect.title | lower)))}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
-\vspace{\baselineskip}
-
 ((* set courses = sect.entries.classes *))
-((* for u, i in courses | groupby("university")  *))
-\subsection{(((u)))}
 \begin{itemize}[label={}]
-  ((* for x in i | sort_first_year("year", reverse=True) *))
-  \item (((x.title | escape_tex))). (((x.role))). (((x. semester))) (((x.year))).
+  ((* for univ, course_list in courses | groupby("university")  *))
+  \item \textbf{(((univ)))}
+        ((* for course in course_list | sort_first_year("year", reverse=True) *))
+        (((course.title | escape_tex))). (((course.role))). (((course. semester))) (((course.year))).
+        ((* endfor *))
         ((* endfor *))
 \end{itemize}
-((* endfor *))
 
 %% Advising
 %((* set sect = data.sections | select_by_attr_name("title", "Advising") *))
-%\section{(((sect.title | lower)))}
+%\section{\color{BrickRed}(((sect.title | lower)))}
 %
 %\mbox{}\vspace{-\dimexpr\baselineskip\relax}
 %
@@ -316,19 +278,19 @@ UprightFont=*-Regular]{Inconsolata}
 
 %% Media Coverage
 ((* set sect = data.sections | select_by_attr_name("title", "Media Coverage") *))
-\section{(((sect.title | lower)))}
+\section{\color{BrickRed}(((sect.title | lower)))}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
 \begin{itemize}[label={}]
   ((* for i in sect.entries.media | sort(attribute="date", reverse=True) *))
-  \item ((* if i.url *))\href{(((i.url)))}{(((i.title)))}((* else *))i.title((* endif *)), \textit{(((i.author)))}, (((i.publication))). (((i.date))).
+  \item ((* if i.url *))\href{(((i.url)))}{(((i.title)))}((* else *))i.title((* endif *)), \textit{(((i.author)))}, \textbf{(((i.publication)))}, (((i.date))).
         ((* endfor *))
 \end{itemize}
 
 %% Workshops and sessions organized
 ((* set sect = data.sections | select_by_attr_name("title", "Workshops and Sessions Organized") *))
-\section{(((sect.title | lower)))}
+\section{\color{BrickRed}(((sect.title | lower)))}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
@@ -340,7 +302,7 @@ UprightFont=*-Regular]{Inconsolata}
 
 %% PEER REVIEW
 ((* set sect = data.sections | select_by_attr_name("title", "Peer Review") *))
-\section{(((sect.title | lower)))}
+\section{\color{BrickRed}(((sect.title | lower)))}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
@@ -352,7 +314,7 @@ UprightFont=*-Regular]{Inconsolata}
 
 %% Professional Experience
 ((* set sect = data.sections | select_by_attr_name("title", "Professional Experience") *))
-\section{(((sect.title | lower)))}
+\section{\color{BrickRed}(((sect.title | lower)))}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
