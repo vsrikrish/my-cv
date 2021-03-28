@@ -1,3 +1,3 @@
 # CV for James Doss-Gollin
 
-**UNDER CONSTRUCTION**
+Under construction but now up
