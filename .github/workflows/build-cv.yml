@@ -45,8 +45,9 @@ jobs:
         uses: xu-cheng/latex-action@v2
         with:
           root_file: docs/Doss-Gollin-CV.tex
-          args: "-bibtex-cond1 -pdfxe"
-          post_compile: "latexmk -c -cd"
+          compiler: xelatex
+          args: "-bibtex-cond1 -pdfxem -cd"
+          post_compile: "latexmk -c"
       - name: Commit
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
