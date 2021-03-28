@@ -33,13 +33,8 @@
 
 % Section styling
 \usepackage{titlesec}
-\titleformat{\section}[leftmargin]{\raggedleft\sfamily\footnotesize\bfseries\color{BrickRed}}{}{0pt}{}
 \titlespacing*{\section}{2cm}{1ex}{0.25in}
-
-% Section styling
-\usepackage{titlesec}
-\titleformat{\section}[leftmargin]{\raggedleft\sffamily\footnotesize\bfseries\color{BrickRed}}{}{0pt}{}
-\titlespacing*{\section}{2cm}{1ex}{0.25in}
+\titleformat{\section}[leftmargin]{\raggedleft\sffamily\footnotesize\bfseries}{}{0pt}{\color{BrickRed}}
 
 \raggedbottom
 
@@ -121,7 +116,7 @@
 
 %% Research Interests
 ((* set sect = data.sections | select_by_attr_name("title", "Research Interests") *))
-\section{\color{BrickRed}(((sect.title | lower)))}
+\section{(((sect.title | lower)))}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
@@ -133,7 +128,7 @@
 
 %% Appointments
 ((* set sect = data.sections | select_by_attr_name("title", "Appointments") *))
-\section{\color{BrickRed}(((sect.title | lower)))}
+\section{(((sect.title | lower)))}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
@@ -151,7 +146,7 @@
 
 %% Education
 ((* set sect = data.sections | select_by_attr_name("title", "Education")*))
-\section{\color{BrickRed}(((sect.title | lower)))}
+\section{(((sect.title | lower)))}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
@@ -169,7 +164,7 @@
 
 %% Awards
 ((* set sect = data.sections | select_by_attr_name("title", "Awards") *))
-\section{\color{BrickRed}(((sect.title | lower)))}
+\section{(((sect.title | lower)))}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
@@ -182,7 +177,7 @@
 
 %% Grants and Contracts
 %((* set sect = data.sections | select_by_attr_name("title", "Grants and Contracts") *))
-%\section{\color{BrickRed}(((sect.title | lower)))}
+%\section{(((sect.title | lower)))}
 %
 %\mbox{}\vspace{-\dimexpr\baselineskip\relax}
 %
@@ -194,20 +189,20 @@
 
 %% Publications
 
-\section{\color{BrickRed}journal articles}
+\section{journal articles}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 \vspace*{-1em}
 
 \printbibliography[type=article, heading=none]
 
-\section{\color{BrickRed}dissertation}
+\section{dissertation}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 \vspace*{-1em}
 \printbibliography[type=thesis, heading=none]
 
-\section{\color{BrickRed}articles in review}
+\section{articles in review}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 \vspace*{-1em}
@@ -215,7 +210,7 @@
 
 %% Invited Talks
 ((* set sect = data.sections | select_by_attr_name("title", "Invited Talks") *))
-\section{\color{BrickRed}(((sect.title | lower)))}
+\section{(((sect.title | lower)))}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
@@ -225,7 +220,7 @@
         ((* endfor *))
 \end{itemize}
 
-\section{\color{BrickRed}conference proceedings}
+\section{conference proceedings}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 \vspace*{-1em}
@@ -233,7 +228,7 @@
 
 %% Workshops
 ((* set sect = data.sections | select_by_attr_name("title", "Workshop Presentations") *))
-\section{\color{BrickRed}(((sect.title | lower)))}
+\section{(((sect.title | lower)))}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
@@ -245,7 +240,7 @@
 
 %% Teaching
 ((* set sect = data.sections | select_by_attr_name("title", "Teaching") *))
-\section{\color{BrickRed}(((sect.title | lower)))}
+\section{(((sect.title | lower)))}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
@@ -261,7 +256,7 @@
 
 %% Advising
 %((* set sect = data.sections | select_by_attr_name("title", "Advising") *))
-%\section{\color{BrickRed}(((sect.title | lower)))}
+%\section{(((sect.title | lower)))}
 %
 %\mbox{}\vspace{-\dimexpr\baselineskip\relax}
 %
@@ -278,7 +273,7 @@
 
 %% Media Coverage
 ((* set sect = data.sections | select_by_attr_name("title", "Media Coverage") *))
-\section{\color{BrickRed}(((sect.title | lower)))}
+\section{(((sect.title | lower)))}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
@@ -290,7 +285,7 @@
 
 %% Workshops and sessions organized
 ((* set sect = data.sections | select_by_attr_name("title", "Workshops and Sessions Organized") *))
-\section{\color{BrickRed}(((sect.title | lower)))}
+\section{(((sect.title | lower)))}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
@@ -302,7 +297,7 @@
 
 %% PEER REVIEW
 ((* set sect = data.sections | select_by_attr_name("title", "Peer Review") *))
-\section{\color{BrickRed}(((sect.title | lower)))}
+\section{(((sect.title | lower)))}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
@@ -314,7 +309,7 @@
 
 %% Professional Experience
 ((* set sect = data.sections | select_by_attr_name("title", "Professional Experience") *))
-\section{\color{BrickRed}(((sect.title | lower)))}
+\section{(((sect.title | lower)))}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
