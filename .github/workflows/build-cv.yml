@@ -44,14 +44,14 @@ jobs:
       - name: Build CV
         uses: xu-cheng/latex-action@v2
         with:
-          root_file: Doss-Gollin-CV.tex
+          root_file: docs/Doss-Gollin-CV.tex
           args: "-bibtex-cond1 -pdfxe"
           post_compile: "latexmk -c"
       - name: Commit
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add Doss-Gollin-CV.pdf
+          git add docs/Doss-Gollin-CV.pdf
           git add my-papers/
           git commit -m "update CV"
       - name: Push
@@ -60,14 +60,3 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
           force: True
-      - name: Copy CV File
-        uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.PUSH_TOKEN }}
-        with:
-          source_file: "Doss-Gollin-CV.pdf"
-          destination_repo: "dossgollin-lab/dossgollin-lab.github.io"
-          destination_folder: "assets/pdf"
-          user_email: "james.dossgollin@gmail.com"
-          user_name: "jdossgollin"
-          destination_branch: "gh-pages"

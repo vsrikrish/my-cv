@@ -13,6 +13,7 @@ except NameError:  # We are the main py2exe script, not a module
 sys.path.append(fileroot)
 import filters  # filters for Jinja
 
+
 class CV(object):
     """
     Build CV in LaTeX and Markdown formats from YAML and BiBTeX inputs
@@ -22,17 +23,28 @@ class CV(object):
 
         self.filters = filters
         # read config file
-        with open(config_file, 'r') as f:
+        with open(config_file, "r") as f:
             config = yaml.load(f, Loader=yaml.BaseLoader)
 
         # read in section data files
         sections = [
-            {'title': k['title'], 'entries': yaml.load(open(os.path.join(config['paths']['yaml_path'], k['file']), 'r'), Loader=yaml.BaseLoader)}
-            for k in config['sections']
+            {
+                "title": k["title"],
+                "entries": yaml.load(
+                    open(os.path.join(config["paths"]["yaml_path"], k["file"]), "r"),
+                    Loader=yaml.BaseLoader,
+                ),
+            }
+            for k in config["sections"]
         ]
 
         # combine personal, sectional data, and publication data
-        self.data = {'person': config['person'], 'paths': config['paths'], 'publications': config['publications'], 'sections': sections}
+        self.data = {
+            "person": config["person"],
+            "paths": config["paths"],
+            "publications": config["publications"],
+            "sections": sections,
+        }
 
         # load templates
         templates = {} if templates is None else templates
@@ -43,11 +55,16 @@ class CV(object):
         """
         Set up HTML/Markdown Jinja environment
         """
-        loader = jinja2.loaders.ChoiceLoader([
-            self.loader,
-            jinja2.FileSystemLoader(
-                os.path.join(os.path.dirname(os.path.realpath(__file__)), 'templates'))
-        ])
+        loader = jinja2.loaders.ChoiceLoader(
+            [
+                self.loader,
+                jinja2.FileSystemLoader(
+                    os.path.join(
+                        os.path.dirname(os.path.realpath(__file__)), "templates"
+                    )
+                ),
+            ]
+        )
         jenv = jinja2.Environment(loader=loader)
         for f in self.filters:
             jenv.filters[f.__name__] = f
@@ -58,32 +75,35 @@ class CV(object):
         """
         Set up TeX environment
         """
-        loader = jinja2.ChoiceLoader([
-            self.loader, jinja2.FileSystemLoader('templates')
-        ])
+        loader = jinja2.ChoiceLoader(
+            [self.loader, jinja2.FileSystemLoader("templates")]
+        )
         jenv = jinja2.Environment(loader=loader)
         # define new delimiters to avoid TeX conflicts
-        jenv.block_start_string = '((*'
-        jenv.block_end_string = '*))'
-        jenv.variable_start_string = '((('
-        jenv.variable_end_string = ')))'
-        jenv.comment_start_string = '((='
-        jenv.comment_end_string = '=))'
+        jenv.block_start_string = "((*"
+        jenv.block_end_string = "*))"
+        jenv.variable_start_string = "((("
+        jenv.variable_end_string = ")))"
+        jenv.comment_start_string = "((="
+        jenv.comment_end_string = "=))"
         for f in self.filters:
             jenv.filters[f.__name__] = f
         return jenv
 
     def render_tex(self, template, **kwargs):
-        return self.jenv_tex.get_template(template).render(
-            data=self.data, **kwargs)
+        return self.jenv_tex.get_template(template).render(data=self.data, **kwargs)
 
 
 my_filters = [
     filters.escape_tex,
     filters.select_by_attr_name,
     filters.sort_by_attr,
-    filters.sort_first_year
+    filters.sort_first_year,
 ]
-cv = CV('_config.yml', filters=my_filters)
-with open('Doss-Gollin-CV.tex', 'w') as f:
-    f.write(cv.render_tex('cv.tex'))
+
+cv = CV("_config.yml", filters=my_filters)
+
+if not os.path.isdir("docs"):
+    os.mkdir("docs")
+with open("docs/Doss-Gollin-CV.tex", "w") as f:
+    f.write(cv.render_tex("cv.tex"))
