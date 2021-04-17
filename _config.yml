@@ -48,6 +48,8 @@ sections:
     file: media.yml
   - title: Peer Review
     file: peerreview.yml
+  - title: Grant Review
+    file: grantreview.yml
   - title: Professional Experience
     file: experience.yml
   - title: Workshops and Sessions Organized

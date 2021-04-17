@@ -307,6 +307,18 @@
         ((* endfor *))
 \end{itemize}
 
+%% GRANT REVIEW
+((* set sect = data.sections | select_by_attr_name("title", "Grant Review") *))
+%\section{(((sect.title | lower)))}
+
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+
+\begin{itemize}[label={}]
+  ((* for i in sect.entries.grantreview | sort(attribute="organization") *))
+  \item (((i.organization | escape_tex)))
+        ((* endfor *))
+\end{itemize}
+
 %% Professional Experience
 ((* set sect = data.sections | select_by_attr_name("title", "Professional Experience") *))
 \section{(((sect.title | lower)))}
@@ -315,7 +327,7 @@
 
 \begin{itemize}[label={}]
   ((* for i in sect.entries.experience | sort_by_attr(["end", "start"], reverse=True) *))
-  \item \textbf{(((i.title)))}, (((i.org))). ((* if i.end == i.start *))(((i.end)))((* else *))(((i.start)))--(((i.end)))((* endif *))
+  \item \textbf{(((i.title)))}, (((i.org))). ((* if i.end == i.start *))(((i.end)))((* else *))(((i.start)))--(((i.end)))((* endif *)).
         ((* endfor *))
 \end{itemize}
 
