@@ -191,7 +191,9 @@
  doi = true,
  isbn = false,
  backend = biber]{biblatex}
- \AtEveryBibitem{\clearlist{language}}
+ \AtEveryBibitem{%
+  \clearlist{language}%
+}
 
 \DeclareFieldFormat{url}{\url{#1}}
 \DeclareFieldFormat[article]{pages}{#1}
