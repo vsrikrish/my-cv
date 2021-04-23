@@ -70,4 +70,4 @@ jobs:
           destination_folder: 'assets/pdf'
           user_email: 'srikrish@gmail.com'
           user_name: 'vsrikrish'
-          destination_branch: 'gh-pages'
+          destination_branch: 'master'
