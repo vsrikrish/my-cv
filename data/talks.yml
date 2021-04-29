@@ -1,8 +1,14 @@
 talks:
+  - title: "Towards Adaptive Resilience: Managing Flood Risks in a Changing World"
+    event: Technical Webinar
+    org: ASCE Central Jersey Branch
+    location: Remote Presentation
+    month: April
+    year: 2021
   - title: "Towards Adaptive Resilience: Decision and Policy Support for Household Flood Risk Management"
     event: Summer Seminar Series
     org: Columbia University Department of Earth and Environmental Engineering
-    location: Remote
+    location: Remote Presentation
     month: Aug
     year: 2020
   - title: "Prediction and Implications of Structured Climate Risk for Sequential Adaptation under Deep Uncertainty"
