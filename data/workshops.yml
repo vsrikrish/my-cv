@@ -1,4 +1,11 @@
 workshops:
+  - title: "Valuing Flexibility and Soft Instrumentsfor Sequential Decision Problems"
+    event: 2020 Annual Meeting of the Society for Decision Making under Deep Uncertainty
+    org: Society for Decision Making under Deep Uncertainty
+    format: Remote Presentation
+    month: Nov
+    year: 2020
+    link: https://2020.deepuncertainty.org/program
   - title: "Adaptive Resilience through Real Options and Deep Reinforecement Learning"
     event: Doctoral Consortium on Computational Sustainability
     org: Carnegie Mellon University
