@@ -255,21 +255,20 @@
 \end{itemize}
 
 %% Advising
-%((* set sect = data.sections | select_by_attr_name("title", "Advising") *))
-%\section{(((sect.title | lower)))}
-%
-%\mbox{}\vspace{-\dimexpr\baselineskip\relax}
-%
-%\vspace{\baselineskip}
-%((* set advisees = sect.entries.advising *))
-%((* for u, i in advisees | groupby("university") *))
-%\subsection{(((u)))}
-%\begin{itemize}[label={}]
-%  ((* for x in i | sort_by_attr(["end", "start"], reverse=True) *))
-%  \item (((x.name))), (((x.degree))) (((x.field))). (((x.role))). (((x.start)))--(((x.end))).
-%        ((* endfor *))
-%\end{itemize}
-%((* endfor *))
+((* set sect = data.sections | select_by_attr_name("title", "Advising") *))
+\section{(((sect.title | lower)))}
+
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+
+((* set advisees = sect.entries.advising *))
+\begin{itemize}[label={}]
+  ((* for univ, advisee_list in advisees | groupby("university")  *))
+  \item \textbf{(((univ)))}
+        ((* for advisee in advisee_list | sort_first_year("end", reverse=True) *))
+        (((advisee.name))), (((advisee.degree))) (((advisee.field))). (((advisee.role))). (((advisee.start)))--(((advisee.end))).
+        ((* endfor *))
+        ((* endfor *))
+\end{itemize}
 
 %% Media Coverage
 ((* set sect = data.sections | select_by_attr_name("title", "Media Coverage") *))
