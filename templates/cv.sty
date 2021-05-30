@@ -209,9 +209,11 @@
 \DeclareFieldFormat{extrayear}{}
 
 % No dot before number of articles
-\usepackage{xpatch}
-\xpatchbibmacro{volume+number+eid}{\setunit*{\adddot}}{}{}{}
-
+\renewbibmacro{volume+number+eid}{%
+    \printfield{volume}%
+    \setunit{\space}%
+    \printfield{number}}
+    
 % Remove In: for an article.
 \renewbibmacro{in:}{%
   \ifentrytype{article}{}{%
