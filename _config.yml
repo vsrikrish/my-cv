@@ -2,18 +2,18 @@
 person:
   first_name: Vivek
   last_name: Srikrishnan
-  title: Assistant Research Professor
-  affiliation: Earth and Environmental Systems Institute
-  affiliation_link: https://eesi.psu.edu
-  email: vivek@psu.edu
-  web: https://srikrishnan-lab.github.io/
+  title: Assistant Professor
+  affiliation: Department of Biological & Environmental Engineering
+  affiliation_link: https://bee.cals.cornell.edu
+  email: viveks@cornell.edu
+  web: https://viveks.bee.cornell.edu
   github: vsrikrish
   googlescholar: CY_JxugAAAAJ
   orcid: 0000-0003-0049-3805
   subject: "climate, systems, engineering"
   address:
-    line1: 319C Earth-Engineering Sciences Building
-    postcode: University Park, PA, 16802
+    line1: 318 Riley-Robb Hall
+    postcode: Ithaca, NY 14853
     country: USA
 
 paths:
