@@ -5,7 +5,7 @@ grants:
     role: Investigator, Task Lead
     start: 2019
     end: 2022
-    amount: 1,200,000 
+    amount: 1,200,000
   - title: Integrated Multi-Scale Multi-Sector Modeling (IM3)
     funder: DOE (BER)
     role: Investigator
@@ -20,10 +20,12 @@ grants:
     start: 2021
     end: 2026
     amount: 533,922
+    total: 16,800,000
   - title: Health Effects of Decarbonization (HEALED)
     funder: NSF
     role: Co-PI
     PI: Wei Peng
     start: 2021
     end: 2024
-    amount: 399,472
+    amount: 50,001
+    total: 399,472
