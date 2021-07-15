@@ -160,6 +160,13 @@ UprightFont=*-Regular]{Inconsolata}
     \end{longtable}
 }
 
+\usepackage{fancyhdr}
+\usepackage[yyyymmdd,hhmmss]{datetime}
+\pagestyle{fancy}
+\rfoot{Current as of \today}
+\cfoot{}
+\lfoot{Page \thepage}
+
 % have to load this last
 \usepackage{hyperref} % Required for adding links	and customizing them
 \hypersetup{colorlinks, breaklinks, urlcolor=CornellRed, linkcolor=CornellRed, pdfnewwindow=true}
