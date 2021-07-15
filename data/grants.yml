@@ -1,29 +1,29 @@
 grants:
   - title: Integrated Coastal Modeling (ICoM)
     funder: Department of Energy, Biological and Environmental Research
-    role: Co-PI
-    PI: Klaus Keller at Penn State on subcontract from Battelle-Pacific Northwest National Laboratory
+    PI: Ian Kraucunas
+    role: Investigator, Task Lead
     start: 2019
     end: 2022
-    amount: 1,200,000
+    amount: 1,200,000 
   - title: Integrated Multi-Scale Multi-Sector Modeling (IM3)
-    funder: Department of Energy, Biological and Environmental Research
-    role: Co-PI
-    PI: Klaus Keller at Penn State on subcontract from Battelle-Pacific Northwest National Laboratory
+    funder: DOE (BER)
+    role: Investigator
+    PI: Jennie Rice
     start: 2019
     end: 2020
     amount: 25,000
-  - title: PROJECTX
-    funder: Department of Energy, Biological and Environmental Research
-    role: Co-PI
-    PI: Karen Fisher-Vanden and Robert Nicholas at Penn State and John Weyant at Stanford
+  - title: Understanding Multistressor and Multiscale Drivers of Feedbacks, Cascading Failures, and Risk Management Pathways within Complex MSD Systems
+    funder: DOE (BER)
+    role: Investigator, Institutional Lead
+    PI: Karen Fisher-Vanden
     start: 2021
     end: 2026
     amount: 533,922
   - title: Health Effects of Decarbonization (HEALED)
-    funder: National Science Foundation, Environmental Sustainability program
+    funder: NSF
     role: Co-PI
-    PI: Wei Peng at Penn State
+    PI: Wei Peng
     start: 2021
     end: 2024
-    amount: 50,001
+    amount: 399,472
