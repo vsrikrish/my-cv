@@ -13,6 +13,7 @@ person:
   subject: "climate, systems, engineering"
   address:
     line1: 318 Riley-Robb Hall
+    line2: Cornell University
     postcode: Ithaca, NY 14853
     country: USA
 
