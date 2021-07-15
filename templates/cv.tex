@@ -284,7 +284,7 @@ UprightFont=*-Regular]{Inconsolata}
 
 \begin{itemize}[label={}]
 ((* for i in sect.entries.grants | sort_by_attr(["start"], reverse=True) *))
-\item (((i.role))), \enquote{(((i.title | escape_tex)))}. (* if i.PI *)) (PI: (((i.PI))))((* endif *)). (((i.funder))) \$(((i.amount))) ((* if i.total *))(total: \$(((i.total))))((* endif *)). (((i.start)))--(((i.end))).
+\item (((i.role))), \enquote{(((i.title | escape_tex)))}. ((* if i.PI *)) (PI: (((i.PI))))((* endif *)). (((i.funder))) \$(((i.amount))) ((* if i.total *))(total: \$(((i.total))))((* endif *)). (((i.start)))--(((i.end))).
 ((* endfor *)).
 \end{itemize}
 
