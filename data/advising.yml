@@ -20,3 +20,17 @@ advising:
     role: Committee member
     start: 2020
     end: present
+  - name: Parin Bhaduri
+    degree: Ph.D
+    field: Biological & Environmental Engineering
+    university: Cornell University
+    role: Advisor
+    start: 2021
+    end: present
+  - name: Chloe Darnell
+    degree: M.S.
+    field: Biological & Environmental Engineering
+    university: Cornell University
+    role: Advisor
+    start: 2021
+    end: present
