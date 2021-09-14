@@ -176,16 +176,16 @@
 
 
 %% Grants and Contracts
-%((* set sect = data.sections | select_by_attr_name("title", "Grants and Contracts") *))
-%\section{(((sect.title | lower)))}
-%
-%\mbox{}\vspace{-\dimexpr\baselineskip\relax}
-%
-%\begin{itemize}[label={}]
-%  ((* for i in sect.entries.grants | sort_by_attr(["start"], reverse=True) *))
-%  \item (((i.role)))((* if i.PI *)) (PI: (((i.PI))))((* endif *)). (((i.funder))). \enquote{(((i.title | escape_tex)))}. \$(((i.amount))). (((i.start)))--(((i.end))).
-%        ((* endfor *))
-%\end{itemize}
+((* set sect = data.sections | select_by_attr_name("title", "Grants and Contracts") *))
+\section{(((sect.title | lower)))}
+
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+
+\begin{itemize}[label={}]
+  ((* for i in sect.entries.grants | sort_by_attr(["start"], reverse=True) *))
+  \item \textbf{(((i.role)))}. (((i.funder))): \enquote{(((i.title | escape_tex)))}. \$(((i.amount)))((* if i.total *))/\$((( i.total )))((* endif *)). (((i.start)))--(((i.end))).
+        ((* endfor *))
+\end{itemize}
 
 %% Publications
 
@@ -278,6 +278,16 @@
 
 \begin{itemize}[label={}]
   ((* for i in sect.entries.media | sort(attribute="date", reverse=True) *))
+  \item ((* if i.url *))\href{(((i.url)))}{(((i.title)))}((* else *))i.title((* endif *)), \textit{(((i.author)))}, \textbf{(((i.publication)))}, (((i.date))).
+        ((* endfor *))
+\end{itemize}
+
+\section{opinion}
+
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+
+\begin{itemize}[label={}]
+  ((* for i in sect.entries.opinion | sort(attribute="date", reverse=True) *))
   \item ((* if i.url *))\href{(((i.url)))}{(((i.title)))}((* else *))i.title((* endif *)), \textit{(((i.author)))}, \textbf{(((i.publication)))}, (((i.date))).
         ((* endfor *))
 \end{itemize}
