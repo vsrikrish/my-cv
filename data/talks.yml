@@ -1,4 +1,11 @@
 talks:
+  - title: Panelist
+    event: "Tail events: Prediction, Planning, and Performance"
+    org: Harvard Electricity Policy Group
+    url: https://hepg.hks.harvard.edu/event/september-virtual-session
+    year: 2021
+    month: Sept
+
   - title: "Towards Adaptive Resilience: Managing Flood Risks in a Changing World"
     event: Technical Webinar
     org: ASCE Central Jersey Branch
