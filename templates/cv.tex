@@ -265,7 +265,7 @@
   ((* for univ, advisee_list in advisees | groupby("university")  *))
   \item \textbf{(((univ)))}
         ((* for advisee in advisee_list | sort_first_year("degree_year", reverse=True) *))
-        (((advisee.name))), (((advisee.degree))) (((advisee.field))), ((((advisee.degree_year)))). (((advisee.role))).
+        (((advisee.name))), (((advisee.field))), ((((advisee.degree_year)))). (((advisee.role))). *(((advisee.degree)))*
         ((* endfor *))
         ((* endfor *))
 \end{itemize}
