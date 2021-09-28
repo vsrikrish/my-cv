@@ -5,3 +5,10 @@ classes:
     role: Teaching Assistant
     semester: Spring
     year: 2018
+
+  - title: Fundamentals of Civil and Environmental Engineering
+    course: CEVE101
+    university: Rice University
+    role: Instructor
+    semester: Fall
+    year: 2021
