@@ -262,11 +262,8 @@
 
 ((* set advisees = sect.entries.advising *))
 \begin{itemize}[label={}]
-  ((* for univ, advisee_list in advisees | groupby("university")  *))
-  \item \textbf{(((univ)))}
-        ((* for advisee in advisee_list | sort_first_year("degree_year", reverse=True) *))
-        (((advisee.name))), (((advisee.field))), ((((advisee.degree_year)))). (((advisee.role))). *(((advisee.degree)))*
-        ((* endfor *))
+  ((* for advisee in advisees | sort_first_year("degree_year", reverse=True) *))
+  \item \textbf{(((advisee.role)))} for (((advisee.name))), \emph{(((advisee.degree)))} in (((advisee.field))) at (((advisee.university))). ((((advisee.degree_year)))).
         ((* endfor *))
 \end{itemize}
 
