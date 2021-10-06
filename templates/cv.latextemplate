@@ -16,6 +16,16 @@
 %% Choose fonts for use with xelatex
 
 
+% Better footer
+\usepackage{fancyhdr}
+\fancyhf{}
+\fancyfoot[L]{James Doss-Gollin}
+\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{1pt}
+\pagestyle{fancy}
+
+
 \usepackage{fontspec}
 \setromanfont[
 	Path = ../fonts/,
