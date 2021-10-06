@@ -121,7 +121,7 @@
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
 \begin{itemize}[label={}]
-  ((* for i in sect.entries.interests *))
+  ((* for i in sect.entries *))
   \item (((i.name)))
         ((* endfor *))
 \end{itemize}
@@ -320,21 +320,21 @@
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
 \begin{itemize}[label={}]
-  ((* for i in sect.entries.grantreview | sort(attribute="organization") *))
+  ((* for i in sect.entries | sort(attribute="organization") *))
   \item (((i.organization | escape_tex)))
         ((* endfor *))
 \end{itemize}
 
-%% Professional Experience
-((* set sect = data.sections | select_by_attr_name("title", "Professional Experience") *))
+%% Additional Experience and Training
+((* set sect = data.sections | select_by_attr_name("title", "Additional Experience and Training") *))
 \section{(((sect.title | lower)))}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
 \begin{itemize}[label={}]
-  ((* for i in sect.entries.experience | sort_by_attr(["end", "start"], reverse=True) *))
+  ((* for i in sect.entries | sort_by_attr(["end", "start"], reverse=True) *))
   \item \textbf{(((i.title)))}, (((i.org))). ((* if i.end == i.start *))(((i.end)))((* else *))(((i.start)))--(((i.end)))((* endif *)).
-        ((* endfor *))
+  ((* endfor *))
 \end{itemize}
 
 

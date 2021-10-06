@@ -1,17 +1,19 @@
+"""
+This script builds the CV file from a template
+"""
+
 import os
 import sys
 import re
-
-import yaml  # parse YAML files
-import jinja2  # templating for CV
-
-# add parent directory to system path
-try:
-    fileroot = os.path.dirname(os.path.realpath(__file__))
-except NameError:  # We are the main py2exe script, not a module
-    fileroot = os.path.dirname(os.path.realpath(os.getcwd()))
-sys.path.append(fileroot)
 import filters  # filters for Jinja
+import jinja2
+import yaml
+
+# definitions
+CONFIG_FILE = "_config.yml"
+TEMPLATE_FILE = "cv.latextemplate"  # NOT relative
+TEMPLATE_DIR = "templates"
+OUTPUT_TEX = os.path.join("docs", "Doss-Gollin-CV.tex")
 
 
 class CV(object):
@@ -76,7 +78,7 @@ class CV(object):
         Set up TeX environment
         """
         loader = jinja2.ChoiceLoader(
-            [self.loader, jinja2.FileSystemLoader("templates")]
+            [self.loader, jinja2.FileSystemLoader(TEMPLATE_DIR)]
         )
         jenv = jinja2.Environment(loader=loader)
         # define new delimiters to avoid TeX conflicts
@@ -94,16 +96,24 @@ class CV(object):
         return self.jenv_tex.get_template(template).render(data=self.data, **kwargs)
 
 
-my_filters = [
-    filters.escape_tex,
-    filters.select_by_attr_name,
-    filters.sort_by_attr,
-    filters.sort_first_year,
-]
+def main():
 
-cv = CV("_config.yml", filters=my_filters)
+    my_filters = [
+        filters.escape_tex,
+        filters.select_by_attr_name,
+        filters.sort_by_attr,
+        filters.sort_first_year,
+    ]
 
-if not os.path.isdir("docs"):
-    os.mkdir("docs")
-with open("docs/Doss-Gollin-CV.tex", "w") as f:
-    f.write(cv.render_tex("cv.tex"))
+    cv = CV(CONFIG_FILE, filters=my_filters)
+
+    if not os.path.isdir("docs"):
+        os.mkdir("docs")
+
+    with open(OUTPUT_TEX, "w") as f:
+        f.write(cv.render_tex(TEMPLATE_FILE))
+
+
+if __name__ == "__main__":
+    main()
+
