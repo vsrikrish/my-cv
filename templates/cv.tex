@@ -124,23 +124,6 @@ UprightFont=*-Regular]{Inconsolata}
 % bold my name
 \plauthorname[Vivek]{Srikrishnan}
 
-% make modifications to standard styles
-\DeclareFieldFormat{title}{\mkbibquote{#1}}
-\DeclareFieldFormat{url}{\url{#1}}
-\DeclareFieldFormat[article]{pages}{#1}
-\DeclareFieldFormat[inproceedings]{pages}{\lowercase{pp.}#1}
-\DeclareFieldFormat[incollection]{pages}{\lowercase{pp.}#1}
-\DeclareFieldFormat[article]{volume}{\mkbibbold{#1}}
-\DeclareFieldFormat[article]{number}{\mkbibparens{#1}}
-\DeclareFieldFormat[article]{url}{}
-\DeclareFieldFormat{shorthandwidth}{#1}
-\DeclareFieldFormat{extrayear}{}
-
-% Remove In: for an article.
-\renewbibmacro{in:}{%
-  \ifentrytype{article}{}{%
-  \printtext{\bibstring{in}\intitlepunct}}}
-
 % Format sub-bibliography headings as subsections
 \defbibheading{subbibliography}[\refname]{\subsection*{#1}}
 
