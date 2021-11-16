@@ -157,6 +157,108 @@ UprightFont=*-Regular]{Inconsolata}
 \usepackage{hyperref} % Required for adding links	and customizing them
 \hypersetup{colorlinks, breaklinks, urlcolor=CornellRed, linkcolor=CornellRed, pdfnewwindow=true}
 
+%% ------------------------------------------------------------------------
+%%   Bibliography formatting
+%% ------------------------------------------------------------------------
+%% documentation:
+%% http://ctan.mirrorcatalogs.com/macros/latex/exptl/biblatex/doc/biblatex.pdf
+% Use BibLaTeX
+\usepackage[
+	backend=biber,
+	style=publist,
+	plauthorfirstinit=true,
+	plauthorhandling=highlight,
+	plnumbered=false,
+	labeldateparts=false,
+	%linktitleall=true,
+	boldyear=false,
+	marginyear=false,
+	doi=true,
+	url=false,
+	isbn=false,
+	maxbibnames=99,
+	maxcitenames=99,
+  defernumbers,
+  giveninits,
+	date=year
+]{biblatex}
+
+\setlength{\bibhang}{15pt}
+
+% add bib resources
+((* set bibpath = data.paths.bib_path *))
+((* for i in data.publications *))
+\addbibresource{(((bibpath)))/(((i.file)))}
+((* endfor *))
+
+% bold my name
+\plauthorname[Vivek]{Srikrishnan}
+
+% Format sub-bibliography headings as subsections
+\defbibheading{subbibliography}[\refname]{\subsection*{#1}}
+
+% remove period inbetween volume and number
+\renewbibmacro*{volume+number}{%
+  \printfield{volume}%
+%  \setunit*{\adddot}% DELETED
+  \setunit*{\addnbspace}% NEW (optional); there's also \addnbthinspace
+  \printfield{number}%
+  \setunit{\addcomma\space}%
+}
+
+\DeclareFieldFormat{url}{\url{#1}}
+\DeclareFieldFormat[article]{pages}{#1}
+\DeclareFieldFormat[inproceedings]{pages}{\lowercase{pp.}#1}
+\DeclareFieldFormat[incollection]{pages}{\lowercase{pp.}#1}
+\DeclareFieldFormat[article]{volume}{\mkbibbold{#1}}
+\DeclareFieldFormat[article]{number}{\mkbibparens{#1}}
+\DeclareFieldFormat[article]{title}{\MakeCapital{#1}}
+\DeclareFieldFormat[article]{url}{}
+\DeclareFieldFormat[inproceedings]{title}{#1}
+\DeclareFieldFormat{notes}{#1}
+\DeclareFieldFormat{shorthandwidth}{#1}
+\DeclareFieldFormat{extrayear}{}
+    
+% Remove In: for an article.
+\renewbibmacro{in:}{%
+  \ifentrytype{article}{}{%
+  \printtext{\bibstring{in}\intitlepunct}}}
+
+% Bibliography categories
+\def\makebibcategory#1#2{\DeclareBibliographyCategory{#1}\defbibheading{#1}{\subsection*{#2}}}
+\makebibcategory{papers}{Journal articles}
+\makebibcategory{inpress}{Under Review and In Press}
+\makebibcategory{conferences}{Conference Proceedings}
+\makebibcategory{books}{Books}
+\makebibcategory{chapters}{Book Chapters}
+\makebibcategory{techreports}{Technical Reports}
+\makebibcategory{talks}{Conference Talks}
+\makebibcategory{posters}{Conference Posters}
+\makebibcategory{software}{Software}
+\makebibcategory{bookreviews}{Book reviews}
+\makebibcategory{editorials}{Editorials}
+\makebibcategory{phd}{PhD thesis}
+
+\setlength{\bibitemsep}{2.5pt}
+
+%\renewcommand*{\bibitem}{\item \mbox{} \\}
+%\defbibenvironment{bibliography}
+%{\list{}
+%  {\setlength{\leftmargin}{\bibhang}%
+%   \setlength{\itemsep}{\bibitemsep}%
+%   \setlength{\parsep}{\bibparsep}}}
+%{\endlist}
+%{\bibitem}
+
+\newenvironment{publications}{\section{Publications}}
+
+\def\printbib#1{\printbibliography[category=#1,heading=#1]}
+%\renewcommand{\bibfont}{\normalfont\fontsize{11}{13.4}\rmfamily}
+
+% Add all papers in the bib file.
+\nocite{*}
+
+
 %---------------------------------------------------------------------
 
 \begin{document}
