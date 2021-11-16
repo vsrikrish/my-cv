@@ -196,13 +196,13 @@
 }
 
 % remove period inbetween volume and number
-\renewbibmacro*{volume+number+eid}{%
+\renewbibmacro*{volume+number}{%
   \printfield{volume}%
 %  \setunit*{\adddot}% DELETED
   \setunit*{\addnbspace}% NEW (optional); there's also \addnbthinspace
   \printfield{number}%
   \setunit{\addcomma\space}%
-  \printfield{eid}}
+}
 
 \DeclareFieldFormat{url}{\url{#1}}
 \DeclareFieldFormat[article]{pages}{#1}
