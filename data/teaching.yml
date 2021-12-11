@@ -7,7 +7,14 @@ classes:
     year: 2018
 
   - title: Fundamentals of Civil and Environmental Engineering
-    course: CEVE101
+    course: CEVE 101
+    university: Rice University
+    role: Instructor
+    semester: Fall
+    year: 2021
+
+  - title: Environmental Data Science
+    course: CEVE 543
     university: Rice University
     role: Instructor
     semester: Fall
