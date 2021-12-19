@@ -192,8 +192,8 @@
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
 \begin{itemize}[label={}]
-  ((* for i in sect.entries.grants | sort_by_attr(["start"], reverse=True) *))
-  \item \textbf{(((i.role)))}. (((i.funder))): \enquote{(((i.title | escape_tex)))}. \$(((i.amount)))((* if i.total *))/\$((( i.total )))((* endif *)). (((i.start)))--(((i.end))).
+  ((* for i in sect.entries.grants | sort_by_attr(["end", "start"], reverse=True) *))
+  \item \textbf{(((i.role)))}, \enquote{(((i.title | escape_tex)))}. ((* if i.PI *)) PI: (((i.PI))).((* endif *)) \textit{(((i.funder)))}, \$(((i.amount)))((* if i.total *)) (total: \$(((i.total))))((* endif *)). (((i.start)))--(((i.end))).
         ((* endfor *))
 \end{itemize}
 
@@ -273,7 +273,7 @@
 ((* set advisees = sect.entries.advising *))
 \begin{itemize}[label={}]
   ((* for advisee in advisees | sort_first_year("degree_year", reverse=True) *))
-  \item \textbf{(((advisee.role)))} for (((advisee.name))), \emph{(((advisee.degree)))} in (((advisee.field))) at (((advisee.university))). ((((advisee.degree_year)))).
+  \item \textbf{(((advisee.role)))} for (((advisee.name))), \textit{(((advisee.degree))) in (((advisee.field)))}, (((advisee.university))). ((((advisee.degree_year)))).
         ((* endfor *))
 \end{itemize}
 

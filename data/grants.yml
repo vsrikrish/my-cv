@@ -1,8 +1,9 @@
 grants:
-  - title: "Participatory Design for Water Quality Monitoring of Highly Decentralized Water Infrastructure Systems"
-    funder: National Science Foundation EAGER SAI
+  - title: "EAGER: Participatory Design for Water Quality Monitoring of Highly Decentralized Water Infrastructure Systems"
+    funder: "NSF: Strengthening America's Infrastructure"
     role: Co-PI
     start: 2022
     end: 2023
     amount: 85,046
     total: 300,000
+    PI: Alicia Cooperman

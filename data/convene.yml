@@ -1,6 +1,6 @@
 convene:
   - role: Primary Convenor
-    session: "51A: Emerging Needs and Approaches for Climate Services: Understanding and Developing Innovative Approaches to User-Oriented Climate Services"
+    session: "NH53 -- Emerging Needs and Approaches for Climate Services: Understanding and Developing Innovative Approaches to User-Oriented Climate Services"
     event: American Geophysical Union Fall Meeting
     location: San Francisco, CA
     date: 2019-12-23
@@ -14,3 +14,8 @@ convene:
     event: Columbia University
     location: New York, NY
     date: 2017-10-27
+  - role: Chair
+    session: "H44G -- Water and Society: Interdisciplinary Perspectives on Hydroclimatic Forecasting for Water Resources Decision Making"
+    event: American Geophysical Union Fall Meeting
+    location: New Orleans, LA
+    date: 2021-12-16
