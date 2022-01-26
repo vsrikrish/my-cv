@@ -1,61 +1,50 @@
 talks:
-  - title: "Extreme impacts don’t require extreme weather: lessons from the Feb 2021 Texas blackouts"
+  - title: "Extreme Impacts Don't Require Extreme Weather: Lessons from the February 2021 Texas Blackouts"
+    event: "Outreach Event: Science is for Everyone"
+    org: American Meteorlogical Society
+    url: https://annual.ametsoc.org/index.cfm/2022/program-events/networking-and-events/public-outreach-events/
+    date: 2022-01-25
+    location: Remote Presentation
+  - title: "Extreme Impacts Don't Require Extreme Weather: Lessons from the February 2021 Texas Blackouts"
     event: "Compound Events Working Group"
     org: Risk KAN (Knowledge Action Networks)
     url: https://www.risk-kan.org/webinars/
-    year: 2021
-    month: Dec
+    date: 2021-12-09
     location: Remote Presentation
     recording: https://www.youtube.com/watch?v=q8Qeb_sXCxg
-
   - title: Panelist
     event: "Tail events: Prediction, Planning, and Performance"
     org: Harvard Electricity Policy Group
     url: https://hepg.hks.harvard.edu/event/september-virtual-session
-    year: 2021
-    month: Sept
+    date: 2021-09-28
     location: Remote Presentation
-
   - title: "Towards Adaptive Resilience: Managing Flood Risks in a Changing World"
     event: Technical Webinar
     org: ASCE Central Jersey Branch
     location: Remote Presentation
-    month: April
-    year: 2021
-
-  - title: "Towards Adaptive Resilience: Decision and Policy Support for Household Flood Risk Management"
-    event: Summer Seminar Series
-    org: Columbia University Department of Earth and Environmental Engineering
-    location: Remote Presentation
-    month: Aug
-    year: 2020
+    date: 2021-04-28
   - title: "Prediction and Implications of Structured Climate Risk for Sequential Adaptation under Deep Uncertainty"
     event: Center for Climate Risk Management CLIMA Seminar
     org: the Pennsylvania State University
     location: State College, PA
-    month: Jan
-    year: 2020
+    date: 2020-01-29
   - title: "Prediction and Implications of Structured Climate Risk for Sequential Adaptation under Deep Uncertainty"
     event: Department of Civil and Environmental Engineering Seminar
     org: Rice University
     location: Houston, TX
-    month: Jan
-    year: 2020
+    date: 2020-01-27
   - title: "Prediction and Implications of Structured Climate Risk for Sequential Adaptation under Deep Uncertainty"
     event: Complex Systems Simulation and Optimization Group
     org: National Renewable Energy Laboratory
     location: Golden, CO
-    month: Jan
-    year: 2020
+    date: 2020-01-07
   - title: "Drivers of Extreme Rainfall: Atmospheric Circulation Patterns and Regional Intense Rainfall in the Ohio River"
     event: European Flood Awareness System Group
     org: European Centre for Medium Range Weather Forecasting
     location: Reading, England
-    year: 2016
-    month: Sept
+    date: 2016-09-02
   - title: "Understanding the Physical Drivers of Extreme Rainfall for Flood Prediction"
     event: Oxford Water Network
     org: Oxford University
     location: Oxford, England
-    year: 2016
-    month: Aug
+    date: 2016-08-26
