@@ -210,6 +210,8 @@ UprightFont=*-Regular]{Inconsolata}
   \printfield{eid}%
 }
 
+\DeclareFieldFormat{title}{#1}
+\DeclareFieldFormat{citetitle}{#1}
 \DeclareFieldFormat{url}{\url{#1}}
 \DeclareFieldFormat[article]{pages}{#1}
 \DeclareFieldFormat[inproceedings]{pages}{\lowercase{pp.}#1}
