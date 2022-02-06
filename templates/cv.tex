@@ -147,6 +147,10 @@ UprightFont=*-Regular]{Inconsolata}
 	date=year
 ]{biblatex}
 
+\AtEveryBibitem{%
+  \clearlist{language}%
+}
+
 % specify sorting rules
 \DeclareSortingTemplate{ndymdt}{
   \sort{
