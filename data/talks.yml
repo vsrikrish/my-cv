@@ -1,4 +1,10 @@
 talks:
+  - title: "Adapting Engineering Design Criteria to a Changing Climate: Insights from House Elevation "
+    event: Technical Webinar
+    org: ASCE Central New Jersey Branch
+    location: Remote Presentation
+    date: 2022-04-12
+
   - title: Panelist
     event: "Extreme Weather: How To Report on a World That’s Warmer, Colder, Wetter, Drier and Weirder"
     org: 31st Annual Conference of the Society of Environmental Journalists
@@ -26,7 +32,7 @@ talks:
     location: Remote Presentation
   - title: "Towards Adaptive Resilience: Managing Flood Risks in a Changing World"
     event: Technical Webinar
-    org: ASCE Central Jersey Branch
+    org: ASCE Central New Jersey Branch
     location: Remote Presentation
     date: 2021-04-28
   - title: "Prediction and Implications of Structured Climate Risk for Sequential Adaptation under Deep Uncertainty"
