@@ -216,7 +216,7 @@
 
 %\mbox{}\vspace{-\dimexpr\baselineskip\relax}
 %\vspace*{-1em}
-%\printbibliography[type=unpublished, heading=none]
+%\printbibliography[type=misc, heading=none]
 
 %% Invited Talks
 ((* set sect = data.sections | select_by_attr_name("title", "Invited Talks") *))
