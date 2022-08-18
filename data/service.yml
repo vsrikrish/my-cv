@@ -21,4 +21,7 @@ service:
   - title: Co-Guest Editor
     journal: Water
     org: "Special Issue on 'Climate Model Projections: Sea-Level Rise and Impacts on Coastal Defense Decision-Making'"
-    start: Forthcoming
+  - title: Panel Reviewer
+    org: National Science Foundation, Department of Energy
+  - title: Ad Hoc Reviewer
+    org: Sloan Foundation, National Science Foundation  
