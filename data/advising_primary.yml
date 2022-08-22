@@ -1,0 +1,18 @@
+advisor:
+  ########################################
+  # CURRENT STUDENTS #####################
+  ########################################
+  - name: Yuchen Lu
+    degree: Ph.D.
+    field: Civil and Environmental Engineering
+    university: Rice University
+    degree_year: 2021--Present
+  ########################################
+  # PAST STUDENTS ########################
+  ########################################
+  - name: Alyssa Graham
+    degree: M.S.
+    field: Civil and Environmental Engineering
+    university: Rice University
+    degree_year: 2022
+    thesis_title: "Water Supply Vulnerability Testing and Robust Planning Analysis with Exploratory Modeling under Deep Uncertainty"

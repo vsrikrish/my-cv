@@ -40,8 +40,10 @@ sections:
     file: grants.yml
   - title: Teaching
     file: teaching.yml
-  - title: Advising
-    file: advising.yml
+  - title: Primary Advisor
+    file: advising_primary.yml
+  - title: Committee Member
+    file: advising_committee.yml
   - title: Awards
     file: awards.yml
   - title: Media Coverage

@@ -1,0 +1,45 @@
+committee:
+  ########################################
+  # CURRENT STUDENTS #####################
+  ########################################
+  - name: Matthew Garcia
+    degree: Ph.D.
+    field: Civil and Environmental Engineering
+    university: Rice University
+    degree_year: 2022 (Anticipated)
+  - name: Chunshan Liu
+    degree: Ph.D.
+    field: Statistics
+    university: Rice University
+    degree_year: 2022--Present
+  - name: Xiangnan Zhou
+    degree: Ph.D.
+    field: Civil and Environmental Engineering
+    university: Rice University
+    degree_year: 2022--Present
+  - name: Chen Chen
+    degree: Ph.D.
+    field: Civil and Environmental Engineering
+    university: Rice University
+    degree_year: 2022--Present
+  ########################################
+  # PAST STUDENTS ########################
+  ########################################
+  - name: Elizabeth Hoffmann
+    degree: M.S.
+    field: Civil and Environmental Engineering
+    university: Rice University
+    degree_year: 2022
+    thesis_title: "Mapping Dynamic Watershed Response Under Increasing Development Using HEC-RAS 2D: A Case Study of the Big Creek Watershed in Fort Bend County"
+  - name: Bahnick, Raychel
+    degree: M.S.
+    field: Civil and Environmental Engineering
+    university: Rice University
+    degree_year: 2022
+    thesis_title: "Assessing Land Use Change and Subsidence Impact on Inland Flooding"
+  - name: Toby Li
+    degree: M.S.
+    field: Civil and Environmental Engineering
+    university: Rice University
+    degree_year: 2021
+    thesis_title: "Evaluating the Effects of Project Brays Mitigation Using Unsteady HEC-RAS Hydraulic Modeling: Application to Meyerland in Houston, TX"

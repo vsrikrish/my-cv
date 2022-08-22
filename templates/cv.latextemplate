@@ -265,16 +265,29 @@
 \end{itemize}
 
 %% Advising
-((* set sect = data.sections | select_by_attr_name("title", "Advising") *))
+((* set sect = data.sections | select_by_attr_name("title", "Primary Advisor") *))
 \section{(((sect.title | lower)))}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
-((* set advisees = sect.entries.advising *))
+((* set advisees = sect.entries.advisor *))
 \begin{itemize}[label={}]
   ((* for advisee in advisees | sort_first_year("degree_year", reverse=True) *))
-  \item \textbf{(((advisee.role)))} for (((advisee.name))), \textit{(((advisee.degree))) in (((advisee.field)))}, (((advisee.university))). ((((advisee.degree_year)))).
-        ((* endfor *))
+    \item (((advisee.name))), \textit{(((advisee.degree))) in (((advisee.field)))}, (((advisee.university))). ((((advisee.degree_year)))). ((* if advisee.thesis_title *)) \enquote{((( advisee.thesis_title ))).}((* endif *))
+  ((* endfor *))
+\end{itemize}
+
+%% Committe Membership
+((* set sect = data.sections | select_by_attr_name("title", "Committee Member") *))
+\section{(((sect.title | lower)))}
+
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+
+((* set advisees = sect.entries.committee *))
+\begin{itemize}[label={}]
+  ((* for advisee in advisees | sort_first_year("degree_year", reverse=True) *))
+    \item (((advisee.name))), \textit{(((advisee.degree))) in (((advisee.field)))}, (((advisee.university))). ((((advisee.degree_year)))). ((* if advisee.thesis_title *)) \enquote{((( advisee.thesis_title ))).}((* endif *))
+  ((* endfor *))
 \end{itemize}
 
 %% Media Coverage
