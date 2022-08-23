@@ -11,17 +11,22 @@ committee:
     degree: Ph.D.
     field: Statistics
     university: Rice University
-    degree_year: 2022--Present
+    degree_year: 2022 (Anticipated)
   - name: Xiangnan Zhou
     degree: Ph.D.
     field: Civil and Environmental Engineering
     university: Rice University
-    degree_year: 2022--Present
+    degree_year: 2018--Present
   - name: Chen Chen
     degree: Ph.D.
     field: Civil and Environmental Engineering
     university: Rice University
     degree_year: 2022--Present
+  - name: Kelsey Murphy
+    degree: Ph.D.
+    field: Earth, Environmental, and Planetary Sciences
+    university: Rice University
+    degree_year: 2021--Present
   ########################################
   # PAST STUDENTS ########################
   ########################################
