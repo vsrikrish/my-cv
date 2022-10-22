@@ -192,7 +192,7 @@
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
 \begin{itemize}[label={}]
-  ((* for i in sect.entries.grants | sort(attribute=["end", "start"], reverse=True) *))
+  ((* for i in sect.entries.grants | sort(attribute="end", reverse=True) | sort(attribute="start", reverse=True) *))
   \item \textbf{(((i.role | escape_tex)))}, \enquote{(((i.title | escape_tex)))}. ((* if i.PI *)) PI: (((i.PI | escape_tex))).((* endif *)) \textit{(((i.funder | escape_tex)))}, \$(((i.amount)))((* if i.total *)) (total: \$(((i.total))))((* endif *)). (((i.start)))--(((i.end))).
         ((* endfor *))
 \end{itemize}
@@ -219,7 +219,7 @@
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
 \begin{itemize}[label={}]
-  ((* for i in sect.entries.talks | sort(attribute=["date"], reverse=True) *))
+  ((* for i in sect.entries.talks | sort(attribute="date", reverse=True) *))
   \item \enquote{\textbf{(((i.title | escape_tex)))}}, ((* if i.event *))(((i.event | escape_tex))), ((* endif *)) \textit{(((i.org)))}. (((i.location))), (((i.date))).
   ((* endfor *))
 \end{itemize}
@@ -322,7 +322,7 @@
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
 \begin{itemize}[label={}]
-  ((* for i in sect.entries.workshops | sort(attribute=["year"], reverse=True) *))
+  ((* for i in sect.entries.workshops | sort(attribute="year", reverse=True) *))
   \item ((* if i.link *))\href{(((i.link)))}{\enquote{\textbf{(((i.title | escape_tex)))}}}((* else *))\enquote{\textbf{(((i.title | escape_tex)))}}((* endif *)), ((* if i.event *))(((i.event | escape_tex))), ((* endif *)) \textit{(((i.org)))}. (((i.location))). ((* if i.format *))(((i.format))).((* endif *)) (((i.month)))((* if i.month != "May" *)).((* endif *)) (((i.year)))((* if i.coauthor *)) (with (((i.coauthor))))((* endif *)).
         ((* endfor *))
 \end{itemize}
