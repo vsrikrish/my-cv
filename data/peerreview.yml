@@ -2,9 +2,11 @@ peerreview:
   - journal: AGU Advances
   - journal: Climatic Change
   - journal: Earth's Future
+  - journal: Energy Technology
   - journal: Environmental Research Letters
   - journal: Geophysical Research Letters
   - journal: Hydrology and Earth System Sciences
+  - journal: Joule
   - journal: Journal of Applied Meteorology and Climatology
   - journal: Journal of Hydrology
   - journal: Journal of Water Resources Management and Planning
@@ -12,4 +14,3 @@ peerreview:
   - journal: Water Resources Research
   - journal: Water Security
   - journal: Weather, Climate, and Society
-  - journal: Joule

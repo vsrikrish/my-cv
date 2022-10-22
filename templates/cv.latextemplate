@@ -179,7 +179,7 @@
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
 \begin{itemize}[label={}]
-  ((* for award in sect.entries.awards | sort_by_attr(["year"], reverse=True) *))
+  ((* for award in sect.entries.awards | sort(attribute=["year"], reverse=True) *))
   \item \textbf{(((award.title)))}, (((award.org))), (((award.year))).
         ((* endfor *))
 \end{itemize}
@@ -192,7 +192,7 @@
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
 \begin{itemize}[label={}]
-  ((* for i in sect.entries.grants | sort_by_attr(["end", "start"], reverse=True) *))
+  ((* for i in sect.entries.grants | sort(attribute=["end", "start"], reverse=True) *))
   \item \textbf{(((i.role | escape_tex)))}, \enquote{(((i.title | escape_tex)))}. ((* if i.PI *)) PI: (((i.PI | escape_tex))).((* endif *)) \textit{(((i.funder | escape_tex)))}, \$(((i.amount)))((* if i.total *)) (total: \$(((i.total))))((* endif *)). (((i.start)))--(((i.end))).
         ((* endfor *))
 \end{itemize}
@@ -212,12 +212,6 @@
 \vspace*{-1em}
 \printbibliography[type=misc, heading=none]
 
-\section{dissertation}
-
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
-\vspace*{-1em}
-\printbibliography[type=thesis, heading=none]
-
 %% Invited Talks
 ((* set sect = data.sections | select_by_attr_name("title", "Invited Talks") *))
 \section{(((sect.title | lower)))}
@@ -225,27 +219,9 @@
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
 \begin{itemize}[label={}]
-  ((* for i in sect.entries.talks | sort_by_attr(["date"], reverse=True) *))
+  ((* for i in sect.entries.talks | sort(attribute=["date"], reverse=True) *))
   \item \enquote{\textbf{(((i.title | escape_tex)))}}, ((* if i.event *))(((i.event | escape_tex))), ((* endif *)) \textit{(((i.org)))}. (((i.location))), (((i.date))).
   ((* endfor *))
-\end{itemize}
-
-\section{conference proceedings}
-
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
-\vspace*{-1em}
-\printbibliography[type=inproceedings, heading=none]
-
-%% Workshops
-((* set sect = data.sections | select_by_attr_name("title", "Workshop Presentations") *))
-\section{(((sect.title | lower)))}
-
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
-
-\begin{itemize}[label={}]
-  ((* for i in sect.entries.workshops | sort_by_attr(["year"], reverse=True) *))
-  \item ((* if i.link *))\href{(((i.link)))}{\enquote{\textbf{(((i.title | escape_tex)))}}}((* else *))\enquote{\textbf{(((i.title | escape_tex)))}}((* endif *)), ((* if i.event *))(((i.event | escape_tex))), ((* endif *)) \textit{(((i.org)))}. (((i.location))). ((* if i.format *))(((i.format))).((* endif *)) (((i.month)))((* if i.month != "May" *)).((* endif *)) (((i.year)))((* if i.coauthor *)) (with (((i.coauthor))))((* endif *)).
-        ((* endfor *))
 \end{itemize}
 
 %% Teaching
@@ -270,10 +246,14 @@
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
-((* set advisees = sect.entries.advisor *))
 \begin{itemize}[label={}]
-  ((* for advisee in advisees | sort_first_year("degree_year", reverse=True) *))
-    \item (((advisee.name))), \textit{(((advisee.degree))) in (((advisee.field)))}, (((advisee.university))). ((((advisee.degree_year)))). ((* if advisee.thesis_title *)) \enquote{((( advisee.thesis_title ))).}((* endif *))
+((* set advisees = sect.entries.advisor | rejectattr("degree_year") *))
+  ((* for advisee in advisees | sort(attribute="lastname") *))
+    \item (((advisee.firstname))) (((advisee.lastname))), \textit{(((advisee.degree))) in (((advisee.field)))}, (((advisee.university))). ((* if advisee.thesis_title *)) \enquote{((( advisee.thesis_title ))).}((* endif *))
+  ((* endfor *))
+  ((* set advisees = sect.entries.advisor | selectattr("degree_year") *))
+  ((* for advisee in advisees | sort_first_year("degree_year", reverse=True) | sort(attribute="lastname") *))
+    \item \textbf{((((advisee.degree_year))))} \quad (((advisee.firstname))) (((advisee.lastname))), \textit{(((advisee.degree))) in (((advisee.field)))}, (((advisee.university))). ((* if advisee.thesis_title *))Thesis: \enquote{((( advisee.thesis_title ))).}((* endif *))
   ((* endfor *))
 \end{itemize}
 
@@ -283,10 +263,14 @@
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
-((* set advisees = sect.entries.committee *))
 \begin{itemize}[label={}]
-  ((* for advisee in advisees | sort_first_year("degree_year", reverse=True) *))
-    \item (((advisee.name))), \textit{(((advisee.degree))) in (((advisee.field)))}, (((advisee.university))). ((((advisee.degree_year)))). ((* if advisee.thesis_title *)) \enquote{((( advisee.thesis_title ))).}((* endif *))
+((* set advisees = sect.entries.committee | rejectattr("degree_year") *))
+  ((* for advisee in advisees | sort(attribute="lastname") *))
+    \item (((advisee.firstname))) (((advisee.lastname))), \textit{(((advisee.degree))) in (((advisee.field)))}, (((advisee.university))). ((* if advisee.thesis_title *)) \enquote{((( advisee.thesis_title ))).}((* endif *))
+  ((* endfor *))
+  ((* set advisees = sect.entries.committee | selectattr("degree_year") *))
+  ((* for advisee in advisees | sort_first_year("degree_year", reverse=True) | sort(attribute="lastname") *))
+    \item \textbf{((((advisee.degree_year))))} \quad (((advisee.firstname))) (((advisee.lastname))), \textit{(((advisee.degree))) in (((advisee.field)))}, (((advisee.university))). ((* if advisee.thesis_title *))Thesis: \enquote{((( advisee.thesis_title ))).}((* endif *))
   ((* endfor *))
 \end{itemize}
 
@@ -312,8 +296,8 @@
         ((* endfor *))
 \end{itemize}
 
-%% Workshops and sessions organized
-((* set sect = data.sections | select_by_attr_name("title", "Workshops and Sessions Organized") *))
+%% SESSIONS ORGANIZED
+((* set sect = data.sections | select_by_attr_name("title", "Sessions Organized") *))
 \section{(((sect.title | lower)))}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
@@ -321,6 +305,25 @@
 \begin{itemize}[label={}]
   ((* for i in sect.entries.convene | sort(attribute="date", reverse=True) *))
   \item \textbf{(((i.role)))}, \textit{(((i.session)))}, (((i.event))), (((i.location))). (((i.date))).
+        ((* endfor *))
+\end{itemize}
+
+%% CONFERENCE PROCEEDINGS
+\section{conference papers}
+
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+\vspace*{-1em}
+\printbibliography[type=inproceedings, heading=none]
+
+%% WORKSHOPS
+((* set sect = data.sections | select_by_attr_name("title", "Workshop Presentations") *))
+\section{(((sect.title | lower)))}
+
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+
+\begin{itemize}[label={}]
+  ((* for i in sect.entries.workshops | sort(attribute=["year"], reverse=True) *))
+  \item ((* if i.link *))\href{(((i.link)))}{\enquote{\textbf{(((i.title | escape_tex)))}}}((* else *))\enquote{\textbf{(((i.title | escape_tex)))}}((* endif *)), ((* if i.event *))(((i.event | escape_tex))), ((* endif *)) \textit{(((i.org)))}. (((i.location))). ((* if i.format *))(((i.format))).((* endif *)) (((i.month)))((* if i.month != "May" *)).((* endif *)) (((i.year)))((* if i.coauthor *)) (with (((i.coauthor))))((* endif *)).
         ((* endfor *))
 \end{itemize}
 
@@ -349,14 +352,14 @@
 \end{itemize}
 
 %% Additional Experience and Training
-((* set sect = data.sections | select_by_attr_name("title", "Additional Experience and Training") *))
+((* set sect = data.sections | select_by_attr_name("title", "Additional Experience") *))
 \section{(((sect.title | lower)))}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
 \begin{itemize}[label={}]
-  ((* for i in sect.entries | sort_by_attr(["end", "start"], reverse=True) *))
-  \item \textbf{(((i.title)))}, (((i.org))). ((* if i.end == i.start *))(((i.end)))((* else *))(((i.start)))--(((i.end)))((* endif *)).
+  ((* for i in sect.entries | sort(attribute="end", reverse=True) *))
+  \item \textbf{(((i.title)))}, (((i.org))). ((* if i.end == i.start *))(((i.end)))((* else *))(((i.start)))--(((i.end)))((* endif *)).((* if i.details *))\\(((i.details))).((* endif *))
   ((* endfor *))
 \end{itemize}
 

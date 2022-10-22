@@ -2,47 +2,50 @@ committee:
   ########################################
   # CURRENT STUDENTS #####################
   ########################################
-  - name: Matthew Garcia
+  - firstname: Matthew
+    lastname: Garcia
     degree: Ph.D.
     field: Civil and Environmental Engineering
     university: Rice University
-    degree_year: 2022 (Anticipated)
-  - name: Chunshan Liu
+  - firstname: Chunshan
+    lastname: Liu
     degree: Ph.D.
     field: Statistics
     university: Rice University
-    degree_year: 2022 (Anticipated)
-  - name: Xiangnan Zhou
+  - firstname: Xiangnan
+    lastname: Zhou
     degree: Ph.D.
     field: Civil and Environmental Engineering
     university: Rice University
-    degree_year: 2018--Present
-  - name: Chen Chen
+  - firstname: Chen
+    lastname: Chen
     degree: Ph.D.
     field: Civil and Environmental Engineering
     university: Rice University
-    degree_year: 2022--Present
-  - name: Kelsey Murphy
+  - firstname: Kelsey
+    lastname: Murphy
     degree: Ph.D.
     field: Earth, Environmental, and Planetary Sciences
     university: Rice University
-    degree_year: 2021--Present
   ########################################
   # PAST STUDENTS ########################
   ########################################
-  - name: Elizabeth Hoffmann
+  - firstname: Elizabeth
+    lastname: Hoffmann
     degree: M.S.
     field: Civil and Environmental Engineering
     university: Rice University
     degree_year: 2022
     thesis_title: "Mapping Dynamic Watershed Response Under Increasing Development Using HEC-RAS 2D: A Case Study of the Big Creek Watershed in Fort Bend County"
-  - name: Bahnick, Raychel
+  - firstname: Raychel
+    lastname: Bahnick
     degree: M.S.
     field: Civil and Environmental Engineering
     university: Rice University
     degree_year: 2022
     thesis_title: "Assessing Land Use Change and Subsidence Impact on Inland Flooding"
-  - name: Toby Li
+  - firstname: Toby
+    lastname: Li
     degree: M.S.
     field: Civil and Environmental Engineering
     university: Rice University

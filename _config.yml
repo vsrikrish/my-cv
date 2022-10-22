@@ -52,7 +52,7 @@ sections:
     file: peerreview.yml
   - title: Grant Review
     file: grantreview.yml
-  - title: Additional Experience and Training
+  - title: Additional Experience
     file: training.yml
-  - title: Workshops and Sessions Organized
+  - title: Sessions Organized
     file: convene.yml
