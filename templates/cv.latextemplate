@@ -179,7 +179,7 @@
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
 \begin{itemize}[label={}]
-  ((* for award in sect.entries.awards | sort(attribute=["year"], reverse=True) *))
+  ((* for award in sect.entries.awards | sort(attribute="year", reverse=True) *))
   \item \textbf{(((award.title)))}, (((award.org))), (((award.year))).
         ((* endfor *))
 \end{itemize}
