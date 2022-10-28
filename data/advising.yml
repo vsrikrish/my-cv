@@ -6,31 +6,32 @@ advising:
     role: Co-advisor
     start: 2019
     end: 2020
-  - name: Xinyuan Huang
-    degree: Ph.D.
-    field: Civil and Environmental Engineering
-    university: Pennsylvania State University
-    role: Committee member
-    start: 2019
-    end: present
   - name: Carl Frederick Aquino
     degree: M.S.
     field: Geosciences
     university: Pennsylvania State University
     role: Committee member
     start: 2020
-    end: present
+    end: 2022
   - name: Parin Bhaduri
     degree: Ph.D
     field: Biological \& Environmental Engineering
     university: Cornell University
-    role: Advisor
+    role: Advisor, Committee Chair
     start: 2021
     end: present
   - name: Chloe Darnell
     degree: M.S.
     field: Biological \& Environmental Engineering
     university: Cornell University
-    role: Advisor
+    role: Advisor, Committee Chair
     start: 2021
     end: present
+  - name: Katerina Tang
+    degree: Ph.D.
+    field: Applied Mathematics
+    university: Cornell University
+    role: Advisor
+    start: 2022
+    end: present
+
