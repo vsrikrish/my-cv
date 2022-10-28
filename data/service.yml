@@ -1,4 +1,7 @@
 service:
+  - title: Faculty Fellow
+    org: Cornell Atkinson Center for a Sustainable Future
+    tag: univ
   - title: Co-Organizer
     org: BEE Department Seminar
     start: 2021
@@ -28,6 +31,6 @@ service:
     journal: Water
     org: "Special Issue on 'Climate Model Projections: Sea-Level Rise and Impacts on Coastal Defense Decision-Making'"
   - title: Panel Reviewer
-    org: National Science Foundation, Department of Energy
+    org: National Science Foundation (HDBE), Department of Energy (BER)
   - title: Ad Hoc Reviewer
-    org: Sloan Foundation, National Science Foundation  
+    org: Sloan Foundation, National Science Foundation (DRMS, MG&G)
