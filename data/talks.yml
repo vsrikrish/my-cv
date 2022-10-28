@@ -1,5 +1,6 @@
 talks:
-  - title: "Identifying Challenges and Opportunities for Uncertainty Analysis in MultiSector Dynamics Research" (with Jonathan Lamontagne)
+  - title: "Identifying Challenges and Opportunities for Uncertainty Analysis in MultiSector Dynamics Research"
+    coauthor: Jonathan Lamontagne
     event: Community Webinar
     org: MultiSector Dynamics Community of Practice
     location: remote
