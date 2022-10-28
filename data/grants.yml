@@ -13,7 +13,6 @@ grants:
     start: 2021
     end: 2026
     amount: 533,922
-    total: 16,900,000
   - title: Health Effects of Decarbonization (HEALED)
     funder: NSF
     role: Co-PI
@@ -29,7 +28,6 @@ grants:
     start: 2019
     end: 2023
     amount: 334,610
-    total: 15,600,000
   - title: Addressing Deep Uncertainty in Hydropower Futures
     funder: NREL
     PI: Patrick Reed
