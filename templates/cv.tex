@@ -413,7 +413,7 @@ UprightFont=*-Regular]{Inconsolata}
 \subsection{(((u)))}
 \begin{itemize}[label={}]
 ((* for x in i | sort_first_year("year", reverse=True) *))
-\item (((x.title | escape_tex))). (((x.role))). (((x. semester))) (((x.year))).
+\item (((x.course | escape_tex ))) --- (((x.title | escape_tex))). (((x.role))). (((x. semester))) (((x.year))).
 ((* endfor *))
 \end{itemize}
 ((* endfor *))
