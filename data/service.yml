@@ -2,6 +2,7 @@ service:
   - title: Co-Organizer
     org: BEE Department Seminar
     start: 2021
+    end: present
     tag: univ
   - title: Associate Deputy Editor
     journal: Climatic Change
