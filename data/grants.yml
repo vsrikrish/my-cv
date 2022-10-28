@@ -1,11 +1,4 @@
 grants:
-  - title: Integrated Coastal Modeling (ICoM)
-    funder: DOE (BER)
-    PI: Ian Kraucunas
-    role: Investigator, Task Lead
-    start: 2019
-    end: 2021
-    amount: 1,200,000
   - title: Integrated Multi-Scale Multi-Sector Modeling (IM3)
     funder: DOE (BER)
     role: Investigator
@@ -33,6 +26,15 @@ grants:
     funder: DOE (BER)
     PI: Ian Kraucunas
     role: Investigator, Task Lead
-    start: 2021
-    end: 2022
-    amount: 139,825
+    start: 2019
+    end: 2023
+    amount: 1,054,110
+    total: 15,600,000
+  - title: Addressing Deep Uncertainty in Hydropower Futures
+    funder: NREL
+    PI: Patrick Reed
+    role: Co-PI
+    start: 2022
+    end: 2023
+    amount: 15,053
+    total: 75,000
