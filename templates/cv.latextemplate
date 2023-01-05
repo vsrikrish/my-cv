@@ -335,13 +335,13 @@
 
 \begin{itemize}[label={}]
   ((* for i in sect.entries.peerreview | sort(attribute="journal") *))
-  \item (((i.journal | escape_tex)))
-        ((* endfor *))
+    \item (((i.journal | escape_tex)))
+  ((* endfor *))
 \end{itemize}
 
 %% GRANT REVIEW
 ((* set sect = data.sections | select_by_attr_name("title", "Grant Review") *))
-%\section{(((sect.title | lower)))}
+\section{(((sect.title | lower)))}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
