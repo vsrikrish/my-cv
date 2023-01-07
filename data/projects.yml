@@ -1,11 +1,23 @@
 projects:
+  - title: Project on Coupled Human and Earth Systems (PCHES-ADAPT)
+    role: Senior Personnel
+    PI: Karen Fisher-Vanden and John Weyant
+    funder: Department of Energy, Biological and Environmental Research
+    start: 2021
+    end: current
+  - title: Integrated Coastal Modeling (ICoM)
+    role: Task Lead
+    PI: Ian Kraucunas
+    funder: Department of Energy, Biological and Environmental Research
+    start: 2019
+    end: current
   - title: Visualizing Forest Futures (ViFF)
     role: Participant
     PI: Erica Smithwick
     funder: National Science Foundation
     start: 2019
     end: 2021
-  - title: Project on Coupled Human and Earth Systems (PCHES)
+  - title: Project on Coupled Human and Earth Systems (PCHES-FRAME)
     role: Participant
     PI: Karen Fisher-Vanden and John Weyant
     funder: Department of Energy, Biological and Environmental Research
