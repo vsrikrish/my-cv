@@ -7,10 +7,10 @@ committee:
     degree: Ph.D.
     field: Civil and Environmental Engineering
     university: Rice University
-  - firstname: Chunshan
-    lastname: Liu
+  - firstname: True
+    lastname: Furrh
     degree: Ph.D.
-    field: Statistics
+    field: Civil and Environmental Engineering
     university: Rice University
   - firstname: Xiangnan
     lastname: Zhou
@@ -51,3 +51,10 @@ committee:
     university: Rice University
     degree_year: 2021
     thesis_title: "Evaluating the Effects of Project Brays Mitigation Using Unsteady HEC-RAS Hydraulic Modeling: Application to Meyerland in Houston, TX"
+  - firstname: Chunshan
+    lastname: Liu
+    degree: Ph.D.
+    field: Statistics
+    university: Rice University
+    degree_year: 2022
+    thesis_title: "Bayesian Graphical Models for Multivariate Time Series"

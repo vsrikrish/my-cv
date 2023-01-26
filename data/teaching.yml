@@ -19,3 +19,10 @@ classes:
     role: Instructor
     semester: Spring
     year: 2022
+
+  - title: Climate Risk Management
+    course: CEVE 421/521
+    university: Rice University
+    role: Instructor
+    semester: Spring
+    year: 2023

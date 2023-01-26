@@ -1,12 +1,26 @@
 talks:
+  - title: "Quantifying and characterizing uncertain climate hazards to enable adaptive resilience"
+    event: Atmospheric Sciences Seminar
+    org: Texas A&M University
+    location: College Station, TX
+    date: 2022-11-16
+  - title: "Unprecedented impacts don't require unprecedented weather"
+    event: "Post-Harvey Climate & Flood Impacts on the Built Environment"
+    org: "Severe Storm Prediction, Education, & Evacuation from Disasters Center"
+    location: Houston, TX
+    date: 2022-04-29
+  - title: "Revisiting our design criteria: What hazards should we design for in a changing climate?"
+    event: Hydrologic Sciences and Water Resources Engineering Seminar
+    org: University of Colorado Boulder
+    location: Remote Presentation
+    date: 2022-04-13
   - title: "Adapting Engineering Design Criteria to a Changing Climate: Insights from House Elevation "
     event: Technical Webinar
     org: ASCE Central New Jersey Branch
     location: Remote Presentation
     date: 2022-04-12
-
   - title: Panelist
-    event: "Extreme Weather: How To Report on a World That’s Warmer, Colder, Wetter, Drier and Weirder"
+    event: "Extreme Weather: How To Report on a World That's Warmer, Colder, Wetter, Drier and Weirder"
     org: 31st Annual Conference of the Society of Environmental Journalists
     url: https://conference2022.sej.org/agenda/
     date: 2022-04-02
