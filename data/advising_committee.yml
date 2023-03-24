@@ -27,6 +27,21 @@ committee:
     degree: Ph.D.
     field: Earth, Environmental, and Planetary Sciences
     university: Rice University
+  - firstname: Jainish
+    lastname: Patel
+    degree: Ph.D.
+    field: Civil and Environmental Engineering
+    university: Rice University
+  - firstname: Kooshan
+    lastname: Amini
+    degree: Ph.D.
+    field: Civil and Environmental Engineering
+    university: Rice University
+  - firstname: Mia
+    lastname: Peeples
+    degree: M.S.
+    field: Civil and Environmental Engineering
+    university: Rice University
   ########################################
   # PAST STUDENTS ########################
   ########################################
