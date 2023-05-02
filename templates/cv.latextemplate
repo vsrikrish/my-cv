@@ -212,7 +212,7 @@
 \vspace*{-1em}
 \defbibfilter{ispreprint}{% 
     type=misc
-    or keyword=online
+    or type=online
 }
 \printbibliography[filter=ispreprint, heading=none]
 
