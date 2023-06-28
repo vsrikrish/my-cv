@@ -2,11 +2,7 @@ committee:
   ########################################
   # CURRENT STUDENTS #####################
   ########################################
-  - firstname: Matthew
-    lastname: Garcia
-    degree: Ph.D.
-    field: Civil and Environmental Engineering
-    university: Rice University
+
   - firstname: True
     lastname: Furrh
     degree: Ph.D.
@@ -37,14 +33,23 @@ committee:
     degree: Ph.D.
     field: Civil and Environmental Engineering
     university: Rice University
+  ########################################
+  # PAST STUDENTS ########################
+  ########################################
   - firstname: Mia
     lastname: Peeples
     degree: M.S.
     field: Civil and Environmental Engineering
     university: Rice University
-  ########################################
-  # PAST STUDENTS ########################
-  ########################################
+    degree_year: 2023
+    thesis_title: "Modeling Flood Reduction of Nature-Based Channel Modifications in Houston, TX"
+  - firstname: Matthew
+    lastname: Garcia
+    degree: Ph.D.
+    field: Civil and Environmental Engineering
+    university: Rice University
+    degree_year: 2023
+    thesis_title: Novel Urban Floodplain Modeling Methods for Applications in Coupling Surrogate Machine Learning Methods
   - firstname: Elizabeth
     lastname: Hoffmann
     degree: M.S.
