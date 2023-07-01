@@ -1,4 +1,10 @@
 service:
+  - title: Co-Organizer
+    org: Energy Modeling Forum Snowmass Workshop
+    start: 2023
+  - title: Session Chair
+    org: Energy Modeling Forum Snowmass Workshop
+    start: 2023
   - title: Faculty Fellow
     org: Cornell Atkinson Center for a Sustainable Future
     tag: univ
