@@ -273,7 +273,7 @@
     \item \textbf{Current} (((advisee.firstname))) (((advisee.lastname))), \textit{(((advisee.degree))) in (((advisee.field)))}, (((advisee.university))). ((* if advisee.thesis_title *)) \enquote{((( advisee.thesis_title ))).}((* endif *))
   ((* endfor *))
   ((* set advisees = sect.entries.committee | selectattr("degree_year") *))
-  ((* for advisee in advisees | sort_first_year("degree_year", reverse=True) | sort(attribute="lastname") *))
+  ((* for advisee in advisees  | sort(attribute="lastname") | sort(attribute="degree", reverse=True) | sort_first_year("degree_year", reverse=True) *))
     \item \textbf{((((advisee.degree_year))))} \quad (((advisee.firstname))) (((advisee.lastname))), \textit{(((advisee.degree))) in (((advisee.field)))}, (((advisee.university))). ((* if advisee.thesis_title *))Thesis: \enquote{((( advisee.thesis_title ))).}((* endif *))
   ((* endfor *))
 \end{itemize}
