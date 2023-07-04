@@ -1,8 +1,5 @@
 service:
-  - title: Co-Organizer
-    org: Energy Modeling Forum Snowmass Workshop
-    start: 2023
-  - title: Session Chair
+  - title: Co-Organizer and Session Chair
     org: Energy Modeling Forum Snowmass Workshop
     start: 2023
   - title: Faculty Fellow
