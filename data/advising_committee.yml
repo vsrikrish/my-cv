@@ -33,6 +33,17 @@ committee:
     degree: Ph.D.
     field: Civil and Environmental Engineering
     university: Rice University
+  - firstname: Kendall
+    lastname: Capshaw
+    degree: Ph.D.
+    field: Civil and Environmental Engineering
+    university: Rice University
+  - firstname: Anibal
+    lastname: Tafur Gutierrez
+    degree: Ph.D.
+    field: Civil and Environmental Engineering
+    university: Rice University
+
   ########################################
   # PAST STUDENTS ########################
   ########################################
