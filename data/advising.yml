@@ -1,11 +1,14 @@
 advising:
   - name: Carl Frederick Aquino
-    degree: B.S.
+    degree: M.S.
     field: Geosciences
     university: Pennsylvania State University
-    role: Co-advisor
-    start: 2019
-    end: 2020
+    role: Co-Advisor
+    start: 2020
+    end: 2022
+    thesis: |-
+      Greenland Ice Sheet drives sea-level rise differences between model and expert projections
+    type: Graduate
   - name: Parin Bhaduri
     degree: Ph.D.
     field: Biological \& Environmental Engineering
@@ -13,13 +16,17 @@ advising:
     role: Advisor, Committee Chair
     start: 2021
     end: present
+    type: Graduate
   - name: Chloe Darnell
     degree: M.S.
     field: Biological \& Environmental Engineering
     university: Cornell University
     role: Advisor, Committee Chair
     start: 2021
-    end: present
+    end: 2023
+    thesis: |-
+      Uncertainty in Emissions Pathways and Earth System Dynamics: Implications for Global Mean Sea Level Rise
+    type: Graduate
   - name: Katerina Tang
     degree: Ph.D.
     field: Applied Mathematics
@@ -27,4 +34,34 @@ advising:
     role: Advisor
     start: 2022
     end: present
-
+    type: Graduate
+  - name: Yifan Luo
+    degree: Ph.D.
+    field: Civil \& Environmental Engineering
+    university: Cornell University
+    role: Advisor, Committee Chair
+    start: 2023
+    end: present
+    type: Graduate
+  - name: Gabriela Ackermann Logan
+    degree: M.S.
+    field: Biological \& Environmental Engineering
+    university: Cornell University
+    role: Advisor, Committee Chair
+    start: 2023
+    end: present
+    type: Graduate
+  - name: Cella Schnabel
+    field: Civil \& Environmental Engineering
+    university: Cornell University
+    role: Research Advisor
+    start: 2023
+    end: present
+    type: Undergraduate
+  - name: Cannon Cline
+    field: Earth \& Atmospheric Science
+    university: Cornell University
+    role: Research Advisor
+    start: 2023
+    end: present
+    type: Undergraduate

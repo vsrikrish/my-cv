@@ -132,17 +132,16 @@ UprightFont=*-Regular]{Inconsolata}
 	style=publist,
 	plauthorfirstinit=true,
 	plauthorhandling=highlight,
-	plnumbered=false,
+	plnumbering=local-descending,
 	labeldateparts=false,
-	%linktitleall=true,
-	boldyear=false,
+	linktitles={none, doi, url},
+	hlyear=true,
 	marginyear=false,
 	doi=true,
 	url=false,
 	isbn=false,
 	maxbibnames=99,
 	maxcitenames=99,
-  defernumbers,
   giveninits,
 	date=year
 ]{biblatex}
@@ -338,19 +337,21 @@ UprightFont=*-Regular]{Inconsolata}
 \section{publications}
 \uspunctuation
 
+\begin{refsection}
 \printbibliography[type=article, title={Peer-Reviewed Journal Articles}, heading=subbibliography]
+\end{refsection}
 
-\printbibliography[type=misc, title={Articles Under Review or Forthcoming}, heading=subbibliography, keyword=unpublished]
+\printbibliography[type=misc, title={Articles Under Review or Forthcoming}, heading=subbibliography, keyword=unpublished, resetnumbers]
 
-\printbibliography[type=report, title={Reports}, heading=subbibliography]
+\printbibliography[type=report, title={Reports}, heading=subbibliography, resetnumbers]
 
-\printbibliography[type=book, title={Books}, heading=subbibliography]
+\printbibliography[type=book, title={Books}, heading=subbibliography, resetnumbers]
 
-\printbibliography[type=inproceedings, title={Conference Proceedings}, heading=subbibliography]
+\printbibliography[type=inproceedings, title={Conference Proceedings}, heading=subbibliography, resetnumbers]
 
-\printbibliography[type=misc, title={Conference Presentations}, heading=subbibliography, keyword=talk]
+\printbibliography[type=misc, title={Conference Presentations}, heading=subbibliography, keyword=talk, resetnumbers]
 
-\printbibliography[type=misc, title={Conference Posters}, heading=subbibliography, keyword=poster]
+\printbibliography[type=misc, title={Conference Posters}, heading=subbibliography, keyword=poster, resetnumbers]
 
 %% Invited Talks
 ((* set sect = data.sections | select_by_attr_name("title", "Invited Talks") *))
@@ -426,11 +427,11 @@ UprightFont=*-Regular]{Inconsolata}
 
 \vspace{\baselineskip}
 ((* set advisees = sect.entries.advising *))
-((* for u, i in advisees | groupby("university") *))
-\subsection{(((u)))}
+((* for t, i in advisees | groupby("type") *))
+\subsection{(((t)))}
 \begin{itemize}[label={}]
 ((* for x in i | sort_by_attr(["end", "start"], reverse=True) *))
-\item (((x.name))), (((x.degree))) (((x.field))). (((x.role))). (((x.start)))--(((x.end))).
+\item (((x.name))), ((* if x.degree *))(((x.degree))),((* endif *)) (((x.field))). (((x.role))). (((x.start)))--(((x.end))). ((*if x.thesis *)) Thesis: "((( x.thesis | capitalize )))."((* endif *))
 ((* endfor *))
 \end{itemize}
 ((* endfor *))
