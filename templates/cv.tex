@@ -132,7 +132,7 @@ UprightFont=*-Regular]{Inconsolata}
 	style=publist,
 	plauthorfirstinit=true,
 	plauthorhandling=highlight,
-	plnumbering=local-descending,
+	plnumbering=none,
 	labeldateparts=false,
 	linktitles={none, doi, url},
 	hlyear=true,
@@ -337,9 +337,7 @@ UprightFont=*-Regular]{Inconsolata}
 \section{publications}
 \uspunctuation
 
-\begin{refsection}
 \printbibliography[type=article, title={Peer-Reviewed Journal Articles}, heading=subbibliography]
-\end{refsection}
 
 \printbibliography[type=misc, title={Articles Under Review or Forthcoming}, heading=subbibliography, keyword=unpublished, resetnumbers]
 
@@ -365,17 +363,6 @@ UprightFont=*-Regular]{Inconsolata}
 ((* endfor *))
 \end{itemize}
 
-%% Workshops
-((* set sect = data.sections | select_by_attr_name("title", "Workshops Organized") *))
-\section{(((sect.title | lower)))}
-
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
-
-\begin{itemize}[label={}]
-((* for i in sect.entries.workshops | sort_by_attr(["year"], reverse=True) *))
-\item (((i.title | escape_tex))). (((i.location))). (((i.month)))((* if i.month != "May" *)).((* endif *)) (((i.year))).
-((* endfor *))
-\end{itemize}
 
 %% Grants and Contracts
 ((* set sect = data.sections | select_by_attr_name("title", "Grants and Contracts") *))
@@ -413,11 +400,24 @@ UprightFont=*-Regular]{Inconsolata}
 ((* for u, i in courses | groupby("university")  *))
 \subsection{(((u)))}
 \begin{itemize}[label={}]
-((* for x in i | sort_first_year("year", reverse=True) *))
+((* for x in i | sort_last_year("year", reverse=True) *))
 \item (((x.course | escape_tex ))) --- (((x.title | escape_tex))). (((x.role))). (((x. semester))) (((x.year))).
 ((* endfor *))
 \end{itemize}
 ((* endfor *))
+
+%% Workshops
+((* set sect = data.sections | select_by_attr_name("title", "Workshops Organized") *))
+\section{(((sect.title | lower)))}
+
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+
+\begin{itemize}[label={}]
+((* for i in sect.entries.workshops | sort_last_year("year", reverse=True) *))
+\item (((i.title | escape_tex))). (((i.location))). (((i.month)))((* if i.month != "May" *)).((* endif *)) (((i.year))).
+((* endfor *))
+\end{itemize}
+
 
 %% Advising
 ((* set sect = data.sections | select_by_attr_name("title", "Advising") *))
@@ -455,7 +455,7 @@ UprightFont=*-Regular]{Inconsolata}
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
 \begin{itemize}[label={}]
-((* for i in sect.entries.outreach | sort_first_year("year", reverse=True) *))
+((* for i in sect.entries.outreach | sort_last_year("year", reverse=True) *))
 \item (((i.activity))), (((i.org))). (((i.year))).
 ((* endfor *))
 \end{itemize}

@@ -40,5 +40,5 @@ def sort_by_attr(array, attr, reverse=False):
     return sorted_array
 
 
-def sort_first_year(array, attr, reverse=False):
-    return sorted(array, key=lambda x: int(re.findall(r'^\d{4}', str(x[attr]))[0]), reverse=reverse)
+def sort_last_year(array, attr, reverse=False):
+    return sorted(array, key=lambda x: int(re.findall(r'\d{4}$', str(x[attr]))[0]), reverse=reverse)
