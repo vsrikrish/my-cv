@@ -27,7 +27,7 @@ grants:
     role: Investigator, Task Lead
     start: 2019
     end: 2023
-    amount: 334,610
+    amount: 682,610
   - title: Addressing Deep Uncertainty in Hydropower Futures
     funder: NREL
     PI: Patrick Reed
