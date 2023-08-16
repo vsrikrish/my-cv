@@ -434,20 +434,20 @@ UprightFont=*-Regular]{Inconsolata}
 \item (((x.name))), ((* if x.degree *))(((x.degree))),((* endif *)) (((x.field))). (((x.role))). (((x.start)))--(((x.end))). ((*if x.thesis *)) Thesis: "((( x.thesis | capitalize )))."((* endif *))
 ((* endfor *))
 \end{itemize}
-((* endfor *))$
+((* endfor *))
 
 %% Committee Membership
-((* set sect = data.sections | select_by_attr_name("title", "Committee") *))
-\section{committee member}
+((* set sect = data.sections | select_by_attr_name("title", "Committee Member") *))
+\section{(((sect.title | lower)))}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
 \vspace{\baselineskip}
 \begin{itemize}[label={}]
-((* for x in sect.entries.committee | sort_by_attr(["year"], reverse=True) *))
+((* for x in sect.entries.member | sort_by_attr(["year"], reverse=True) *))
 \item (((x.name))), (((x.degree))), (((x.field))). (((x.year))).
-\end{itemize}
 ((* endfor *))
+\end{itemize}
 
 
 %% Awards

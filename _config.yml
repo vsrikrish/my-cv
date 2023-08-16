@@ -48,6 +48,8 @@ sections:
     file: teaching.yml
   - title: Advising
     file: advising.yml
+  - title: Committee Member
+    file: committee.yml
   - title: Awards
     file: awards.yml
   - title: Outreach
