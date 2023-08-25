@@ -26,3 +26,10 @@ classes:
     role: Instructor
     semester: Spring
     year: 2023
+
+  - title: Data Science Methods for Climate Hazard Assessment
+    course: CEVE 543
+    university: Rice University
+    role: Instructor
+    semester: Fall
+    year: 2023
