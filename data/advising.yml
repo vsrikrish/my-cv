@@ -65,3 +65,28 @@ advising:
     start: 2023
     end: present
     type: Undergraduate
+  - name: Matthew Lipton
+    field: Biological \& Environmental Engineering
+    university: Cornell University
+    role: Research Co-Advisor (with C. Lindsay Anderson)
+    start: 2023
+    end: present
+    type: Undergraduate
+  - name: Elnaz Kabir
+    university: Cornell University
+    note: Co-advised with C. Lindsay Anderson \& Scott Steinschneider
+    start: 2021
+    end: 2023
+    area: Decarbonized Energy System Operations
+    current: Assistant Professor, Engineering Technology \& Industrial Distribution, Texas A\&M
+    type: Postdoctoral
+  - name: Nicole Rosario Nieves
+    university: Cornell University
+    role: Advisor
+    start: 2023
+    end: 2023
+    degree: M.Eng.
+    field: Biological \& Environmental Engineering
+    thesis: |-
+      Generation of an agent-based policy tree for decision making on home elevation in coastal floodable areas
+    type: Graduate

@@ -4,6 +4,7 @@ See http://flask.pocoo.org/snippets/55/ for more info.
 """
 
 import re
+import operator
 
 LATEX_SUBS = (
     (re.compile(r'\\'), r'\\textbackslash'),
@@ -42,3 +43,7 @@ def sort_by_attr(array, attr, reverse=False):
 
 def sort_last_year(array, attr, reverse=False):
     return sorted(array, key=lambda x: int(re.findall(r'\d{4}$', str(x[attr]))[0]), reverse=reverse)
+
+def sort_advisees(array, reverse=False):
+    sort_order = {"Postdoctoral": 0, "Graduate": 1, "Undergraduate": 2}
+    return sorted(array, key=lambda val: sort_order[val[0]], reverse=reverse)

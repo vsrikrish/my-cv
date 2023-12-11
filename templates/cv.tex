@@ -427,12 +427,22 @@ UprightFont=*-Regular]{Inconsolata}
 
 \vspace{\baselineskip}
 ((* set advisees = sect.entries.advising *))
-((* for t, i in advisees | groupby("type") *))
+((* for t, i in advisees | groupby("type") | sort_advisees(reverse=False) *))
 \subsection{(((t)))}
 \begin{itemize}[label={}]
+((* if t == "Postdoctoral" *))
 ((* for x in i | sort_by_attr(["end", "start"], reverse=True) *))
-\item (((x.name))), ((* if x.degree *))(((x.degree))),((* endif *)) (((x.field))). (((x.role))). (((x.start)))--(((x.end))). ((*if x.thesis *)) Thesis: "((( x.thesis | capitalize )))."((* endif *))
+\item (((x.name))). (((x.area))). ((*if x.note *))(((x.note))).((* endif *)) (((x.start)))--(((x.end))). ((*if x.current *)) Current: (((x.current))).((* endif *))
 ((* endfor *))
+((* elif t == "Graduate" *))
+((* for x in i | sort_by_attr(["degree", "end", "start"], reverse=True) *))
+\item (((x.name))). (((x.degree))), (((x.field))). (((x.role))). (((x.start)))--(((x.end))). ((*if x.thesis *)) Thesis: "((( x.thesis | capitalize )))."((* endif *)) ((*if x.current *)) Current: (((x.current))).((* endif *))
+((* endfor *))
+((* else *))
+((* for x in i | sort_by_attr(["end", "start"], reverse=True) *))
+\item (((x.name))). (((x.field))). (((x.role))). (((x.start)))--(((x.end))). ((*if x.thesis *)) Thesis: "((( x.thesis | capitalize )))."((* endif *)) ((*if x.current *)) Current: (((x.current))).((* endif *))
+((* endfor *))
+((* endif *))
 \end{itemize}
 ((* endfor *))
 

@@ -82,7 +82,8 @@ my_filters = [
     filters.escape_tex,
     filters.select_by_attr_name,
     filters.sort_by_attr,
-    filters.sort_last_year
+    filters.sort_last_year,
+    filters.sort_advisees
 ]
 cv = CV('_config.yml', filters=my_filters)
 with open('Srikrishnan-CV.tex', 'w') as f:
