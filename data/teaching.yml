@@ -71,9 +71,21 @@ classes:
     university: Cornell University
     semester: Spring
     year: 2023
+  - title: Environmental Data Analysis and Simulation
+    course: BEE 4850/5850
+    role: Primary Instructor
+    university: Cornell University
+    semester: Spring
+    year: 2024
   - title: Climate Uncertainties
     course: BEE 6940/AAP Design Studio
     role: Collaborative Instructor
     university: Cornell University
     semester: Fall
     year: 2023
+  - title: Perspectives on the Climate Change Challenge
+    course: BEE 2000
+    role: Collaborative Instructor
+    university: Cornell University
+    semester: Spring
+    year: 2024
