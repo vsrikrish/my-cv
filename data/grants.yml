@@ -8,7 +8,7 @@ grants:
     amount: 25,000
   - title: Understanding Multistressor and Multiscale Drivers of Feedbacks, Cascading Failures, and Risk Management Pathways within Complex MSD Systems
     funder: DOE (BER)
-    role: Investigator, Institutional Lead
+    role: Investigator, Site Lead
     PI: Karen Fisher-Vanden
     start: 2021
     end: 2026
@@ -24,10 +24,10 @@ grants:
   - title: Integrated Coastal Modeling (ICoM)
     funder: DOE (BER)
     PI: Ian Kraucunas
-    role: Investigator, Task Lead
-    start: 2019
-    end: 2023
-    amount: 682,610
+    role: Investigator, Site Lead, Task Lead
+    start: 2021
+    end: 2024
+    amount: 598,217 
   - title: Addressing Deep Uncertainty in Hydropower Futures
     funder: NREL
     PI: Patrick Reed
@@ -36,3 +36,11 @@ grants:
     end: 2023
     amount: 15,053
     total: 75,000
+  - title: Valuing Hydropower Contributions Across Multiple Timescales 
+    funder: NREL
+    PI: Patrick Reed
+    role: Co-PI
+    start: 2024
+    end: 2024
+    amount: 16,556
+    total: 90,000
