@@ -1,4 +1,9 @@
 convene:
+  - role: Primary Convener
+    session: "H31G - Integrating Social, Scientific, and Engineering Approaches to Identify and Address Gaps in Water Infrastructure and Household Water Security"
+    event: American Geophysical Union Fall Meeting
+    location: San Francisco, CA
+    date: 2023-12-13
   - role: Primary Convenor
     session: "NH53 -- Emerging Needs and Approaches for Climate Services: Understanding and Developing Innovative Approaches to User-Oriented Climate Services"
     event: American Geophysical Union Fall Meeting
