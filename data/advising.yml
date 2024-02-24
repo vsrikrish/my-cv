@@ -54,7 +54,8 @@ advising:
   - name: Demola Ogunnaike
     degree: M.S.
     field: Civil \& Environmental Engineering
-    year: current
+    start: 2024
+    end: present
     type: Graduate
   - name: Cella Schnabel
     field: Civil \& Environmental Engineering
