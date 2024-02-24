@@ -51,6 +51,10 @@ advising:
     start: 2023
     end: present
     type: Graduate
+  - name: Demola Ogunnaike
+    degree: M.S.
+    field: Civil \& Environmental Engineering
+    year: current
   - name: Cella Schnabel
     field: Civil \& Environmental Engineering
     university: Cornell University
@@ -70,7 +74,7 @@ advising:
     university: Cornell University
     role: Research Co-Advisor (with C. Lindsay Anderson)
     start: 2023
-    end: present
+    end: 2023
     type: Undergraduate
   - name: Elnaz Kabir
     university: Cornell University

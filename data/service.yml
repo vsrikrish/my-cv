@@ -2,6 +2,7 @@ service:
   - title: Co-Organizer and Session Chair
     org: Energy Modeling Forum Snowmass Workshop
     start: 2023
+    end: present
   - title: Faculty Fellow
     org: Cornell Atkinson Center for a Sustainable Future
     tag: univ
@@ -43,6 +44,6 @@ service:
     end: present
     tag: univ
   - title: Member
-    org: Biological & Environmental Engineering, Science-Based Solutions to Grand Challenges in Equity and Inclusion Search Committee
-    start: Spring 2022
+    org: Biological & Environmental Engineering Faculty Search Committees
+    start: 2022, 2024
     tag: univ
