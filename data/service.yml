@@ -28,16 +28,16 @@ service:
     start: 2019
     end: present
   - title: Co-Convener and Co-Chair
-    org: AGU Sessions on MultiSector Dynamic and Uncertainty
+    org: AGU Sessions on MultiSector Dynamics and Uncertainty
     start: 2020
-    end: 2022
+    end: 2023
   - title: Co-Guest Editor
     journal: Water
     org: "Special Issue on 'Climate Model Projections: Sea-Level Rise and Impacts on Coastal Defense Decision-Making'"
   - title: Panel Reviewer
     org: National Science Foundation (HDBE), Department of Energy (BER)
   - title: Ad Hoc Reviewer
-    org: Sloan Foundation, National Science Foundation (DRMS, MG&G)
+    org: Sloan Foundation, National Science Foundation (DRMS, MG&G), Austrian Science Fund
   - title: Member
     org: Environmental Engineering Program Curriculum Committee
     start: Fall 2022
