@@ -30,7 +30,10 @@ service:
   - title: Co-Convener and Co-Chair
     org: AGU Sessions on MultiSector Dynamics and Uncertainty
     start: 2020
-    end: 2023
+    end: 2024
+  - title: Co-Convener
+    org: European Social Simulation Association Meeting Session on Uncertainty in Agent-Based simulation
+    start: 2024
   - title: Co-Guest Editor
     journal: Water
     org: "Special Issue on 'Climate Model Projections: Sea-Level Rise and Impacts on Coastal Defense Decision-Making'"
