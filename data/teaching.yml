@@ -40,3 +40,10 @@ classes:
     role: Instructor
     semester: Spring
     year: 2024
+  
+  - title: Fundamentals of Civil and Environmental Engineering
+    course: CEVE 101
+    university: Rice University
+    role: Instructor
+    semester: Fall
+    year: 2024

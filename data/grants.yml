@@ -37,4 +37,20 @@ grants:
     role: PI
     start: 2022
     end: 2024
-    amount: 42,500
+  - title: "Cluster: AI for Climate Risk and Resilience"
+    funder: "Rice Ken Kennedy Institute"
+    role: Lead PI
+    start: 2024
+    end: 2025
+    amount: 80,000
+  - title: "RAISE: Flood resilience in rural Texas communities"
+    funder: "National Science Foundation"
+    amount: 999,986
+    role: co-PI
+    start: 2025
+    end: 2028
+  - title: Computing Infrastructure for AI-enhanced Climate Risk and Resilience at Rice
+    funder: NVIDIA
+    role: co-PI
+    start: 2025
+    end: 2026

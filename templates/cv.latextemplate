@@ -193,7 +193,7 @@
 
 \begin{itemize}[label={}]
   ((* for i in sect.entries.grants | sort(attribute="end", reverse=True) | sort(attribute="start", reverse=True) *))
-  \item \textbf{(((i.role | escape_tex)))}, \enquote{(((i.title | escape_tex)))}. ((* if i.PI *)) PI: (((i.PI | escape_tex))).((* endif *)) \textit{(((i.funder | escape_tex)))}, \$(((i.amount)))((* if i.total *)) (total: \$(((i.total))))((* endif *)). (((i.start)))--(((i.end))).
+  \item \textbf{(((i.role | escape_tex)))}, \enquote{(((i.title | escape_tex)))}. ((* if i.PI *)) PI: (((i.PI | escape_tex))).((* endif *)) \textit{(((i.funder | escape_tex)))}((* if i.amount *)), \$(((i.amount)))((* if i.total *)) (total: \$(((i.total))))((* endif *))((* endif *)). (((i.start)))--(((i.end))).
         ((* endfor *))
 \end{itemize}
 
@@ -206,7 +206,7 @@
 
 \printbibliography[type=article, heading=none]
 
-\section{forthcoming}
+\section{preprints}
 
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 \vspace*{-1em}

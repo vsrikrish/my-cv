@@ -1,4 +1,11 @@
 workshops:
+  - title: "Leveraging Machine Learning to Advance Urban Flood Hazard Assessment: Challenges and Opportunities"
+    event: Data-driven and physics-based machine learning methods for forecasting and knowledge discovery of surface hydrology
+    org: Conference on Computational Methods in Water Resources
+    location: Tucson, AZ
+    year: Oct
+    month: 2024
+    format: Oral Presentation
   - title: "Valuing Flexibility and Soft Instruments for Sequential Decision Problems"
     event: 2020 Annual Meeting of the Society for Decision Making under Deep Uncertainty
     org: Society for Decision Making under Deep Uncertainty

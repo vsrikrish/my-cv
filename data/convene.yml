@@ -1,4 +1,9 @@
 convene:
+  - role: Convener
+    session: "NH41C - Hybrid Modeling and Digital Twin Systems for Flood Hazard Prediction and Risk Assessment at Different Spatial Scales"
+    event: American Geophysical Union Fall Meeting
+    location: Washington, DC
+    date: 2023-12-11
   - role: Primary Convener
     session: "H31G - Integrating Social, Scientific, and Engineering Approaches to Identify and Address Gaps in Water Infrastructure and Household Water Security"
     event: American Geophysical Union Fall Meeting

@@ -8,23 +8,23 @@ committee:
     degree: Ph.D.
     field: Civil and Environmental Engineering
     university: Rice University
-  - firstname: Xiangnan
-    lastname: Zhou
-    degree: Ph.D.
-    field: Civil and Environmental Engineering
-    university: Rice University
   - firstname: Kelsey
     lastname: Murphy
     degree: Ph.D.
     field: Earth, Environmental, and Planetary Sciences
     university: Rice University
-  - firstname: Kendall
-    lastname: Capshaw
+  - firstname: Kyle
+    lastname: Ostlind
+    degree: M.S.
+    field: Civil and Environmental Engineering
+    university: Rice University
+  - firstname: Catherine
+    lastname: Jackson
     degree: Ph.D.
     field: Civil and Environmental Engineering
     university: Rice University
-  - firstname: Anibal
-    lastname: Tafur Gutierrez
+  - firstname: Madison
+    lastname: Guerinot
     degree: Ph.D.
     field: Civil and Environmental Engineering
     university: Rice University
@@ -32,6 +32,14 @@ committee:
   ########################################
   # PAST STUDENTS ########################
   ########################################
+  
+  - firstname: Alyssa
+    lastname: Graham
+    degree: M.S.
+    field: Civil and Environmental Engineering
+    university: Rice University
+    degree_year: 2022
+    thesis_title: "Water Supply Vulnerability Testing and Robust Planning Analysis with Exploratory Modeling under Deep Uncertainty"
   - firstname: Mia
     lastname: Peeples
     degree: M.S.
@@ -74,3 +82,24 @@ committee:
     university: Rice University
     degree_year: 2022
     thesis_title: "Bayesian Graphical Models for Multivariate Time Series"
+  - firstname: Anibal
+    lastname: Tafur Gutierrez
+    degree: Ph.D.
+    field: Civil and Environmental Engineering
+    university: Rice University
+    degree_year: 2024
+    thesis_title: "Methods and Tools for Risk-informed Resilience Enhancement of Coastal Intermodal Freight Networks"
+  - firstname: Kendall
+    lastname: Capshaw
+    degree: Ph.D.
+    field: Civil and Environmental Engineering
+    university: Rice University
+    degree_year: 2024
+    thesis_title: "Modeling Coastal Petrochemical Infrastructure Risk, Resilience, and Cascading Community Consequences"
+  - firstname: Xiangnan
+    lastname: Zhou
+    degree: Ph.D.
+    field: Civil and Environmental Engineering
+    university: Rice University
+    degree_year: 2023
+    thesis_title: "Resilience Planning for Water Distribution Systems"

@@ -12,14 +12,12 @@ advisor:
     degree: Ph.D.
     field: Civil and Environmental Engineering
     university: Rice University
+  - firstname: Dongwook
+    lastname: Kim
+    degree: Ph.D.
+    field: Civil and Environmental Engineering
+    university: Rice University
 
   ########################################
   # PAST STUDENTS ########################
   ########################################
-  - firstname: Alyssa
-    lastname: Graham
-    degree: M.S.
-    field: Civil and Environmental Engineering
-    university: Rice University
-    degree_year: 2022
-    thesis_title: "Water Supply Vulnerability Testing and Robust Planning Analysis with Exploratory Modeling under Deep Uncertainty"
