@@ -148,10 +148,12 @@
         ((* for pos in positions *))
         \textit{((( pos.role | escape_tex )))}, ((( pos.org | escape_tex ))), ((* if pos.start == pos.end *))((( pos.start )))((* else *))((( pos.start )))--((( pos.end )))((* endif *)).
         ((* if pos.notes *))
-        ((* for note in pos.notes *))((( note | escape_tex )))((* endfor *))
+          ((* for note in pos.notes *))
+          \quad \textit{((( note.name | escape_tex  )))}: ((( note.value | escape_tex  )))
+          ((* endfor *))
         ((* endif *))
         ((* endfor *))
-        ((* endfor *))
+  ((* endfor *))
 \end{itemize}
 
 %% Education
