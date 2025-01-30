@@ -165,11 +165,13 @@
   \item \textbf{(((univ | escape_tex)))}
         ((* for deg in entry.degrees *))
         \textit{((( deg.degree | escape_tex )))}, ((( deg.subject | escape_tex ))), ((( deg.year ))).
+        ((* if deg.notes *))
+          ((* for note in deg.notes *))
+          \quad \textit{((( note.name | escape_tex  )))}: ((( note.value | escape_tex  )))
+          ((* endfor *))
+        ((* endif *))
         ((* endfor *))
-        ((* if entry.notes *))((* for note in entry.notes *))
-        ((( note )))
-        ((* endfor *))((* endif *))
-        ((* endfor *))
+  ((* endfor *))
 \end{itemize}
 
 %% Awards
@@ -193,7 +195,7 @@
 
 \begin{itemize}[label={}]
   ((* for i in sect.entries.grants | sort(attribute="end", reverse=True) | sort(attribute="start", reverse=True) *))
-  \item \textbf{(((i.role | escape_tex)))}, \enquote{(((i.title | escape_tex)))}. ((* if i.PI *)) PI: (((i.PI | escape_tex))).((* endif *)) \textit{(((i.funder | escape_tex)))}((* if i.amount *)), \$(((i.amount)))((* if i.total *)) (total: \$(((i.total))))((* endif *))((* endif *)). (((i.start)))--(((i.end))).
+  \item \textbf{(((i.role | escape_tex)))}, \enquote{(((i.title | escape_tex)))}. ((* if i.PI *)) PI: (((i.PI | escape_tex))).((* endif *)) (((i.sponsor | escape_tex)))((* if i.program *)): \textit{((( i.program | escape_tex)))}((* endif *))((* if i.amount *)), \$(((i.amount)))((* if i.total *)) (total: \$(((i.total))))((* endif *))((* endif *)). (((i.start)))--(((i.end))).
         ((* endfor *))
 \end{itemize}
 

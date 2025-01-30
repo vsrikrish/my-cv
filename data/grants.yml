@@ -1,6 +1,7 @@
 grants:
   - title: "EAGER: Participatory Design for Water Quality Monitoring of Highly Decentralized Water Infrastructure Systems"
-    funder: "NSF: Strengthening America's Infrastructure"
+    sponsor: "National Science Foundation"
+    program: "Strengthening America's Infrastructure"
     number: 2121986
     role: PI
     start: 2022
@@ -9,48 +10,60 @@ grants:
     total: 300,000
     PI: Alicia Cooperman
   - title: "Evaluating the Past and Future of Mississippi River Hydroclimatology to Constrain Risk via Integrated Climate Modeling, Observations, and Reconstructions"
-    funder: "NSF: Atmospheric & Geospace Sciences"
+    sponsor: "National Science Foundation"
+    program: "Climate and Large-Scale Dynamics"
+    number: 2147781
     role: co-PI
     start: 2022
     end: 2025
     amount: 441,342
   - title: "Blending Observations of Extreme Precipitation across Space and Time to Improve Stormwater Management in Houston"
-    funder: Rice University Sustainable Futures Fund
+    sponsor: Rice University
+    program: Sustainable Futures Fund
     role: Lead PI
     start: 2022
     end: 2023
     amount: 50,000
   - title: "IFCE-Rice-SENAI Program on Artificial Intelligence for Urban Sustainability and Resilience to Natural Disasters in the Americas"
-    funder: "100,000 Strong in the Americas Innovation Fund"
+    sponsor: "100,000 Strong in the Americas Innovation Fund"
     role: co-PI
     start: 2022
     end: 2023
     amount: 50,000
   - title: "Synthesis of Texas Electricity Research from Rice University"
-    funder: "Energy Foundation"
+    sponsor: "Energy Foundation"
     role: co-PI
     start: 2022
     end: 2023
     amount: 24,928
   - title: "Developing Future Rainfall Frequency Grids for the State of Texas"
-    funder: "Texas Water Development Board"
+    sponsor: "Texas Water Development Board"
     role: PI
     start: 2022
     end: 2024
+  - title: "IUCRC Planning Grant Rice University: Center for Climate, Equity and Resilience in Catmodeling (CERCat)"
+    sponsor: "National Science Foundation"
+    number: 2413382
+    role: co-PI
+    start: 2024
+    end: 2025
+    amount: 20,000
   - title: "Cluster: AI for Climate Risk and Resilience"
-    funder: "Rice Ken Kennedy Institute"
+    sponsor: "Rice Ken Kennedy Institute"
     role: Lead PI
     start: 2024
     end: 2025
     amount: 80,000
   - title: "RAISE: Flood resilience in rural Texas communities"
-    funder: "National Science Foundation"
+    sponsor: "National Science Foundation"
+    program: "Confronting Hazards, Impacts and Risks for a Resilient Planet (CHIRRP)"
+    number: 2440167
     amount: 999,986
     role: co-PI
     start: 2025
     end: 2028
   - title: Computing Infrastructure for AI-enhanced Climate Risk and Resilience at Rice
-    funder: NVIDIA
+    sponsor: NVIDIA
     role: co-PI
     start: 2025
     end: 2026

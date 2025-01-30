@@ -3,11 +3,14 @@ Columbia University:
     - degree: Ph.D
       subject: Earth & Environmental Engineering
       year: 2020
+      notes:
+        - name: dissertation
+          value: Sequential Adaptation through Prediction of Structured Climate Risk
+        - name: adviser
+          value: Upmanu Lall
     - degree: M.S.
       subject: Earth & Environmental Engineering
       year: 2016
-  notes:
-    - "adviser: Upmanu Lall"
 
 Yale University:
   degrees:
