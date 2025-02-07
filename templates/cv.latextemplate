@@ -359,6 +359,18 @@
         ((* endfor *))
 \end{itemize}
 
+%% EXTERNAL REVIEW
+((* set sect = data.sections | select_by_attr_name("title", "External Review") *))
+\section{(((sect.title | lower)))}
+
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+
+\begin{itemize}[label={}]
+  ((* for i in sect.entries | sort(attribute="name") *))
+  \item (((i.name | escape_tex)))
+        ((* endfor *))
+\end{itemize}
+
 %% Additional Experience and Training
 ((* set sect = data.sections | select_by_attr_name("title", "Additional Experience") *))
 \section{(((sect.title | lower)))}
