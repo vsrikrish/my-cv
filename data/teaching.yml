@@ -64,7 +64,7 @@ classes:
     role: Primary Instructor
     university: Cornell University
     semester: Fall
-    year: 2022, 2023
+    year: 2022, 2023, 2024
   - title: Climate Risk Analysis
     course: BEE 6940
     role: Primary Instructor
@@ -76,7 +76,7 @@ classes:
     role: Primary Instructor
     university: Cornell University
     semester: Spring
-    year: 2024
+    year: 2024, 2025
   - title: Climate Uncertainties
     course: BEE 6940/AAP Design Studio
     role: Collaborative Instructor

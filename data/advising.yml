@@ -51,12 +51,15 @@ advising:
     start: 2023
     end: present
     type: Graduate
+    thesis: |-
+      Economic and Environmental Impacts of Co-Located and Grid-Connected Hydrogen Production
   - name: Demola Ogunnaike
-    degree: M.S.
-    field: Civil \& Environmental Engineering
+    degree: M.S./Ph.D.
+    field: Systems Engineering
     start: 2024
     end: present
     type: Graduate
+    role: Committee Chair
   - name: Cella Schnabel
     field: Civil \& Environmental Engineering
     university: Cornell University
@@ -96,3 +99,17 @@ advising:
     thesis: |-
       Generation of an agent-based policy tree for decision making on home elevation in coastal floodable areas
     type: Graduate
+  - name: David Lafferty
+    university: Cornell University
+    type: Postdoctoral
+    area: Climate Data Analysis
+    start: 2024
+    end: present
+  - name: Yuhe Pan
+    university: Cornell University
+    type: Graduate
+    degree: M.S.
+    field: Systems Engineering
+    role: Committee Chair
+    start: 2024
+    end: present

@@ -2,7 +2,7 @@ service:
   - title: Co-Organizer and Session Chair
     org: Energy Modeling Forum Snowmass Workshop
     start: 2023
-    end: present
+    end: 2024
   - title: Faculty Fellow
     org: Cornell Atkinson Center for a Sustainable Future
     tag: univ
@@ -38,12 +38,12 @@ service:
     journal: Water
     org: "Special Issue on 'Climate Model Projections: Sea-Level Rise and Impacts on Coastal Defense Decision-Making'"
   - title: Panel Reviewer
-    org: National Science Foundation (HDBE), Department of Energy (BER)
+    org: National Science Foundation, Department of Energy
   - title: Ad Hoc Reviewer
-    org: Sloan Foundation, National Science Foundation (DRMS, MG&G), Austrian Science Fund
+    org: Sloan Foundation, National Science Foundation, Austrian Science Fund
   - title: Member
     org: Environmental Engineering Program Curriculum Committee
-    start: Fall 2022
+    start: 2022
     end: present
     tag: univ
   - title: Member
