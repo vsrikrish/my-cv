@@ -330,9 +330,9 @@
 \mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
 \begin{itemize}[label={}]
-  ((* for i in sect.entries.workshops | sort(attribute="year", reverse=True) *))
-  \item ((* if i.link *))\href{(((i.link)))}{\enquote{\textbf{(((i.title | escape_tex)))}}}((* else *))\enquote{\textbf{(((i.title | escape_tex)))}}((* endif *)), ((* if i.event *))(((i.event | escape_tex))), ((* endif *)) \textit{(((i.org)))}. (((i.location))). ((* if i.format *))(((i.format))).((* endif *)) (((i.month)))((* if i.month != "May" *)).((* endif *)) (((i.year)))((* if i.coauthor *)) (with (((i.coauthor))))((* endif *)).
-        ((* endfor *))
+  ((* for i in sect.entries.workshops | sort(attribute="date", reverse=True) *))
+  \item ((* if i.link *))\href{(((i.link)))}{\enquote{\textbf{(((i.title | escape_tex)))}}}((* else *))\enquote{\textbf{(((i.title | escape_tex)))}}((* endif *)), ((* if i.event *))(((i.event | escape_tex))), ((* endif *)) ((* if i.org *))\textit{(((i.org | escape_tex)))}((* endif *)). (((i.location))).((* if i.format *)) (((i.format))).((* endif *)) (((i.date))).
+  ((* endfor *))
 \end{itemize}
 
 %% PEER REVIEW

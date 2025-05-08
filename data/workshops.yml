@@ -1,74 +1,77 @@
 workshops:
+  - title: "Robust Trends in Extreme Rainfall Probabilities in Texas"
+    event: 2025 Texas Climate Conference
+    org: Rice University and Texas A&M University
+    location: Houston, TX
+    date: 2025-04-10
+  - title: "Use-inspired tools for climate hazard assessment"
+    event: "Nature-Based Solutions for a Resilient Gulf Coast Workshop"
+    org: Rice University
+    location: Houston, TX
+    date: 2025-03-04
+    link: "https://events.rice.edu/event/nbs-workshop#!view/all"
   - title: "Leveraging Machine Learning to Advance Urban Flood Hazard Assessment: Challenges and Opportunities"
     event: Data-driven and physics-based machine learning methods for forecasting and knowledge discovery of surface hydrology
     org: Conference on Computational Methods in Water Resources
     location: Tucson, AZ
-    year: Oct
-    month: 2024
+    date: 2024-10-01
     format: Oral Presentation
+    link: https://cmwrconference.org/wp-content/uploads/2024/09/CMWR-2024-Agenda-Full.pdf
   - title: "Valuing Flexibility and Soft Instruments for Sequential Decision Problems"
-    event: 2020 Annual Meeting of the Society for Decision Making under Deep Uncertainty
+    event: 2020 Annual Meeting
     org: Society for Decision Making under Deep Uncertainty
     format: Remote Presentation
-    month: Nov
-    year: 2020
+    date: 2020-11-11
     link: https://2020.deepuncertainty.org/program
   - title: "Adaptive Resilience through Real Options and Deep Reinforecement Learning"
     event: Doctoral Consortium on Computational Sustainability
     org: Carnegie Mellon University
     location: Pittsburgh,  PA
     format: Oral Presentation
-    month: Oct
-    year: 2019
+    date: 2019-10-19
   - title: "Evaluating Staged Investments in Critical Infrastructure for Climate Adaptation"
-    event: Interdisciplinary Ph.D. Workshop in Sustainable Development
+    event: 2019 Interdisciplinary Ph.D. Workshop in Sustainable Development
     org: Columbia University
     location: New York, NY
     format: Oral Presentation
-    month: Apr
-    year: 2019
+    date: 2019-04-12
   - title: Robust Adaptation to Multi-Scale Climate Variability
     event: The Nexus of Climate Data, Insurance, and Adaptive Capacity
     location: Asheville, NC
     format: Poster Presentation
-    month: Nov
-    year: 2018
+    date: 2018-11-08
     link: https://doi.org/10.6084/m9.figshare.8277002.v1
   - title: "Extreme Rainfall in Paraguay during the 2015-16 Austral Summer: Causes and Predictive Skill"
     event: North East Graduate Student Water Symposium
     org: University of Massachusetts Amherst
     location: Amherst, MA
     format: Oral Presentation
-    month: Sept
-    year: 2017
+    date: 2017-09-10
     link: https://doi.org/10.6084/m9.figshare.8277128.v2
   - title: "Regional Intense Precipitation: Inferences From GCM Atmospheric Circulation Fields"
     event: Modeling Research in the Cloud
     org: National Center for Atmospheric Research
     location: Boulder, CO
     format: Poster Presentation
-    year: 2017
-    month: May
+    date: 2017-05-31
     link: https://doi.org/10.6084/m9.figshare.8277167.v1
   - title: "Statistical-Dynamical Analysis of Climate Projections for Flood Infrastructure Design"
     event: Interdisciplinary Ph.D. Workshop in Sustainable Development 2017
     org: Columbia University
     location: New York, NY
     format: Oral Presentation
-    year: 2017
-    month: Apr
+    date: 2017-04-21
   - title: "Causes and Model Skill of the Persistent Intense Rainfall and Flooding in Paraguay during the Austral Summer 2015-2016"
     event: Workshop on Subseasonal to Seasonal Predictability of Extreme Weather and Climate
     org: Columbia University
     location: New York, NY
     format: Poster Presentation
-    year: 2016
-    month: Dec
+    date: 2016-12-06
     link: https://doi.org/10.13140/RG.2.2.20146.30406
   - title: "A Bayesian Spatial Hierarchical Framework for Process-Informed Nonstationary Analysis of Precipitation Frequencies"
     event: 13th International Workshop on Statistical Hydrology
     org: International Association of Hydrological Sciences
     location: Boston, MA
     format: Oral Presentation
-    month: Nov
-    year: 2023
+    date: 2023-11-10
+    link: https://iahs.info/uploads/Commissions/ICSH/STAHY%202023%20Program%20Public.pdf

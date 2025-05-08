@@ -2,7 +2,10 @@ docs/one-page.*
 docs/five-pager.*
 docs/three-pager.*
 docs/two-pager.*
-
+docs/Doss-Gollin-CV-short.*
+docs/cover-letter.*
+docs/*-CV-short.*
+*-CV-short.*
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
