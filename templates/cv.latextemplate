@@ -290,7 +290,7 @@
 
 \begin{itemize}[label={}]
   ((* for i in sect.entries.media | sort(attribute="date", reverse=True) *))
-  \item ((* if i.url *))\href{(((i.url)))}{(((i.title)))}((* else *))i.title((* endif *)), \textit{(((i.author)))}, \textbf{(((i.publication)))}, (((i.date))).
+  \item ((* if i.url *))\href{(((i.url)))}{(((i.title)))}((* else *))i.title((* endif *)), ((* if i.author *))\textit{(((i.author)))}, ((* endif *))\textbf{(((i.publication)))}, (((i.date))).
         ((* endfor *))
 \end{itemize}
 
