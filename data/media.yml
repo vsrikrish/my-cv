@@ -1,4 +1,17 @@
 media:
+  - title: Houston's Morning Show
+    publication: Fox26 Houston
+    date: 2025-07-10
+    url: https://mms.tveyes.com/Transcript.asp?StationID=979&DateTime=7%2F10%2F2025+8%3A31%3A51+AM&LineNumber=&MediaStationID=979&playclip=True&RefPage=&pbc=WatchlistTerm%3A1599598
+    format: live video interview
+
+  - title: Breaking down the force of water in the Texas floods
+    publication: AP News
+    author: Michael Phillis
+    date: 2025-07-10
+    format: print
+    url: https://apnews.com/article/flash-floods-texas-hill-country-hydrology-51901309407b21b65cbbc6c04206f627
+
   - title: Here are some things you can do to be better prepared for major flooding
     author: Caleigh Wells
     publication: Associated Press
