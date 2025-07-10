@@ -1,52 +1,79 @@
 media:
+  - title: Here are some things you can do to be better prepared for major flooding
+    author: Caleigh Wells
+    publication: Associated Press
+    date: 2025-07-10
+    url: https://apnews.com/article/flood-hurricane-emergency-disaster-prepare-abb8f9cc9ab16c89a3937638739c6663
+    format: print
+
+  - title: ABC13-Luke Jones speaks with James Doss-Gollin, an assistant professor of Civil and Environmental Engineering at Rice University, about the key differences between flooding in Houston and central Texas.
+    author: Luke Jones
+    publication: ABC13
+    date: 2025-07-09
+    url: https://www.facebook.com/watch/?v=1931096184096338
+    format: recorded video interview
+
   - title: After deadly flooding in Central Texas, state lawmakers look to prevent similar tragedies
     author: Daniel Perreault
     publication: KVUE
     date: 2025-07-09
     url: https://www.kvue.com/article/news/politics/special-session/central-texas-flooding-special-session/269-2e5a87d4-ec92-4fb8-b850-748de1a6cbbe
+    format: recorded video interview
 
   - title: New Flood Warning System Greenlit Shortly Before Deadly Texas Disaster
     author: Joseph De Avila
     publication: The Wall Street Journal
     date: 2025-07-09
     url: https://www.wsj.com/us-news/climate-environment/texas-guadalupe-flood-threat-system-06c29954
+    format: print
 
   - title: Questions arise on how emergency warning systems work after Central Texas flood
     author: Tom Abrahams
     publication: ABC13
     date: 2025-07-08
     url: https://abc13.com/post/questions-arise-how-emergency-warning-systems-work-central-texas-flood/17024010/
+    format: print
 
   - title: Bajo la Amenaza del Golfo (Under the Threat of the Gulf)
     publication: Telemundo Houston
     date: 2025-05-30
     url: https://www.telemundohouston.com/noticias/bajo-la-amenaza-del-golfo-parte-1-2/2494095/
+    format: recorded video interview
 
   - title: Will Texas become too hot for humans?
     author: Sarah Griffiths
     publication: BBC Future
     date: 2023-06-30
     url: https://www.bbc.com/future/article/20230630-will-texas-become-too-hot-for-humans
+    format: print
+
   - title: Climate change has sent temperatures soaring in Texas
     author: Erin Douglas, Yuriko Schumacher and Alex Ford
     publication: The Texas Tribune
     date: 2023-06-27
     url: https://www.texastribune.org/2023/06/27/texas-climate-change-heat/
+    format: print
+
   - title: Texas could have foreseen 2021 cold-wave disaster, new study concludes
     author: Bob Henson
     publication: Texas Climate News
     date: 2022-05-21
     url: https://texasclimatenews.org/2022/05/21/texas-could-have-foreseen-2021-cold-wave-disaster-new-study-concludes/
+    format: print
+
   - title: The False Comfort of Higher Seawalls
     author: Paola Rosa-Aquino
     publication: The New Republic
     date: 2019-10-29
     url: https://newrepublic.com/article/155519/false-comfort-higher-seawalls
+    format: print
+
   - title: New Study Shows Promise for Long-Term Weather Forecasts in South America
     author: Elisabeth Gawthrop
     publication: State of the Planet
     date: 2018-08-06
     url: https://blogs.ei.columbia.edu/2018/08/06/subseasonal-weather-forecasts-paraguay/
+    format: print
 
 opinion:
   - title: "Opinion: The risks of climate change are great - so are the rewards of solving it"
