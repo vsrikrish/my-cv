@@ -67,8 +67,8 @@ jobs:
           API_TOKEN_GITHUB: ${{ secrets.PUSH_TOKEN }}
         with:
           source_file: 'Srikrishnan-CV.pdf'
-          destination_repo: 'vsrikrish/vsrikrish.github.io'
+          destination_repo: 'vsrikrish/vsrikrish-quarto'
           destination_folder: 'assets/pdf'
           user_email: 'srikrish@gmail.com'
           user_name: 'vsrikrish'
-          destination_branch: 'master'
+          destination_branch: 'main'
