@@ -74,12 +74,19 @@ advising:
     start: 2023
     end: present
     type: Undergraduate
-  - name: Matthew Lipton
-    field: Biological \& Environmental Engineering
+  - name: Reynolds Li
+    field: Information Science
     university: Cornell University
-    role: Research Co-Advisor (with C. Lindsay Anderson)
+    role: Research Advisor
+    start: 2025
+    end: present
+    type: Undergraduate
+  - name: Matthew Lipton
+    field: Independent Engineering
+    university: Cornell University
+    role: Research Co-Advisor (with C. Lindsay Anderson), Academic Co-Advisor
     start: 2023
-    end: 2023
+    end: present
     type: Undergraduate
   - name: Elnaz Kabir
     university: Cornell University
@@ -99,12 +106,21 @@ advising:
     thesis: |-
       Generation of an agent-based policy tree for decision making on home elevation in coastal floodable areas
     type: Graduate
+  - name: Liying Ma
+    university: Cornell University
+    role: Advisor
+    start: 2025
+    end: present
+    degree: M.Eng.
+    field: Biological \& Environmental Engineering
+    type: Graduate
   - name: David Lafferty
     university: Cornell University
     type: Postdoctoral
     area: Climate Data Analysis
     start: 2024
-    end: present
+    end: 2025
+    current: Scientist, Verisk Extreme Event Solutions
   - name: Yuhe Pan
     university: Cornell University
     type: Graduate
