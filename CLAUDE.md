@@ -46,7 +46,7 @@ python grants_to_excel.py
 ### Environment Setup
 
 ```bash
-# Create conda environment
+# Create conda environment (requires Python >=3.12)
 conda env create -f environment.yml
 conda activate cv
 ```
@@ -87,9 +87,10 @@ git submodule update --remote my-cv-data
 ### GitHub Actions
 
 - Automatically builds PDFs on push to main branch
-- Updates both submodules before building
+- Updates both submodules before building (uses token authentication for private submodule)
 - Commits generated files back to repository
 - Uses XeLaTeX for PDF compilation with bibtex processing
+- Runs on Python 3.12 to match environment.yml requirements
 
 ### File Organization
 

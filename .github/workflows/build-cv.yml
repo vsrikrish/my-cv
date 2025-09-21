@@ -20,7 +20,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT_TOKEN }}
           submodules: false  # Don't auto-checkout submodules
       - name: Update public bibliography submodule
         run: |
@@ -31,7 +31,7 @@ jobs:
           git submodule update --remote my-papers
       - name: Update private CV data submodule
         run: |
-          git config --global url."https://${{ secrets.GITHUB_TOKEN }}@github.com/".insteadOf "https://github.com/"
+          git config --global url."https://${{ secrets.PAT_TOKEN }}@github.com/".insteadOf "https://github.com/"
           git submodule update --init --recursive my-cv-data
       - name: Set up Conda Environment
         uses: conda-incubator/setup-miniconda@v2
@@ -73,6 +73,6 @@ jobs:
       - name: Push
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.PAT_TOKEN }}
           branch: ${{ github.ref }}
           force: True
