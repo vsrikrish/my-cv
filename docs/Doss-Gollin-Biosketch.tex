@@ -1,0 +1,120 @@
+\documentclass[10pt,oneside]{article}
+
+% language setup
+\usepackage[english]{babel}
+
+% margins
+\usepackage[left=1.5in, right=1.75in, top=1in, bottom=0.75in]{geometry}
+
+\RequirePackage{xcolor}
+\definecolor{RiceBlue}{HTML}{00205B}
+\definecolor{RiceGray}{HTML}{7C7E7F}
+\definecolor{BrickRed}{HTML}{C04829}
+
+% Better footer
+\usepackage{fancyhdr}
+\fancyhf{}
+\fancyfoot[L]{James Doss-Gollin - Biosketch}
+\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{1pt}
+\pagestyle{fancy}
+
+\usepackage{fontspec}
+\setromanfont[
+	Path = ../fonts/,
+  UprightFont = *-Regular,
+	BoldFont = *-Bold,
+	ItalicFont = *-Italic,
+	BoldItalicFont = *-BoldItalic,
+	Extension = .ttf,
+]{Lato}
+
+% Section styling
+\usepackage{titlesec}
+\titlespacing*{\section}{2cm}{1ex}{0.25in}
+\titleformat{\section}[leftmargin]{\raggedleft\sffamily\footnotesize\bfseries}{}{0pt}{\color{BrickRed}}
+
+\raggedbottom
+
+% better lists
+\usepackage{enumitem}
+\setlist[itemize, 1]{nosep, noitemsep, labelsep=-5pt, leftmargin=*, after=\vspace{\baselineskip}, itemindent=-15pt, labelindent=5pt}
+
+% fixed width tables
+\usepackage{array}
+\newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
+\newcolumntype{C}[1]{>{\PreserveBackslash\centering}p{#1}}
+\newcolumntype{R}[1]{>{\PreserveBackslash\raggedleft}p{#1}}
+\newcolumntype{L}[1]{>{\PreserveBackslash\raggedright}p{#1}}
+
+% icons for the contact info
+\usepackage{fontawesome5}
+\usepackage{academicons}
+
+% have to load this last
+\usepackage{hyperref}
+\hypersetup{hidelinks, breaklinks}
+
+%---------------------------------------------------------------------
+
+\begin{document}
+
+\thispagestyle{empty}
+
+%% Name and contact block
+\noindent{
+  \footnotesize
+  \color{RiceGray}
+  \begin{tabular}{L{0.5\textwidth}R{0.5\textwidth}}
+    Rice University       & \texttt{\href{mailto:jdossgollin@rice.edu}{jdossgollin@rice.edu}} \, \faEnvelope                                                                                  \\
+    Department of Civil and Environmental Engineering       & \texttt{\href{https://dossgollin-lab.github.io}{https://dossgollin-lab.github.io}} \, \faGlobe                                                                                                \\
+    6100 Main Street, Ryon Lab 204-MS 318    & \texttt{\href{https://github.com/jdossgollin}{jdossgollin}} \, \faGithub                                                                      \\
+    Houston, TX, 77005 & \texttt{\href{https://scholar.google.com/citations?user=6ifLBBsAAAAJ}{James Doss-Gollin}} \, \aiGoogleScholar \\
+  \end{tabular}
+}
+
+\bigskip
+
+%% Name
+\noindent{\LARGE\bfseries \textcolor{RiceBlue}{James Doss-Gollin}}
+\reversemarginpar
+
+\bigskip
+
+%% Appointments
+
+\section{appointments}
+
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+
+\begin{itemize}[label={}]
+  
+  \item \textbf{Rice University}
+        \textit{Assistant Professor}, Department of Civil \& Environmental Engineering, 2021--present.
+  
+  \item \textbf{The Pennsylvania State University}
+        \textit{Postdoctoral Scholar}, Earth \& Environmental Systems Institute, 2020.
+  
+\end{itemize}
+
+%% Education
+
+\section{education}
+
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+
+\begin{itemize}[label={}]
+  
+  \item \textbf{Columbia University}
+        \textit{Ph.D}, Earth \& Environmental Engineering, 2020.
+  
+  \item \textbf{Columbia University}
+        \textit{M.S.}, Earth \& Environmental Engineering, 2016.
+  
+  \item \textbf{Yale University}
+        \textit{B.S.}, Mechanical Engineering, 2015.
+  
+\end{itemize}
+
+\end{document}
