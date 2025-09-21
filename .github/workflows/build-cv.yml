@@ -15,17 +15,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: [3.9]
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: actions/checkout@v4
         with:
-          persist-credentials: false
+          token: ${{ secrets.GITHUB_TOKEN }}
           submodules: false  # Don't auto-checkout submodules
       - name: Update public bibliography submodule
         run: |
@@ -36,15 +31,14 @@ jobs:
           git submodule update --remote my-papers
       - name: Update private CV data submodule
         run: |
+          git config --global url."https://${{ secrets.GITHUB_TOKEN }}@github.com/".insteadOf "https://github.com/"
           git submodule update --init --recursive my-cv-data
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Set up Conda Environment
         uses: conda-incubator/setup-miniconda@v2
         with:
           activate-environment: cv
           environment-file: environment.yml
-          python-version: ${{ matrix.python-verison }}
+          python-version: 3.12
       - name: Generate Templates
         run: python generate_cv.py
       - name: Generate Grants Excel
