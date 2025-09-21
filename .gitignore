@@ -7,6 +7,9 @@ docs/cover-letter.*
 docs/*-CV-short.*
 *-CV-short.*
 
+# Temporary build directory
+temp_output/
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof

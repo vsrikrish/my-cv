@@ -2,7 +2,9 @@ name: cv
 channels:
   - conda-forge
 dependencies:
-  - python=3.8
+  - python>=3.12
   - jinja2
   - pyyaml>=5.1
   - mypy
+  - pandas
+  - openpyxl

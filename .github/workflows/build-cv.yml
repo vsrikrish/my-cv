@@ -26,28 +26,47 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           persist-credentials: false
-          submodules: true
-      - name: Update bibliography
+          submodules: false  # Don't auto-checkout submodules
+      - name: Update public bibliography submodule
         run: |
+          git submodule update --init --recursive my-papers
           cd my-papers
           git branch -u origin/master master
           cd ..
-          git submodule update --remote --recursive
+          git submodule update --remote my-papers
+      - name: Update private CV data submodule
+        run: |
+          git submodule update --init --recursive my-cv-data
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Set up Conda Environment
         uses: conda-incubator/setup-miniconda@v2
         with:
           activate-environment: cv
           environment-file: environment.yml
           python-version: ${{ matrix.python-verison }}
-      - name: Generate Template
+      - name: Generate Templates
         run: python generate_cv.py
-      - name: Build CV
+      - name: Generate Grants Excel
+        run: python grants_to_excel.py
+      - name: Build CV PDF
         uses: xu-cheng/latex-action@v2
         with:
           root_file: Doss-Gollin-CV.tex
           args: "-bibtex-cond1 -pdfxe"
           post_compile: "latexmk -c"
-          working_directory: "docs"
+          working_directory: "temp_output"
+      - name: Build Biosketch PDF
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Doss-Gollin-Biosketch.tex
+          args: "-bibtex-cond1 -pdfxe"
+          post_compile: "latexmk -c"
+          working_directory: "temp_output"
+      - name: Copy CV to docs
+        run: |
+          cp temp_output/Doss-Gollin-CV.pdf docs/
+          echo "✓ Copied CV PDF to docs/ for GitHub Pages"
       - name: Commit
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -55,6 +74,7 @@ jobs:
           git add docs/Doss-Gollin-CV.tex
           git add docs/Doss-Gollin-CV.pdf
           git add my-papers/
+          git add my-cv-data/
           git commit -m "update CV"
       - name: Push
         uses: ad-m/github-push-action@master

@@ -11,9 +11,31 @@ import yaml
 
 # definitions
 CONFIG_FILE = "_config.yml"
-TEMPLATE_FILE = "cv.latextemplate"  # NOT relative
 TEMPLATE_DIR = "templates"
-OUTPUT_TEX = os.path.join("docs", "Doss-Gollin-CV.tex")
+TEMP_OUTPUT_DIR = "temp_output"
+DOCS_DIR = "docs"
+
+# Template configurations
+TEMPLATES = {
+    "full_cv": {
+        "template": "cv.latextemplate",
+        "output_tex": "Doss-Gollin-CV.tex",
+        "output_pdf": "Doss-Gollin-CV.pdf",
+        "copy_to_docs": True,  # This goes to GitHub Pages
+    },
+    "biosketch": {
+        "template": "biosketch.latextemplate",
+        "output_tex": "Doss-Gollin-Biosketch.tex",
+        "output_pdf": "Doss-Gollin-Biosketch.pdf",
+        "copy_to_docs": False,  # Keep private
+    },
+    # "grants": {
+    #     "template": "grants.latextemplate",
+    #     "output_tex": "Doss-Gollin-Grants.tex",
+    #     "output_pdf": "Doss-Gollin-Grants.pdf",
+    #     "copy_to_docs": False,  # Keep private
+    # },
+}
 
 
 class CV(object):
@@ -95,8 +117,20 @@ class CV(object):
     def render_tex(self, template, **kwargs):
         return self.jenv_tex.get_template(template).render(data=self.data, **kwargs)
 
+    def copy_pdfs_to_docs(self):
+        """Copy specified PDFs from temp to docs after LaTeX compilation"""
+        import shutil
+        for template_name, config in TEMPLATES.items():
+            if config["copy_to_docs"]:
+                temp_pdf = os.path.join(TEMP_OUTPUT_DIR, config["output_pdf"])
+                docs_pdf = os.path.join(DOCS_DIR, config["output_pdf"])
+                if os.path.exists(temp_pdf):
+                    shutil.copy2(temp_pdf, docs_pdf)
+                    print(f"Copied {config['output_pdf']} to docs/")
+
 
 def main():
+    import shutil
 
     my_filters = [
         filters.escape_tex,
@@ -107,11 +141,28 @@ def main():
 
     cv = CV(CONFIG_FILE, filters=my_filters)
 
-    if not os.path.isdir("docs"):
-        os.mkdir("docs")
+    # Create output directories
+    if not os.path.isdir(TEMP_OUTPUT_DIR):
+        os.mkdir(TEMP_OUTPUT_DIR)
+    if not os.path.isdir(DOCS_DIR):
+        os.mkdir(DOCS_DIR)
 
-    with open(OUTPUT_TEX, "w") as f:
-        f.write(cv.render_tex(TEMPLATE_FILE))
+    # Generate all templates
+    for template_name, config in TEMPLATES.items():
+        print(f"Generating {template_name}...")
+
+        # Generate TeX file in temp directory
+        temp_tex_path = os.path.join(TEMP_OUTPUT_DIR, config["output_tex"])
+        with open(temp_tex_path, "w") as f:
+            f.write(cv.render_tex(config["template"]))
+
+        # Copy to docs if specified
+        if config["copy_to_docs"]:
+            docs_tex_path = os.path.join(DOCS_DIR, config["output_tex"])
+            shutil.copy2(temp_tex_path, docs_tex_path)
+            print(f"  Copied {config['output_tex']} to docs/")
+
+        print(f"  Generated {temp_tex_path}")
 
 
 if __name__ == "__main__":

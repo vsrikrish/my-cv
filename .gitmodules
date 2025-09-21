@@ -1,3 +1,6 @@
 [submodule "my-papers"]
 	path = my-papers
 	url = https://github.com/jdossgollin/my-papers
+[submodule "my-cv-data"]
+	path = my-cv-data
+	url = https://github.com/jdossgollin/my-cv-data.git

@@ -1,0 +1,111 @@
+\documentclass[10pt,oneside]{article}
+
+% language setup
+\usepackage[english]{babel}
+
+% margins
+\usepackage[left=1.5in, right=1.75in, top=1in, bottom=0.75in]{geometry}
+
+\RequirePackage{xcolor}
+\definecolor{RiceBlue}{HTML}{00205B}
+\definecolor{RiceGray}{HTML}{7C7E7F}
+\definecolor{BrickRed}{HTML}{C04829}
+
+% Better footer
+\usepackage{fancyhdr}
+\fancyhf{}
+\fancyfoot[L]{James Doss-Gollin - Biosketch}
+\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{1pt}
+\pagestyle{fancy}
+
+\usepackage{fontspec}
+\setromanfont[
+	Path = ../fonts/,
+  UprightFont = *-Regular,
+	BoldFont = *-Bold,
+	ItalicFont = *-Italic,
+	BoldItalicFont = *-BoldItalic,
+	Extension = .ttf,
+]{Lato}
+
+% Section styling
+\usepackage{titlesec}
+\titlespacing*{\section}{2cm}{1ex}{0.25in}
+\titleformat{\section}[leftmargin]{\raggedleft\sffamily\footnotesize\bfseries}{}{0pt}{\color{BrickRed}}
+
+\raggedbottom
+
+% better lists
+\usepackage{enumitem}
+\setlist[itemize, 1]{nosep, noitemsep, labelsep=-5pt, leftmargin=*, after=\vspace{\baselineskip}, itemindent=-15pt, labelindent=5pt}
+
+% fixed width tables
+\usepackage{array}
+\newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
+\newcolumntype{C}[1]{>{\PreserveBackslash\centering}p{#1}}
+\newcolumntype{R}[1]{>{\PreserveBackslash\raggedleft}p{#1}}
+\newcolumntype{L}[1]{>{\PreserveBackslash\raggedright}p{#1}}
+
+% icons for the contact info
+\usepackage{fontawesome5}
+\usepackage{academicons}
+
+% have to load this last
+\usepackage{hyperref}
+\hypersetup{hidelinks, breaklinks}
+
+%---------------------------------------------------------------------
+
+\begin{document}
+
+\thispagestyle{empty}
+
+%% Name and contact block
+\noindent{
+  \footnotesize
+  \color{RiceGray}
+  \begin{tabular}{L{0.5\textwidth}R{0.5\textwidth}}
+    (((data.person.university)))       & \texttt{\href{mailto:(((data.person.email)))}{(((data.person.email)))}} \, \faEnvelope                                                                                  \\
+    (((data.person.department)))       & \texttt{\href{(((data.person.web)))}{(((data.person.web)))}} \, \faGlobe                                                                                                \\
+    (((data.person.address.line1)))    & \texttt{\href{https://github.com/(((data.person.github)))}{(((data.person.github)))}} \, \faGithub                                                                      \\
+    (((data.person.address.postcode))) & \texttt{\href{https://scholar.google.com/citations?user=(((data.person.googlescholar)))}{(((data.person.first_name))) (((data.person.last_name)))}} \, \aiGoogleScholar \\
+  \end{tabular}
+}
+
+\bigskip
+
+%% Name
+\noindent{\LARGE\bfseries \textcolor{RiceBlue}{(((data.person.first_name))) (((data.person.last_name)))}}
+\reversemarginpar
+
+\bigskip
+
+%% Appointments
+((* set sect = data.sections | select_by_attr_name("title", "Appointments") *))
+\section{(((sect.title | lower)))}
+
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+
+\begin{itemize}[label={}]
+  ((* for pos in sect.entries | sort(attribute="start", reverse=True) *))
+  \item \textbf{(((pos.organization | escape_tex)))}
+        \textit{((( pos.role | escape_tex )))}, ((( pos.org | escape_tex ))), ((* if pos.start == pos.end *))((( pos.start )))((* else *))((( pos.start )))--((( pos.end )))((* endif *)).
+  ((* endfor *))
+\end{itemize}
+
+%% Education
+((* set sect = data.sections | select_by_attr_name("title", "Education") *))
+\section{(((sect.title | lower)))}
+
+\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+
+\begin{itemize}[label={}]
+  ((* for deg in sect.entries | sort(attribute="year", reverse=True) *))
+  \item \textbf{(((deg.university | escape_tex)))}
+        \textit{((( deg.degree | escape_tex )))}, ((( deg.subject | escape_tex ))), ((( deg.year ))).
+  ((* endfor *))
+\end{itemize}
+
+\end{document}

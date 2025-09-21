@@ -11,7 +11,6 @@ person:
   github: jdossgollin
   googlescholar: 6ifLBBsAAAAJ
   orcid: 0000-0002-3428-2224
-  subject: "adaptive and resilient infrastructure"
   address:
     line1: 6100 Main Street, Ryon Lab 204-MS 318
     postcode: Houston, TX, 77005
@@ -19,7 +18,7 @@ person:
 
 paths:
   bib_path: my-papers
-  yaml_path: data
+  yaml_path: my-cv-data
 
 publications:
   - title: Papers
@@ -40,20 +39,14 @@ sections:
     file: grants.yml
   - title: Teaching
     file: teaching.yml
-  - title: Primary Advisor
-    file: advising_primary.yml
-  - title: Committee Member
-    file: advising_committee.yml
+  - title: Advising
+    file: advising.yml
   - title: Awards
     file: awards.yml
   - title: Media Coverage
     file: media.yml
-  - title: Peer Review
-    file: peerreview.yml
-  - title: Grant Review
-    file: grantreview.yml
-  - title: External Review
-    file: externalreview.yml
+  - title: Review Activities
+    file: review.yml
   - title: Additional Experience
     file: training.yml
   - title: Sessions Organized
