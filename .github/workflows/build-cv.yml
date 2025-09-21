@@ -45,8 +45,6 @@ jobs:
           auto-activate-base: false
       - name: Generate Templates
         run: python generate_cv.py
-      - name: Generate Grants Excel
-        run: python grants_to_excel.py
       - name: Build CV PDF
         uses: xu-cheng/latex-action@v2
         with:
@@ -61,16 +59,21 @@ jobs:
           args: "-bibtex-cond1 -pdfxe"
           post_compile: "latexmk -c"
           working_directory: "temp_output"
-      - name: Copy CV to docs
+      - name: Copy CV and Biosketch to docs
         run: |
+          cp temp_output/Doss-Gollin-CV.tex docs/
           cp temp_output/Doss-Gollin-CV.pdf docs/
-          echo "✓ Copied CV PDF to docs/ for GitHub Pages"
+          cp temp_output/Doss-Gollin-Biosketch.tex docs/
+          cp temp_output/Doss-Gollin-Biosketch.pdf docs/
+          echo "✓ Copied CV and Biosketch TeX/PDF to docs/ for GitHub Pages"
       - name: Commit
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add docs/Doss-Gollin-CV.tex
           git add docs/Doss-Gollin-CV.pdf
+          git add docs/Doss-Gollin-Biosketch.tex
+          git add docs/Doss-Gollin-Biosketch.pdf
           git add my-papers/
           git add my-cv-data/
           git commit -m "update CV"

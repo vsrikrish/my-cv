@@ -28,6 +28,16 @@ The system uses two submodules:
 - Public bibliography repository for publications
 - Private data repository for CV content
 
+## GitHub Actions Setup
+
+For the automated CV generation to work, you need to configure a Personal Access Token for accessing private submodules:
+
+1. Go to GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)
+2. Generate new token with `repo` scope (full repository access)
+3. Add it as a repository secret named `PAT_TOKEN` in your repository settings (Settings → Secrets and variables → Actions)
+
+The GitHub Actions workflow requires this token to access the private `my-cv-data` submodule during the build process.
+
 ## Customization
 
 Fork this repository and adapt the templates and configuration for your own automated CV system. The framework separates content management from document formatting, making it easy to maintain and update your academic CV over time.
