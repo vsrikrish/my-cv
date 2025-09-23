@@ -4,6 +4,8 @@ A reproducible and modular system for generating academic CVs from structured da
 
 **[View Current CV](https://jdossgollin.github.io/my-cv/Doss-Gollin-CV.pdf)** | **[Homepage](https://jdossgollin.github.io)** | **[Lab Website](https://dossgollin-lab.github.io)**
 
+ROADMAP: <https://github.com/subidit/rover-resume/blob/main/templates/base%20rover/base-rover.pdf>
+
 ## Goals
 
 This system prioritizes reproducibility through version-controlled data and automated builds. Content is modular - you update YAML files rather than wrestling with LaTeX code. GitHub Actions handles the compilation and publishing automatically when data changes. The same data source generates multiple document types including full CV, biosketch, and grants documents.

@@ -14,6 +14,7 @@ CONFIG_FILE = "_config.yml"
 TEMPLATE_DIR = "templates"
 TEMP_OUTPUT_DIR = "temp_output"
 DOCS_DIR = "docs"
+BIB_FILE = os.path.join("my-papers", "my-papers.bib")
 
 # Template configurations
 TEMPLATES = {
@@ -29,12 +30,6 @@ TEMPLATES = {
         "output_pdf": "Doss-Gollin-Biosketch.pdf",
         "copy_to_docs": False,  # Keep private
     },
-    # "grants": {
-    #     "template": "grants.latextemplate",
-    #     "output_tex": "Doss-Gollin-Grants.tex",
-    #     "output_pdf": "Doss-Gollin-Grants.pdf",
-    #     "copy_to_docs": False,  # Keep private
-    # },
 }
 
 
@@ -95,7 +90,9 @@ class CV(object):
         return jenv
 
     @property
-    def jenv_tex(self,):
+    def jenv_tex(
+        self,
+    ):
         """
         Set up TeX environment
         """
@@ -120,6 +117,7 @@ class CV(object):
     def copy_pdfs_to_docs(self):
         """Copy specified PDFs from temp to docs after LaTeX compilation"""
         import shutil
+
         for template_name, config in TEMPLATES.items():
             if config["copy_to_docs"]:
                 temp_pdf = os.path.join(TEMP_OUTPUT_DIR, config["output_pdf"])
@@ -164,7 +162,10 @@ def main():
 
         print(f"  Generated {temp_tex_path}")
 
+    # copy BiB file to temp directory
+    shutil.copy2(BIB_FILE, os.path.join(TEMP_OUTPUT_DIR, "my-papers.bib"))
+    print(f"  Copied my-papers.bib to {TEMP_OUTPUT_DIR}/")
+
 
 if __name__ == "__main__":
     main()
-

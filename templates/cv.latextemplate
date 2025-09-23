@@ -4,7 +4,7 @@
 \usepackage[english]{babel}
 
 % margins
-\usepackage[left=1.5in, right=1.75in, top=1in, bottom=0.75in]{geometry}% adjust the page margins
+\usepackage[left=0.75in, right=0.75in, top=1in, bottom=0.75in]{geometry}% adjust the page margins
 
 \RequirePackage{xcolor}
 \definecolor{RiceBlue}{HTML}{00205B} % official Rice blue color -- use for text etc
@@ -28,32 +28,62 @@
 
 \usepackage{fontspec}
 \setromanfont[
-	Path = ../fonts/,
-  UprightFont = *-Regular, 
-	BoldFont = *-Bold,
-	ItalicFont = *-Italic,
-	BoldItalicFont = *-BoldItalic,
-	Extension = .ttf,
+  Path = ../fonts/,
+  UprightFont = *-Regular,
+  BoldFont = *-Bold,
+  ItalicFont = *-Italic,
+  BoldItalicFont = *-BoldItalic,
+  Extension = .ttf,
 ]{Lato}
 \setsansfont[
-	Path = ../fonts/,
-  UprightFont = *-Regular, 
-	Extension = .ttf,
+  Path = ../fonts/,
+  UprightFont = *-Regular,
+  Extension = .ttf,
 ]{Inconsolata}
 
 % Section styling
 \usepackage{titlesec}
-\titlespacing*{\section}{2cm}{1ex}{0.25in}
-\titleformat{\section}[leftmargin]{\raggedleft\sffamily\footnotesize\bfseries}{}{0pt}{\color{BrickRed}}
+\titleformat{\section}{\large\bfseries\uppercase}{}{0pt}{}[\titlerule]
+\titleformat{\subsection}{\normalsize\bfseries}{}{0pt}{}
+\titleformat{\subsubsection}{\normalsize\itshape}{}{0pt}{}
+
+\titlespacing*{\section}{0pt}{1em}{0.5em}
+\titlespacing*{\subsection}{0pt}{0pt}{0pt}
+\titlespacing*{\subsubsection}{0pt}{0pt}{0pt}
 
 \raggedbottom
 
 % useful macro
 \newcommand{\dotspace}{\quad}
 
+% Load longtable package
+\usepackage{longtable}
+
+% Custom environment for aligned entries with years
+\newenvironment{alignedentries}[1][0pt]{%
+  \noindent%
+  \hspace{#1}%
+  \begin{tabular*}{\dimexpr\textwidth-#1\relax}{@{}p{\dimexpr0.85\textwidth-#1\relax}@{\extracolsep{\fill}}r@{}}%
+    }{%
+  \end{tabular*}%
+}
+% Custom environment for aligned entries with hanging indent
+\newenvironment{alignedentrieshang}[1][2em]{%
+  \noindent%
+}{%
+}
+\newcommand{\hangingitem}[2]{%
+  \noindent%
+  \begin{tabular*}{\textwidth}{@{}p{0.85\textwidth}@{\extracolsep{\fill}}r@{}}%
+    \hangindent=2em \hangafter=1 #1 & #2%
+  \end{tabular*}%
+}
+\newcommand{\entryitem}[2]{#1 & #2}
+\newcommand{\entrybreak}{\\}
+
 % better lists
 \usepackage{enumitem}
-\setlist[itemize, 1]{nosep, noitemsep, labelsep=-5pt, leftmargin=*, after=\vspace{\baselineskip}, itemindent=-15pt, labelindent=5pt}
+\setlist[itemize, 1]{nosep, noitemsep, label={}, labelsep=-5pt, leftmargin=*, after=\vspace{\baselineskip}, itemindent=-15pt, labelindent=5pt}
 
 % fixed width tables
 \usepackage{array}
@@ -64,28 +94,39 @@
 
 \usepackage[autostyle=true, autopunct=true, english=american]{csquotes}
 \usepackage[
-	backend=biber,
-	style=publist,
-	plauthorfirstinit=true,
-	plauthorhandling=highlight,
-	plnumbered=false,
-	labeldateparts=false,
-	boldyear=false,
-	marginyear=false,
-	doi=true,
-	url=false,
-	isbn=false,
-	maxbibnames=99,
-	maxcitenames=99,
-	date=year,
+  backend=biber,
+  style=publist,
+  plauthorfirstinit=true,
+  plauthorhandling=highlight,
+  plnumbered=false,
+  labeldateparts=false,
+  boldyear=false,
+  marginyear=false,
+  doi=true,
+  url=false,
+  isbn=false,
+  maxbibnames=99,
+  maxcitenames=99,
+  date=year,
 ]{biblatex}
 \setlength{\bibhang}{15pt}
 
-% add bib resource
-\addbibresource{../my-papers/my-papers.bib}
+% custom author highlighting: blue+bold for James, purple+bold+asterisk for group members
+\renewcommand*{\plauthorhl}[1]{%
+  \StrGobbleRight{#1}{1}[\trimmedname]%
+  \IfSubStr{#1}{Doss-Gollin}%
+  {\textcolor{RiceBlue}{\mkbibbold{\trimmedname}}}%
+  {\textcolor{GrassGreen}{\mkbibbold{\trimmedname}}}%
+}
 
-% bold my name
+% bold my name (will be blue)
 \plauthorname[James]{Doss-Gollin}
+
+% highlight group members (will be purple with asterisk)
+\plauthorname[Yuchen]{Lu}
+
+% add bibliography resource
+\addbibresource{my-papers.bib}
 
 % include everything in bibliography
 \nocite{*}
@@ -95,6 +136,10 @@
 \usepackage{fontawesome5}
 \usepackage{academicons}
 
+% conditional logic for author highlighting
+\usepackage{ifthen}
+\usepackage{xstring}
+
 % have to load this last
 \usepackage{hyperref} % Required for adding links	and customizing them
 \hypersetup{hidelinks, breaklinks}
@@ -102,105 +147,91 @@
 %---------------------------------------------------------------------
 
 \begin{document}
+\reversemarginpar
+
+\nocite{*}
 
 \thispagestyle{empty}
 %% Name and contact block
 \noindent{
   \footnotesize
   \color{RiceGray}
-  \begin{tabular}{L{0.5\textwidth}R{0.5\textwidth}}
+  \begin{tabular*}{\textwidth}{@{}p{0.5\textwidth}@{\extracolsep{\fill}}r@{}}
     (((data.person.university)))       & \texttt{\href{mailto:(((data.person.email)))}{(((data.person.email)))}} \, \faEnvelope                                                                                  \\
     (((data.person.department)))       & \texttt{\href{(((data.person.web)))}{(((data.person.web)))}} \, \faGlobe                                                                                                \\
     (((data.person.address.line1)))    & \texttt{\href{https://github.com/(((data.person.github)))}{(((data.person.github)))}} \, \faGithub                                                                      \\
     (((data.person.address.postcode))) & \texttt{\href{https://scholar.google.com/citations?user=(((data.person.googlescholar)))}{(((data.person.first_name))) (((data.person.last_name)))}} \, \aiGoogleScholar \\
-  \end{tabular}
+  \end{tabular*}
 }
 
 \bigskip
 
 %% Name
 \noindent{\LARGE\bfseries \textcolor{RiceBlue}{(((data.person.first_name))) (((data.person.last_name)))}}
-\reversemarginpar
 
-\bigskip
 
-%% Research Interests
-((* set sect = data.sections | select_by_attr_name("title", "Research Interests") *))
-\section{(((sect.title | lower)))}
 
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
-
-\begin{itemize}[label={}]
-  ((* for i in sect.entries *))
-  \item (((i.name)))
-        ((* endfor *))
-\end{itemize}
 
 %% Appointments
 ((* set sect = data.sections | select_by_attr_name("title", "Appointments") *))
-\section{(((sect.title | lower)))}
+\section{(((sect.title | upper)))}
 
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
-
-\begin{itemize}[label={}]
-  ((* for pos in sect.entries | sort(attribute="start", reverse=True) *))
-  \item \textbf{(((pos.organization | escape_tex)))}
-        \textit{((( pos.role | escape_tex )))}, ((( pos.org | escape_tex ))), ((* if pos.start == pos.end *))((( pos.start )))((* else *))((( pos.start )))--((( pos.end )))((* endif *)).
-  ((* endfor *))
-\end{itemize}
+((* for pos in sect.entries | sort(attribute="start", reverse=True) *))
+\subsection{(((pos.organization | escape_tex)))}
+\begin{alignedentries}[2em]
+\entryitem{\textit{(((pos.role | escape_tex)))}}{((* if pos.start == pos.end *))((( pos.start )))((* else *))((( pos.start )))--((( pos.end )))((* endif *))}((* if not loop.last *))\entrybreak((* endif *))
+\end{alignedentries}
+((* endfor *))
 
 %% Education
 ((* set sect = data.sections | select_by_attr_name("title", "Education")*))
-\section{(((sect.title | lower)))}
+\section{(((sect.title | upper)))}
 
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
-
-\begin{itemize}[label={}]
-  ((* for deg in sect.entries | sort(attribute="year", reverse=True) *))
-  \item \textbf{(((deg.university | escape_tex)))}
-        \textit{((( deg.degree | escape_tex )))}, ((( deg.subject | escape_tex ))), ((( deg.year ))).
-  ((* endfor *))
-\end{itemize}
+((* for univ, degree_list in sect.entries | groupby("university") *))
+\subsection{(((univ | escape_tex)))}
+\begin{alignedentries}[2em]
+((* for deg in degree_list | sort(attribute="year", reverse=True) *))
+\entryitem{\textit{(((deg.degree | escape_tex))) in ((( deg.subject | escape_tex )))}}{((( deg.year )))}((* if not loop.last *))\entrybreak((* endif *))
+((* endfor *))
+\end{alignedentries}
+((* endfor *))
 
 %% Awards
 ((* set sect = data.sections | select_by_attr_name("title", "Awards") *))
-\section{(((sect.title | lower)))}
 
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
-\begin{itemize}[label={}]
-  ((* for award in sect.entries | sort(attribute="year", reverse=True) *))
-  \item \textbf{(((award.title)))}, (((award.org))), (((award.year))).
-        ((* endfor *))
-\end{itemize}
+\section{(((sect.title | upper)))}
+
+\begin{alignedentrieshang}
+((* for award in sect.entries | sort(attribute="year", reverse=True) *))
+\hangingitem{\textbf{(((award.title)))}, (((award.org)))}{(((award.year)))}
+((* endfor *))
+\end{alignedentrieshang}
 
 
 %% Grants and Contracts
 ((* set sect = data.sections | select_by_attr_name("title", "Grants and Contracts") *))
-\section{(((sect.title | lower)))}
+\section{(((sect.title | upper)))}
 
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+\textit{Amounts reflect Rice portion for collaborative grants and subawards; total amount for direct awards.}
 
-\begin{itemize}[label={}]
-  ((* for i in sect.entries | selectattr("status", "in", ["active", "complete"]) | sort(attribute="end", reverse=True) | sort(attribute="start", reverse=True) *))
-  \item \textbf{(((i.role | escape_tex)))}, \enquote{(((i.title | escape_tex)))}. ((* if i.PI *)) PI: (((i.PI | escape_tex))).((* endif *)) (((i.sponsor | escape_tex)))((* if i.program *)): \textit{((( i.program | escape_tex)))}((* endif *))((* if i.total_award *)), \$((( "{:,}".format(i.total_award | int) )))((* endif *)). (((i.start)))--(((i.end))).
-        ((* endfor *))
-\end{itemize}
+\bigskip
+
+\begin{alignedentrieshang}
+((* for i in sect.entries | selectattr("status", "in", ["active", "complete"]) | sort(attribute="end", reverse=True) | sort(attribute="start", reverse=True) *))
+\hangingitem{\textit{(((i.sponsor | escape_tex)))}((* if i.subaward_from *)) (via (((i.subaward_from | escape_tex))))((* endif *))((* if i.program *))\textit{: ((( i.program | escape_tex)))}((* endif *)). ``(((i.title | escape_tex))).'' \textbf{((* if i.subaward_from *))Subaward ((* endif *))(((i.role | escape_tex)))}((* if i.PI *)) (PI: (((i.PI | escape_tex))))((* endif *)).((* if i.total_award *)) \textbf{\$((( "{:,}".format(i.total_award | int) )))}((* endif *)).}{(((i.start)))--(((i.end)))}
+((* endfor *))
+\end{alignedentrieshang}
 
 %% Publications
 
-\section{journal articles}
+\section{JOURNAL ARTICLES}
 
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
-\vspace*{-1em}
+\printbibliography[heading=none, type=article]
 
-\printbibliography[type=article, heading=none]
+\section{FORTHCOMING}
 
-\section{preprints}
-
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
-\vspace*{-1em}
-\defbibfilter{ispreprint}{% 
+\defbibfilter{ispreprint}{%
     type=misc
     or type=online
 }
@@ -208,163 +239,134 @@
 
 %% Invited Talks
 ((* set sect = data.sections | select_by_attr_name("title", "Invited Talks") *))
-\section{(((sect.title | lower)))}
+\section{(((sect.title | upper)))}
 
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
-
-\begin{itemize}[label={}]
-  ((* for i in sect.entries | sort(attribute="date", reverse=True) *))
-  \item \enquote{\textbf{(((i.title | escape_tex)))}}, ((* if i.event *))(((i.event | escape_tex))), ((* endif *)) \textit{(((i.org | escape_tex)))}. (((i.location))), (((i.date))).
-  ((* endfor *))
-\end{itemize}
+\begin{alignedentrieshang}
+((* for i in sect.entries | sort(attribute="date", reverse=True) *))
+\hangingitem{\enquote{\textbf{(((i.title | escape_tex)))}}. ((* if i.event *))(((i.event | escape_tex))), ((* endif *)) \textit{(((i.org | escape_tex)))}((* if i.location *)), (((i.location))).((* else *)).((* endif *))}{(((i.date)))}
+((* endfor *))
+\end{alignedentrieshang}
 
 %% Teaching
 ((* set sect = data.sections | select_by_attr_name("title", "Teaching") *))
-\section{(((sect.title | lower)))}
+\section{(((sect.title | upper)))}
 
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
-
-((* set courses = sect.entries *))
-\begin{itemize}[label={}]
-  ((* for univ, course_list in courses | groupby("university")  *))
-  \item \textbf{(((univ)))}
-        ((* for course in course_list | sort_first_year("year", reverse=True) *))
-        (((course.title | escape_tex))). (((course.role))). (((course. semester))) (((course.year))).
-        ((* endfor *))
-        ((* endfor *))
-\end{itemize}
+((* for univ, course_list in sect.entries | groupby("university") | sort(attribute="1.0.year", reverse=True) *))
+\subsection{(((univ | escape_tex)))}
+\begin{alignedentries}[2em]
+((* for course in course_list | sort(attribute="year", reverse=True) | sort(attribute="semester", reverse=True) *))
+\entryitem{(((course.course))): \textit{(((course.title | escape_tex)))}. (((course.role))).}{(((course.semester))) (((course.year)))}((* if not loop.last *))\entrybreak((* endif *))
+((* endfor *))
+\end{alignedentries}
+((* endfor *))
 
 %% Advising
 ((* set sect = data.sections | select_by_attr_name("title", "Advising") *))
-\section{primary advisor}
+\section{(((sect.title | upper)))}
 
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+\begin{alignedentrieshang}
+((* for advisee in sect.entries | rejectattr("degree_year") | sort(attribute="lastname") *))
+\hangingitem{(((advisee.firstname))) (((advisee.lastname))): \textit{(((advisee.degree))) in (((advisee.field)))}, (((advisee.university))).((* if advisee.thesis_title *)) Thesis: \enquote{((( advisee.thesis_title )))}.((* endif *)) \textbf{((* if advisee.role == "primary" *))Primary Advisor((* else *))Committee Member((* endif *))}.}{}
+((* endfor *))
+((* for advisee in sect.entries | selectattr("degree_year") | sort(attribute="lastname") | sort(attribute="degree_year", reverse=True) *))
+\hangingitem{(((advisee.firstname))) (((advisee.lastname))): \textit{(((advisee.degree))) in (((advisee.field)))}, (((advisee.university))).((* if advisee.thesis_title *)) Thesis: \enquote{((( advisee.thesis_title )))}.((* endif *)) \textbf{((* if advisee.role == "primary" *))Primary Advisor((* else *))Committee Member((* endif *))}.}{((((advisee.degree_year))))}
+((* endfor *))
+\end{alignedentrieshang}
 
-\begin{itemize}[label={}]
-((* set advisees = sect.entries | selectattr("role", "equalto", "primary") | rejectattr("degree_year") *))
-  ((* for advisee in advisees | sort(attribute="lastname") *))
-    \item \textbf{Current} (((advisee.firstname))) (((advisee.lastname))), \textit{(((advisee.degree))) in (((advisee.field)))}, (((advisee.university))). ((* if advisee.thesis_title *)) \enquote{((( advisee.thesis_title ))).}((* endif *))
-  ((* endfor *))
-  ((* set advisees = sect.entries | selectattr("role", "equalto", "primary") | selectattr("degree_year") *))
-  ((* for advisee in advisees | sort_first_year("degree_year", reverse=True) | sort(attribute="lastname") *))
-    \item \textbf{((((advisee.degree_year))))} \quad (((advisee.firstname))) (((advisee.lastname))), \textit{(((advisee.degree))) in (((advisee.field)))}, (((advisee.university))). ((* if advisee.thesis_title *))Thesis: \enquote{((( advisee.thesis_title ))).}((* endif *))
-  ((* endfor *))
-\end{itemize}
+%% Advisee Awards
+((* set sect = data.sections | select_by_attr_name("title", "Advisee Awards") *))
+\section{(((sect.title | upper)))}
 
-\section{committee member}
-
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
-
-\begin{itemize}[label={}]
-((* set advisees = sect.entries | selectattr("role", "equalto", "committee") | rejectattr("degree_year") *))
-  ((* for advisee in advisees | sort(attribute="lastname") *))
-    \item \textbf{Current} (((advisee.firstname))) (((advisee.lastname))), \textit{(((advisee.degree))) in (((advisee.field)))}, (((advisee.university))). ((* if advisee.thesis_title *)) \enquote{((( advisee.thesis_title ))).}((* endif *))
-  ((* endfor *))
-  ((* set advisees = sect.entries | selectattr("role", "equalto", "committee") | selectattr("degree_year") *))
-  ((* for advisee in advisees  | sort(attribute="lastname") | sort(attribute="degree", reverse=True) | sort_first_year("degree_year", reverse=True) *))
-    \item \textbf{((((advisee.degree_year))))} \quad (((advisee.firstname))) (((advisee.lastname))), \textit{(((advisee.degree))) in (((advisee.field)))}, (((advisee.university))). ((* if advisee.thesis_title *))Thesis: \enquote{((( advisee.thesis_title ))).}((* endif *))
-  ((* endfor *))
-\end{itemize}
+\begin{alignedentrieshang}
+((* for award in sect.entries | sort(attribute="year", reverse=True) *))
+\hangingitem{(((award.award | escape_tex))), \textbf{(((award.recipient | escape_tex)))}.}{(((award.year)))}
+((* endfor *))
+\end{alignedentrieshang}
 
 %% Media Coverage
 ((* set sect = data.sections | select_by_attr_name("title", "Media Coverage") *))
-\section{(((sect.title | lower)))}
+\section{(((sect.title | upper)))}
 
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+\begin{alignedentrieshang}
+((* for i in sect.entries | sort(attribute="date", reverse=True) *))
+\hangingitem{\enquote{(((i.title | escape_tex))).} \textbf{(((i.publication | escape_tex)))}((* if i.author *)) --- (((i.author | escape_tex)))((* endif *))((* if i.format *)) [\textit{((( i.format | lower )))}]((* endif *)).}{(((i.date)))}
+((* endfor *))
+\end{alignedentrieshang}
 
-\begin{itemize}[label={}]
-  ((* for i in sect.entries | sort(attribute="date", reverse=True) *))
-    \item ((* if i.url *))\href{(((i.url)))}{(((i.title)))}((* else
-    *))i.title((* endif *)), ((* if i.author *))\textit{(((i.author)))}, ((*
-    endif *))\textbf{(((i.publication)))}, (((i.date))).((* if i.format *))
-    \textsl{(((i.format)))}.((* endif *))
-        ((* endfor *))
-\end{itemize}
-
-\section{opinion}
-
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
-
-\begin{itemize}[label={}]
-  ((* for i in sect.entries | sort(attribute="date", reverse=True) *))
-  \item ((* if i.url *))\href{(((i.url)))}{(((i.title)))}((* else *))i.title((* endif *)), \textit{(((i.author)))}, \textbf{(((i.publication)))}, (((i.date))).
-        ((* endfor *))
-\end{itemize}
 
 %% SESSIONS ORGANIZED
 ((* set sect = data.sections | select_by_attr_name("title", "Sessions Organized") *))
 \section{(((sect.title | lower)))}
 
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
-
-\begin{itemize}[label={}]
-  ((* for i in sect.entries | sort(attribute="date", reverse=True) *))
-  \item \textbf{(((i.role)))}, \textit{(((i.session)))}, (((i.event))), (((i.location))). (((i.date))).
-        ((* endfor *))
-\end{itemize}
-
-%% CONFERENCE PROCEEDINGS
-\section{conference papers}
-
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
-\vspace*{-1em}
-\printbibliography[type=inproceedings, heading=none]
+\begin{alignedentrieshang}
+((* for i in sect.entries | sort(attribute="date", reverse=True) *))
+\hangingitem{\textbf{(((i.role)))}. \textit{(((i.session | escape_tex)))} at \textbf{(((i.event | escape_tex)))}, (((i.location))).}{(((i.date)))}
+((* endfor *))
+\end{alignedentrieshang}
 
 %% WORKSHOPS
 ((* set sect = data.sections | select_by_attr_name("title", "Workshop Presentations") *))
-\section{(((sect.title | lower)))}
+\section{(((sect.title | upper)))}
 
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+\textit{Presenter names in bold indicate my own presentations; presenter names in \textcolor{RiceBlue}{blue} indicate advisee presentations.}
 
-\begin{itemize}[label={}]
-  ((* for i in sect.entries | sort(attribute="date", reverse=True) *))
-  \item ((* if i.link *))\href{(((i.link)))}{\enquote{\textbf{(((i.title | escape_tex)))}}}((* else *))\enquote{\textbf{(((i.title | escape_tex)))}}((* endif *)), ((* if i.event *))(((i.event | escape_tex))), ((* endif *)) ((* if i.org *))\textit{(((i.org | escape_tex)))}((* endif *)). (((i.location))).((* if i.format *)) (((i.format))).((* endif *)) (((i.date))).
-  ((* endfor *))
-\end{itemize}
+\bigskip
+
+\begin{alignedentrieshang}
+((* for i in sect.entries | sort(attribute="date", reverse=True) *))
+((* if i.presenter == "James Doss-Gollin" *))
+\hangingitem{\textbf{(((i.presenter | escape_tex)))}: \enquote{(((i.title | escape_tex)))}. \textbf{(((i.event | escape_tex)))}((* if i.org *)), \textit{(((i.org | escape_tex)))}((* endif *)), (((i.location)))((* if i.format *)) [\textit{(((i.format)))}]((* endif *)).}{(((i.date)))}
+((* else *))
+\hangingitem{\textcolor{RiceBlue}{\textbf{(((i.presenter | escape_tex)))}}: \enquote{(((i.title | escape_tex)))}. \textbf{(((i.event | escape_tex)))}((* if i.org *)), \textit{(((i.org | escape_tex)))}((* endif *)), (((i.location)))((* if i.format *)) [\textit{(((i.format)))}]((* endif *)).}{(((i.date)))}
+((* endif *))
+((* endfor *))
+\end{alignedentrieshang}
 
 %% REVIEW ACTIVITIES
 ((* set sect = data.sections | select_by_attr_name("title", "Review Activities") *))
-\section{peer review}
+\section{PEER REVIEW}
 
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+\subsection{Journals}
 
-\begin{itemize}[label={}]
-  ((* for i in sect.entries | selectattr("type", "equalto", "journal") | sort(attribute="name") *))
-    \item (((i.name | escape_tex)))
-  ((* endfor *))
-\end{itemize}
+\begin{alignedentrieshang}[2em]
 
-\section{grant review}
+  \hangingitem{((* for i in sect.entries | selectattr("type", "equalto", "journal") | sort(attribute="name") *))(((i.name | escape_tex)))((* if not loop.last *)); ((* endif *))((* endfor *)).
+  }{}
 
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
-\begin{itemize}[label={}]
-  ((* for i in sect.entries | selectattr("type", "equalto", "funding") | sort(attribute="name") *))
-  \item (((i.name | escape_tex)))
-        ((* endfor *))
-\end{itemize}
+\end{alignedentrieshang}
 
-\section{external review}
 
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+\subsection{Funding Agencies}
 
-\begin{itemize}[label={}]
-  ((* for i in sect.entries | selectattr("type", "equalto", "external") | sort(attribute="name") *))
-  \item (((i.name | escape_tex)))
-        ((* endfor *))
-\end{itemize}
+\begin{alignedentrieshang}[2em]
+
+  \hangingitem{((* for i in sect.entries | selectattr("type", "equalto", "funding") | sort(attribute="name") *))(((i.name | escape_tex)))((* if not loop.last *)); ((* endif *))((* endfor *)).
+  }{}
+
+
+\end{alignedentrieshang}
+
+
+\subsection{Agencies}
+
+\begin{alignedentrieshang}[2em]
+
+  \hangingitem{((* for i in sect.entries | selectattr("type", "equalto", "external") | sort(attribute="name") *))(((i.name | escape_tex)))((* if not loop.last *)); ((* endif *))((* endfor *)).
+  }{}
+
+
+\end{alignedentrieshang}
 
 %% Additional Experience and Training
 ((* set sect = data.sections | select_by_attr_name("title", "Additional Experience") *))
-\section{(((sect.title | lower)))}
+\section{(((sect.title | upper)))}
 
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
-
-\begin{itemize}[label={}]
-  ((* for i in sect.entries | sort(attribute="end", reverse=True) *))
-  \item \textbf{(((i.title)))}, (((i.org))). ((* if i.end == i.start *))(((i.end)))((* else *))(((i.start)))--(((i.end)))((* endif *)).((* if i.details *))\\(((i.details))).((* endif *))
-  ((* endfor *))
-\end{itemize}
+\begin{alignedentrieshang}
+((* for i in sect.entries | sort(attribute="end", reverse=True) *))
+\hangingitem{\textbf{(((i.title | escape_tex)))} --- \textit{(((i.org | escape_tex)))}((* if i.details *)). (((i.details | escape_tex)))((* endif *)).}{((* if i.end == i.start *))(((i.end)))((* else *))(((i.start)))--(((i.end)))((* endif *))}
+((* endfor *))
+\end{alignedentrieshang}
 
 
 

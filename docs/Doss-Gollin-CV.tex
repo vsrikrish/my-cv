@@ -4,7 +4,7 @@
 \usepackage[english]{babel}
 
 % margins
-\usepackage[left=1.5in, right=1.75in, top=1in, bottom=0.75in]{geometry}% adjust the page margins
+\usepackage[left=0.75in, right=0.75in, top=1in, bottom=0.75in]{geometry}% adjust the page margins
 
 \RequirePackage{xcolor}
 \definecolor{RiceBlue}{HTML}{00205B} % official Rice blue color -- use for text etc
@@ -28,32 +28,62 @@
 
 \usepackage{fontspec}
 \setromanfont[
-	Path = ../fonts/,
-  UprightFont = *-Regular, 
-	BoldFont = *-Bold,
-	ItalicFont = *-Italic,
-	BoldItalicFont = *-BoldItalic,
-	Extension = .ttf,
+  Path = ../fonts/,
+  UprightFont = *-Regular,
+  BoldFont = *-Bold,
+  ItalicFont = *-Italic,
+  BoldItalicFont = *-BoldItalic,
+  Extension = .ttf,
 ]{Lato}
 \setsansfont[
-	Path = ../fonts/,
-  UprightFont = *-Regular, 
-	Extension = .ttf,
+  Path = ../fonts/,
+  UprightFont = *-Regular,
+  Extension = .ttf,
 ]{Inconsolata}
 
 % Section styling
 \usepackage{titlesec}
-\titlespacing*{\section}{2cm}{1ex}{0.25in}
-\titleformat{\section}[leftmargin]{\raggedleft\sffamily\footnotesize\bfseries}{}{0pt}{\color{BrickRed}}
+\titleformat{\section}{\large\bfseries\uppercase}{}{0pt}{}[\titlerule]
+\titleformat{\subsection}{\normalsize\bfseries}{}{0pt}{}
+\titleformat{\subsubsection}{\normalsize\itshape}{}{0pt}{}
+
+\titlespacing*{\section}{0pt}{1em}{0.5em}
+\titlespacing*{\subsection}{0pt}{0pt}{0pt}
+\titlespacing*{\subsubsection}{0pt}{0pt}{0pt}
 
 \raggedbottom
 
 % useful macro
 \newcommand{\dotspace}{\quad}
 
+% Load longtable package
+\usepackage{longtable}
+
+% Custom environment for aligned entries with years
+\newenvironment{alignedentries}[1][0pt]{%
+  \noindent%
+  \hspace{#1}%
+  \begin{tabular*}{\dimexpr\textwidth-#1\relax}{@{}p{\dimexpr0.85\textwidth-#1\relax}@{\extracolsep{\fill}}r@{}}%
+    }{%
+  \end{tabular*}%
+}
+% Custom environment for aligned entries with hanging indent
+\newenvironment{alignedentrieshang}[1][2em]{%
+  \noindent%
+}{%
+}
+\newcommand{\hangingitem}[2]{%
+  \noindent%
+  \begin{tabular*}{\textwidth}{@{}p{0.85\textwidth}@{\extracolsep{\fill}}r@{}}%
+    \hangindent=2em \hangafter=1 #1 & #2%
+  \end{tabular*}%
+}
+\newcommand{\entryitem}[2]{#1 & #2}
+\newcommand{\entrybreak}{\\}
+
 % better lists
 \usepackage{enumitem}
-\setlist[itemize, 1]{nosep, noitemsep, labelsep=-5pt, leftmargin=*, after=\vspace{\baselineskip}, itemindent=-15pt, labelindent=5pt}
+\setlist[itemize, 1]{nosep, noitemsep, label={}, labelsep=-5pt, leftmargin=*, after=\vspace{\baselineskip}, itemindent=-15pt, labelindent=5pt}
 
 % fixed width tables
 \usepackage{array}
@@ -64,28 +94,39 @@
 
 \usepackage[autostyle=true, autopunct=true, english=american]{csquotes}
 \usepackage[
-	backend=biber,
-	style=publist,
-	plauthorfirstinit=true,
-	plauthorhandling=highlight,
-	plnumbered=false,
-	labeldateparts=false,
-	boldyear=false,
-	marginyear=false,
-	doi=true,
-	url=false,
-	isbn=false,
-	maxbibnames=99,
-	maxcitenames=99,
-	date=year,
+  backend=biber,
+  style=publist,
+  plauthorfirstinit=true,
+  plauthorhandling=highlight,
+  plnumbered=false,
+  labeldateparts=false,
+  boldyear=false,
+  marginyear=false,
+  doi=true,
+  url=false,
+  isbn=false,
+  maxbibnames=99,
+  maxcitenames=99,
+  date=year,
 ]{biblatex}
 \setlength{\bibhang}{15pt}
 
-% add bib resource
-\addbibresource{../my-papers/my-papers.bib}
+% custom author highlighting: blue+bold for James, purple+bold+asterisk for group members
+\renewcommand*{\plauthorhl}[1]{%
+  \StrGobbleRight{#1}{1}[\trimmedname]%
+  \IfSubStr{#1}{Doss-Gollin}%
+  {\textcolor{RiceBlue}{\mkbibbold{\trimmedname}}}%
+  {\textcolor{GrassGreen}{\mkbibbold{\trimmedname}}}%
+}
 
-% bold my name
+% bold my name (will be blue)
 \plauthorname[James]{Doss-Gollin}
+
+% highlight group members (will be purple with asterisk)
+\plauthorname[Yuchen]{Lu}
+
+% add bibliography resource
+\addbibresource{my-papers.bib}
 
 % include everything in bibliography
 \nocite{*}
@@ -95,6 +136,10 @@
 \usepackage{fontawesome5}
 \usepackage{academicons}
 
+% conditional logic for author highlighting
+\usepackage{ifthen}
+\usepackage{xstring}
+
 % have to load this last
 \usepackage{hyperref} % Required for adding links	and customizing them
 \hypersetup{hidelinks, breaklinks}
@@ -102,158 +147,141 @@
 %---------------------------------------------------------------------
 
 \begin{document}
+\reversemarginpar
+
+\nocite{*}
 
 \thispagestyle{empty}
 %% Name and contact block
 \noindent{
   \footnotesize
   \color{RiceGray}
-  \begin{tabular}{L{0.5\textwidth}R{0.5\textwidth}}
+  \begin{tabular*}{\textwidth}{@{}p{0.5\textwidth}@{\extracolsep{\fill}}r@{}}
     Rice University       & \texttt{\href{mailto:jdossgollin@rice.edu}{jdossgollin@rice.edu}} \, \faEnvelope                                                                                  \\
     Department of Civil and Environmental Engineering       & \texttt{\href{https://dossgollin-lab.github.io}{https://dossgollin-lab.github.io}} \, \faGlobe                                                                                                \\
     6100 Main Street, Ryon Lab 204-MS 318    & \texttt{\href{https://github.com/jdossgollin}{jdossgollin}} \, \faGithub                                                                      \\
     Houston, TX, 77005 & \texttt{\href{https://scholar.google.com/citations?user=6ifLBBsAAAAJ}{James Doss-Gollin}} \, \aiGoogleScholar \\
-  \end{tabular}
+  \end{tabular*}
 }
 
 \bigskip
 
 %% Name
 \noindent{\LARGE\bfseries \textcolor{RiceBlue}{James Doss-Gollin}}
-\reversemarginpar
 
-\bigskip
 
-%% Research Interests
 
-\section{research interests}
-
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
-
-\begin{itemize}[label={}]
-  
-  \item Climate risk management and adaptation
-        
-  \item Decision-making under uncertainty
-        
-  \item Dynamics and spatiotemporal clustering of hydroclimate extremes
-        
-  \item Probabilistic modeling and uncertainty quantification
-        
-  \item Urban flood risk assessment and management
-        
-\end{itemize}
 
 %% Appointments
 
-\section{appointments}
+\section{APPOINTMENTS}
 
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
-\begin{itemize}[label={}]
-  
-  \item \textbf{Rice University}
-        \textit{Assistant Professor}, Department of Civil \& Environmental Engineering, 2021--present.
-  
-  \item \textbf{The Pennsylvania State University}
-        \textit{Postdoctoral Scholar}, Earth \& Environmental Systems Institute, 2020.
-  
-\end{itemize}
+\subsection{Rice University}
+\begin{alignedentries}[2em]
+\entryitem{\textit{Assistant Professor}}{2021--present}\entrybreak
+\end{alignedentries}
+
+\subsection{The Pennsylvania State University}
+\begin{alignedentries}[2em]
+\entryitem{\textit{Postdoctoral Scholar}}{2020}
+\end{alignedentries}
+
 
 %% Education
 
-\section{education}
+\section{EDUCATION}
 
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
-\begin{itemize}[label={}]
-  
-  \item \textbf{Columbia University}
-        \textit{Ph.D}, Earth \& Environmental Engineering, 2020.
-  
-  \item \textbf{Columbia University}
-        \textit{M.S.}, Earth \& Environmental Engineering, 2016.
-  
-  \item \textbf{Yale University}
-        \textit{B.S.}, Mechanical Engineering, 2015.
-  
-\end{itemize}
+\subsection{Columbia University}
+\begin{alignedentries}[2em]
+
+\entryitem{\textit{Ph.D in Earth \& Environmental Engineering}}{2020}\entrybreak
+
+\entryitem{\textit{M.S. in Earth \& Environmental Engineering}}{2016}
+
+\end{alignedentries}
+
+\subsection{Yale University}
+\begin{alignedentries}[2em]
+
+\entryitem{\textit{B.S. in Mechanical Engineering}}{2015}
+
+\end{alignedentries}
+
 
 %% Awards
 
-\section{awards}
 
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
-\begin{itemize}[label={}]
-  
-  \item \textbf{Outstanding Reviewer Award}, Earth's Future, 2023.
-        
-  \item \textbf{Nickolas and Liliana Themelis Fellowship}, Fu Foundation School of Engineering and Applied Science, Columbia University, 2018.
-        
-  \item \textbf{Graduate Research Fellowship, Climate and Large-Scale Atmospheric Dynamics}, National Science Foundation, 2017.
-        
-  \item \textbf{Presidential Distinguished Fellowship}, Fu Foundation School of Engineering and Applied Science, Columbia University, 2015.
-        
-  \item \textbf{Distinction in Major}, Department of Mechanical Engineering and Materials Science, Yale University, 2015.
-        
-  \item \textbf{Legacy Award}, New Haven Promise, 2015.
-        
-  \item \textbf{Larry Coben '79 Fellowship}, Yale University, 2014.
-        
-  \item \textbf{Vance-Carter Travel Award}, Yale University, 2013.
-        
-  \item \textbf{Thomas C. Barry Travel Award}, Yale University, 2012.
-        
-\end{itemize}
+\section{AWARDS}
+
+\begin{alignedentrieshang}
+
+\hangingitem{\textbf{Outstanding Reviewer Award}, Earth's Future}{2023}
+
+\hangingitem{\textbf{Nickolas and Liliana Themelis Fellowship}, Fu Foundation School of Engineering and Applied Science, Columbia University}{2018}
+
+\hangingitem{\textbf{Graduate Research Fellowship, Climate and Large-Scale Atmospheric Dynamics}, National Science Foundation}{2017}
+
+\hangingitem{\textbf{Presidential Distinguished Fellowship}, Fu Foundation School of Engineering and Applied Science, Columbia University}{2015}
+
+\hangingitem{\textbf{Distinction in Major}, Department of Mechanical Engineering and Materials Science, Yale University}{2015}
+
+\hangingitem{\textbf{Legacy Award}, New Haven Promise}{2015}
+
+\hangingitem{\textbf{Larry Coben '79 Fellowship}, Yale University}{2014}
+
+\hangingitem{\textbf{Vance-Carter Travel Award}, Yale University}{2013}
+
+\hangingitem{\textbf{Thomas C. Barry Travel Award}, Yale University}{2012}
+
+\end{alignedentrieshang}
 
 
 %% Grants and Contracts
 
-\section{grants and contracts}
+\section{GRANTS AND CONTRACTS}
 
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+\textit{Amounts reflect Rice portion for collaborative grants and subawards; total amount for direct awards.}
 
-\begin{itemize}[label={}]
-  
-  \item \textbf{co-PI}, \enquote{RAISE: Flood resilience in rural Texas communities}.  PI: Avantika Gori. National Science Foundation: \textit{Confronting Hazards, Impacts and Risks for a Resilient Planet (CHIRRP)}, \$999,986. 2025--2028.
-        
-  \item \textbf{Lead PI}, \enquote{A Nonstationary Joint Probability Method for Tropical Cyclone Hazard Assessment}.  Consortium for Enhancing Resilience and Catastrophe Modeling (CERCAT), \$75,000. 2025--2026.
-        
-  \item \textbf{co-PI}, \enquote{Computing Infrastructure for AI-enhanced Climate Risk and Resilience at Rice}.  PI: Arlei Lopes da Silva. NVIDIA, \$0. 2025--2025.
-        
-  \item \textbf{Lead PI}, \enquote{Advancing AI for Climate Risk and Urban Resilience}.  Ken Kennedy Institute at Rice University, \$160,000. 2024--2025.
-        
-  \item \textbf{co-PI}, \enquote{IUCRC Planning Grant Rice University: Center for Climate, Equity and Resilience in Catmodeling (CERCat)}.  PI: Jamie Padgett. National Science Foundation, \$20,000. 2024--2025.
-        
-  \item \textbf{Co-PI}, \enquote{Developing Future Rainfall Frequency Grids for the State of Texas}.  PI: John Nielsen-Gammon. Texas Water Development Board, \$77,750. 2022--2025.
-        
-  \item \textbf{PI}, \enquote{EAGER: Participatory Design for Water Quality Monitoring of Highly Decentralized Water Infrastructure Systems}.  PI: Alicia Cooperman. National Science Foundation: \textit{Strengthening America's Infrastructure}, \$104,684. 2022--2025.
-        
-  \item \textbf{co-PI}, \enquote{Collaborative Research: Evaluating the Past and Future of Mississippi River Hydroclimatology to Constrain Risk via Integrated Climate Modeling, Observations, and Reconstructions}.  National Science Foundation: \textit{Climate and Large-Scale Dynamics}, \$472,024. 2022--2025.
-        
-  \item \textbf{Lead PI}, \enquote{Leveraging Earth System Observations at Multiple Scales to Improve Stormwater Management in Houston}.  Rice University: \textit{Sustainable Futures Fund}, \$50,000. 2022--2023.
-        
-  \item \textbf{co-PI}, \enquote{IFCE-Rice-SENAI Program on Artificial Intelligence for Urban Sustainability and Resilience to Natural Disasters in the Americas}.  PI: Arlei Lopes da Silva. 100,000 Strong in the Americas Innovation Fund, \$50,000. 2022--2023.
-        
-  \item \textbf{co-PI}, \enquote{Synthesis of Texas Electricity Research from Rice University}.  PI: Daniel Cohan. Energy Foundation, \$24,928. 2022--2023.
-        
-\end{itemize}
+\bigskip
+
+\begin{alignedentrieshang}
+
+\hangingitem{\textit{National Science Foundation}\textit{: Confronting Hazards, Impacts and Risks for a Resilient Planet (CHIRRP)}. ``RAISE: Flood resilience in rural Texas communities.'' \textbf{co-PI} (PI: Avantika Gori). \textbf{\$999,986}.}{2025--2028}
+
+\hangingitem{\textit{Consortium for Enhancing Resilience and Catastrophe Modeling (CERCAT)}. ``A Nonstationary Joint Probability Method for Tropical Cyclone Hazard Assessment.'' \textbf{Lead PI}. \textbf{\$75,000}.}{2025--2026}
+
+\hangingitem{\textit{NVIDIA}. ``Computing Infrastructure for AI-enhanced Climate Risk and Resilience at Rice.'' \textbf{co-PI} (PI: Arlei Lopes da Silva). \textbf{\$0}.}{2025--2025}
+
+\hangingitem{\textit{Ken Kennedy Institute at Rice University}. ``Advancing AI for Climate Risk and Urban Resilience.'' \textbf{Lead PI}. \textbf{\$160,000}.}{2024--2025}
+
+\hangingitem{\textit{National Science Foundation}. ``IUCRC Planning Grant Rice University: Center for Climate, Equity and Resilience in Catmodeling (CERCat).'' \textbf{co-PI} (PI: Jamie Padgett). \textbf{\$20,000}.}{2024--2025}
+
+\hangingitem{\textit{Texas Water Development Board} (via Texas A\&M University). ``Developing Future Rainfall Frequency Grids for the State of Texas.'' \textbf{Subaward PI}. \textbf{\$77,750}.}{2022--2025}
+
+\hangingitem{\textit{National Science Foundation}\textit{: Strengthening America's Infrastructure}. ``EAGER: Participatory Design for Water Quality Monitoring of Highly Decentralized Water Infrastructure Systems.'' \textbf{PI} (PI: Alicia Cooperman). \textbf{\$104,684}.}{2022--2025}
+
+\hangingitem{\textit{National Science Foundation}\textit{: Climate and Large-Scale Dynamics}. ``Collaborative Research: Evaluating the Past and Future of Mississippi River Hydroclimatology to Constrain Risk via Integrated Climate Modeling, Observations, and Reconstructions.'' \textbf{co-PI}. \textbf{\$472,024}.}{2022--2025}
+
+\hangingitem{\textit{Rice University}\textit{: Sustainable Futures Fund}. ``Leveraging Earth System Observations at Multiple Scales to Improve Stormwater Management in Houston.'' \textbf{Lead PI}. \textbf{\$50,000}.}{2022--2023}
+
+\hangingitem{\textit{100,000 Strong in the Americas Innovation Fund}. ``IFCE-Rice-SENAI Program on Artificial Intelligence for Urban Sustainability and Resilience to Natural Disasters in the Americas.'' \textbf{co-PI} (PI: Arlei Lopes da Silva). \textbf{\$50,000}.}{2022--2023}
+
+\hangingitem{\textit{Energy Foundation}. ``Synthesis of Texas Electricity Research from Rice University.'' \textbf{co-PI} (PI: Daniel Cohan). \textbf{\$24,928}.}{2022--2023}
+
+\end{alignedentrieshang}
 
 %% Publications
 
-\section{journal articles}
+\section{JOURNAL ARTICLES}
 
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
-\vspace*{-1em}
+\printbibliography[heading=none, type=article]
 
-\printbibliography[type=article, heading=none]
+\section{FORTHCOMING}
 
-\section{preprints}
-
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
-\vspace*{-1em}
-\defbibfilter{ispreprint}{% 
+\defbibfilter{ispreprint}{%
     type=misc
     or type=online
 }
@@ -261,426 +289,383 @@
 
 %% Invited Talks
 
-\section{invited talks}
+\section{INVITED TALKS}
 
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+\begin{alignedentrieshang}
 
-\begin{itemize}[label={}]
-  
-  \item \enquote{\textbf{Advancing Urban Flood Risk Management through Physics-informed, Data-Driven Hazard Assessment}}, Earth, Marine, and Environmental Science Seminar,  \textit{University of North Carolina}. Chapel Hill, NC, 2024-03-27.
-  
-  \item \enquote{\textbf{Quantifying and characterizing uncertain climate hazards to enable adaptive resilience}}, Atmospheric Sciences Seminar,  \textit{Texas A\&M University}. College Station, TX, 2022-11-16.
-  
-  \item \enquote{\textbf{Unprecedented impacts don't require unprecedented weather}}, Post-Harvey Climate \& Flood Impacts on the Built Environment,  \textit{Severe Storm Prediction, Education, \& Evacuation from Disasters Center}. Houston, TX, 2022-04-29.
-  
-  \item \enquote{\textbf{Revisiting our design criteria: What hazards should we design for in a changing climate?}}, Hydrologic Sciences and Water Resources Engineering Seminar,  \textit{University of Colorado Boulder}. Remote Presentation, 2022-04-13.
-  
-  \item \enquote{\textbf{Adapting Engineering Design Criteria to a Changing Climate: Insights from House Elevation }}, Technical Webinar,  \textit{ASCE Central New Jersey Branch}. Remote Presentation, 2022-04-12.
-  
-  \item \enquote{\textbf{Panelist}}, Extreme Weather: How To Report on a World That's Warmer, Colder, Wetter, Drier and Weirder,  \textit{31st Annual Conference of the Society of Environmental Journalists}. Houston, TX, 2022-04-02.
-  
-  \item \enquote{\textbf{Extreme Impacts Don't Require Extreme Weather: Lessons from the February 2021 Texas Blackouts}}, Outreach Event: Science is for Everyone,  \textit{American Meteorlogical Society}. Remote Presentation, 2022-01-25.
-  
-  \item \enquote{\textbf{Extreme Impacts Don't Require Extreme Weather: Lessons from the February 2021 Texas Blackouts}}, Compound Events Working Group,  \textit{Risk KAN (Knowledge Action Networks)}. Remote Presentation, 2021-12-09.
-  
-  \item \enquote{\textbf{Panelist}}, Tail events: Prediction, Planning, and Performance,  \textit{Harvard Electricity Policy Group}. Remote Presentation, 2021-09-28.
-  
-  \item \enquote{\textbf{Towards Adaptive Resilience: Managing Flood Risks in a Changing World}}, Technical Webinar,  \textit{ASCE Central New Jersey Branch}. Remote Presentation, 2021-04-28.
-  
-  \item \enquote{\textbf{Prediction and Implications of Structured Climate Risk for Sequential Adaptation under Deep Uncertainty}}, Center for Climate Risk Management CLIMA Seminar,  \textit{the Pennsylvania State University}. State College, PA, 2020-01-29.
-  
-  \item \enquote{\textbf{Prediction and Implications of Structured Climate Risk for Sequential Adaptation under Deep Uncertainty}}, Department of Civil and Environmental Engineering Seminar,  \textit{Rice University}. Houston, TX, 2020-01-27.
-  
-  \item \enquote{\textbf{Prediction and Implications of Structured Climate Risk for Sequential Adaptation under Deep Uncertainty}}, Complex Systems Simulation and Optimization Group,  \textit{National Renewable Energy Laboratory}. Golden, CO, 2020-01-07.
-  
-  \item \enquote{\textbf{Drivers of Extreme Rainfall: Atmospheric Circulation Patterns and Regional Intense Rainfall in the Ohio River}}, European Flood Awareness System Group,  \textit{European Centre for Medium Range Weather Forecasting}. Reading, England, 2016-09-02.
-  
-  \item \enquote{\textbf{Understanding the Physical Drivers of Extreme Rainfall for Flood Prediction}}, Oxford Water Network,  \textit{Oxford University}. Oxford, England, 2016-08-26.
-  
-\end{itemize}
+\hangingitem{\enquote{\textbf{Advancing Urban Flood Risk Management through Physics-informed, Data-Driven Hazard Assessment}}. Earth, Marine, and Environmental Science Seminar,  \textit{University of North Carolina}, Chapel Hill, NC.}{2024-03-27}
+
+\hangingitem{\enquote{\textbf{Quantifying and characterizing uncertain climate hazards to enable adaptive resilience}}. Atmospheric Sciences Seminar,  \textit{Texas A\&M University}, College Station, TX.}{2022-11-16}
+
+\hangingitem{\enquote{\textbf{Unprecedented impacts don't require unprecedented weather}}. Post-Harvey Climate \& Flood Impacts on the Built Environment,  \textit{Severe Storm Prediction, Education, \& Evacuation from Disasters Center}, Houston, TX.}{2022-04-29}
+
+\hangingitem{\enquote{\textbf{Revisiting our design criteria: What hazards should we design for in a changing climate?}}. Hydrologic Sciences and Water Resources Engineering Seminar,  \textit{University of Colorado Boulder}, Remote Presentation.}{2022-04-13}
+
+\hangingitem{\enquote{\textbf{Adapting Engineering Design Criteria to a Changing Climate: Insights from House Elevation }}. Technical Webinar,  \textit{ASCE Central New Jersey Branch}, Remote Presentation.}{2022-04-12}
+
+\hangingitem{\enquote{\textbf{Panelist}}. Extreme Weather: How To Report on a World That's Warmer, Colder, Wetter, Drier and Weirder,  \textit{31st Annual Conference of the Society of Environmental Journalists}, Houston, TX.}{2022-04-02}
+
+\hangingitem{\enquote{\textbf{Extreme Impacts Don't Require Extreme Weather: Lessons from the February 2021 Texas Blackouts}}. Outreach Event: Science is for Everyone,  \textit{American Meteorlogical Society}, Remote Presentation.}{2022-01-25}
+
+\hangingitem{\enquote{\textbf{Extreme Impacts Don't Require Extreme Weather: Lessons from the February 2021 Texas Blackouts}}. Compound Events Working Group,  \textit{Risk KAN (Knowledge Action Networks)}, Remote Presentation.}{2021-12-09}
+
+\hangingitem{\enquote{\textbf{Panelist}}. Tail events: Prediction, Planning, and Performance,  \textit{Harvard Electricity Policy Group}, Remote Presentation.}{2021-09-28}
+
+\hangingitem{\enquote{\textbf{Towards Adaptive Resilience: Managing Flood Risks in a Changing World}}. Technical Webinar,  \textit{ASCE Central New Jersey Branch}, Remote Presentation.}{2021-04-28}
+
+\hangingitem{\enquote{\textbf{Prediction and Implications of Structured Climate Risk for Sequential Adaptation under Deep Uncertainty}}. Center for Climate Risk Management CLIMA Seminar,  \textit{the Pennsylvania State University}, State College, PA.}{2020-01-29}
+
+\hangingitem{\enquote{\textbf{Prediction and Implications of Structured Climate Risk for Sequential Adaptation under Deep Uncertainty}}. Department of Civil and Environmental Engineering Seminar,  \textit{Rice University}, Houston, TX.}{2020-01-27}
+
+\hangingitem{\enquote{\textbf{Prediction and Implications of Structured Climate Risk for Sequential Adaptation under Deep Uncertainty}}. Complex Systems Simulation and Optimization Group,  \textit{National Renewable Energy Laboratory}, Golden, CO.}{2020-01-07}
+
+\hangingitem{\enquote{\textbf{Drivers of Extreme Rainfall: Atmospheric Circulation Patterns and Regional Intense Rainfall in the Ohio River}}. European Flood Awareness System Group,  \textit{European Centre for Medium Range Weather Forecasting}, Reading, England.}{2016-09-02}
+
+\hangingitem{\enquote{\textbf{Understanding the Physical Drivers of Extreme Rainfall for Flood Prediction}}. Oxford Water Network,  \textit{Oxford University}, Oxford, England.}{2016-08-26}
+
+\end{alignedentrieshang}
 
 %% Teaching
 
-\section{teaching}
-
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+\section{TEACHING}
 
 
-\begin{itemize}[label={}]
-  
-  \item \textbf{Columbia University}
-        
-        Environmental Data Analysis and Modeling. Teaching Assistant. Spring 2018.
-        
-        
-  \item \textbf{Rice University}
-        
-        Fundamentals of Civil and Environmental Engineering. Instructor. Fall 2024.
-        
-        Climate Risk Management. Instructor. Spring 2024.
-        
-        Data Science Methods for Climate Hazard Assessment. Instructor. Fall 2023.
-        
-        Climate Risk Management. Instructor. Spring 2023.
-        
-        Environmental Data Science. Instructor. Spring 2022.
-        
-        Fundamentals of Civil and Environmental Engineering. Instructor. Fall 2021.
-        
-        
-\end{itemize}
+\subsection{Rice University}
+\begin{alignedentries}[2em]
+
+\entryitem{CEVE 421/521: \textit{Climate Risk Management}. Instructor.}{Spring 2024}\entrybreak
+
+\entryitem{CEVE 421/521: \textit{Climate Risk Management}. Instructor.}{Spring 2023}\entrybreak
+
+\entryitem{CEVE 543: \textit{Environmental Data Science}. Instructor.}{Spring 2022}\entrybreak
+
+\entryitem{CEVE 543: \textit{Statistical-Physical Methods for Hydroclimate Extremes and Catastrophes}. Instructor.}{Fall 2025}\entrybreak
+
+\entryitem{CEVE 101: \textit{Fundamentals of Civil and Environmental Engineering}. Instructor.}{Fall 2024}\entrybreak
+
+\entryitem{CEVE 543: \textit{Data Science Methods for Climate Hazard Assessment}. Instructor.}{Fall 2023}\entrybreak
+
+\entryitem{CEVE 101: \textit{Fundamentals of Civil and Environmental Engineering}. Instructor.}{Fall 2021}
+
+\end{alignedentries}
+
+\subsection{Columbia University}
+\begin{alignedentries}[2em]
+
+\entryitem{EAEEE 4257: \textit{Environmental Data Analysis and Modeling}. Teaching Assistant.}{Spring 2018}
+
+\end{alignedentries}
+
 
 %% Advising
 
-\section{primary advisor}
+\section{ADVISING}
 
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+\begin{alignedentrieshang}
 
-\begin{itemize}[label={}]
+\hangingitem{True Furrh: \textit{Ph.D. in Civil and Environmental Engineering}, Rice University. \textbf{Committee Member}.}{}
 
-  
-    \item \textbf{Current} Dongwook Kim, \textit{Ph.D. in Civil and Environmental Engineering}, Rice University. 
-  
-    \item \textbf{Current} Yuchen Lu, \textit{Ph.D. in Civil and Environmental Engineering}, Rice University. 
-  
-    \item \textbf{Current} Jonah Schaechter, \textit{Ph.D. in Civil and Environmental Engineering}, Rice University. 
-  
-  
-  
-\end{itemize}
+\hangingitem{Dongwook Kim: \textit{Ph.D. in Civil and Environmental Engineering}, Rice University. \textbf{Primary Advisor}.}{}
 
-\section{committee member}
+\hangingitem{Yuchen Lu: \textit{Ph.D. in Civil and Environmental Engineering}, Rice University. \textbf{Primary Advisor}.}{}
 
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+\hangingitem{Kelsey Murphy: \textit{Ph.D. in Earth, Environmental, and Planetary Sciences}, Rice University. \textbf{Committee Member}.}{}
 
-\begin{itemize}[label={}]
+\hangingitem{Jonah Schaechter: \textit{Ph.D. in Civil and Environmental Engineering}, Rice University. \textbf{Primary Advisor}.}{}
 
-  
-    \item \textbf{Current} True Furrh, \textit{Ph.D. in Civil and Environmental Engineering}, Rice University. 
-  
-    \item \textbf{Current} Kelsey Murphy, \textit{Ph.D. in Earth, Environmental, and Planetary Sciences}, Rice University. 
-  
-    \item \textbf{Current} Valeriia Sobolevskaia, \textit{Ph.D. in Earth, Environmental, and Planetary Sciences}, Rice University. 
-  
-  
-  
-    \item \textbf{2025} \quad Karan Jakhar, \textit{Ph.D. in Mechanical Engineering}, Rice University. Thesis: \enquote{Equation Discovery and Deep Learning for Geophysical Turbulence.}
-  
-    \item \textbf{2025} \quad Kyle Ostlind, \textit{M.S. in Civil and Environmental Engineering}, Rice University. Thesis: \enquote{Evaluating Runoff Response to Nature-Based Solutions under Varying Development Scenarios in Upper Cypress Creak near Houston, Texas.}
-  
-    \item \textbf{2024} \quad Kendall Capshaw, \textit{Ph.D. in Civil and Environmental Engineering}, Rice University. Thesis: \enquote{Modeling Coastal Petrochemical Infrastructure Risk, Resilience, and Cascading Community Consequences.}
-  
-    \item \textbf{2024} \quad Xinyue Luo, \textit{Ph.D. in Earth, Environmental and Planetary Sciences}, Rice University. Thesis: \enquote{Characterizing the El Niño-Southern Oscillation and its North American Teleconnections over the Last Millennium.}
-  
-    \item \textbf{2024} \quad Anibal Tafur Gutierrez, \textit{Ph.D. in Civil and Environmental Engineering}, Rice University. Thesis: \enquote{Methods and Tools for Risk-informed Resilience Enhancement of Coastal Intermodal Freight Networks.}
-  
-    \item \textbf{2024} \quad John A. Baer, \textit{M.S. in Earth, Marine and Environmental Sciences}, University of North Carolina at Chapel Hill. Thesis: \enquote{Quantifying Precipitation-Induced Uncertainty in Flood Hazard Assessment in a Coastal Urban Area.}
-  
-    \item \textbf{2023} \quad Matthew Garcia, \textit{Ph.D. in Civil and Environmental Engineering}, Rice University. Thesis: \enquote{Novel Urban Floodplain Modeling Methods for Applications in Coupling Surrogate Machine Learning Methods.}
-  
-    \item \textbf{2023} \quad Xiangnan Zhou, \textit{Ph.D. in Civil and Environmental Engineering}, Rice University. Thesis: \enquote{Resilience Planning for Water Distribution Systems.}
-  
-    \item \textbf{2023} \quad Mia Peeples, \textit{M.S. in Civil and Environmental Engineering}, Rice University. Thesis: \enquote{Modeling Flood Reduction of Nature-Based Channel Modifications in Houston, TX.}
-  
-    \item \textbf{2022} \quad Chunshan Liu, \textit{Ph.D. in Statistics}, Rice University. Thesis: \enquote{Bayesian Graphical Models for Multivariate Time Series.}
-  
-    \item \textbf{2022} \quad Raychel Bahnick, \textit{M.S. in Civil and Environmental Engineering}, Rice University. Thesis: \enquote{Assessing Land Use Change and Subsidence Impact on Inland Flooding.}
-  
-    \item \textbf{2022} \quad Alyssa Graham, \textit{M.S. in Civil and Environmental Engineering}, Rice University. Thesis: \enquote{Water Supply Vulnerability Testing and Robust Planning Analysis with Exploratory Modeling under Deep Uncertainty.}
-  
-    \item \textbf{2022} \quad Elizabeth Hoffmann, \textit{M.S. in Civil and Environmental Engineering}, Rice University. Thesis: \enquote{Mapping Dynamic Watershed Response Under Increasing Development Using HEC-RAS 2D: A Case Study of the Big Creek Watershed in Fort Bend County.}
-  
-    \item \textbf{2021} \quad Xiaoyu (Toby) Li, \textit{M.S. in Civil and Environmental Engineering}, Rice University. Thesis: \enquote{Evaluating the Effects of Project Brays Mitigation Using Unsteady HEC-RAS Hydraulic Modeling: Application to Meyerland in Houston, TX.}
-  
-\end{itemize}
+\hangingitem{Valeriia Sobolevskaia: \textit{Ph.D. in Earth, Environmental, and Planetary Sciences}, Rice University. \textbf{Committee Member}.}{}
+
+
+\hangingitem{Karan Jakhar: \textit{Ph.D. in Mechanical Engineering}, Rice University. Thesis: \enquote{Equation Discovery and Deep Learning for Geophysical Turbulence}. \textbf{Committee Member}.}{2025}
+
+\hangingitem{Kyle Ostlind: \textit{M.S. in Civil and Environmental Engineering}, Rice University. Thesis: \enquote{Evaluating Runoff Response to Nature-Based Solutions under Varying Development Scenarios in Upper Cypress Creak near Houston, Texas}. \textbf{Committee Member}.}{2025}
+
+\hangingitem{John A. Baer: \textit{M.S. in Earth, Marine and Environmental Sciences}, University of North Carolina at Chapel Hill. Thesis: \enquote{Quantifying Precipitation-Induced Uncertainty in Flood Hazard Assessment in a Coastal Urban Area}. \textbf{Committee Member}.}{2024}
+
+\hangingitem{Kendall Capshaw: \textit{Ph.D. in Civil and Environmental Engineering}, Rice University. Thesis: \enquote{Modeling Coastal Petrochemical Infrastructure Risk, Resilience, and Cascading Community Consequences}. \textbf{Committee Member}.}{2024}
+
+\hangingitem{Xinyue Luo: \textit{Ph.D. in Earth, Environmental and Planetary Sciences}, Rice University. Thesis: \enquote{Characterizing the El Niño-Southern Oscillation and its North American Teleconnections over the Last Millennium}. \textbf{Committee Member}.}{2024}
+
+\hangingitem{Anibal Tafur Gutierrez: \textit{Ph.D. in Civil and Environmental Engineering}, Rice University. Thesis: \enquote{Methods and Tools for Risk-informed Resilience Enhancement of Coastal Intermodal Freight Networks}. \textbf{Committee Member}.}{2024}
+
+\hangingitem{Matthew Garcia: \textit{Ph.D. in Civil and Environmental Engineering}, Rice University. Thesis: \enquote{Novel Urban Floodplain Modeling Methods for Applications in Coupling Surrogate Machine Learning Methods}. \textbf{Committee Member}.}{2023}
+
+\hangingitem{Mia Peeples: \textit{M.S. in Civil and Environmental Engineering}, Rice University. Thesis: \enquote{Modeling Flood Reduction of Nature-Based Channel Modifications in Houston, TX}. \textbf{Committee Member}.}{2023}
+
+\hangingitem{Xiangnan Zhou: \textit{Ph.D. in Civil and Environmental Engineering}, Rice University. Thesis: \enquote{Resilience Planning for Water Distribution Systems}. \textbf{Committee Member}.}{2023}
+
+\hangingitem{Raychel Bahnick: \textit{M.S. in Civil and Environmental Engineering}, Rice University. Thesis: \enquote{Assessing Land Use Change and Subsidence Impact on Inland Flooding}. \textbf{Committee Member}.}{2022}
+
+\hangingitem{Alyssa Graham: \textit{M.S. in Civil and Environmental Engineering}, Rice University. Thesis: \enquote{Water Supply Vulnerability Testing and Robust Planning Analysis with Exploratory Modeling under Deep Uncertainty}. \textbf{Committee Member}.}{2022}
+
+\hangingitem{Elizabeth Hoffmann: \textit{M.S. in Civil and Environmental Engineering}, Rice University. Thesis: \enquote{Mapping Dynamic Watershed Response Under Increasing Development Using HEC-RAS 2D: A Case Study of the Big Creek Watershed in Fort Bend County}. \textbf{Committee Member}.}{2022}
+
+\hangingitem{Chunshan Liu: \textit{Ph.D. in Statistics}, Rice University. Thesis: \enquote{Bayesian Graphical Models for Multivariate Time Series}. \textbf{Committee Member}.}{2022}
+
+\hangingitem{Xiaoyu (Toby) Li: \textit{M.S. in Civil and Environmental Engineering}, Rice University. Thesis: \enquote{Evaluating the Effects of Project Brays Mitigation Using Unsteady HEC-RAS Hydraulic Modeling: Application to Meyerland in Houston, TX}. \textbf{Committee Member}.}{2021}
+
+\end{alignedentrieshang}
+
+%% Advisee Awards
+
+\section{ADVISEE AWARDS}
+
+\begin{alignedentrieshang}
+
+\hangingitem{Karen and John Huff Graduate Fellowship in Civil and Environmental Engineering, \textbf{Dongwook Kim}.}{2025}
+
+\hangingitem{H.W. Reeves Endowed Scholarship, \textbf{Yuchen Lu}.}{2022}
+
+\end{alignedentrieshang}
 
 %% Media Coverage
 
-\section{media coverage}
+\section{MEDIA COVERAGE}
 
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+\begin{alignedentrieshang}
 
-\begin{itemize}[label={}]
-  
-    \item \href{https://mms.tveyes.com/Transcript.asp?StationID=2370&DateTime=7%2F25%2F2025+6%3A31%3A37+PM&LineNumber=&MediaStationID=2370&playclip=True&RefPage=&pbc=WatchlistTerm%3A1599598}{Historic Texas Flooding}, \textbf{KEYE-AUS (CBS)}, 2025-07-25.
-    \textsl{recorded video interview}.
-        
-    \item \href{https://mms.tveyes.com/Transcript.asp?StationID=979&DateTime=7%2F10%2F2025+8%3A31%3A51+AM&LineNumber=&MediaStationID=979&playclip=True&RefPage=&pbc=WatchlistTerm%3A1599598}{Houston's Morning Show}, \textbf{Fox26 Houston}, 2025-07-10.
-    \textsl{live video interview}.
-        
-    \item \href{https://apnews.com/article/flash-floods-texas-hill-country-hydrology-51901309407b21b65cbbc6c04206f627}{Breaking down the force of water in the Texas floods}, \textit{Michael Phillis}, \textbf{AP News}, 2025-07-10.
-    \textsl{print}.
-        
-    \item \href{https://apnews.com/article/flood-hurricane-emergency-disaster-prepare-abb8f9cc9ab16c89a3937638739c6663}{Here are some things you can do to be better prepared for major flooding}, \textit{Caleigh Wells}, \textbf{Associated Press}, 2025-07-10.
-    \textsl{print}.
-        
-    \item \href{https://www.facebook.com/watch/?v=1931096184096338}{ABC13-Luke Jones speaks with James Doss-Gollin, an assistant professor of Civil and Environmental Engineering at Rice University, about the key differences between flooding in Houston and central Texas.}, \textit{Luke Jones}, \textbf{ABC13}, 2025-07-09.
-    \textsl{recorded video interview}.
-        
-    \item \href{https://www.kvue.com/article/news/politics/special-session/central-texas-flooding-special-session/269-2e5a87d4-ec92-4fb8-b850-748de1a6cbbe}{After deadly flooding in Central Texas, state lawmakers look to prevent similar tragedies}, \textit{Daniel Perreault}, \textbf{KVUE}, 2025-07-09.
-    \textsl{recorded video interview}.
-        
-    \item \href{https://www.wsj.com/us-news/climate-environment/texas-guadalupe-flood-threat-system-06c29954}{New Flood Warning System Greenlit Shortly Before Deadly Texas Disaster}, \textit{Joseph De Avila}, \textbf{The Wall Street Journal}, 2025-07-09.
-    \textsl{print}.
-        
-    \item \href{https://abc13.com/post/questions-arise-how-emergency-warning-systems-work-central-texas-flood/17024010/}{Questions arise on how emergency warning systems work after Central Texas flood}, \textit{Tom Abrahams}, \textbf{ABC13}, 2025-07-08.
-    \textsl{print}.
-        
-    \item \href{https://www.telemundohouston.com/noticias/bajo-la-amenaza-del-golfo-parte-1-2/2494095/}{Bajo la Amenaza del Golfo (Under the Threat of the Gulf)}, \textbf{Telemundo Houston}, 2025-05-30.
-    \textsl{recorded video interview}.
-        
-    \item \href{https://www.bbc.com/future/article/20230630-will-texas-become-too-hot-for-humans}{Will Texas become too hot for humans?}, \textit{Sarah Griffiths}, \textbf{BBC Future}, 2023-06-30.
-    \textsl{print}.
-        
-    \item \href{https://www.texastribune.org/2023/06/27/texas-climate-change-heat/}{Climate change has sent temperatures soaring in Texas}, \textit{Erin Douglas, Yuriko Schumacher and Alex Ford}, \textbf{The Texas Tribune}, 2023-06-27.
-    \textsl{print}.
-        
-    \item \href{https://texasclimatenews.org/2022/05/21/texas-could-have-foreseen-2021-cold-wave-disaster-new-study-concludes/}{Texas could have foreseen 2021 cold-wave disaster, new study concludes}, \textit{Bob Henson}, \textbf{Texas Climate News}, 2022-05-21.
-    \textsl{print}.
-        
-    \item \href{https://www.houstonchronicle.com/opinion/outlook/article/Opinion-The-risks-of-climate-change-are-great-16426616.php}{Opinion: The risks of climate change are great - so are the rewards of solving it}, \textit{Andrew Dessler, James Doss-Gollin, and Katherine Hayhoe}, \textbf{Houston Chronicle}, 2021-09-01.
-    \textsl{print}.
-        
-    \item \href{https://newrepublic.com/article/155519/false-comfort-higher-seawalls}{The False Comfort of Higher Seawalls}, \textit{Paola Rosa-Aquino}, \textbf{The New Republic}, 2019-10-29.
-    \textsl{print}.
-        
-    \item \href{https://blogs.ei.columbia.edu/2018/08/06/subseasonal-weather-forecasts-paraguay/}{New Study Shows Promise for Long-Term Weather Forecasts in South America}, \textit{Elisabeth Gawthrop}, \textbf{State of the Planet}, 2018-08-06.
-    \textsl{print}.
-        
-\end{itemize}
+\hangingitem{\enquote{Historic Texas Flooding.} \textbf{KEYE-AUS (CBS)} [\textit{recorded video interview}].}{2025-07-25}
 
-\section{opinion}
+\hangingitem{\enquote{Houston's Morning Show.} \textbf{Fox26 Houston} [\textit{live video interview}].}{2025-07-10}
 
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+\hangingitem{\enquote{Breaking down the force of water in the Texas floods.} \textbf{AP News} --- Michael Phillis [\textit{print}].}{2025-07-10}
 
-\begin{itemize}[label={}]
-  
-  \item \href{https://mms.tveyes.com/Transcript.asp?StationID=2370&DateTime=7%2F25%2F2025+6%3A31%3A37+PM&LineNumber=&MediaStationID=2370&playclip=True&RefPage=&pbc=WatchlistTerm%3A1599598}{Historic Texas Flooding}, \textit{}, \textbf{KEYE-AUS (CBS)}, 2025-07-25.
-        
-  \item \href{https://mms.tveyes.com/Transcript.asp?StationID=979&DateTime=7%2F10%2F2025+8%3A31%3A51+AM&LineNumber=&MediaStationID=979&playclip=True&RefPage=&pbc=WatchlistTerm%3A1599598}{Houston's Morning Show}, \textit{}, \textbf{Fox26 Houston}, 2025-07-10.
-        
-  \item \href{https://apnews.com/article/flash-floods-texas-hill-country-hydrology-51901309407b21b65cbbc6c04206f627}{Breaking down the force of water in the Texas floods}, \textit{Michael Phillis}, \textbf{AP News}, 2025-07-10.
-        
-  \item \href{https://apnews.com/article/flood-hurricane-emergency-disaster-prepare-abb8f9cc9ab16c89a3937638739c6663}{Here are some things you can do to be better prepared for major flooding}, \textit{Caleigh Wells}, \textbf{Associated Press}, 2025-07-10.
-        
-  \item \href{https://www.facebook.com/watch/?v=1931096184096338}{ABC13-Luke Jones speaks with James Doss-Gollin, an assistant professor of Civil and Environmental Engineering at Rice University, about the key differences between flooding in Houston and central Texas.}, \textit{Luke Jones}, \textbf{ABC13}, 2025-07-09.
-        
-  \item \href{https://www.kvue.com/article/news/politics/special-session/central-texas-flooding-special-session/269-2e5a87d4-ec92-4fb8-b850-748de1a6cbbe}{After deadly flooding in Central Texas, state lawmakers look to prevent similar tragedies}, \textit{Daniel Perreault}, \textbf{KVUE}, 2025-07-09.
-        
-  \item \href{https://www.wsj.com/us-news/climate-environment/texas-guadalupe-flood-threat-system-06c29954}{New Flood Warning System Greenlit Shortly Before Deadly Texas Disaster}, \textit{Joseph De Avila}, \textbf{The Wall Street Journal}, 2025-07-09.
-        
-  \item \href{https://abc13.com/post/questions-arise-how-emergency-warning-systems-work-central-texas-flood/17024010/}{Questions arise on how emergency warning systems work after Central Texas flood}, \textit{Tom Abrahams}, \textbf{ABC13}, 2025-07-08.
-        
-  \item \href{https://www.telemundohouston.com/noticias/bajo-la-amenaza-del-golfo-parte-1-2/2494095/}{Bajo la Amenaza del Golfo (Under the Threat of the Gulf)}, \textit{}, \textbf{Telemundo Houston}, 2025-05-30.
-        
-  \item \href{https://www.bbc.com/future/article/20230630-will-texas-become-too-hot-for-humans}{Will Texas become too hot for humans?}, \textit{Sarah Griffiths}, \textbf{BBC Future}, 2023-06-30.
-        
-  \item \href{https://www.texastribune.org/2023/06/27/texas-climate-change-heat/}{Climate change has sent temperatures soaring in Texas}, \textit{Erin Douglas, Yuriko Schumacher and Alex Ford}, \textbf{The Texas Tribune}, 2023-06-27.
-        
-  \item \href{https://texasclimatenews.org/2022/05/21/texas-could-have-foreseen-2021-cold-wave-disaster-new-study-concludes/}{Texas could have foreseen 2021 cold-wave disaster, new study concludes}, \textit{Bob Henson}, \textbf{Texas Climate News}, 2022-05-21.
-        
-  \item \href{https://www.houstonchronicle.com/opinion/outlook/article/Opinion-The-risks-of-climate-change-are-great-16426616.php}{Opinion: The risks of climate change are great - so are the rewards of solving it}, \textit{Andrew Dessler, James Doss-Gollin, and Katherine Hayhoe}, \textbf{Houston Chronicle}, 2021-09-01.
-        
-  \item \href{https://newrepublic.com/article/155519/false-comfort-higher-seawalls}{The False Comfort of Higher Seawalls}, \textit{Paola Rosa-Aquino}, \textbf{The New Republic}, 2019-10-29.
-        
-  \item \href{https://blogs.ei.columbia.edu/2018/08/06/subseasonal-weather-forecasts-paraguay/}{New Study Shows Promise for Long-Term Weather Forecasts in South America}, \textit{Elisabeth Gawthrop}, \textbf{State of the Planet}, 2018-08-06.
-        
-\end{itemize}
+\hangingitem{\enquote{Here are some things you can do to be better prepared for major flooding.} \textbf{Associated Press} --- Caleigh Wells [\textit{print}].}{2025-07-10}
+
+\hangingitem{\enquote{ABC13-Luke Jones speaks with James Doss-Gollin, an assistant professor of Civil and Environmental Engineering at Rice University, about the key differences between flooding in Houston and central Texas..} \textbf{ABC13} --- Luke Jones [\textit{recorded video interview}].}{2025-07-09}
+
+\hangingitem{\enquote{After deadly flooding in Central Texas, state lawmakers look to prevent similar tragedies.} \textbf{KVUE} --- Daniel Perreault [\textit{recorded video interview}].}{2025-07-09}
+
+\hangingitem{\enquote{New Flood Warning System Greenlit Shortly Before Deadly Texas Disaster.} \textbf{The Wall Street Journal} --- Joseph De Avila [\textit{print}].}{2025-07-09}
+
+\hangingitem{\enquote{Questions arise on how emergency warning systems work after Central Texas flood.} \textbf{ABC13} --- Tom Abrahams [\textit{print}].}{2025-07-08}
+
+\hangingitem{\enquote{Bajo la Amenaza del Golfo (Under the Threat of the Gulf).} \textbf{Telemundo Houston} [\textit{recorded video interview}].}{2025-05-30}
+
+\hangingitem{\enquote{Will Texas become too hot for humans?.} \textbf{BBC Future} --- Sarah Griffiths [\textit{print}].}{2023-06-30}
+
+\hangingitem{\enquote{Climate change has sent temperatures soaring in Texas.} \textbf{The Texas Tribune} --- Erin Douglas, Yuriko Schumacher and Alex Ford [\textit{print}].}{2023-06-27}
+
+\hangingitem{\enquote{Texas could have foreseen 2021 cold-wave disaster, new study concludes.} \textbf{Texas Climate News} --- Bob Henson [\textit{print}].}{2022-05-21}
+
+\hangingitem{\enquote{Opinion: The risks of climate change are great - so are the rewards of solving it.} \textbf{Houston Chronicle} --- Andrew Dessler, James Doss-Gollin, and Katherine Hayhoe [\textit{print}].}{2021-09-01}
+
+\hangingitem{\enquote{The False Comfort of Higher Seawalls.} \textbf{The New Republic} --- Paola Rosa-Aquino [\textit{print}].}{2019-10-29}
+
+\hangingitem{\enquote{New Study Shows Promise for Long-Term Weather Forecasts in South America.} \textbf{State of the Planet} --- Elisabeth Gawthrop [\textit{print}].}{2018-08-06}
+
+\end{alignedentrieshang}
+
 
 %% SESSIONS ORGANIZED
 
 \section{sessions organized}
 
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+\begin{alignedentrieshang}
 
-\begin{itemize}[label={}]
-  
-  \item \textbf{Co-Organizer}, \textit{Nature-Based Solutions for a Resilient Gulf Coast Workshop}, Rice University, Houston, TX. 2025-03-03.
-        
-  \item \textbf{Primary Convener}, \textit{H31G - Integrating Social, Scientific, and Engineering Approaches to Identify and Address Gaps in Water Infrastructure and Household Water Security}, American Geophysical Union Fall Meeting, San Francisco, CA. 2023-12-13.
-        
-  \item \textbf{Convener}, \textit{NH41C - Hybrid Modeling and Digital Twin Systems for Flood Hazard Prediction and Risk Assessment at Different Spatial Scales}, American Geophysical Union Fall Meeting, Washington, DC. 2023-12-11.
-        
-  \item \textbf{Chair}, \textit{H44G -- Water and Society: Interdisciplinary Perspectives on Hydroclimatic Forecasting for Water Resources Decision Making}, American Geophysical Union Fall Meeting, New Orleans, LA. 2021-12-16.
-        
-  \item \textbf{Primary Convener}, \textit{NH53 -- Emerging Needs and Approaches for Climate Services: Understanding and Developing Innovative Approaches to User-Oriented Climate Services}, American Geophysical Union Fall Meeting, San Francisco, CA. 2019-12-23.
-        
-  \item \textbf{Student Organizer}, \textit{Earth and Environmental Engineering Student Research Symposium}, Columbia University, New York, NY. 2018-10-12.
-        
-  \item \textbf{Student Organizer}, \textit{Earth and Environmental Engineering Student Research Symposium}, Columbia University, New York, NY. 2017-10-27.
-        
-\end{itemize}
+\hangingitem{\textbf{Co-Organizer}. \textit{Nature-Based Solutions for a Resilient Gulf Coast Workshop} at \textbf{Rice University}, Houston, TX.}{2025-03-03}
 
-%% CONFERENCE PROCEEDINGS
-\section{conference papers}
+\hangingitem{\textbf{Primary Convener}. \textit{H31G - Integrating Social, Scientific, and Engineering Approaches to Identify and Address Gaps in Water Infrastructure and Household Water Security} at \textbf{American Geophysical Union Fall Meeting}, San Francisco, CA.}{2023-12-13}
 
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
-\vspace*{-1em}
-\printbibliography[type=inproceedings, heading=none]
+\hangingitem{\textbf{Convener}. \textit{NH41C - Hybrid Modeling and Digital Twin Systems for Flood Hazard Prediction and Risk Assessment at Different Spatial Scales} at \textbf{American Geophysical Union Fall Meeting}, Washington, DC.}{2023-12-11}
+
+\hangingitem{\textbf{Chair}. \textit{H44G -- Water and Society: Interdisciplinary Perspectives on Hydroclimatic Forecasting for Water Resources Decision Making} at \textbf{American Geophysical Union Fall Meeting}, New Orleans, LA.}{2021-12-16}
+
+\hangingitem{\textbf{Primary Convener}. \textit{NH53 -- Emerging Needs and Approaches for Climate Services: Understanding and Developing Innovative Approaches to User-Oriented Climate Services} at \textbf{American Geophysical Union Fall Meeting}, San Francisco, CA.}{2019-12-23}
+
+\hangingitem{\textbf{Student Organizer}. \textit{Earth and Environmental Engineering Student Research Symposium} at \textbf{Columbia University}, New York, NY.}{2018-10-12}
+
+\hangingitem{\textbf{Student Organizer}. \textit{Earth and Environmental Engineering Student Research Symposium} at \textbf{Columbia University}, New York, NY.}{2017-10-27}
+
+\end{alignedentrieshang}
 
 %% WORKSHOPS
 
-\section{workshop presentations}
+\section{WORKSHOP PRESENTATIONS}
 
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+\textit{Presenter names in bold indicate my own presentations; presenter names in \textcolor{RiceBlue}{blue} indicate advisee presentations.}
 
-\begin{itemize}[label={}]
-  
-  \item \href{https://si.rice.edu/texas-climate-conference-2025}{\enquote{\textbf{Robust Trends in Extreme Rainfall Probabilities in Texas}}}, 2025 Texas Climate Conference,  \textit{Rice University and Texas A\&M University}. Houston, TX. Oral Presentation. 2025-04-10.
-  
-  \item \href{https://events.rice.edu/event/nbs-workshop#!view/all}{\enquote{\textbf{Use-inspired tools for climate hazard assessment}}}, Nature-Based Solutions for a Resilient Gulf Coast Workshop,  \textit{Rice University}. Houston, TX. Oral Presentation. 2025-03-04.
-  
-  \item \enquote{\textbf{Advancing Urban Flood Hazard Characterization through Machine Learning: Challenges and Opportunities}}, American Geophysical Union Fall Meeting 2024,  \textit{AGU}. Washington, DC. Oral Presentation. 2024-12-13.
-  
-  \item \href{https://agu.confex.com/agu/agu24/meetingapp.cgi/Paper/1624973}{\enquote{\textbf{TxRAIN-Observational: A Hierarchical Bayesian Spatial Framework to Assess Nonstationary Rainfall Intensity, Frequency, and Duration in Texas}}}, American Geophysical Union Fall Meeting 2024,  \textit{AGU}. Washington, DC. Oral Presentation. 2024-12-10.
-  
-  \item \href{https://agu.confex.com/agu/agu24/meetingapp.cgi/Paper/1711820}{\enquote{\textbf{Assessing and Managing Climate Risks to Electricity Systems in an Era of Climate Change and Energy Transition}}}, American Geophysical Union Fall Meeting 2024,  \textit{AGU}. Washington, DC. Oral Presentation. 2024-12-10.
-  
-  \item \href{https://cmwrconference.org/wp-content/uploads/2024/09/CMWR-2024-Agenda-Full.pdf}{\enquote{\textbf{Leveraging Machine Learning to Advance Urban Flood Hazard Assessment: Challenges and Opportunities}}}, Data-driven and physics-based machine learning methods for forecasting and knowledge discovery of surface hydrology,  \textit{Conference on Computational Methods in Water Resources}. Tucson, AZ. Oral Presentation. 2024-10-01.
-  
-  \item \href{https://agu.confex.com/agu/fm23/meetingapp.cgi/Paper/1328932}{\enquote{\textbf{H21T-1602: Spatially Varying Covariate Model: A Hierarchical Bayesian Framework for Precipitation Frequency Analysis in the Gulf Coast}}}, American Geophysical Union Fall Meeting 2023,  \textit{AGU}. San Francisco, CA. Oral Presentation. 2023-12-12.
-  
-  \item \href{https://agu.confex.com/agu/fm23/meetingapp.cgi/Paper/1352809}{\enquote{\textbf{NH14B-07: Linking Robust Trends in Observations and Models to Develop Nonstationary Rainfall Frequency Grids for the State of Texas}}}, American Geophysical Union Fall Meeting 2023,  \textit{AGU}. San Francisco, CA. Oral Presentation. 2023-12-11.
-  
-  \item \href{https://iahs.info/uploads/Commissions/ICSH/STAHY%202023%20Program%20Public.pdf}{\enquote{\textbf{A Bayesian Spatial Hierarchical Framework for Process-Informed Nonstationary Analysis of Precipitation Frequencies}}}, 13th International Workshop on Statistical Hydrology,  \textit{International Association of Hydrological Sciences}. Boston, MA. Oral Presentation. 2023-11-10.
-  
-  \item \href{https://agu.confex.com/agu/fm22/meetingapp.cgi/Paper/1136415}{\enquote{\textbf{H42E-1333: Nonstationary GEV with Hierarchical Spatial Pooling: A Spatiotemporal Bayesian Framework for Nonstationary Extreme Precipitation Frequency Analysis in the Gulf Coast}}}, American Geophysical Union Fall Meeting 2022,  \textit{AGU}. Chicago, IL. Oral Presentation. 2022-12-15.
-  
-  \item \href{https://agu.confex.com/agu/fm22/meetingapp.cgi/Paper/1153913}{\enquote{\textbf{H35F-07: Near-term Predictability Lowers Long-Term Adaptation Costs}}}, American Geophysical Union Fall Meeting 2022,  \textit{AGU}. Chicago, IL. Oral Presentation. 2022-12-14.
-  
-  \item \href{agu2021fallmeeting-agu.ipostersessions.com/Default.aspx?s=D2-0D-CF-34-C4-B0-81-F3-7F-89-98-D7-10-3D-BB-01}{\enquote{\textbf{H25U-1265: Operationalizing Bayesian Model Checking for Robust Decision Making: Insights from House Elevation}}}, American Geophysical Union Fall Meeting 2021,  \textit{AGU}. New Orleans, LA. Poster Presentation. 2021-12-14.
-  
-  \item \href{https://agu.confex.com/agu/fm21/meetingapp.cgi/Paper/796322}{\enquote{\textbf{A14H-03: How Unprecedented Was the February 2021 Texas Cold Snap?}}}, American Geophysical Union Fall Meeting 2021,  \textit{AGU}. New Orleans, LA. Oral Presentation. 2021-12-13.
-  
-  \item \href{https://2020.deepuncertainty.org/program}{\enquote{\textbf{Valuing Flexibility and Soft Instruments for Sequential Decision Problems}}}, 2020 Annual Meeting,  \textit{Society for Decision Making under Deep Uncertainty}. . Remote Presentation. 2020-11-11.
-  
-  \item \href{https://figshare.com/articles/Towards_Adaptive_Resilience_Managing_uncertainties_and_exploiting_predictability_across_timescales/11397936}{\enquote{\textbf{H11G-07: Towards Adaptive Resilience: Managing Uncertainties and Exploiting Predictability across Timescales}}}, American Geophysical Union Fall Meeting 2019,  \textit{AGU}. San Francisco, CA. Oral Presentation. 2019-12-09.
-  
-  \item \enquote{\textbf{Adaptive Resilience through Real Options and Deep Reinforecement Learning}}, Doctoral Consortium on Computational Sustainability,  \textit{Carnegie Mellon University}. Pittsburgh,  PA. Oral Presentation. 2019-10-19.
-  
-  \item \enquote{\textbf{Evaluating Staged Investments in Critical Infrastructure for Climate Adaptation}}, 2019 Interdisciplinary Ph.D. Workshop in Sustainable Development,  \textit{Columbia University}. New York, NY. Oral Presentation. 2019-04-12.
-  
-  \item \href{https://agu.confex.com/agu/fm18/meetingapp.cgi/Paper/440508}{\enquote{\textbf{H52F-05: Robust Adaptation to Cyclical Climate Risk}}}, American Geophysical Union Fall Meeting 2018,  \textit{AGU}. Washington, DC. Oral Presentation. 2018-12-14.
-  
-  \item \href{https://doi.org/10.6084/m9.figshare.8277002.v1}{\enquote{\textbf{Robust Adaptation to Multi-Scale Climate Variability}}}, The Nexus of Climate Data, Insurance, and Adaptive Capacity,  . Asheville, NC. Poster Presentation. 2018-11-08.
-  
-  \item \href{https://agu.confex.com/agu/fm17/meetingapp.cgi/Paper/299087}{\enquote{\textbf{A31H-0135: Causes and Model Skill of the Persistent Intense Rainfall and Flooding in Paraguay during the Austral Summer 2015-2016}}}, American Geophysical Union Fall Meeting 2017,  \textit{AGU}. New Orleans, LA. Oral Presentation. 2017-12-01.
-  
-  \item \href{https://agu.confex.com/agu/fm17/meetingapp.cgi/Paper/241469}{\enquote{\textbf{H22B-02: Designing and Operating Infrastructure for Nonstationary Flood Risk Management}}}, American Geophysical Union Fall Meeting 2017,  \textit{AGU}. New Orleans, LA. Oral Presentation. 2017-12-01.
-  
-  \item \href{https://doi.org/10.6084/m9.figshare.8277128.v2}{\enquote{\textbf{Extreme Rainfall in Paraguay during the 2015-16 Austral Summer: Causes and Predictive Skill}}}, North East Graduate Student Water Symposium,  \textit{University of Massachusetts Amherst}. Amherst, MA. Oral Presentation. 2017-09-10.
-  
-  \item \href{https://doi.org/10.6084/m9.figshare.8277167.v1}{\enquote{\textbf{Regional Intense Precipitation: Inferences From GCM Atmospheric Circulation Fields}}}, Modeling Research in the Cloud,  \textit{National Center for Atmospheric Research}. Boulder, CO. Poster Presentation. 2017-05-31.
-  
-  \item \enquote{\textbf{Statistical-Dynamical Analysis of Climate Projections for Flood Infrastructure Design}}, Interdisciplinary Ph.D. Workshop in Sustainable Development 2017,  \textit{Columbia University}. New York, NY. Oral Presentation. 2017-04-21.
-  
-  \item \href{https://doi.org/10.13140/RG.2.2.20146.30406}{\enquote{\textbf{Causes and Model Skill of the Persistent Intense Rainfall and Flooding in Paraguay during the Austral Summer 2015-2016}}}, Workshop on Subseasonal to Seasonal Predictability of Extreme Weather and Climate,  \textit{Columbia University}. New York, NY. Poster Presentation. 2016-12-06.
-  
-\end{itemize}
+\bigskip
+
+\begin{alignedentrieshang}
+
+
+\hangingitem{\textbf{James Doss-Gollin}: \enquote{Robust Trends in Extreme Rainfall Probabilities in Texas}. \textbf{2025 Texas Climate Conference}, \textit{Rice University and Texas A\&M University}, Houston, TX [\textit{Talk}].}{2025-04-10}
+
+
+
+\hangingitem{\textbf{James Doss-Gollin}: \enquote{Use-inspired tools for climate hazard assessment}. \textbf{Nature-Based Solutions for a Resilient Gulf Coast Workshop}, \textit{Rice University}, Houston, TX [\textit{Talk}].}{2025-03-04}
+
+
+
+\hangingitem{\textbf{James Doss-Gollin}: \enquote{Advancing Urban Flood Hazard Characterization through Machine Learning: Challenges and Opportunities}. \textbf{American Geophysical Union Fall Meeting 2024}, \textit{AGU}, Washington, DC [\textit{Talk}].}{2024-12-13}
+
+
+
+\hangingitem{\textcolor{RiceBlue}{\textbf{Yuchen Lu}}: \enquote{TxRAIN-Observational: A Hierarchical Bayesian Spatial Framework to Assess Nonstationary Rainfall Intensity, Frequency, and Duration in Texas}. \textbf{American Geophysical Union Fall Meeting 2024}, \textit{AGU}, Washington, DC [\textit{Talk}].}{2024-12-10}
+
+
+
+\hangingitem{\textbf{James Doss-Gollin}: \enquote{Assessing and Managing Climate Risks to Electricity Systems in an Era of Climate Change and Energy Transition}. \textbf{American Geophysical Union Fall Meeting 2024}, \textit{AGU}, Washington, DC [\textit{Talk}].}{2024-12-10}
+
+
+
+\hangingitem{\textcolor{RiceBlue}{\textbf{Yuchen Lu}}: \enquote{Nonstationary Extreme Precipitation Probabilities in Texas}. \textbf{Fall Meeting}, \textit{Consortium for Enhancing Resilience and Catastrophe Modeling (CERCat)}, Bethlehem, PA [\textit{Poster}].}{2024-10-17}
+
+
+
+\hangingitem{\textbf{James Doss-Gollin}: \enquote{Leveraging Machine Learning to Advance Urban Flood Hazard Assessment: Challenges and Opportunities}. \textbf{Data-driven and physics-based machine learning methods for forecasting and knowledge discovery of surface hydrology}, \textit{Conference on Computational Methods in Water Resources}, Tucson, AZ [\textit{Talk}].}{2024-10-01}
+
+
+
+\hangingitem{\textcolor{RiceBlue}{\textbf{Yuchen Lu}}: \enquote{Spatially Varying and Duration Dependent Covariate Model: A Hierarchical Bayesian Framework for Multi-duration Extreme Precipitation Frequency Analysis in Texas}. \textbf{World Environmental \& Water Resources Congress 2024}, \textit{Environmental \& Water Resources Institute (EWRI) - ASCE}, Milwaukee, WI [\textit{Talk}].}{2024-05-21}
+
+
+
+\hangingitem{\textcolor{RiceBlue}{\textbf{Yuchen Lu}}: \enquote{H21T-1602: Spatially Varying Covariate Model: A Hierarchical Bayesian Framework for Precipitation Frequency Analysis in the Gulf Coast}. \textbf{American Geophysical Union Fall Meeting 2023}, \textit{AGU}, San Francisco, CA [\textit{Talk}].}{2023-12-12}
+
+
+
+\hangingitem{\textbf{James Doss-Gollin}: \enquote{NH14B-07: Linking Robust Trends in Observations and Models to Develop Nonstationary Rainfall Frequency Grids for the State of Texas}. \textbf{American Geophysical Union Fall Meeting 2023}, \textit{AGU}, San Francisco, CA [\textit{Talk}].}{2023-12-11}
+
+
+
+\hangingitem{\textbf{James Doss-Gollin}: \enquote{A Bayesian Spatial Hierarchical Framework for Process-Informed Nonstationary Analysis of Precipitation Frequencies}. \textbf{13th International Workshop on Statistical Hydrology}, \textit{International Association of Hydrological Sciences}, Boston, MA [\textit{Talk}].}{2023-11-10}
+
+
+
+\hangingitem{\textcolor{RiceBlue}{\textbf{Yuchen Lu}}: \enquote{H42E-1333: Nonstationary GEV with Hierarchical Spatial Pooling: A Spatiotemporal Bayesian Framework for Nonstationary Extreme Precipitation Frequency Analysis in the Gulf Coast}. \textbf{American Geophysical Union Fall Meeting 2022}, \textit{AGU}, Chicago, IL [\textit{Talk}].}{2022-12-15}
+
+
+
+\hangingitem{\textbf{James Doss-Gollin}: \enquote{H35F-07: Near-term Predictability Lowers Long-Term Adaptation Costs}. \textbf{American Geophysical Union Fall Meeting 2022}, \textit{AGU}, Chicago, IL [\textit{Talk}].}{2022-12-14}
+
+
+
+\hangingitem{\textbf{James Doss-Gollin}: \enquote{H25U-1265: Operationalizing Bayesian Model Checking for Robust Decision Making: Insights from House Elevation}. \textbf{American Geophysical Union Fall Meeting 2021}, \textit{AGU}, New Orleans, LA [\textit{Poster}].}{2021-12-14}
+
+
+
+\hangingitem{\textbf{James Doss-Gollin}: \enquote{A14H-03: How Unprecedented Was the February 2021 Texas Cold Snap?}. \textbf{American Geophysical Union Fall Meeting 2021}, \textit{AGU}, New Orleans, LA [\textit{Talk}].}{2021-12-13}
+
+
+
+\hangingitem{\textbf{James Doss-Gollin}: \enquote{Valuing Flexibility and Soft Instruments for Sequential Decision Problems}. \textbf{2020 Annual Meeting}, \textit{Society for Decision Making under Deep Uncertainty},  [\textit{Remote Presentation}].}{2020-11-11}
+
+
+
+\hangingitem{\textbf{James Doss-Gollin}: \enquote{H11G-07: Towards Adaptive Resilience: Managing Uncertainties and Exploiting Predictability across Timescales}. \textbf{American Geophysical Union Fall Meeting 2019}, \textit{AGU}, San Francisco, CA [\textit{Talk}].}{2019-12-09}
+
+
+
+\hangingitem{\textbf{James Doss-Gollin}: \enquote{Adaptive Resilience through Real Options and Deep Reinforecement Learning}. \textbf{Doctoral Consortium on Computational Sustainability}, \textit{Carnegie Mellon University}, Pittsburgh,  PA [\textit{Talk}].}{2019-10-19}
+
+
+
+\hangingitem{\textbf{James Doss-Gollin}: \enquote{Evaluating Staged Investments in Critical Infrastructure for Climate Adaptation}. \textbf{2019 Interdisciplinary Ph.D. Workshop in Sustainable Development}, \textit{Columbia University}, New York, NY [\textit{Talk}].}{2019-04-12}
+
+
+
+\hangingitem{\textbf{James Doss-Gollin}: \enquote{H52F-05: Robust Adaptation to Cyclical Climate Risk}. \textbf{American Geophysical Union Fall Meeting 2018}, \textit{AGU}, Washington, DC [\textit{Talk}].}{2018-12-14}
+
+
+
+\hangingitem{\textbf{James Doss-Gollin}: \enquote{Robust Adaptation to Multi-Scale Climate Variability}. \textbf{The Nexus of Climate Data, Insurance, and Adaptive Capacity}, Asheville, NC [\textit{Poster}].}{2018-11-08}
+
+
+
+\hangingitem{\textbf{James Doss-Gollin}: \enquote{A31H-0135: Causes and Model Skill of the Persistent Intense Rainfall and Flooding in Paraguay during the Austral Summer 2015-2016}. \textbf{American Geophysical Union Fall Meeting 2017}, \textit{AGU}, New Orleans, LA [\textit{Talk}].}{2017-12-01}
+
+
+
+\hangingitem{\textbf{James Doss-Gollin}: \enquote{H22B-02: Designing and Operating Infrastructure for Nonstationary Flood Risk Management}. \textbf{American Geophysical Union Fall Meeting 2017}, \textit{AGU}, New Orleans, LA [\textit{Talk}].}{2017-12-01}
+
+
+
+\hangingitem{\textbf{James Doss-Gollin}: \enquote{Extreme Rainfall in Paraguay during the 2015-16 Austral Summer: Causes and Predictive Skill}. \textbf{North East Graduate Student Water Symposium}, \textit{University of Massachusetts Amherst}, Amherst, MA [\textit{Talk}].}{2017-09-10}
+
+
+
+\hangingitem{\textbf{James Doss-Gollin}: \enquote{Regional Intense Precipitation: Inferences From GCM Atmospheric Circulation Fields}. \textbf{Modeling Research in the Cloud}, \textit{National Center for Atmospheric Research}, Boulder, CO [\textit{Poster}].}{2017-05-31}
+
+
+
+\hangingitem{\textbf{James Doss-Gollin}: \enquote{Statistical-Dynamical Analysis of Climate Projections for Flood Infrastructure Design}. \textbf{Interdisciplinary Ph.D. Workshop in Sustainable Development 2017}, \textit{Columbia University}, New York, NY [\textit{Talk}].}{2017-04-21}
+
+
+
+\hangingitem{\textbf{James Doss-Gollin}: \enquote{Causes and Model Skill of the Persistent Intense Rainfall and Flooding in Paraguay during the Austral Summer 2015-2016}. \textbf{Workshop on Subseasonal to Seasonal Predictability of Extreme Weather and Climate}, \textit{Columbia University}, New York, NY [\textit{Poster}].}{2016-12-06}
+
+
+\end{alignedentrieshang}
 
 %% REVIEW ACTIVITIES
 
-\section{peer review}
+\section{PEER REVIEW}
 
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+\subsection{Journals}
 
-\begin{itemize}[label={}]
-  
-    \item AGU Advances
-  
-    \item Climate Risk Management
-  
-    \item Climatic Change
-  
-    \item Communications Earth and Environment
-  
-    \item Earth's Future
-  
-    \item Energy Technology
-  
-    \item Environmental Data Science
-  
-    \item Environmental Research Letters
-  
-    \item Geophysical Research Letters
-  
-    \item Hydrology and Earth System Sciences
-  
-    \item Joule
-  
-    \item Journal of Applied Meteorology and Climatology
-  
-    \item Journal of Hydrology
-  
-    \item Journal of Water Resources Management and Planning
-  
-    \item Oxford Journal of Development Studies
-  
-    \item Water Resources Research
-  
-    \item Water Security
-  
-    \item Weather, Climate, and Society
-  
-\end{itemize}
+\begin{alignedentrieshang}[2em]
 
-\section{grant review}
+  \hangingitem{AGU Advances; Climate Risk Management; Climatic Change; Communications Earth and Environment; Earth's Future; Energy Technology; Environmental Data Science; Environmental Research Letters; Geophysical Research Letters; Hydrology and Earth System Sciences; Joule; Journal of Applied Meteorology and Climatology; Journal of Hydrology; Journal of Water Resources Management and Planning; Oxford Journal of Development Studies; Water Resources Research; Water Security; Weather, Climate, and Society.
+  }{}
 
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
 
-\begin{itemize}[label={}]
-  
-  \item Department of Energy (BER)
-        
-  \item National Science Foundation
-        
-\end{itemize}
+\end{alignedentrieshang}
 
-\section{external review}
 
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+\subsection{Funding Agencies}
 
-\begin{itemize}[label={}]
-  
-  \item Electric Power Research Institute (EPRI)
-        
-  \item Texas Water Development Board (TWDB)
-        
-\end{itemize}
+\begin{alignedentrieshang}[2em]
+
+  \hangingitem{Department of Energy (BER); National Science Foundation.
+  }{}
+
+
+\end{alignedentrieshang}
+
+
+\subsection{Agencies}
+
+\begin{alignedentrieshang}[2em]
+
+  \hangingitem{Electric Power Research Institute (EPRI); Texas Water Development Board (TWDB).
+  }{}
+
+
+\end{alignedentrieshang}
 
 %% Additional Experience and Training
 
-\section{additional experience}
+\section{ADDITIONAL EXPERIENCE}
 
-\mbox{}\vspace{-\dimexpr\baselineskip\relax}
+\begin{alignedentrieshang}
 
-\begin{itemize}[label={}]
-  
-  \item \textbf{Social and Behavioral Research - Basic/Refresher}, CITI program. 2025--2028.
-  
-  \item \textbf{Panel Fellow}, NSF CMMI's Game Changer Academies for Advancing Research Innovation. 2021.
-  
-  \item \textbf{Visiting Graduate Researcher}, Lamontagne Research Group, Department of Civil and Environmental Engineering, Tufts University, Medford, MA. 2019--2020.
-  
-  \item \textbf{Graduate Research Fellow}, Columbia Water Center, Department of Earth and Environmental Engineering, Columbia University, New York, NY. 2015--2020.
-  
-  \item \textbf{Summer School Participant}, Fluid Dynamics of Sustainability and the Environment, Cambridge University, Cambridge, England. 2016.
-  
-  \item \textbf{Education Policy Intern}, Elm City Communities / New Haven Housing Authority, New Haven, CT. 2015.
-  
-  \item \textbf{President (2014), Design Lead (2013), Member (2012, 2015)}, Engineers Without Borders, Yale Student Chapter, New Haven, CT. 2012--2015.
-  
-  \item \textbf{Undergraduate Research Assistant}, Lab of Jaehong Kim, Department of Chemical and Environmental Engineering, Yale University, New Haven, CT. 2014--2015.
-  
-  \item \textbf{Visiting Undergraduate Researcher}, Water and Climate Risk Lab, Department of Hydraulic and Environmental Engineering, Universidade Federal do Ceará, Fortaleza, Brazil. 2014.
-  
-  \item \textbf{Mechanical Design Intern}, Slingshot Team, DEKA Research \& Development, Manchester, NH. 2013.
-  
-  \item \textbf{Undergraduate Research Assistant}, Lab of Jan Schroers, Department of Mechanical Engineering and Materials Science, Yale University, New Haven, CT. 2012.
-  
-  \item \textbf{Ikatú Agua Intern}, Fundación Paraguaya, Asunción, Paraguay. 2012.
-  
-\end{itemize}
+\hangingitem{\textbf{Social and Behavioral Research - Basic/Refresher} --- \textit{CITI program}.}{2025--2028}
+
+\hangingitem{\textbf{Panel Fellow} --- \textit{NSF CMMI's Game Changer Academies for Advancing Research Innovation}.}{2021}
+
+\hangingitem{\textbf{Visiting Graduate Researcher} --- \textit{Lamontagne Research Group, Department of Civil and Environmental Engineering, Tufts University, Medford, MA}.}{2019--2020}
+
+\hangingitem{\textbf{Graduate Research Fellow} --- \textit{Columbia Water Center, Department of Earth and Environmental Engineering, Columbia University, New York, NY}.}{2015--2020}
+
+\hangingitem{\textbf{Summer School Participant} --- \textit{Fluid Dynamics of Sustainability and the Environment, Cambridge University, Cambridge, England}.}{2016}
+
+\hangingitem{\textbf{Education Policy Intern} --- \textit{Elm City Communities / New Haven Housing Authority, New Haven, CT}.}{2015}
+
+\hangingitem{\textbf{President (2014), Design Lead (2013), Member (2012, 2015)} --- \textit{Engineers Without Borders, Yale Student Chapter, New Haven, CT}.}{2012--2015}
+
+\hangingitem{\textbf{Undergraduate Research Assistant} --- \textit{Lab of Jaehong Kim, Department of Chemical and Environmental Engineering, Yale University, New Haven, CT}.}{2014--2015}
+
+\hangingitem{\textbf{Visiting Undergraduate Researcher} --- \textit{Water and Climate Risk Lab, Department of Hydraulic and Environmental Engineering, Universidade Federal do Ceará, Fortaleza, Brazil}.}{2014}
+
+\hangingitem{\textbf{Mechanical Design Intern} --- \textit{Slingshot Team, DEKA Research \textbackslash\& Development, Manchester, NH}.}{2013}
+
+\hangingitem{\textbf{Undergraduate Research Assistant} --- \textit{Lab of Jan Schroers, Department of Mechanical Engineering and Materials Science, Yale University, New Haven, CT}.}{2012}
+
+\hangingitem{\textbf{Ikatú Agua Intern} --- \textit{Fundación Paraguaya, Asunción, Paraguay}.}{2012}
+
+\end{alignedentrieshang}
 
 
 

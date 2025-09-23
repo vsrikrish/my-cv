@@ -41,6 +41,8 @@ sections:
     file: teaching.yml
   - title: Advising
     file: advising.yml
+  - title: Advisee Awards
+    file: awards_advisee.yml
   - title: Awards
     file: awards.yml
   - title: Media Coverage

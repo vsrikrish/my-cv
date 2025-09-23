@@ -27,7 +27,7 @@ def format_amount(amount):
     """Format amount as currency if present"""
     if amount:
         try:
-            return f"${int(amount.replace('_', '')):,}"
+            return int(amount.replace("_", ""))
         except (ValueError, AttributeError):
             return amount
     return ""

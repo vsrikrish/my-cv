@@ -1,0 +1,140 @@
+% language setup
+\usepackage[english]{babel}
+
+% margins
+\usepackage[left=0.75in, right=0.75in, top=1in, bottom=0.75in]{geometry}% adjust the page margins
+
+\RequirePackage{xcolor}
+\definecolor{RiceBlue}{HTML}{00205B} % official Rice blue color -- use for text etc
+\definecolor{RiceGray}{HTML}{7C7E7F} % official Rice gray -- use for Section
+\definecolor{LightGray}{HTML}{E0E2E6} % background color -- do not use for anything else
+\definecolor{BrickRed}{HTML}{C04829} % backup color 
+\definecolor{GrassGreen}{HTML}{359245}
+\definecolor{WarmYellow}{HTML}{E9A139}
+%% Choose fonts for use with xelatex
+
+
+% Better footer
+\usepackage{fancyhdr}
+\fancyhf{}
+\fancyfoot[L]{James Doss-Gollin}
+\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{1pt}
+\pagestyle{fancy}
+
+
+\usepackage{fontspec}
+\setromanfont[
+  Path = ../fonts/,
+  UprightFont = *-Regular,
+  BoldFont = *-Bold,
+  ItalicFont = *-Italic,
+  BoldItalicFont = *-BoldItalic,
+  Extension = .ttf,
+]{Lato}
+\setsansfont[
+  Path = ../fonts/,
+  UprightFont = *-Regular,
+  Extension = .ttf,
+]{Inconsolata}
+
+% Section styling
+\usepackage{titlesec}
+\titleformat{\section}{\large\bfseries\uppercase}{}{0pt}{}[\titlerule]
+\titleformat{\subsection}{\normalsize\bfseries}{}{0pt}{}
+\titleformat{\subsubsection}{\normalsize\itshape}{}{0pt}{}
+
+\titlespacing*{\section}{0pt}{1em}{0.5em}
+\titlespacing*{\subsection}{0pt}{0pt}{0pt}
+\titlespacing*{\subsubsection}{0pt}{0pt}{0pt}
+
+\raggedbottom
+
+% useful macro
+\newcommand{\dotspace}{\quad}
+
+% Load longtable package
+\usepackage{longtable}
+
+% Custom environment for aligned entries with years
+\newenvironment{alignedentries}[1][0pt]{%
+  \noindent%
+  \hspace{#1}%
+  \begin{tabular*}{\dimexpr\textwidth-#1\relax}{@{}p{\dimexpr0.85\textwidth-#1\relax}@{\extracolsep{\fill}}r@{}}%
+    }{%
+  \end{tabular*}%
+}
+% Custom environment for aligned entries with hanging indent
+\newenvironment{alignedentrieshang}[1][2em]{%
+  \noindent%
+}{%
+}
+\newcommand{\hangingitem}[2]{%
+  \noindent%
+  \begin{tabular*}{\textwidth}{@{}p{0.85\textwidth}@{\extracolsep{\fill}}r@{}}%
+    \hangindent=2em \hangafter=1 #1 & #2%
+  \end{tabular*}%
+}
+\newcommand{\entryitem}[2]{#1 & #2}
+\newcommand{\entrybreak}{\\}
+
+% better lists
+\usepackage{enumitem}
+\setlist[itemize, 1]{nosep, noitemsep, label={}, labelsep=-5pt, leftmargin=*, after=\vspace{\baselineskip}, itemindent=-15pt, labelindent=5pt}
+
+% fixed width tables
+\usepackage{array}
+\newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
+\newcolumntype{C}[1]{>{\PreserveBackslash\centering}p{#1}}
+\newcolumntype{R}[1]{>{\PreserveBackslash\raggedleft}p{#1}}
+\newcolumntype{L}[1]{>{\PreserveBackslash\raggedright}p{#1}}
+
+\usepackage[autostyle=true, autopunct=true, english=american]{csquotes}
+\usepackage[
+  backend=biber,
+  style=publist,
+  plauthorfirstinit=true,
+  plauthorhandling=highlight,
+  plnumbered=false,
+  labeldateparts=false,
+  boldyear=false,
+  marginyear=true,
+  doi=true,
+  url=false,
+  isbn=false,
+  maxbibnames=99,
+  maxcitenames=99,
+  date=year,
+]{biblatex}
+\setlength{\bibhang}{15pt}
+
+% custom author highlighting: blue+bold for James, purple+bold+asterisk for group members
+\renewcommand*{\plauthorhl}[1]{%
+  \StrGobbleRight{#1}{1}[\trimmedname]%
+  \IfSubStr{#1}{Doss-Gollin}%
+  {\textcolor{RiceBlue}{\mkbibbold{\trimmedname}}}%
+  {\textcolor{GrassGreen}{\mkbibbold{\trimmedname}}}%
+}
+
+% bold my name (will be blue)
+\plauthorname[James]{Doss-Gollin}
+
+% highlight group members (will be purple with asterisk)
+\plauthorname[Yuchen]{Lu}
+
+% include everything in bibliography
+\nocite{*}
+
+%% other stuff
+% icons for the contact info
+\usepackage{fontawesome5}
+\usepackage{academicons}
+
+% conditional logic for author highlighting
+\usepackage{ifthen}
+\usepackage{xstring}
+
+% have to load this last
+\usepackage{hyperref} % Required for adding links	and customizing them
+\hypersetup{hidelinks, breaklinks}
