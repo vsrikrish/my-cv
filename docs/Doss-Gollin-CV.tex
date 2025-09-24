@@ -50,7 +50,7 @@
 \titleformat{\subsubsection}{\normalsize\itshape}{}{0pt}{}
 
 \titlespacing*{\section}{0pt}{1em}{0.5em}
-\titlespacing*{\subsection}{0pt}{0pt}{0pt}
+\titlespacing*{\subsection}{0pt}{1em}{0pt}
 \titlespacing*{\subsubsection}{0pt}{0pt}{0pt}
 
 \raggedbottom
@@ -65,7 +65,7 @@
 \newenvironment{alignedentries}[1][0pt]{%
   \noindent%
   \hspace{#1}%
-  \begin{tabular*}{\dimexpr\textwidth-#1\relax}{@{}p{\dimexpr0.875\textwidth-#1\relax}@{\extracolsep{\fill}}r@{}}%
+  \begin{tabular*}{\dimexpr\textwidth-#1\relax}{@{}p{\dimexpr0.85\textwidth-#1\relax}@{\extracolsep{\fill}}r@{}}%
     }{%
   \end{tabular*}%
 }
@@ -76,7 +76,7 @@
 }
 \newcommand{\hangingitem}[2]{%
   \noindent%
-  \begin{tabular*}{\textwidth}{@{}p{0.875\textwidth}@{\extracolsep{\fill}}r@{}}%
+  \begin{tabular*}{\textwidth}{@{}p{0.85\textwidth}@{\extracolsep{\fill}}r@{}}%
     \hangindent=2em \hangafter=1 #1 & #2%
   \end{tabular*}%
 }
@@ -239,12 +239,12 @@
 \section{APPOINTMENTS}
 
 
-\subsection{Rice University}
+\textbf{Rice University}
 \begin{alignedentries}[2em]
 \entryitem{\textit{Assistant Professor}, Department of Civil \& Environmental Engineering}{2021---}\entrybreak
 \end{alignedentries}
 
-\subsection{The Pennsylvania State University}
+\textbf{The Pennsylvania State University}
 \begin{alignedentries}[2em]
 \entryitem{\textit{Postdoctoral Scholar}, Earth \& Environmental Systems Institute}{2020}
 \end{alignedentries}
@@ -254,16 +254,16 @@
 \section{EDUCATION}
 
 
-\subsection{Columbia University}
+\textbf{Columbia University}
 \begin{alignedentries}[2em]
 
-\entryitem{\textit{Ph.D in Earth \& Environmental Engineering}.}{2020}\entrybreak
+\entryitem{\textit{Ph.D. in Earth \& Environmental Engineering}.}{2020}\entrybreak
 
 \entryitem{\textit{M.S. in Earth \& Environmental Engineering}.}{2016}
 
 \end{alignedentries}
 
-\subsection{Yale University}
+\textbf{Yale University}
 \begin{alignedentries}[2em]
 
 \entryitem{\textit{B.S. in Mechanical Engineering}.}{2015}
@@ -302,15 +302,17 @@
 
 \textit{Amounts reflect Rice portion for collaborative grants and subawards; total amount for direct awards.}
 
-\bigskip
+\medskip
 
 \begin{alignedentrieshang}
 
-\hangingitem{\textit{National Science Foundation}\textit{: Confronting Hazards, Impacts and Risks for a Resilient Planet (CHIRRP)}. ``RAISE: Flood resilience in rural Texas communities.'' \textbf{co-PI} (PI: Avantika Gori). \textbf{\$999,986}.}{2025--2028}
+\hangingitem{\textit{National Science Foundation}\textit{: Confronting Hazards, Impacts and Risks for a Resilient Planet (CHIRRP)}. ``RAISE: Flood Resilience in Rural Texas Communities.'' \textbf{co-PI} (PI: Avantika Gori). \textbf{\$999,986}.}{2025--2028}
 
 \hangingitem{\textit{Consortium for Enhancing Resilience and Catastrophe Modeling (CERCAT)}. ``A Nonstationary Joint Probability Method for Tropical Cyclone Hazard Assessment.'' \textbf{Lead PI}. \textbf{\$75,000}.}{2025--2026}
 
 \hangingitem{\textit{NVIDIA}. ``Computing Infrastructure for AI-enhanced Climate Risk and Resilience at Rice.'' \textbf{co-PI} (PI: Arlei Lopes da Silva). \textbf{\$0}.}{2025--2025}
+
+\hangingitem{\textit{Rice University Sustainability Institute}. ``Workshop on Nature-Based Solutions for Resilient Coastal Cities.'' \textbf{co-PI} (PI: Avantika Gori). \textbf{\$7,500}.}{2024--2025}
 
 \hangingitem{\textit{Ken Kennedy Institute at Rice University}. ``Advancing AI for Climate Risk and Urban Resilience.'' \textbf{Lead PI}. \textbf{\$160,000}.}{2024--2025}
 
@@ -320,7 +322,7 @@
 
 \hangingitem{\textit{National Science Foundation}\textit{: Strengthening America's Infrastructure}. ``EAGER: Participatory Design for Water Quality Monitoring of Highly Decentralized Water Infrastructure Systems.'' \textbf{PI} (PI: Alicia Cooperman). \textbf{\$104,684}.}{2022--2025}
 
-\hangingitem{\textit{National Science Foundation}\textit{: Climate and Large-Scale Dynamics}. ``Collaborative Research: Evaluating the Past and Future of Mississippi River Hydroclimatology to Constrain Risk via Integrated Climate Modeling, Observations, and Reconstructions.'' \textbf{co-PI}. \textbf{\$472,024}.}{2022--2025}
+\hangingitem{\textit{National Science Foundation}\textit{: Climate and Large-Scale Dynamics}. ``Collaborative Research: Evaluating the Past and Future of Mississippi River Hydroclimatology to Constrain Risk via Integrated Climate Modeling, Observations, and Reconstructions.'' \textbf{co-PI} (PI: Sylvia Dee). \textbf{\$472,024}.}{2022--2025}
 
 \hangingitem{\textit{Rice University}\textit{: Sustainable Futures Fund}. ``Leveraging Earth System Observations at Multiple Scales to Improve Stormwater Management in Houston.'' \textbf{Lead PI}. \textbf{\$50,000}.}{2022--2023}
 
@@ -360,23 +362,27 @@
 
 \begin{alignedentrieshang}
 
+\hangingitem{Panelist. Exploring Water Resilience to Emerging Challenges,  \textbf{Society for Risk Analysis}, Remote Presentation.}{2024}
+
 \hangingitem{\enquote{Advancing Urban Flood Risk Management through Physics-informed, Data-Driven Hazard Assessment}. Earth, Marine, and Environmental Science Seminar,  \textbf{University of North Carolina}, Chapel Hill, NC.}{2024}
 
-\hangingitem{\enquote{Quantifying and characterizing uncertain climate hazards to enable adaptive resilience}. Atmospheric Sciences Seminar,  \textbf{Texas A\&M University}, College Station, TX.}{2022}
+\hangingitem{\enquote{Quantifying and Characterizing Uncertain Climate Hazards to Enable Adaptive Resilience}. Atmospheric Sciences Seminar,  \textbf{Texas A\&M University}, College Station, TX.}{2022}
 
-\hangingitem{\enquote{Unprecedented impacts don't require unprecedented weather}. Post-Harvey Climate \& Flood Impacts on the Built Environment,  \textbf{Severe Storm Prediction, Education, \& Evacuation from Disasters Center}, Houston, TX.}{2022}
+\hangingitem{\enquote{Unprecedented Impacts Don't Require Unprecedented Weather}. Post-Harvey Climate \& Flood Impacts on the Built Environment,  \textbf{Severe Storm Prediction, Education, \& Evacuation from Disasters Center}, Houston, TX.}{2022}
 
-\hangingitem{\enquote{Revisiting our design criteria: What hazards should we design for in a changing climate?}. Hydrologic Sciences and Water Resources Engineering Seminar,  \textbf{University of Colorado Boulder}, Remote Presentation.}{2022}
+\hangingitem{\enquote{Revisiting Our Design Criteria: What Hazards Should We Design for in a Changing Climate?}. Hydrologic Sciences and Water Resources Engineering Seminar,  \textbf{University of Colorado Boulder}, Remote Presentation.}{2022}
 
 \hangingitem{\enquote{Adapting Engineering Design Criteria to a Changing Climate: Insights from House Elevation }. Technical Webinar,  \textbf{ASCE Central New Jersey Branch}, Remote Presentation.}{2022}
 
-\hangingitem{\enquote{Panelist}. Extreme Weather: How To Report on a World That's Warmer, Colder, Wetter, Drier and Weirder,  \textbf{31st Annual Conference of the Society of Environmental Journalists}, Houston, TX.}{2022}
+\hangingitem{Panelist. Extreme Weather: How To Report on a World That's Warmer, Colder, Wetter, Drier and Weirder,  \textbf{31st Annual Conference of the Society of Environmental Journalists}, Houston, TX.}{2022}
 
-\hangingitem{\enquote{Extreme Impacts Don't Require Extreme Weather: Lessons from the February 2021 Texas Blackouts}. Outreach Event: Science is for Everyone,  \textbf{American Meteorlogical Society}, Remote Presentation.}{2022}
+\hangingitem{\enquote{Predictable and Preventable: Lessons in Climate Risk Management from the Texas Coast (and Beyond)}. Climate Risk and Financial Institutions Seminar (Prof. Madison Condon),  \textbf{Boston University School of Law}, Remote Presentation.}{2022}
+
+\hangingitem{\enquote{Extreme Impacts Don't Require Extreme Weather: Lessons from the February 2021 Texas Blackouts}. Outreach Event: Science is for Everyone,  \textbf{American Meteorological Society}, Remote Presentation.}{2022}
 
 \hangingitem{\enquote{Extreme Impacts Don't Require Extreme Weather: Lessons from the February 2021 Texas Blackouts}. Compound Events Working Group,  \textbf{Risk KAN (Knowledge Action Networks)}, Remote Presentation.}{2021}
 
-\hangingitem{\enquote{Panelist}. Tail events: Prediction, Planning, and Performance,  \textbf{Harvard Electricity Policy Group}, Remote Presentation.}{2021}
+\hangingitem{Panelist. Tail events: Prediction, Planning, and Performance,  \textbf{Harvard Electricity Policy Group}, Remote Presentation.}{2021}
 
 \hangingitem{\enquote{Towards Adaptive Resilience: Managing Flood Risks in a Changing World}. Technical Webinar,  \textbf{ASCE Central New Jersey Branch}, Remote Presentation.}{2021}
 
@@ -397,7 +403,7 @@
 
 \textit{Presenter names in \textcolor{RiceBlue}{blue} indicate advisee presentations.}
 
-\bigskip
+\medskip
 
 \begin{alignedentrieshang}
 
@@ -406,7 +412,7 @@
 
 
 
-\hangingitem{\enquote{Use-inspired tools for climate hazard assessment}. \textbf{Nature-Based Solutions for a Resilient Gulf Coast Workshop}, \textit{Rice University}, Houston, TX [\textit{Talk}].}{2025}
+\hangingitem{\enquote{Use-Inspired Tools for Climate Hazard Assessment}. \textbf{Nature-Based Solutions for a Resilient Gulf Coast Workshop}, \textit{Rice University}, Houston, TX [\textit{Talk}].}{2025}
 
 
 
@@ -427,6 +433,10 @@
 
 
 \hangingitem{\enquote{Leveraging Machine Learning to Advance Urban Flood Hazard Assessment: Challenges and Opportunities}. \textbf{Data-driven and physics-based machine learning methods for forecasting and knowledge discovery of surface hydrology}, \textit{Conference on Computational Methods in Water Resources}, Tucson, AZ [\textit{Talk}].}{2024}
+
+
+
+\hangingitem{\enquote{Incorporating Temperature Projections into Energy Systems Planning}. \textbf{Extreme Heat Workshop}, \textit{Columbia University}, New York, NY [\textit{Talk}].}{2024}
 
 
 
@@ -587,22 +597,22 @@
 
 \begin{alignedentrieshang}
 
-\hangingitem{True Furrh: \textit{Ph.D. in Civil and Environmental Engineering}, Rice University. \textbf{Committee Member}.}{}
+\hangingitem{True Furrh: \textit{Ph.D. in Civil and Environmental Engineering}, Rice University. \textbf{Committee Member}.}{joined 2021}
 
-\hangingitem{Dongwook Kim: \textit{Ph.D. in Civil and Environmental Engineering}, Rice University. \textbf{Primary Advisor}.}{}
+\hangingitem{Dongwook Kim: \textit{Ph.D. in Civil and Environmental Engineering}, Rice University. \textbf{Primary Advisor}.}{joined 2024}
 
-\hangingitem{Yuchen Lu: \textit{Ph.D. in Civil and Environmental Engineering}, Rice University. \textbf{Primary Advisor}.}{}
+\hangingitem{Yuchen Lu: \textit{Ph.D. in Civil and Environmental Engineering}, Rice University. \textbf{Primary Advisor}.}{joined 2021}
 
-\hangingitem{Kelsey Murphy: \textit{Ph.D. in Earth, Environmental, and Planetary Sciences}, Rice University. \textbf{Committee Member}.}{}
+\hangingitem{Kelsey Murphy: \textit{Ph.D. in Earth, Environmental, and Planetary Sciences}, Rice University. \textbf{Committee Member}.}{joined 2021}
 
-\hangingitem{Jonah Schaechter: \textit{Ph.D. in Civil and Environmental Engineering}, Rice University. \textbf{Primary Advisor}.}{}
+\hangingitem{Jonah Schaechter: \textit{Ph.D. in Civil and Environmental Engineering}, Rice University. \textbf{Primary Advisor}.}{joined 2024}
 
-\hangingitem{Valeriia Sobolevskaia: \textit{Ph.D. in Earth, Environmental, and Planetary Sciences}, Rice University. \textbf{Committee Member}.}{}
+\hangingitem{Valeriia Sobolevskaia: \textit{Ph.D. in Earth, Environmental, and Planetary Sciences}, Rice University. \textbf{Committee Member}.}{joined 2020}
 
 
 \hangingitem{Karan Jakhar: \textit{Ph.D. in Mechanical Engineering}, Rice University. Thesis: \enquote{Equation Discovery and Deep Learning for Geophysical Turbulence}. \textbf{Committee Member}.}{2025}
 
-\hangingitem{Kyle Ostlind: \textit{M.S. in Civil and Environmental Engineering}, Rice University. Thesis: \enquote{Evaluating Runoff Response to Nature-Based Solutions under Varying Development Scenarios in Upper Cypress Creak near Houston, Texas}. \textbf{Committee Member}.}{2025}
+\hangingitem{Kyle Ostlind: \textit{M.S. in Civil and Environmental Engineering}, Rice University. Thesis: \enquote{Evaluating Runoff Response to Nature-Based Solutions under Varying Development Scenarios in Upper Cypress Creek near Houston, Texas}. \textbf{Committee Member}.}{2025}
 
 \hangingitem{Katlyn Schmeltzer: \textit{MCEE in Civil and Environmental Engineering}, Rice University. Thesis: \enquote{Pre-Trained Long Short-Term Memory Network Performance for Streamflow Prediction in the Brazos River Basin}. \textbf{Primary Advisor}.}{2025}
 
@@ -610,9 +620,9 @@
 
 \hangingitem{Kendall Capshaw: \textit{Ph.D. in Civil and Environmental Engineering}, Rice University. Thesis: \enquote{Modeling Coastal Petrochemical Infrastructure Risk, Resilience, and Cascading Community Consequences}. \textbf{Committee Member}.}{2024}
 
-\hangingitem{Xinyue Luo: \textit{Ph.D. in Earth, Environmental and Planetary Sciences}, Rice University. Thesis: \enquote{Characterizing the El Niño-Southern Oscillation and its North American Teleconnections over the Last Millennium}. \textbf{Committee Member}.}{2024}
+\hangingitem{Xinyue Luo: \textit{Ph.D. in Earth, Environmental and Planetary Sciences}, Rice University. Thesis: \enquote{Characterizing the El Niño-Southern Oscillation and Its North American Teleconnections over the Last Millennium}. \textbf{Committee Member}.}{2024}
 
-\hangingitem{Anibal Tafur Gutierrez: \textit{Ph.D. in Civil and Environmental Engineering}, Rice University. Thesis: \enquote{Methods and Tools for Risk-informed Resilience Enhancement of Coastal Intermodal Freight Networks}. \textbf{Committee Member}.}{2024}
+\hangingitem{Anibal Tafur Gutierrez: \textit{Ph.D. in Civil and Environmental Engineering}, Rice University. Thesis: \enquote{Methods and Tools for Risk-Informed Resilience Enhancement of Coastal Intermodal Freight Networks}. \textbf{Committee Member}.}{2024}
 
 \hangingitem{Matthew Garcia: \textit{Ph.D. in Civil and Environmental Engineering}, Rice University. Thesis: \enquote{Novel Urban Floodplain Modeling Methods for Applications in Coupling Surrogate Machine Learning Methods}. \textbf{Committee Member}.}{2023}
 
@@ -631,8 +641,6 @@
 \hangingitem{Xiaoyu (Toby) Li: \textit{M.S. in Civil and Environmental Engineering}, Rice University. Thesis: \enquote{Evaluating the Effects of Project Brays Mitigation Using Unsteady HEC-RAS Hydraulic Modeling: Application to Meyerland in Houston, TX}. \textbf{Committee Member}.}{2021}
 
 \end{alignedentrieshang}
-
-\medskip 
 
 \subsection{UNDERGRADUATE RESEARCH ASSISTANTS}
 
@@ -659,9 +667,52 @@
 
 \end{alignedentrieshang}
 
-%% SESSIONS ORGANIZED
-\section{SESSIONS ORGANIZED}
 
+%% Service
+\section{SERVICE ACTIVITIES}
+
+\subsection{UNIVERSITY SERVICE}
+\begin{alignedentrieshang}
+
+\hangingitem{\textbf{Member}, Research Council. Ken Kennedy Institute.}{2024---}
+
+\hangingitem{\textbf{Faculty Associate}. Duncan College.}{2023---}
+
+\hangingitem{\textbf{External Search Committee Member}. Department of Earth, Environmental, and Planetary Sciences.}{2022--2023}
+
+\end{alignedentrieshang}
+
+\subsection{DEPARTMENTAL SERVICE}
+\begin{alignedentrieshang}
+
+\hangingitem{\textbf{Member}, Diversity, Equity, and Inclusion Committee. Department of Civil and Environmental Engineering.}{2024--2024}
+
+\hangingitem{\textbf{Member}, Seminar Committee. Department of Civil and Environmental Engineering.}{2023--2024}
+
+\end{alignedentrieshang}
+
+\subsection{PROFESSIONAL SERVICE}
+\begin{alignedentrieshang}
+
+\hangingitem{\textbf{Committee Member}, Water and Society Newsletter Committee. American Geophysical Union.}{2024---}
+
+\hangingitem{\textbf{Panelist}, Webinar Series. Society for Risk Analysis. Panelist for webinar on risk analysis methodologies.}{2024---}
+
+\hangingitem{\textbf{Committee Member}, Environmental and Water Resources Systems Committee (EWRS). Environmental \& Water Resources Institute (EWRI).}{2021---}
+
+\end{alignedentrieshang}
+
+\subsection{PEER REVIEW}
+\begin{alignedentrieshang}[2em]
+  \hangingitem{\textbf{Journals:} AGU Advances; Climate Risk Management; Climatic Change; Communications Earth and Environment; Earth's Future; Energy Technology; Environmental Data Science; Environmental Research Letters; Geophysical Research Letters; Hydrology and Earth System Sciences; Joule; Journal of Applied Meteorology and Climatology; Journal of Hydrology; Journal of Water Resources Management and Planning; Oxford Journal of Development Studies; Water Resources Research; Water Security; Weather, Climate, and Society.
+  }{}
+  \hangingitem{\textbf{Funding Agencies:} Department of Energy (BER); National Science Foundation.
+  }{}
+  \hangingitem{\textbf{Other:} Electric Power Research Institute (EPRI); Texas Water Development Board (TWDB).
+  }{}
+\end{alignedentrieshang}
+
+\subsection{SESSIONS CONVENED}
 \begin{alignedentrieshang}
 
 \hangingitem{\textbf{Co-Organizer}. \textit{Nature-Based Solutions for a Resilient Gulf Coast Workshop} at \textbf{Rice University}, Houston, TX.}{2025}
@@ -680,27 +731,14 @@
 
 \end{alignedentrieshang}
 
-%% REVIEW ACTIVITIES
-\section{PEER REVIEW}
-
-\begin{alignedentrieshang}[2em]
-
-  \hangingitem{\textbf{Journals:} AGU Advances; Climate Risk Management; Climatic Change; Communications Earth and Environment; Earth's Future; Energy Technology; Environmental Data Science; Environmental Research Letters; Geophysical Research Letters; Hydrology and Earth System Sciences; Joule; Journal of Applied Meteorology and Climatology; Journal of Hydrology; Journal of Water Resources Management and Planning; Oxford Journal of Development Studies; Water Resources Research; Water Security; Weather, Climate, and Society.
-  }{}
-  \hangingitem{\textbf{Funding Agencies:} Department of Energy (BER); National Science Foundation.
-  }{}
-  \hangingitem{\textbf{Other:} Electric Power Research Institute (EPRI); Texas Water Development Board (TWDB).
-  }{}
-
-
-\end{alignedentrieshang}
-
 %% Additional Experience and Training
 \section{ADDITIONAL EXPERIENCE}
 
 \begin{alignedentrieshang}
 
-\hangingitem{\textbf{Social and Behavioral Research - Basic/Refresher} --- \textit{CITI program}.}{2025--2028}
+\hangingitem{\textbf{Social and Behavioral Research - Basic/Refresher} --- \textit{CITI Program}.}{2025--2028}
+
+\hangingitem{\textbf{Strategic Program to Accelerate Researchers in Computing (SPARC) Participant} --- \textit{Natural Hazards Engineering Research Infrastructure (NHERI) DesignSafe-CI}. https://www.designsafe-ci.org/learning-center/sparc/.}{2025}
 
 \hangingitem{\textbf{Panel Fellow} --- \textit{NSF CMMI's Game Changer Academies for Advancing Research Innovation}.}{2021}
 

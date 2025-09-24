@@ -53,6 +53,12 @@ sections:
     file: media.yml
   - title: Review Activities
     file: review.yml
+  - title: University Service
+    file: university_service.yml
+  - title: Department Service
+    file: department_service.yml
+  - title: Professional Service
+    file: professional_service.yml
   - title: Additional Experience
     file: training.yml
   - title: Sessions Organized
