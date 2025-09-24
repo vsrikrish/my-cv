@@ -42,3 +42,13 @@ def sort_by_attr(array, attr, reverse=False):
 
 def sort_first_year(array, attr, reverse=False):
     return sorted(array, key=lambda x: int(re.findall(r'^\d{4}', str(x[attr]))[0]), reverse=reverse)
+
+
+def extract_year(date_str):
+    """
+    Extract year from date string (supports YYYY-MM-DD, YYYY-MM, or YYYY formats)
+    """
+    if not date_str:
+        return ""
+    year_match = re.findall(r'^\d{4}', str(date_str))
+    return year_match[0] if year_match else str(date_str)

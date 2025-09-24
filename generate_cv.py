@@ -57,12 +57,23 @@ class CV(object):
             for k in config["sections"]
         ]
 
+        # also load section data directly by key name for easier template access
+        section_data = {}
+        for k in config["sections"]:
+            # Convert section titles to lowercase keys with underscores
+            key_name = k["title"].lower().replace(" ", "_").replace("and_", "")
+            section_data[key_name] = yaml.load(
+                open(os.path.join(config["paths"]["yaml_path"], k["file"]), "r"),
+                Loader=yaml.BaseLoader,
+            )
+
         # combine personal, sectional data, and publication data
         self.data = {
             "person": config["person"],
             "paths": config["paths"],
             "publications": config["publications"],
             "sections": sections,
+            **section_data,  # Add direct section access
         }
 
         # load templates
@@ -135,6 +146,7 @@ def main():
         filters.select_by_attr_name,
         filters.sort_by_attr,
         filters.sort_first_year,
+        filters.extract_year,
     ]
 
     cv = CV(CONFIG_FILE, filters=my_filters)

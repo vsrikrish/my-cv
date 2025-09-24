@@ -91,7 +91,7 @@
 \begin{itemize}[label={}]
   ((* for pos in sect.entries | sort(attribute="start", reverse=True) *))
   \item \textbf{(((pos.organization | escape_tex)))}
-        \textit{((( pos.role | escape_tex )))}, ((( pos.org | escape_tex ))), ((* if pos.start == pos.end *))((( pos.start )))((* else *))((( pos.start )))--((( pos.end )))((* endif *)).
+        \textit{((( pos.role | escape_tex )))}, ((( pos.dept | escape_tex ))), ((* if pos.start == pos.end *))((( pos.start )))((* else *))((( pos.start )))--((( pos.end )))((* endif *)).
   ((* endfor *))
 \end{itemize}
 

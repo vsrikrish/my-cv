@@ -19,10 +19,12 @@
 % Better footer
 \usepackage{fancyhdr}
 \fancyhf{}
-\fancyfoot[L]{James Doss-Gollin}
-\fancyfoot[R]{\thepage}
+\fancyfoot[L]{\textcolor{RiceGray}{James Doss-Gollin}}
+\fancyfoot[C]{\textcolor{RiceGray}{updated \today}}
+\fancyfoot[R]{\textcolor{RiceGray}{\thepage}}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{1pt}
+\renewcommand{\footrule}{\color{RiceGray}\hrule width\headwidth height\footrulewidth \vskip-\footrulewidth}
 \pagestyle{fancy}
 
 
@@ -63,7 +65,7 @@
 \newenvironment{alignedentries}[1][0pt]{%
   \noindent%
   \hspace{#1}%
-  \begin{tabular*}{\dimexpr\textwidth-#1\relax}{@{}p{\dimexpr0.85\textwidth-#1\relax}@{\extracolsep{\fill}}r@{}}%
+  \begin{tabular*}{\dimexpr\textwidth-#1\relax}{@{}p{\dimexpr0.875\textwidth-#1\relax}@{\extracolsep{\fill}}r@{}}%
     }{%
   \end{tabular*}%
 }
@@ -74,7 +76,7 @@
 }
 \newcommand{\hangingitem}[2]{%
   \noindent%
-  \begin{tabular*}{\textwidth}{@{}p{0.85\textwidth}@{\extracolsep{\fill}}r@{}}%
+  \begin{tabular*}{\textwidth}{@{}p{0.875\textwidth}@{\extracolsep{\fill}}r@{}}%
     \hangindent=2em \hangafter=1 #1 & #2%
   \end{tabular*}%
 }
@@ -100,7 +102,7 @@
   plauthorhandling=highlight,
   plnumbered=false,
   labeldateparts=false,
-  boldyear=false,
+  boldyear=true,
   marginyear=false,
   doi=true,
   url=false,
@@ -111,12 +113,16 @@
 ]{biblatex}
 \setlength{\bibhang}{15pt}
 
-% custom author highlighting: blue+bold for James, purple+bold+asterisk for group members
+% Force first name abbreviation for all authors in publist style
+\ExecuteBibliographyOptions{giveninits=true}
+
+\usepackage{amsmath}
+% custom author highlighting: bold for James, blue+bold+dagger for group members
 \renewcommand*{\plauthorhl}[1]{%
   \StrGobbleRight{#1}{1}[\trimmedname]%
   \IfSubStr{#1}{Doss-Gollin}%
-  {\textcolor{RiceBlue}{\mkbibbold{\trimmedname}}}%
-  {\textcolor{GrassGreen}{\mkbibbold{\trimmedname}}}%
+  {\mkbibbold{\trimmedname}}%
+  {\textcolor{RiceBlue}{\mkbibbold{\trimmedname$^\mathbf{\dagger}$}}}%
 }
 
 % bold my name (will be blue)
@@ -130,6 +136,63 @@
 
 % include everything in bibliography
 \nocite{*}
+
+% Aggressively clear all fields for preprints since they're not forthcoming
+\AtEveryBibitem{%
+  \ifentrytype{misc}{%
+    \clearfield{year}\clearfield{date}\clearfield{month}\clearfield{day}%
+    \clearfield{addendum}\clearfield{note}\clearfield{urldate}%
+    \clearfield{url}\clearfield{eprint}\clearfield{eprinttype}%
+    \clearfield{pubstate}\clearfield{howpublished}%
+    \clearlist{publisher}\clearlist{location}%
+  }{}%
+  \ifentrytype{online}{%
+    \clearfield{year}\clearfield{date}\clearfield{month}\clearfield{day}%
+    \clearfield{addendum}\clearfield{note}\clearfield{urldate}%
+    \clearfield{url}\clearfield{eprint}\clearfield{eprinttype}%
+    \clearfield{pubstate}\clearfield{howpublished}%
+    \clearlist{publisher}\clearlist{location}%
+  }{}%
+}
+
+% Suppress all date/URL related formatting for preprints
+\DeclareFieldFormat[misc]{year}{}
+\DeclareFieldFormat[misc]{date}{}
+\DeclareFieldFormat[misc]{url}{}
+\DeclareFieldFormat[misc]{addendum}{}
+\DeclareFieldFormat[misc]{note}{}
+\DeclareFieldFormat[misc]{pubstate}{}
+\DeclareFieldFormat[online]{year}{}
+\DeclareFieldFormat[online]{date}{}
+\DeclareFieldFormat[online]{url}{}
+\DeclareFieldFormat[online]{addendum}{}
+\DeclareFieldFormat[online]{note}{}
+\DeclareFieldFormat[online]{pubstate}{}
+
+% Override URL and DOI macros for preprints
+\AtEveryBibitem{%
+  \ifentrytype{misc}{%
+    \renewbibmacro*{url+urldate}{}%
+    \renewbibmacro*{doi+eprint+url}{\printfield{doi}}%
+  }{}%
+  \ifentrytype{online}{%
+    \renewbibmacro*{url+urldate}{}%
+    \renewbibmacro*{doi+eprint+url}{\printfield{doi}}%
+  }{}%
+}
+
+% Remove "In:", pages, issue, number, and volume from all entries
+\DeclareFieldFormat{pages}{}
+\DeclareFieldFormat{number}{}
+\DeclareFieldFormat{issue}{}
+\DeclareFieldFormat{volume}{}
+\renewbibmacro{in:}{}
+% Remove volume+number+pages macro entirely
+\renewbibmacro*{volume+number+eid}{}
+% Remove the parentheses around volume/issue/pages
+\renewbibmacro*{journal+issuetitle}{%
+  \usebibmacro{journal}%
+}
 
 %% other stuff
 % icons for the contact info
@@ -173,52 +236,46 @@
 
 
 %% Appointments
-((* set sect = data.sections | select_by_attr_name("title", "Appointments") *))
-\section{(((sect.title | upper)))}
+\section{APPOINTMENTS}
 
-((* for pos in sect.entries | sort(attribute="start", reverse=True) *))
+((* for pos in data.appointments | sort(attribute="start", reverse=True) *))
 \subsection{(((pos.organization | escape_tex)))}
 \begin{alignedentries}[2em]
-\entryitem{\textit{(((pos.role | escape_tex)))}}{((* if pos.start == pos.end *))((( pos.start )))((* else *))((( pos.start )))--((( pos.end )))((* endif *))}((* if not loop.last *))\entrybreak((* endif *))
+\entryitem{\textit{(((pos.role | escape_tex)))}((* if pos.dept *)), (((pos.dept | escape_tex)))((* endif *))}{((* if pos.end *))((* if pos.start == pos.end *))((( pos.start )))((* else *))((( pos.start )))--((( pos.end )))((* endif *))((* else *))((( pos.start )))---((* endif *))}((* if not loop.last *))\entrybreak((* endif *))
 \end{alignedentries}
 ((* endfor *))
 
 %% Education
-((* set sect = data.sections | select_by_attr_name("title", "Education")*))
-\section{(((sect.title | upper)))}
+\section{EDUCATION}
 
-((* for univ, degree_list in sect.entries | groupby("university") *))
+((* for univ, degree_list in data.education | groupby("university") *))
 \subsection{(((univ | escape_tex)))}
 \begin{alignedentries}[2em]
 ((* for deg in degree_list | sort(attribute="year", reverse=True) *))
-\entryitem{\textit{(((deg.degree | escape_tex))) in ((( deg.subject | escape_tex )))}}{((( deg.year )))}((* if not loop.last *))\entrybreak((* endif *))
+\entryitem{\textit{(((deg.degree | escape_tex))) in ((( deg.subject | escape_tex )))}.}{((( deg.year )))}((* if not loop.last *))\entrybreak((* endif *))
 ((* endfor *))
 \end{alignedentries}
 ((* endfor *))
 
 %% Awards
-((* set sect = data.sections | select_by_attr_name("title", "Awards") *))
-
-
-\section{(((sect.title | upper)))}
+\section{AWARDS}
 
 \begin{alignedentrieshang}
-((* for award in sect.entries | sort(attribute="year", reverse=True) *))
-\hangingitem{\textbf{(((award.title)))}, (((award.org)))}{(((award.year)))}
+((* for award in data.awards | sort(attribute="year", reverse=True) *))
+\hangingitem{\textbf{(((award.title)))}, (((award.org))).}{(((award.year)))}
 ((* endfor *))
 \end{alignedentrieshang}
 
 
 %% Grants and Contracts
-((* set sect = data.sections | select_by_attr_name("title", "Grants and Contracts") *))
-\section{(((sect.title | upper)))}
+\section{GRANTS AND CONTRACTS}
 
 \textit{Amounts reflect Rice portion for collaborative grants and subawards; total amount for direct awards.}
 
 \bigskip
 
 \begin{alignedentrieshang}
-((* for i in sect.entries | selectattr("status", "in", ["active", "complete"]) | sort(attribute="end", reverse=True) | sort(attribute="start", reverse=True) *))
+((* for i in data.grants_contracts | selectattr("status", "in", ["active", "complete"]) | sort(attribute="end", reverse=True) | sort(attribute="start", reverse=True) *))
 \hangingitem{\textit{(((i.sponsor | escape_tex)))}((* if i.subaward_from *)) (via (((i.subaward_from | escape_tex))))((* endif *))((* if i.program *))\textit{: ((( i.program | escape_tex)))}((* endif *)). ``(((i.title | escape_tex))).'' \textbf{((* if i.subaward_from *))Subaward ((* endif *))(((i.role | escape_tex)))}((* if i.PI *)) (PI: (((i.PI | escape_tex))))((* endif *)).((* if i.total_award *)) \textbf{\$((( "{:,}".format(i.total_award | int) )))}((* endif *)).}{(((i.start)))--(((i.end)))}
 ((* endfor *))
 \end{alignedentrieshang}
@@ -227,31 +284,67 @@
 
 \section{JOURNAL ARTICLES}
 
-\printbibliography[heading=none, type=article]
-
-\section{FORTHCOMING}
+{\textcolor{RiceBlue}{\textbf{$^\mathbf{\dagger}$ denotes Rice advisee publication}}}.
+\href{https://scholar.google.com/citations?user=(((data.person.googlescholar)))}{Google Scholar \aiGoogleScholar}((* if data.person.scholar_metrics *)) \textit{citations}: (((data.person.scholar_metrics.citations))), \textit{h-index}: (((data.person.scholar_metrics.h_index))), \textit{i10-index}: (((data.person.scholar_metrics.i10_index))).((* endif *))
+\medskip
 
 \defbibfilter{ispreprint}{%
     type=misc
     or type=online
 }
+
+\subsection{IN PREP. / UNDER REVIEW}
+
 \printbibliography[filter=ispreprint, heading=none]
 
+\subsection{PUBLISHED}
+
+\printbibliography[heading=none, type=article]
+
+\section{PEER-REVIEWED CONFERENCE PROCEEDINGS}
+
+\printbibliography[heading=none, type=inproceedings]
+
 %% Invited Talks
-((* set sect = data.sections | select_by_attr_name("title", "Invited Talks") *))
-\section{(((sect.title | upper)))}
+\section{INVITED TALKS}
 
 \begin{alignedentrieshang}
-((* for i in sect.entries | sort(attribute="date", reverse=True) *))
-\hangingitem{\enquote{\textbf{(((i.title | escape_tex)))}}. ((* if i.event *))(((i.event | escape_tex))), ((* endif *)) \textit{(((i.org | escape_tex)))}((* if i.location *)), (((i.location))).((* else *)).((* endif *))}{(((i.date)))}
+((* for i in data.invited_talks | sort(attribute="date", reverse=True) *))
+\hangingitem{\enquote{(((i.title | escape_tex)))}. ((* if i.event *))(((i.event | escape_tex))), ((* endif *)) \textbf{(((i.org | escape_tex)))}((* if i.location *)), (((i.location))).((* else *)).((* endif *))}{(((i.date | extract_year)))}
 ((* endfor *))
 \end{alignedentrieshang}
 
-%% Teaching
-((* set sect = data.sections | select_by_attr_name("title", "Teaching") *))
-\section{(((sect.title | upper)))}
+%% WORKSHOPS
+\section{WORKSHOP PRESENTATIONS}
 
-((* for univ, course_list in sect.entries | groupby("university") | sort(attribute="1.0.year", reverse=True) *))
+\textit{Presenter names in \textcolor{RiceBlue}{blue} indicate advisee presentations.}
+
+\bigskip
+
+\begin{alignedentrieshang}
+((* for i in data.workshop_presentations | sort(attribute="date", reverse=True) *))
+((* if i.presenter == "James Doss-Gollin" *))
+\hangingitem{\enquote{(((i.title | escape_tex)))}. \textbf{(((i.event | escape_tex)))}((* if i.org *)), \textit{(((i.org | escape_tex)))}((* endif *)), (((i.location)))((* if i.format *)) [\textit{(((i.format)))}]((* endif *)).}{(((i.date | extract_year)))}
+((* else *))
+\hangingitem{\textcolor{RiceBlue}{\textbf{(((i.presenter | escape_tex)))}}: \enquote{(((i.title | escape_tex)))}. \textbf{(((i.event | escape_tex)))}((* if i.org *)), \textit{(((i.org | escape_tex)))}((* endif *)), (((i.location)))((* if i.format *)) [\textit{(((i.format)))}]((* endif *)).}{(((i.date | extract_year)))}
+((* endif *))
+((* endfor *))
+\end{alignedentrieshang}
+
+%% Media Coverage
+\section{MEDIA HIGHLIGHTS}
+
+\begin{alignedentrieshang}
+((* for i in data.media_coverage | sort(attribute="date", reverse=True) *))
+\hangingitem{\enquote{(((i.title | escape_tex))).} \textbf{(((i.publication | escape_tex)))}((* if i.author *)) --- (((i.author | escape_tex)))((* endif *))((* if i.format *)) [\textit{((( i.format | lower )))}]((* endif *)).}{(((i.date | extract_year)))}
+((* endfor *))
+\end{alignedentrieshang}
+
+
+%% Teaching
+\section{TEACHING}
+
+((* for univ, course_list in data.teaching | groupby("university") | sort(attribute="1.0.year", reverse=True) *))
 \subsection{(((univ | escape_tex)))}
 \begin{alignedentries}[2em]
 ((* for course in course_list | sort(attribute="year", reverse=True) | sort(attribute="semester", reverse=True) *))
@@ -261,109 +354,67 @@
 ((* endfor *))
 
 %% Advising
-((* set sect = data.sections | select_by_attr_name("title", "Advising") *))
-\section{(((sect.title | upper)))}
+\section{ADVISING}
+
+\subsection{GRADUATE STUDENTS}
 
 \begin{alignedentrieshang}
-((* for advisee in sect.entries | rejectattr("degree_year") | sort(attribute="lastname") *))
+((* for advisee in data.advising | rejectattr("degree_year") | rejectattr("degree", "equalto", "B.S.") | sort(attribute="lastname") *))
 \hangingitem{(((advisee.firstname))) (((advisee.lastname))): \textit{(((advisee.degree))) in (((advisee.field)))}, (((advisee.university))).((* if advisee.thesis_title *)) Thesis: \enquote{((( advisee.thesis_title )))}.((* endif *)) \textbf{((* if advisee.role == "primary" *))Primary Advisor((* else *))Committee Member((* endif *))}.}{}
 ((* endfor *))
-((* for advisee in sect.entries | selectattr("degree_year") | sort(attribute="lastname") | sort(attribute="degree_year", reverse=True) *))
+((* for advisee in data.advising | selectattr("degree_year") | rejectattr("degree", "equalto", "B.S.") | sort(attribute="lastname") | sort(attribute="degree_year", reverse=True) *))
 \hangingitem{(((advisee.firstname))) (((advisee.lastname))): \textit{(((advisee.degree))) in (((advisee.field)))}, (((advisee.university))).((* if advisee.thesis_title *)) Thesis: \enquote{((( advisee.thesis_title )))}.((* endif *)) \textbf{((* if advisee.role == "primary" *))Primary Advisor((* else *))Committee Member((* endif *))}.}{((((advisee.degree_year))))}
 ((* endfor *))
 \end{alignedentrieshang}
 
-%% Advisee Awards
-((* set sect = data.sections | select_by_attr_name("title", "Advisee Awards") *))
-\section{(((sect.title | upper)))}
+\medskip 
+
+\subsection{UNDERGRADUATE RESEARCH ASSISTANTS}
 
 \begin{alignedentrieshang}
-((* for award in sect.entries | sort(attribute="year", reverse=True) *))
+((* for advisee in data.advising | selectattr("degree", "equalto", "B.S.") | sort(attribute="degree_year", reverse=True) *))
+\hangingitem{(((advisee.firstname))) (((advisee.lastname))): \textit{(((advisee.degree))) in (((advisee.field)))}, (((advisee.university))).}{(((advisee.degree_year)))}
+((* endfor *))
+\end{alignedentrieshang}
+
+%% Advisee Awards
+\section{ADVISEE AWARDS}
+
+\begin{alignedentrieshang}
+((* for award in data.advisee_awards | sort(attribute="year", reverse=True) *))
 \hangingitem{(((award.award | escape_tex))), \textbf{(((award.recipient | escape_tex)))}.}{(((award.year)))}
 ((* endfor *))
 \end{alignedentrieshang}
 
-%% Media Coverage
-((* set sect = data.sections | select_by_attr_name("title", "Media Coverage") *))
-\section{(((sect.title | upper)))}
-
-\begin{alignedentrieshang}
-((* for i in sect.entries | sort(attribute="date", reverse=True) *))
-\hangingitem{\enquote{(((i.title | escape_tex))).} \textbf{(((i.publication | escape_tex)))}((* if i.author *)) --- (((i.author | escape_tex)))((* endif *))((* if i.format *)) [\textit{((( i.format | lower )))}]((* endif *)).}{(((i.date)))}
-((* endfor *))
-\end{alignedentrieshang}
-
-
 %% SESSIONS ORGANIZED
-((* set sect = data.sections | select_by_attr_name("title", "Sessions Organized") *))
-\section{(((sect.title | lower)))}
+\section{SESSIONS ORGANIZED}
 
 \begin{alignedentrieshang}
-((* for i in sect.entries | sort(attribute="date", reverse=True) *))
-\hangingitem{\textbf{(((i.role)))}. \textit{(((i.session | escape_tex)))} at \textbf{(((i.event | escape_tex)))}, (((i.location))).}{(((i.date)))}
-((* endfor *))
-\end{alignedentrieshang}
-
-%% WORKSHOPS
-((* set sect = data.sections | select_by_attr_name("title", "Workshop Presentations") *))
-\section{(((sect.title | upper)))}
-
-\textit{Presenter names in bold indicate my own presentations; presenter names in \textcolor{RiceBlue}{blue} indicate advisee presentations.}
-
-\bigskip
-
-\begin{alignedentrieshang}
-((* for i in sect.entries | sort(attribute="date", reverse=True) *))
-((* if i.presenter == "James Doss-Gollin" *))
-\hangingitem{\textbf{(((i.presenter | escape_tex)))}: \enquote{(((i.title | escape_tex)))}. \textbf{(((i.event | escape_tex)))}((* if i.org *)), \textit{(((i.org | escape_tex)))}((* endif *)), (((i.location)))((* if i.format *)) [\textit{(((i.format)))}]((* endif *)).}{(((i.date)))}
-((* else *))
-\hangingitem{\textcolor{RiceBlue}{\textbf{(((i.presenter | escape_tex)))}}: \enquote{(((i.title | escape_tex)))}. \textbf{(((i.event | escape_tex)))}((* if i.org *)), \textit{(((i.org | escape_tex)))}((* endif *)), (((i.location)))((* if i.format *)) [\textit{(((i.format)))}]((* endif *)).}{(((i.date)))}
-((* endif *))
+((* for i in data.sessions_organized | sort(attribute="date", reverse=True) *))
+\hangingitem{\textbf{(((i.role)))}. \textit{(((i.session | escape_tex)))} at \textbf{(((i.event | escape_tex)))}, (((i.location))).}{(((i.date | extract_year)))}
 ((* endfor *))
 \end{alignedentrieshang}
 
 %% REVIEW ACTIVITIES
-((* set sect = data.sections | select_by_attr_name("title", "Review Activities") *))
 \section{PEER REVIEW}
 
-\subsection{Journals}
-
 \begin{alignedentrieshang}[2em]
 
-  \hangingitem{((* for i in sect.entries | selectattr("type", "equalto", "journal") | sort(attribute="name") *))(((i.name | escape_tex)))((* if not loop.last *)); ((* endif *))((* endfor *)).
+  \hangingitem{\textbf{Journals:} ((* for i in data.review_activities | selectattr("type", "equalto", "journal") | sort(attribute="name") *))(((i.name | escape_tex)))((* if not loop.last *)); ((* endif *))((* endfor *)).
   }{}
-
-
-\end{alignedentrieshang}
-
-
-\subsection{Funding Agencies}
-
-\begin{alignedentrieshang}[2em]
-
-  \hangingitem{((* for i in sect.entries | selectattr("type", "equalto", "funding") | sort(attribute="name") *))(((i.name | escape_tex)))((* if not loop.last *)); ((* endif *))((* endfor *)).
+  \hangingitem{\textbf{Funding Agencies:} ((* for i in data.review_activities | selectattr("type", "equalto", "funding") | sort(attribute="name") *))(((i.name | escape_tex)))((* if not loop.last *)); ((* endif *))((* endfor *)).
   }{}
-
-
-\end{alignedentrieshang}
-
-
-\subsection{Agencies}
-
-\begin{alignedentrieshang}[2em]
-
-  \hangingitem{((* for i in sect.entries | selectattr("type", "equalto", "external") | sort(attribute="name") *))(((i.name | escape_tex)))((* if not loop.last *)); ((* endif *))((* endfor *)).
+  \hangingitem{\textbf{Other:} ((* for i in data.review_activities | selectattr("type", "equalto", "external") | sort(attribute="name") *))(((i.name | escape_tex)))((* if not loop.last *)); ((* endif *))((* endfor *)).
   }{}
 
 
 \end{alignedentrieshang}
 
 %% Additional Experience and Training
-((* set sect = data.sections | select_by_attr_name("title", "Additional Experience") *))
-\section{(((sect.title | upper)))}
+\section{ADDITIONAL EXPERIENCE}
 
 \begin{alignedentrieshang}
-((* for i in sect.entries | sort(attribute="end", reverse=True) *))
+((* for i in data.additional_experience | sort(attribute="end", reverse=True) *))
 \hangingitem{\textbf{(((i.title | escape_tex)))} --- \textit{(((i.org | escape_tex)))}((* if i.details *)). (((i.details | escape_tex)))((* endif *)).}{((* if i.end == i.start *))(((i.end)))((* else *))(((i.start)))--(((i.end)))((* endif *))}
 ((* endfor *))
 \end{alignedentrieshang}

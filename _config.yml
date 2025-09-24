@@ -11,6 +11,10 @@ person:
   github: jdossgollin
   googlescholar: 6ifLBBsAAAAJ
   orcid: 0000-0002-3428-2224
+  scholar_metrics:
+    citations: 568
+    h_index: 11
+    i10_index: 13
   address:
     line1: 6100 Main Street, Ryon Lab 204-MS 318
     postcode: Houston, TX, 77005
