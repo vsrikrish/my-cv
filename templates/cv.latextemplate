@@ -4,7 +4,7 @@
 \usepackage[english]{babel}
 
 % margins - slightly increased top for header
-\usepackage[left=0.75in, right=0.75in, top=1.25in, bottom=0.75in]{geometry}% adjust the page margins
+\usepackage[left=0.75in, right=0.75in, top=0.75in, bottom=0.75in]{geometry}% adjust the page margins
 
 \RequirePackage{xcolor}
 \definecolor{RiceBlue}{HTML}{00205B} % official Rice blue color -- use for text etc
