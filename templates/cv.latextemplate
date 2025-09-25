@@ -132,6 +132,7 @@
 
 % highlight group members (will be purple with asterisk)
 \plauthorname[Yuchen]{Lu}
+\plauthorname[Katlyn]{Schmeltzer}
 
 % add bibliography resource
 \addbibresource{my-papers.bib}
