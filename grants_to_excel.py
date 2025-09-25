@@ -51,11 +51,13 @@ def grants_to_dataframe(grants):
         row["Title"] = grant.get("title", "")
         row["Sponsor"] = grant.get("sponsor", "")
         row["Program"] = grant.get("program", "")
-        row["Role"] = grant.get("role", "")
-        row["PI"] = grant.get("PI", "")
+        row["My Role"] = grant.get("my_role", grant.get("role", ""))  # Backward compatibility
+        row["Overall PI"] = grant.get("overall_pi", grant.get("PI", ""))  # Backward compatibility
+        row["Rice PI"] = grant.get("rice_pi", "")
         row["Start Year"] = grant.get("start", "")
         row["End Year"] = grant.get("end", "")
-        row["Amount"] = format_amount(grant.get("total_award", ""))
+        row["Rice Amount"] = format_amount(grant.get("total_award", ""))
+        row["Total Project"] = format_amount(grant.get("total_project", ""))
         row["Grant Number"] = grant.get("number", "")
         row["Collaborative"] = "Yes" if grant.get("collaborative") else "No"
         row["Subaward From"] = grant.get("subaward_from", "")

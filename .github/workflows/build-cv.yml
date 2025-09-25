@@ -36,6 +36,23 @@ jobs:
         run: |
           git config --global url."https://${{ secrets.PAT_TOKEN }}@github.com/".insteadOf "https://github.com/"
           git submodule update --init --recursive my-cv-data
+          git submodule update --remote my-cv-data
+      - name: Commit submodule updates
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+          # Check if there are any changes to submodules
+          if ! git diff --quiet --submodule; then
+            echo "Submodule changes detected, committing..."
+            git add my-papers my-cv-data
+            git commit -m "Update submodules to latest commits
+
+            🤖 Generated with GitHub Actions"
+            git push
+          else
+            echo "No submodule changes to commit"
+          fi
       - name: Set up Conda Environment
         uses: conda-incubator/setup-miniconda@v2
         with:

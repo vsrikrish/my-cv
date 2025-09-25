@@ -239,9 +239,11 @@
 \section{APPOINTMENTS}
 
 ((* for pos in data.appointments | sort(attribute="start", reverse=True) *))
+
 \textbf{(((pos.organization | escape_tex)))}
+
 \begin{alignedentries}[2em]
-\entryitem{\textit{(((pos.role | escape_tex)))}((* if pos.dept *)), (((pos.dept | escape_tex)))((* endif *))}{((* if pos.end *))((* if pos.start == pos.end *))((( pos.start )))((* else *))((( pos.start )))--((( pos.end )))((* endif *))((* else *))((( pos.start )))---((* endif *))}((* if not loop.last *))\entrybreak((* endif *))
+\entryitem{\textit{(((pos.role | escape_tex)))}((* if pos.dept *)), (((pos.dept | escape_tex)))((* endif *)).}{((* if pos.end *))((* if pos.start == pos.end *))((( pos.start )))((* else *))((( pos.start )))--((( pos.end )))((* endif *))((* else *))((( pos.start )))---((* endif *))}((* if not loop.last *))\entrybreak((* endif *))
 \end{alignedentries}
 ((* endfor *))
 
@@ -249,7 +251,9 @@
 \section{EDUCATION}
 
 ((* for univ, degree_list in data.education | groupby("university") *))
+
 \textbf{(((univ | escape_tex)))}
+
 \begin{alignedentries}[2em]
 ((* for deg in degree_list | sort(attribute="year", reverse=True) *))
 \entryitem{\textit{(((deg.degree | escape_tex))) in ((( deg.subject | escape_tex )))}.}{((( deg.year )))}((* if not loop.last *))\entrybreak((* endif *))
@@ -276,13 +280,13 @@
 
 \begin{alignedentrieshang}
 ((* for i in data.grants_contracts | selectattr("status", "in", ["active", "complete"]) | sort(attribute="end", reverse=True) | sort(attribute="start", reverse=True) *))
-\hangingitem{\textit{(((i.sponsor | escape_tex)))}((* if i.subaward_from *)) (via (((i.subaward_from | escape_tex))))((* endif *))((* if i.program *))\textit{: ((( i.program | escape_tex)))}((* endif *)). ``(((i.title | escape_tex))).'' \textbf{((* if i.subaward_from *))Subaward ((* endif *))(((i.role | escape_tex)))}((* if i.PI *)) (PI: (((i.PI | escape_tex))))((* endif *)).((* if i.total_award *)) \textbf{\$((( "{:,}".format(i.total_award | int) )))}((* endif *)).}{(((i.start)))--(((i.end)))}
+\hangingitem{\textit{(((i.sponsor | escape_tex)))}((* if i.program *))\textit{: ((( i.program | escape_tex)))}((* endif *)). ``(((i.title | escape_tex))).'' \textbf{(((i.my_role | escape_tex)))}((* if i.rice_pi *)) (Rice Lead: (((i.rice_pi | escape_tex))))((* endif *))((* if i.overall_pi and not i.subaward_from *)) (PI: (((i.overall_pi | escape_tex))))((* endif *)).((* if i.in_kind *)) \textbf{in-kind}((* elif i.total_award *)) \textbf{\$((( "{:,}".format(i.total_award | int) )))}((* endif *))((* if i.subaward_from *)). Subaward from (((i.subaward_from | escape_tex)))((* if i.overall_pi *)) (PI: (((i.overall_pi | escape_tex))))((* endif *))((* if i.total_project *)); \$((( "{:,}".format(i.total_project | int) ))) total((* endif *))((* else *)).((* endif *))}{(((i.start)))--(((i.end)))}
 ((* endfor *))
 \end{alignedentrieshang}
 
 %% Publications
 
-\section{JOURNAL ARTICLES}
+\section{PUBLICATIONS}
 
 {\textcolor{RiceBlue}{\textbf{$^\mathbf{\dagger}$ denotes Rice advisee publication}}}.
 \href{https://scholar.google.com/citations?user=(((data.person.googlescholar)))}{Google Scholar \aiGoogleScholar}((* if data.person.scholar_metrics *)) \textit{citations}: (((data.person.scholar_metrics.citations))), \textit{h-index}: (((data.person.scholar_metrics.h_index))), \textit{i10-index}: (((data.person.scholar_metrics.i10_index))).((* endif *))
@@ -297,16 +301,16 @@
 
 \printbibliography[filter=ispreprint, heading=none]
 
-\subsection{PUBLISHED}
+\subsection{JOURNAL ARTICLES}
 
 \printbibliography[heading=none, type=article]
 
-\section{PEER-REVIEWED CONFERENCE PROCEEDINGS}
+\subsection{PEER-REVIEWED CONFERENCE PROCEEDINGS}
 
 \printbibliography[heading=none, type=inproceedings]
 
 %% Invited Talks
-\section{INVITED TALKS}
+\subsection{INVITED TALKS}
 
 \begin{alignedentrieshang}
 ((* for i in data.invited_talks | sort(attribute="date", reverse=True) *))
@@ -315,9 +319,7 @@
 \end{alignedentrieshang}
 
 %% WORKSHOPS
-\section{WORKSHOP PRESENTATIONS}
-
-\textit{Presenter names in \textcolor{RiceBlue}{blue} indicate advisee presentations.}
+\subsection{WORKSHOP PRESENTATIONS}
 
 \medskip
 
@@ -326,7 +328,7 @@
 ((* if i.presenter == "James Doss-Gollin" *))
 \hangingitem{\enquote{(((i.title | escape_tex)))}. \textbf{(((i.event | escape_tex)))}((* if i.org *)), \textit{(((i.org | escape_tex)))}((* endif *)), (((i.location)))((* if i.format *)) [\textit{(((i.format)))}]((* endif *)).}{(((i.date | extract_year)))}
 ((* else *))
-\hangingitem{\textcolor{RiceBlue}{\textbf{(((i.presenter | escape_tex)))}}: \enquote{(((i.title | escape_tex)))}. \textbf{(((i.event | escape_tex)))}((* if i.org *)), \textit{(((i.org | escape_tex)))}((* endif *)), (((i.location)))((* if i.format *)) [\textit{(((i.format)))}]((* endif *)).}{(((i.date | extract_year)))}
+\hangingitem{\textcolor{RiceBlue}{\textbf{(((i.presenter | escape_tex)))}}$^\mathbf{\dagger}$: \enquote{(((i.title | escape_tex)))}. \textbf{(((i.event | escape_tex)))}((* if i.org *)), \textit{(((i.org | escape_tex)))}((* endif *)), (((i.location)))((* if i.format *)) [\textit{(((i.format)))}]((* endif *)).}{(((i.date | extract_year)))}
 ((* endif *))
 ((* endfor *))
 \end{alignedentrieshang}
@@ -342,10 +344,13 @@
 
 
 %% Teaching
-\section{TEACHING}
+\section{TEACHING AND ADVISING}
+
+\subsection{COURSES TAUGHT}
 
 ((* for univ, course_list in data.teaching | groupby("university") | sort(attribute="1.0.year", reverse=True) *))
-\subsection{(((univ | escape_tex)))}
+\textbf{(((univ | escape_tex)))}
+
 \begin{alignedentries}[2em]
 ((* for course in course_list | sort(attribute="year", reverse=True) | sort(attribute="semester", reverse=True) *))
 \entryitem{(((course.course))): \textit{(((course.title | escape_tex)))}. (((course.role))).}{(((course.semester))) (((course.year)))}((* if not loop.last *))\entrybreak((* endif *))
@@ -354,20 +359,27 @@
 ((* endfor *))
 
 %% Advising
-\section{ADVISING}
-
-\subsection{GRADUATE STUDENTS}
+\subsection{CURRENT GRADUATE STUDENTS}
 
 \begin{alignedentrieshang}
 ((* for advisee in data.advising | rejectattr("degree_year") | rejectattr("degree", "equalto", "B.S.") | sort(attribute="lastname") *))
-\hangingitem{(((advisee.firstname))) (((advisee.lastname))): \textit{(((advisee.degree))) in (((advisee.field)))}, (((advisee.university))).((* if advisee.thesis_title *)) Thesis: \enquote{((( advisee.thesis_title )))}.((* endif *)) \textbf{((* if advisee.role == "primary" *))Primary Advisor((* else *))Committee Member((* endif *))}.}{((* if advisee.join_year *))joined (((advisee.join_year)))((* endif *))}
-((* endfor *))
-((* for advisee in data.advising | selectattr("degree_year") | rejectattr("degree", "equalto", "B.S.") | sort(attribute="lastname") | sort(attribute="degree_year", reverse=True) *))
-\hangingitem{(((advisee.firstname))) (((advisee.lastname))): \textit{(((advisee.degree))) in (((advisee.field)))}, (((advisee.university))).((* if advisee.thesis_title *)) Thesis: \enquote{((( advisee.thesis_title )))}.((* endif *)) \textbf{((* if advisee.role == "primary" *))Primary Advisor((* else *))Committee Member((* endif *))}.}{((((advisee.degree_year))))}
+\hangingitem{(((advisee.firstname))) (((advisee.lastname))): \textbf{(((advisee.degree)))} in (((advisee.field))), (((advisee.university))).((* if advisee.thesis_title *)) Thesis: \enquote{((( advisee.thesis_title )))}.((* endif *)) \textbf{((* if advisee.role == "primary" *))Primary Advisor((* else *))Committee Member((* endif *))}.}{((* if advisee.join_year *))(((advisee.join_year)))---((* endif *))}
 ((* endfor *))
 \end{alignedentrieshang}
 
-\subsection{UNDERGRADUATE RESEARCH ASSISTANTS}
+\subsection{PAST GRADUATE STUDENTS}
+
+\begin{alignedentrieshang}
+((* for advisee in data.advising | selectattr("degree_year") | rejectattr("degree", "equalto", "B.S.") | sort(attribute="lastname") | sort(attribute="degree_year", reverse=True) *))
+\hangingitem{(((advisee.firstname))) (((advisee.lastname))): \textbf{(((advisee.degree)))} in (((advisee.field))), (((advisee.university))).((* if advisee.thesis_title *)) Thesis: \enquote{((( advisee.thesis_title )))}.((* endif *)) \textbf{((* if advisee.role == "primary" *))Primary Advisor((* else *))Committee Member((* endif *))}.}{((((advisee.degree_year))))}
+((* endfor *))
+\end{alignedentrieshang}
+
+\subsection{UNDERGRADUATE RESEARCHERS}
+
+\textit{Year indicates graduation year.}
+
+\medskip
 
 \begin{alignedentrieshang}
 ((* for advisee in data.advising | selectattr("degree", "equalto", "B.S.") | sort(attribute="degree_year", reverse=True) *))
@@ -376,11 +388,11 @@
 \end{alignedentrieshang}
 
 %% Advisee Awards
-\section{ADVISEE AWARDS}
+\subsection{ADVISEE AWARDS}
 
 \begin{alignedentrieshang}
 ((* for award in data.advisee_awards | sort(attribute="year", reverse=True) *))
-\hangingitem{(((award.award | escape_tex))), \textbf{(((award.recipient | escape_tex)))}.}{(((award.year)))}
+\hangingitem{\textbf{(((award.recipient | escape_tex)))}: (((award.award | escape_tex))).}{(((award.year)))}
 ((* endfor *))
 \end{alignedentrieshang}
 
@@ -401,14 +413,14 @@
 \hangingitem{\textbf{(((service.role | escape_tex)))}((* if service.program *)), (((service.program | escape_tex)))((* endif *)). Department of Civil and Environmental Engineering((* if service.description *)). (((service.description | escape_tex)))((* endif *)).}{((* if service.end_year *))(((service.start_year)))--(((service.end_year)))((* else *))(((service.start_year)))---((* endif *))}
 ((* endfor *))
 \end{alignedentrieshang}
-
+%
 \subsection{PROFESSIONAL SERVICE}
 \begin{alignedentrieshang}
 ((* for service in data.professional_service | sort(attribute="start_year", reverse=True) *))
 \hangingitem{\textbf{(((service.role | escape_tex)))}((* if service.program *)), (((service.program | escape_tex)))((* endif *)). (((service.organization | escape_tex)))((* if service.description *)). (((service.description | escape_tex)))((* endif *)).}{((* if service.end_year *))(((service.start_year)))--(((service.end_year)))((* else *))(((service.start_year)))---((* endif *))}
 ((* endfor *))
 \end{alignedentrieshang}
-
+%
 \subsection{PEER REVIEW}
 \begin{alignedentrieshang}[2em]
   \hangingitem{\textbf{Journals:} ((* for i in data.review_activities | selectattr("type", "equalto", "journal") | sort(attribute="name") *))(((i.name | escape_tex)))((* if not loop.last *)); ((* endif *))((* endfor *)).
@@ -418,7 +430,7 @@
   \hangingitem{\textbf{Other:} ((* for i in data.review_activities | selectattr("type", "equalto", "external") | sort(attribute="name") *))(((i.name | escape_tex)))((* if not loop.last *)); ((* endif *))((* endfor *)).
   }{}
 \end{alignedentrieshang}
-
+%
 \subsection{SESSIONS CONVENED}
 \begin{alignedentrieshang}
 ((* for i in data.sessions_organized | sort(attribute="date", reverse=True) *))
