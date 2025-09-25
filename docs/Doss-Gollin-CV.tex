@@ -3,8 +3,8 @@
 % language setup
 \usepackage[english]{babel}
 
-% margins
-\usepackage[left=0.75in, right=0.75in, top=1in, bottom=0.75in]{geometry}% adjust the page margins
+% margins - slightly increased top for header
+\usepackage[left=0.75in, right=0.75in, top=1.25in, bottom=0.75in]{geometry}% adjust the page margins
 
 \RequirePackage{xcolor}
 \definecolor{RiceBlue}{HTML}{00205B} % official Rice blue color -- use for text etc
@@ -16,14 +16,16 @@
 %% Choose fonts for use with xelatex
 
 
-% Better footer
+% Header and footer (skip first page)
 \usepackage{fancyhdr}
 \fancyhf{}
-\fancyfoot[L]{\textcolor{RiceGray}{James Doss-Gollin}}
-\fancyfoot[C]{\textcolor{RiceGray}{updated \today}}
-\fancyfoot[R]{\textcolor{RiceGray}{\thepage}}
-\renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrulewidth}{1pt}
+\fancyhead[L]{\footnotesize\textcolor{RiceGray}{James Doss-Gollin}}
+\fancyhead[R]{\footnotesize\textcolor{RiceGray}{jdossgollin@rice.edu}}
+\fancyfoot[L]{\footnotesize\textcolor{RiceGray}{updated \today}}
+\fancyfoot[R]{\footnotesize\textcolor{RiceGray}{p. \thepage\ / \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+\renewcommand{\headrule}{\color{RiceGray}\hrule width\headwidth height\headrulewidth \vskip-\headrulewidth}
 \renewcommand{\footrule}{\color{RiceGray}\hrule width\headwidth height\footrulewidth \vskip-\footrulewidth}
 \pagestyle{fancy}
 
@@ -137,61 +139,43 @@
 % include everything in bibliography
 \nocite{*}
 
-% Aggressively clear all fields for preprints since they're not forthcoming
-\AtEveryBibitem{%
-  \ifentrytype{misc}{%
-    \clearfield{year}\clearfield{date}\clearfield{month}\clearfield{day}%
-    \clearfield{addendum}\clearfield{note}\clearfield{urldate}%
-    \clearfield{url}\clearfield{eprint}\clearfield{eprinttype}%
-    \clearfield{pubstate}\clearfield{howpublished}%
-    \clearlist{publisher}\clearlist{location}%
-  }{}%
-  \ifentrytype{online}{%
-    \clearfield{year}\clearfield{date}\clearfield{month}\clearfield{day}%
-    \clearfield{addendum}\clearfield{note}\clearfield{urldate}%
-    \clearfield{url}\clearfield{eprint}\clearfield{eprinttype}%
-    \clearfield{pubstate}\clearfield{howpublished}%
-    \clearlist{publisher}\clearlist{location}%
-  }{}%
+% Custom bibliography environment using alignedentrieshang
+\defbibenvironment{hanging}
+  {\begin{alignedentrieshang}}
+  {\end{alignedentrieshang}}
+  {}
+
+% Custom bibliography drivers for hangingitem format
+\DeclareBibliographyDriver{misc}{%
+  \hangingitem{%
+    \printnames{author}: \printfield[title]{title}. \printfield{journaltitle}%
+    \iffieldundef{doi}{\iffieldundef{url}{}{. \printfield{url}}}{. \printfield{doi}}%
+  }{---}%
+  \entrybreak%
 }
 
-% Suppress all date/URL related formatting for preprints
-\DeclareFieldFormat[misc]{year}{}
-\DeclareFieldFormat[misc]{date}{}
-\DeclareFieldFormat[misc]{url}{}
-\DeclareFieldFormat[misc]{addendum}{}
-\DeclareFieldFormat[misc]{note}{}
-\DeclareFieldFormat[misc]{pubstate}{}
-\DeclareFieldFormat[online]{year}{}
-\DeclareFieldFormat[online]{date}{}
-\DeclareFieldFormat[online]{url}{}
-\DeclareFieldFormat[online]{addendum}{}
-\DeclareFieldFormat[online]{note}{}
-\DeclareFieldFormat[online]{pubstate}{}
-
-% Override URL and DOI macros for preprints
-\AtEveryBibitem{%
-  \ifentrytype{misc}{%
-    \renewbibmacro*{url+urldate}{}%
-    \renewbibmacro*{doi+eprint+url}{\printfield{doi}}%
-  }{}%
-  \ifentrytype{online}{%
-    \renewbibmacro*{url+urldate}{}%
-    \renewbibmacro*{doi+eprint+url}{\printfield{doi}}%
-  }{}%
+\DeclareBibliographyDriver{online}{%
+  \hangingitem{%
+    \printnames{author}: \printfield[title]{title}. \printfield{journaltitle}%
+    \iffieldundef{doi}{\iffieldundef{url}{}{. \printfield{url}}}{. \printfield{doi}}%
+  }{---}%
+  \entrybreak%
 }
 
-% Remove "In:", pages, issue, number, and volume from all entries
-\DeclareFieldFormat{pages}{}
-\DeclareFieldFormat{number}{}
-\DeclareFieldFormat{issue}{}
-\DeclareFieldFormat{volume}{}
-\renewbibmacro{in:}{}
-% Remove volume+number+pages macro entirely
-\renewbibmacro*{volume+number+eid}{}
-% Remove the parentheses around volume/issue/pages
-\renewbibmacro*{journal+issuetitle}{%
-  \usebibmacro{journal}%
+\DeclareBibliographyDriver{article}{%
+  \hangingitem{%
+    \printnames{author}: \printfield[title]{title}. \printfield{journaltitle}%
+    \iffieldundef{doi}{\iffieldundef{url}{}{. \printfield{url}}}{. \printfield{doi}}%
+  }{\printfield{year}}%
+  \entrybreak%
+}
+
+\DeclareBibliographyDriver{inproceedings}{%
+  \hangingitem{%
+    \printnames{author}: \printfield[title]{title}. \printfield{booktitle}%
+    \iffieldundef{doi}{\iffieldundef{url}{}{. \printfield{url}}}{. \printfield{doi}}%
+  }{\printfield{year}}%
+  \entrybreak%
 }
 
 %% other stuff
@@ -202,6 +186,9 @@
 % conditional logic for author highlighting
 \usepackage{ifthen}
 \usepackage{xstring}
+
+% page reference for total page count
+\usepackage{lastpage}
 
 % have to load this last
 \usepackage{hyperref} % Required for adding links	and customizing them
@@ -240,14 +227,14 @@
 
 
 
-\textbf{Rice University}
+\noindent\textbf{Rice University}
 
 \begin{alignedentries}[2em]
 \entryitem{\textit{Assistant Professor}, Department of Civil \& Environmental Engineering.}{2021---}\entrybreak
 \end{alignedentries}
 
 
-\textbf{The Pennsylvania State University}
+\noindent\textbf{The Pennsylvania State University}
 
 \begin{alignedentries}[2em]
 \entryitem{\textit{Postdoctoral Scholar}, Earth \& Environmental Systems Institute.}{2020}
@@ -259,7 +246,7 @@
 
 
 
-\textbf{Columbia University}
+\noindent\textbf{Columbia University}
 
 \begin{alignedentries}[2em]
 
@@ -270,7 +257,7 @@
 \end{alignedentries}
 
 
-\textbf{Yale University}
+\noindent\textbf{Yale University}
 
 \begin{alignedentries}[2em]
 
@@ -355,15 +342,15 @@
 
 \subsection{IN PREP. / UNDER REVIEW}
 
-\printbibliography[filter=ispreprint, heading=none]
+\printbibliography[filter=ispreprint, heading=none, env=hanging]
 
 \subsection{JOURNAL ARTICLES}
 
-\printbibliography[heading=none, type=article]
+\printbibliography[heading=none, type=article, env=hanging]
 
-\subsection{PEER-REVIEWED CONFERENCE PROCEEDINGS}
+\subsection{PEER-REVIEWED CONFERENCE PAPERS}
 
-\printbibliography[heading=none, type=inproceedings]
+\printbibliography[heading=none, type=inproceedings, env=hanging]
 
 %% Invited Talks
 \subsection{INVITED TALKS}
@@ -407,7 +394,7 @@
 \end{alignedentrieshang}
 
 %% WORKSHOPS
-\subsection{WORKSHOP PRESENTATIONS}
+\subsection{CONFERENCE AND WORKSHOP PRESENTATIONS}
 
 \medskip
 
@@ -422,15 +409,15 @@
 
 
 
-\hangingitem{\enquote{Advancing Urban Flood Hazard Characterization through Machine Learning: Challenges and Opportunities}. \textbf{American Geophysical Union Fall Meeting 2024}, \textit{AGU}, Washington, DC [\textit{Talk}].}{2024}
+\hangingitem{\enquote{Advancing Urban Flood Hazard Characterization through Machine Learning: Challenges and Opportunities}. \textbf{American Geophysical Union Fall Meeting 2024}, Washington, DC [\textit{Talk}].}{2024}
 
 
 
-\hangingitem{\textcolor{RiceBlue}{\textbf{Yuchen Lu}}$^\mathbf{\dagger}$: \enquote{TxRAIN-Observational: A Hierarchical Bayesian Spatial Framework to Assess Nonstationary Rainfall Intensity, Frequency, and Duration in Texas}. \textbf{American Geophysical Union Fall Meeting 2024}, \textit{AGU}, Washington, DC [\textit{Talk}].}{2024}
+\hangingitem{\textcolor{RiceBlue}{\textbf{Yuchen Lu}}$^\mathbf{\dagger}$: \enquote{TxRAIN-Observational: A Hierarchical Bayesian Spatial Framework to Assess Nonstationary Rainfall Intensity, Frequency, and Duration in Texas}. \textbf{American Geophysical Union Fall Meeting 2024}, Washington, DC [\textit{Talk}].}{2024}
 
 
 
-\hangingitem{\enquote{Assessing and Managing Climate Risks to Electricity Systems in an Era of Climate Change and Energy Transition}. \textbf{American Geophysical Union Fall Meeting 2024}, \textit{AGU}, Washington, DC [\textit{Talk}].}{2024}
+\hangingitem{\enquote{Assessing and Managing Climate Risks to Electricity Systems in an Era of Climate Change and Energy Transition}. \textbf{American Geophysical Union Fall Meeting 2024}, Washington, DC [\textit{Talk}].}{2024}
 
 
 
@@ -450,11 +437,11 @@
 
 
 
-\hangingitem{\textcolor{RiceBlue}{\textbf{Yuchen Lu}}$^\mathbf{\dagger}$: \enquote{H21T-1602: Spatially Varying Covariate Model: A Hierarchical Bayesian Framework for Precipitation Frequency Analysis in the Gulf Coast}. \textbf{American Geophysical Union Fall Meeting 2023}, \textit{AGU}, San Francisco, CA [\textit{Talk}].}{2023}
+\hangingitem{\textcolor{RiceBlue}{\textbf{Yuchen Lu}}$^\mathbf{\dagger}$: \enquote{H21T-1602: Spatially Varying Covariate Model: A Hierarchical Bayesian Framework for Precipitation Frequency Analysis in the Gulf Coast}. \textbf{American Geophysical Union Fall Meeting 2023}, San Francisco, CA [\textit{Talk}].}{2023}
 
 
 
-\hangingitem{\enquote{NH14B-07: Linking Robust Trends in Observations and Models to Develop Nonstationary Rainfall Frequency Grids for the State of Texas}. \textbf{American Geophysical Union Fall Meeting 2023}, \textit{AGU}, San Francisco, CA [\textit{Talk}].}{2023}
+\hangingitem{\enquote{NH14B-07: Linking Robust Trends in Observations and Models to Develop Nonstationary Rainfall Frequency Grids for the State of Texas}. \textbf{American Geophysical Union Fall Meeting 2023}, San Francisco, CA [\textit{Talk}].}{2023}
 
 
 
@@ -462,19 +449,19 @@
 
 
 
-\hangingitem{\textcolor{RiceBlue}{\textbf{Yuchen Lu}}$^\mathbf{\dagger}$: \enquote{H42E-1333: Nonstationary GEV with Hierarchical Spatial Pooling: A Spatiotemporal Bayesian Framework for Nonstationary Extreme Precipitation Frequency Analysis in the Gulf Coast}. \textbf{American Geophysical Union Fall Meeting 2022}, \textit{AGU}, Chicago, IL [\textit{Talk}].}{2022}
+\hangingitem{\textcolor{RiceBlue}{\textbf{Yuchen Lu}}$^\mathbf{\dagger}$: \enquote{H42E-1333: Nonstationary GEV with Hierarchical Spatial Pooling: A Spatiotemporal Bayesian Framework for Nonstationary Extreme Precipitation Frequency Analysis in the Gulf Coast}. \textbf{American Geophysical Union Fall Meeting 2022}, Chicago, IL [\textit{Talk}].}{2022}
 
 
 
-\hangingitem{\enquote{H35F-07: Near-term Predictability Lowers Long-Term Adaptation Costs}. \textbf{American Geophysical Union Fall Meeting 2022}, \textit{AGU}, Chicago, IL [\textit{Talk}].}{2022}
+\hangingitem{\enquote{H35F-07: Near-term Predictability Lowers Long-Term Adaptation Costs}. \textbf{American Geophysical Union Fall Meeting 2022}, Chicago, IL [\textit{Talk}].}{2022}
 
 
 
-\hangingitem{\enquote{H25U-1265: Operationalizing Bayesian Model Checking for Robust Decision Making: Insights from House Elevation}. \textbf{American Geophysical Union Fall Meeting 2021}, \textit{AGU}, New Orleans, LA [\textit{Poster}].}{2021}
+\hangingitem{\enquote{H25U-1265: Operationalizing Bayesian Model Checking for Robust Decision Making: Insights from House Elevation}. \textbf{American Geophysical Union Fall Meeting 2021}, New Orleans, LA [\textit{Poster}].}{2021}
 
 
 
-\hangingitem{\enquote{A14H-03: How Unprecedented Was the February 2021 Texas Cold Snap?}. \textbf{American Geophysical Union Fall Meeting 2021}, \textit{AGU}, New Orleans, LA [\textit{Talk}].}{2021}
+\hangingitem{\enquote{A14H-03: How Unprecedented Was the February 2021 Texas Cold Snap?}. \textbf{American Geophysical Union Fall Meeting 2021}, New Orleans, LA [\textit{Talk}].}{2021}
 
 
 
@@ -482,7 +469,7 @@
 
 
 
-\hangingitem{\enquote{H11G-07: Towards Adaptive Resilience: Managing Uncertainties and Exploiting Predictability across Timescales}. \textbf{American Geophysical Union Fall Meeting 2019}, \textit{AGU}, San Francisco, CA [\textit{Talk}].}{2019}
+\hangingitem{\enquote{H11G-07: Towards Adaptive Resilience: Managing Uncertainties and Exploiting Predictability across Timescales}. \textbf{American Geophysical Union Fall Meeting 2019}, San Francisco, CA [\textit{Talk}].}{2019}
 
 
 
@@ -494,7 +481,7 @@
 
 
 
-\hangingitem{\enquote{H52F-05: Robust Adaptation to Cyclical Climate Risk}. \textbf{American Geophysical Union Fall Meeting 2018}, \textit{AGU}, Washington, DC [\textit{Talk}].}{2018}
+\hangingitem{\enquote{H52F-05: Robust Adaptation to Cyclical Climate Risk}. \textbf{American Geophysical Union Fall Meeting 2018}, Washington, DC [\textit{Talk}].}{2018}
 
 
 
@@ -502,11 +489,11 @@
 
 
 
-\hangingitem{\enquote{A31H-0135: Causes and Model Skill of the Persistent Intense Rainfall and Flooding in Paraguay during the Austral Summer 2015-2016}. \textbf{American Geophysical Union Fall Meeting 2017}, \textit{AGU}, New Orleans, LA [\textit{Talk}].}{2017}
+\hangingitem{\enquote{A31H-0135: Causes and Model Skill of the Persistent Intense Rainfall and Flooding in Paraguay during the Austral Summer 2015-2016}. \textbf{American Geophysical Union Fall Meeting 2017}, New Orleans, LA [\textit{Talk}].}{2017}
 
 
 
-\hangingitem{\enquote{H22B-02: Designing and Operating Infrastructure for Nonstationary Flood Risk Management}. \textbf{American Geophysical Union Fall Meeting 2017}, \textit{AGU}, New Orleans, LA [\textit{Talk}].}{2017}
+\hangingitem{\enquote{H22B-02: Designing and Operating Infrastructure for Nonstationary Flood Risk Management}. \textbf{American Geophysical Union Fall Meeting 2017}, New Orleans, LA [\textit{Talk}].}{2017}
 
 
 
@@ -571,25 +558,23 @@
 \subsection{COURSES TAUGHT}
 
 
-\textbf{Rice University}
+\begin{alignedentrieshang}
 
-\begin{alignedentries}[2em]
+\hangingitem{Rice CEVE 543: \textit{Statistical-Physical Methods for Hydroclimate Extremes and Catastrophes}.}{Fall 2025}
 
-\entryitem{CEVE 421/521: \textit{Climate Risk Management}. Instructor.}{Spring 2024}\entrybreak
+\hangingitem{Rice CEVE 101: \textit{Fundamentals of Civil and Environmental Engineering}.}{Fall 2024}
 
-\entryitem{CEVE 421/521: \textit{Climate Risk Management}. Instructor.}{Spring 2023}\entrybreak
+\hangingitem{Rice CEVE 421/521: \textit{Climate Risk Management}.}{Spring 2024}
 
-\entryitem{CEVE 543: \textit{Environmental Data Science}. Instructor.}{Spring 2022}\entrybreak
+\hangingitem{Rice CEVE 543: \textit{Data Science Methods for Climate Hazard Assessment}.}{Fall 2023}
 
-\entryitem{CEVE 543: \textit{Statistical-Physical Methods for Hydroclimate Extremes and Catastrophes}. Instructor.}{Fall 2025}\entrybreak
+\hangingitem{Rice CEVE 421/521: \textit{Climate Risk Management}.}{Spring 2023}
 
-\entryitem{CEVE 101: \textit{Fundamentals of Civil and Environmental Engineering}. Instructor.}{Fall 2024}\entrybreak
+\hangingitem{Rice CEVE 543: \textit{Environmental Data Science}.}{Spring 2022}
 
-\entryitem{CEVE 543: \textit{Data Science Methods for Climate Hazard Assessment}. Instructor.}{Fall 2023}\entrybreak
+\hangingitem{Rice CEVE 101: \textit{Fundamentals of Civil and Environmental Engineering}.}{Fall 2021}
 
-\entryitem{CEVE 101: \textit{Fundamentals of Civil and Environmental Engineering}. Instructor.}{Fall 2021}
-
-\end{alignedentries}
+\end{alignedentrieshang}
 
 
 %% Advising
@@ -665,6 +650,18 @@
 
 \end{alignedentrieshang}
 
+\subsection{TEAMS ADVISED}
+
+\begin{alignedentrieshang}
+
+\hangingitem{\textbf{Optimal Policy for Decentralized Wastewater Systems (DWS) while Relaxing Certainty}: Rice Computational Mathematics and Operations Research (CMOR) Senior Project.}{2024-2025}
+
+\hangingitem{\textbf{Flood Sight | Advancing Real-Time Flood Predictions for Situational Awareness}: Rice Data to Knowledge (D2K) Lab.}{Spring 2025}
+
+\hangingitem{\textbf{[TBD]}: Rice Data to Knowledge (D2K) Lab.}{Fall 2025}
+
+\end{alignedentrieshang}
+
 %% Advisee Awards
 \subsection{ADVISEE AWARDS}
 
@@ -680,6 +677,19 @@
 %% Service
 \section{SERVICE ACTIVITIES}
 
+\subsection{DEPARTMENTAL SERVICE}
+\begin{alignedentrieshang}
+
+\hangingitem{\textbf{Member}, Graduate Studies Committee.}{2024---}
+
+\hangingitem{\textbf{Member}, Diversity, Equity, and Inclusion Committee.}{2024}
+
+\hangingitem{\textbf{Member}, Seminar Committee.}{2023--2024}
+
+\hangingitem{\textbf{Member}, Faculty Search Committee.}{2022--2023}
+
+\end{alignedentrieshang}
+
 \subsection{UNIVERSITY SERVICE}
 \begin{alignedentrieshang}
 
@@ -691,26 +701,15 @@
 
 \end{alignedentrieshang}
 
-\subsection{DEPARTMENTAL SERVICE}
-\begin{alignedentrieshang}
-
-\hangingitem{\textbf{Member}, Diversity, Equity, and Inclusion Committee. Department of Civil and Environmental Engineering.}{2024--2024}
-
-\hangingitem{\textbf{Member}, Seminar Committee. Department of Civil and Environmental Engineering.}{2023--2024}
-
-\end{alignedentrieshang}
-%
 \subsection{PROFESSIONAL SERVICE}
 \begin{alignedentrieshang}
 
 \hangingitem{\textbf{Committee Member}, Water and Society Newsletter Committee. American Geophysical Union.}{2024---}
 
-\hangingitem{\textbf{Panelist}, Webinar Series. Society for Risk Analysis. Panelist for webinar on risk analysis methodologies.}{2024---}
-
-\hangingitem{\textbf{Committee Member}, Environmental and Water Resources Systems Committee (EWRS). Environmental \& Water Resources Institute (EWRI).}{2021---}
+\hangingitem{\textbf{Committee Member}, Environmental and Water Resources Systems (EWRS) Committee. American Society of Civil Engineers (ASCE) Environmental \& Water Resources Institute (EWRI).}{2021---}
 
 \end{alignedentrieshang}
-%
+
 \subsection{PEER REVIEW}
 \begin{alignedentrieshang}[2em]
   \hangingitem{\textbf{Journals:} AGU Advances; Climate Risk Management; Climatic Change; Communications Earth and Environment; Earth's Future; Energy Technology; Environmental Data Science; Environmental Research Letters; Geophysical Research Letters; Hydrology and Earth System Sciences; Joule; Journal of Applied Meteorology and Climatology; Journal of Hydrology; Journal of Water Resources Management and Planning; Oxford Journal of Development Studies; Water Resources Research; Water Security; Weather, Climate, and Society.
@@ -724,19 +723,19 @@
 \subsection{SESSIONS CONVENED}
 \begin{alignedentrieshang}
 
-\hangingitem{\textbf{Co-Organizer}. \textit{Nature-Based Solutions for a Resilient Gulf Coast Workshop} at \textbf{Rice University}, Houston, TX.}{2025}
+\hangingitem{\textbf{Co-Organizer}. \textit{Nature-Based Solutions for a Resilient Gulf Coast}. \textbf{Rice University}, Houston, TX.}{2025}
 
-\hangingitem{\textbf{Primary Convener}. \textit{H31G - Integrating Social, Scientific, and Engineering Approaches to Identify and Address Gaps in Water Infrastructure and Household Water Security} at \textbf{American Geophysical Union Fall Meeting}, San Francisco, CA.}{2023}
+\hangingitem{\textbf{Primary Convener}. \textit{H31G - Integrating Social, Scientific, and Engineering Approaches to Identify and Address Gaps in Water Infrastructure and Household Water Security}. \textbf{American Geophysical Union Fall Meeting}, San Francisco, CA.}{2023}
 
-\hangingitem{\textbf{Convener}. \textit{NH41C - Hybrid Modeling and Digital Twin Systems for Flood Hazard Prediction and Risk Assessment at Different Spatial Scales} at \textbf{American Geophysical Union Fall Meeting}, Washington, DC.}{2023}
+\hangingitem{\textbf{Convener}. \textit{NH41C - Hybrid Modeling and Digital Twin Systems for Flood Hazard Prediction and Risk Assessment at Different Spatial Scales}. \textbf{American Geophysical Union Fall Meeting}, Washington, DC.}{2023}
 
-\hangingitem{\textbf{Chair}. \textit{H44G -- Water and Society: Interdisciplinary Perspectives on Hydroclimatic Forecasting for Water Resources Decision Making} at \textbf{American Geophysical Union Fall Meeting}, New Orleans, LA.}{2021}
+\hangingitem{\textbf{Chair}. \textit{H44G -- Water and Society: Interdisciplinary Perspectives on Hydroclimatic Forecasting for Water Resources Decision Making}. \textbf{American Geophysical Union Fall Meeting}, New Orleans, LA.}{2021}
 
-\hangingitem{\textbf{Primary Convener}. \textit{NH53 -- Emerging Needs and Approaches for Climate Services: Understanding and Developing Innovative Approaches to User-Oriented Climate Services} at \textbf{American Geophysical Union Fall Meeting}, San Francisco, CA.}{2019}
+\hangingitem{\textbf{Primary Convener}. \textit{NH53 -- Emerging Needs and Approaches for Climate Services: Understanding and Developing Innovative Approaches to User-Oriented Climate Services}. \textbf{American Geophysical Union Fall Meeting}, San Francisco, CA.}{2019}
 
-\hangingitem{\textbf{Student Organizer}. \textit{Earth and Environmental Engineering Student Research Symposium} at \textbf{Columbia University}, New York, NY.}{2018}
+\hangingitem{\textbf{Student Organizer}. \textit{Earth and Environmental Engineering Student Research Symposium}. \textbf{Columbia University}, New York, NY.}{2018}
 
-\hangingitem{\textbf{Student Organizer}. \textit{Earth and Environmental Engineering Student Research Symposium} at \textbf{Columbia University}, New York, NY.}{2017}
+\hangingitem{\textbf{Student Organizer}. \textit{Earth and Environmental Engineering Student Research Symposium}. \textbf{Columbia University}, New York, NY.}{2017}
 
 \end{alignedentrieshang}
 
@@ -747,7 +746,7 @@
 
 \hangingitem{\textbf{Social and Behavioral Research - Basic/Refresher} --- \textit{CITI Program}.}{2025--2028}
 
-\hangingitem{\textbf{Strategic Program to Accelerate Researchers in Computing (SPARC) Participant} --- \textit{Natural Hazards Engineering Research Infrastructure (NHERI) DesignSafe-CI}. https://www.designsafe-ci.org/learning-center/sparc/.}{2025}
+\hangingitem{\textbf{Strategic Program to Accelerate Researchers in Computing (SPARC) Participant} --- \textit{Natural Hazards Engineering Research Infrastructure (NHERI) DesignSafe-CI}.}{2025}
 
 \hangingitem{\textbf{Panel Fellow} --- \textit{NSF CMMI's Game Changer Academies for Advancing Research Innovation}.}{2021}
 

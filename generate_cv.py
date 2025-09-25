@@ -147,6 +147,7 @@ def main():
         filters.sort_by_attr,
         filters.sort_first_year,
         filters.extract_year,
+        filters.trim_university,
     ]
 
     cv = CV(CONFIG_FILE, filters=my_filters)

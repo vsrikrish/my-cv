@@ -52,3 +52,13 @@ def extract_year(date_str):
         return ""
     year_match = re.findall(r'^\d{4}', str(date_str))
     return year_match[0] if year_match else str(date_str)
+
+
+def trim_university(name):
+    """
+    Remove "University" from university names for more concise display
+    e.g., "Rice University" -> "Rice", "Columbia University" -> "Columbia"
+    """
+    if not name:
+        return ""
+    return re.sub(r'\s+University$', '', name)

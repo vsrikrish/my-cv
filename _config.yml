@@ -45,6 +45,8 @@ sections:
     file: teaching.yml
   - title: Advising
     file: advising.yml
+  - title: Teams Advised
+    file: teams_advised.yml
   - title: Advisee Awards
     file: awards_advisee.yml
   - title: Awards
