@@ -102,7 +102,7 @@
   style=publist,
   plauthorfirstinit=true,
   plauthorhandling=highlight,
-  plnumbered=false,
+  plnumbered=true,
   labeldateparts=false,
   boldyear=true,
   marginyear=false,
@@ -112,11 +112,27 @@
   maxbibnames=99,
   maxcitenames=99,
   date=year,
+  sorting=ydnt,
+  defernumbers=true,
 ]{biblatex}
 \setlength{\bibhang}{15pt}
 
 % Force first name abbreviation for all authors in publist style
 \ExecuteBibliographyOptions{giveninits=true}
+
+% Create counters for reverse numbering per section
+\newcounter{articletotal}
+\newcounter{preprinttotal}
+\newcounter{conferencetotal}
+\newcounter{bibitemcount}
+
+% Count entries by type
+\AtDataInput{%
+  \iffieldequalstr{entrytype}{article}{\stepcounter{articletotal}}{}%
+  \iffieldequalstr{entrytype}{misc}{\stepcounter{preprinttotal}}{}%
+  \iffieldequalstr{entrytype}{online}{\stepcounter{preprinttotal}}{}%
+  \iffieldequalstr{entrytype}{inproceedings}{\stepcounter{conferencetotal}}{}%
+}
 
 \usepackage{amsmath}
 % custom author highlighting: bold for James, blue+bold+dagger for group members
@@ -148,32 +164,36 @@
 
 % Custom bibliography drivers for hangingitem format
 \DeclareBibliographyDriver{misc}{%
+  \stepcounter{bibitemcount}%
   \hangingitem{%
-    \printnames{author}: \printfield[title]{title}. \printfield{journaltitle}%
+    [\number\numexpr\value{preprinttotal}-\value{bibitemcount}+1\relax] \printnames{author}: \printfield[title]{title}. \printfield{journaltitle}%
     \iffieldundef{doi}{\iffieldundef{url}{}{. \printfield{url}}}{. \printfield{doi}}%
   }{---}%
   \entrybreak%
 }
 
 \DeclareBibliographyDriver{online}{%
+  \stepcounter{bibitemcount}%
   \hangingitem{%
-    \printnames{author}: \printfield[title]{title}. \printfield{journaltitle}%
+    [\number\numexpr\value{preprinttotal}-\value{bibitemcount}+1\relax] \printnames{author}: \printfield[title]{title}. \printfield{journaltitle}%
     \iffieldundef{doi}{\iffieldundef{url}{}{. \printfield{url}}}{. \printfield{doi}}%
   }{---}%
   \entrybreak%
 }
 
 \DeclareBibliographyDriver{article}{%
+  \stepcounter{bibitemcount}%
   \hangingitem{%
-    \printnames{author}: \printfield[title]{title}. \printfield{journaltitle}%
+    [\number\numexpr\value{articletotal}-\value{bibitemcount}+1\relax] \printnames{author}: \printfield[title]{title}. \printfield{journaltitle}%
     \iffieldundef{doi}{\iffieldundef{url}{}{. \printfield{url}}}{. \printfield{doi}}%
   }{\printfield{year}}%
   \entrybreak%
 }
 
 \DeclareBibliographyDriver{inproceedings}{%
+  \stepcounter{bibitemcount}%
   \hangingitem{%
-    \printnames{author}: \printfield[title]{title}. \printfield{booktitle}%
+    [\number\numexpr\value{conferencetotal}-\value{bibitemcount}+1\relax] \printnames{author}: \printfield[title]{title}. \printfield{booktitle}%
     \iffieldundef{doi}{\iffieldundef{url}{}{. \printfield{url}}}{. \printfield{doi}}%
   }{\printfield{year}}%
   \entrybreak%
@@ -193,7 +213,7 @@
 
 % have to load this last
 \usepackage{hyperref} % Required for adding links	and customizing them
-\hypersetup{hidelinks, breaklinks}
+\hypersetup{colorlinks, linkcolor=black, citecolor=black, urlcolor=RiceBlue, breaklinks}
 
 %---------------------------------------------------------------------
 
@@ -231,7 +251,7 @@
 \noindent\textbf{(((pos.organization | escape_tex)))}
 
 \begin{alignedentries}[2em]
-\entryitem{\textit{(((pos.role | escape_tex)))}((* if pos.dept *)), (((pos.dept | escape_tex)))((* endif *)).}{((* if pos.end *))((* if pos.start == pos.end *))((( pos.start )))((* else *))((( pos.start )))--((( pos.end )))((* endif *))((* else *))((( pos.start )))---((* endif *))}((* if not loop.last *))\entrybreak((* endif *))
+\entryitem{\textit{(((pos.role | escape_tex)))}((* if pos.dept *)), (((pos.dept | escape_tex)))((* endif *))}{((* if pos.end *))((* if pos.start == pos.end *))((( pos.start )))((* else *))((( pos.start )))--((( pos.end )))((* endif *))((* else *))((( pos.start )))---((* endif *))}((* if not loop.last *))\entrybreak((* endif *))
 \end{alignedentries}
 ((* endfor *))
 
@@ -244,7 +264,7 @@
 
 \begin{alignedentries}[2em]
 ((* for deg in degree_list | sort(attribute="year", reverse=True) *))
-\entryitem{\textit{(((deg.degree | escape_tex))) in ((( deg.subject | escape_tex )))}.}{((( deg.year )))}((* if not loop.last *))\entrybreak((* endif *))
+\entryitem{\textit{(((deg.degree | escape_tex))) in ((( deg.subject | escape_tex )))}}{((( deg.year )))}((* if not loop.last *))\entrybreak((* endif *))
 ((* endfor *))
 \end{alignedentries}
 ((* endfor *))
@@ -254,13 +274,13 @@
 
 \begin{alignedentrieshang}
 ((* for award in data.awards | sort(attribute="year", reverse=True) *))
-\hangingitem{\textbf{(((award.title)))}, (((award.org))).}{(((award.year)))}
+\hangingitem{\textbf{(((award.title)))}, (((award.org)))}{(((award.year)))}
 ((* endfor *))
 \end{alignedentrieshang}
 
 
 %% Grants and Contracts
-\section{GRANTS AND CONTRACTS}
+\section{SPONSORED RESEARCH}
 
 \textit{Amounts reflect Rice portion for collaborative grants and subawards; total amount for direct awards.}
 
@@ -269,6 +289,19 @@
 \begin{alignedentrieshang}
 ((* for i in data.grants_contracts | selectattr("status", "in", ["active", "complete"]) | sort(attribute="end", reverse=True) | sort(attribute="start", reverse=True) *))
 \hangingitem{\textit{(((i.sponsor | escape_tex)))}((* if i.program *))\textit{: ((( i.program | escape_tex)))}((* endif *)). ``(((i.title | escape_tex))).'' \textbf{(((i.my_role | escape_tex)))}((* if i.rice_pi *)) (Rice Lead: (((i.rice_pi | escape_tex))))((* endif *))((* if i.overall_pi and not i.rice_pi *)) (PI: (((i.overall_pi | escape_tex))))((* endif *)).((* if i.in_kind *)) \textbf{in-kind}((* elif i.total_award *)) \textbf{\$((( "{:,}".format(i.total_award | int) )))}((* endif *))((* if i.subaward_from *)). Subaward from (((i.subaward_from | escape_tex)))((* if i.total_project *)); \$((( "{:,}".format(i.total_project | int) ))) total.((* else *)).((* endif *))((* else *)).((* endif *))}{(((i.start)))--(((i.end)))}
+((* endfor *))
+\end{alignedentrieshang}
+
+%% Languages
+\section{LANGUAGE SKILLS}
+
+\textit{Proficiency levels based on \href{https://www.actfl.org/proficiency-guidelines-overview}{ACTFL guidelines}.}
+
+\medskip
+
+\begin{alignedentrieshang}
+((* for lang in data.languages *))
+\hangingitem{\textbf{(((lang.language)))}: (((lang.proficiency)))((* if lang.note *)). (((lang.note | escape_tex)))((* endif *))}{}
 ((* endfor *))
 \end{alignedentrieshang}
 
@@ -287,14 +320,17 @@
 
 \subsection{IN PREP. / UNDER REVIEW}
 
+\setcounter{bibitemcount}{0}
 \printbibliography[filter=ispreprint, heading=none, env=hanging]
 
 \subsection{JOURNAL ARTICLES}
 
+\setcounter{bibitemcount}{0}
 \printbibliography[heading=none, type=article, env=hanging]
 
 \subsection{PEER-REVIEWED CONFERENCE PAPERS}
 
+\setcounter{bibitemcount}{0}
 \printbibliography[heading=none, type=inproceedings, env=hanging]
 
 %% Invited Talks

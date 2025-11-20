@@ -12,9 +12,9 @@ person:
   googlescholar: 6ifLBBsAAAAJ
   orcid: 0000-0002-3428-2224
   scholar_metrics:
-    citations: 577
+    citations: 607
     h_index: 11
-    i10_index: 13
+    i10_index: 12
   address:
     line1: 6100 Main Street, Ryon Lab 204-MS 318
     postcode: Houston, TX, 77005
@@ -41,6 +41,8 @@ sections:
     file: workshops.yml
   - title: Grants and Contracts
     file: grants.yml
+  - title: Languages
+    file: languages.yml
   - title: Teaching
     file: teaching.yml
   - title: Advising

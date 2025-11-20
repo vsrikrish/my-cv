@@ -102,7 +102,7 @@
   style=publist,
   plauthorfirstinit=true,
   plauthorhandling=highlight,
-  plnumbered=false,
+  plnumbered=true,
   labeldateparts=false,
   boldyear=true,
   marginyear=false,
@@ -112,11 +112,27 @@
   maxbibnames=99,
   maxcitenames=99,
   date=year,
+  sorting=ydnt,
+  defernumbers=true,
 ]{biblatex}
 \setlength{\bibhang}{15pt}
 
 % Force first name abbreviation for all authors in publist style
 \ExecuteBibliographyOptions{giveninits=true}
+
+% Create counters for reverse numbering per section
+\newcounter{articletotal}
+\newcounter{preprinttotal}
+\newcounter{conferencetotal}
+\newcounter{bibitemcount}
+
+% Count entries by type
+\AtDataInput{%
+  \iffieldequalstr{entrytype}{article}{\stepcounter{articletotal}}{}%
+  \iffieldequalstr{entrytype}{misc}{\stepcounter{preprinttotal}}{}%
+  \iffieldequalstr{entrytype}{online}{\stepcounter{preprinttotal}}{}%
+  \iffieldequalstr{entrytype}{inproceedings}{\stepcounter{conferencetotal}}{}%
+}
 
 \usepackage{amsmath}
 % custom author highlighting: bold for James, blue+bold+dagger for group members
@@ -148,32 +164,36 @@
 
 % Custom bibliography drivers for hangingitem format
 \DeclareBibliographyDriver{misc}{%
+  \stepcounter{bibitemcount}%
   \hangingitem{%
-    \printnames{author}: \printfield[title]{title}. \printfield{journaltitle}%
+    [\number\numexpr\value{preprinttotal}-\value{bibitemcount}+1\relax] \printnames{author}: \printfield[title]{title}. \printfield{journaltitle}%
     \iffieldundef{doi}{\iffieldundef{url}{}{. \printfield{url}}}{. \printfield{doi}}%
   }{---}%
   \entrybreak%
 }
 
 \DeclareBibliographyDriver{online}{%
+  \stepcounter{bibitemcount}%
   \hangingitem{%
-    \printnames{author}: \printfield[title]{title}. \printfield{journaltitle}%
+    [\number\numexpr\value{preprinttotal}-\value{bibitemcount}+1\relax] \printnames{author}: \printfield[title]{title}. \printfield{journaltitle}%
     \iffieldundef{doi}{\iffieldundef{url}{}{. \printfield{url}}}{. \printfield{doi}}%
   }{---}%
   \entrybreak%
 }
 
 \DeclareBibliographyDriver{article}{%
+  \stepcounter{bibitemcount}%
   \hangingitem{%
-    \printnames{author}: \printfield[title]{title}. \printfield{journaltitle}%
+    [\number\numexpr\value{articletotal}-\value{bibitemcount}+1\relax] \printnames{author}: \printfield[title]{title}. \printfield{journaltitle}%
     \iffieldundef{doi}{\iffieldundef{url}{}{. \printfield{url}}}{. \printfield{doi}}%
   }{\printfield{year}}%
   \entrybreak%
 }
 
 \DeclareBibliographyDriver{inproceedings}{%
+  \stepcounter{bibitemcount}%
   \hangingitem{%
-    \printnames{author}: \printfield[title]{title}. \printfield{booktitle}%
+    [\number\numexpr\value{conferencetotal}-\value{bibitemcount}+1\relax] \printnames{author}: \printfield[title]{title}. \printfield{booktitle}%
     \iffieldundef{doi}{\iffieldundef{url}{}{. \printfield{url}}}{. \printfield{doi}}%
   }{\printfield{year}}%
   \entrybreak%
@@ -193,7 +213,7 @@
 
 % have to load this last
 \usepackage{hyperref} % Required for adding links	and customizing them
-\hypersetup{hidelinks, breaklinks}
+\hypersetup{colorlinks, linkcolor=black, citecolor=black, urlcolor=RiceBlue, breaklinks}
 
 %---------------------------------------------------------------------
 
@@ -231,14 +251,14 @@
 \noindent\textbf{Rice University}
 
 \begin{alignedentries}[2em]
-\entryitem{\textit{Assistant Professor}, Department of Civil \& Environmental Engineering.}{2021---}\entrybreak
+\entryitem{\textit{Assistant Professor}, Department of Civil \& Environmental Engineering}{2021---}\entrybreak
 \end{alignedentries}
 
 
 \noindent\textbf{The Pennsylvania State University}
 
 \begin{alignedentries}[2em]
-\entryitem{\textit{Postdoctoral Scholar}, Earth \& Environmental Systems Institute.}{2020}
+\entryitem{\textit{Postdoctoral Scholar}, Earth \& Environmental Systems Institute}{2020}
 \end{alignedentries}
 
 
@@ -251,9 +271,9 @@
 
 \begin{alignedentries}[2em]
 
-\entryitem{\textit{Ph.D. in Earth \& Environmental Engineering}.}{2020}\entrybreak
+\entryitem{\textit{Ph.D. in Earth \& Environmental Engineering}}{2020}\entrybreak
 
-\entryitem{\textit{M.S. in Earth \& Environmental Engineering}.}{2016}
+\entryitem{\textit{M.S. in Earth \& Environmental Engineering}}{2016}
 
 \end{alignedentries}
 
@@ -262,7 +282,7 @@
 
 \begin{alignedentries}[2em]
 
-\entryitem{\textit{B.S. in Mechanical Engineering}.}{2015}
+\entryitem{\textit{B.S. in Mechanical Engineering}}{2015}
 
 \end{alignedentries}
 
@@ -272,29 +292,29 @@
 
 \begin{alignedentrieshang}
 
-\hangingitem{\textbf{Outstanding Reviewer Award}, Earth's Future.}{2023}
+\hangingitem{\textbf{Outstanding Reviewer Award}, Earth's Future}{2023}
 
-\hangingitem{\textbf{Nickolas and Liliana Themelis Fellowship}, Fu Foundation School of Engineering and Applied Science, Columbia University.}{2018}
+\hangingitem{\textbf{Nickolas and Liliana Themelis Fellowship}, Fu Foundation School of Engineering and Applied Science, Columbia University}{2018}
 
-\hangingitem{\textbf{Graduate Research Fellowship, Climate and Large-Scale Atmospheric Dynamics}, National Science Foundation.}{2017}
+\hangingitem{\textbf{Graduate Research Fellowship, Climate and Large-Scale Atmospheric Dynamics}, National Science Foundation}{2017}
 
-\hangingitem{\textbf{Presidential Distinguished Fellowship}, Fu Foundation School of Engineering and Applied Science, Columbia University.}{2015}
+\hangingitem{\textbf{Presidential Distinguished Fellowship}, Fu Foundation School of Engineering and Applied Science, Columbia University}{2015}
 
-\hangingitem{\textbf{Distinction in Major}, Department of Mechanical Engineering and Materials Science, Yale University.}{2015}
+\hangingitem{\textbf{Distinction in Major}, Department of Mechanical Engineering and Materials Science, Yale University}{2015}
 
-\hangingitem{\textbf{Legacy Award}, New Haven Promise.}{2015}
+\hangingitem{\textbf{Legacy Award}, New Haven Promise}{2015}
 
-\hangingitem{\textbf{Larry Coben '79 Fellowship}, Yale University.}{2014}
+\hangingitem{\textbf{Larry Coben '79 Fellowship}, Yale University}{2014}
 
-\hangingitem{\textbf{Vance-Carter Travel Award}, Yale University.}{2013}
+\hangingitem{\textbf{Vance-Carter Travel Award}, Yale University}{2013}
 
-\hangingitem{\textbf{Thomas C. Barry Travel Award}, Yale University.}{2012}
+\hangingitem{\textbf{Thomas C. Barry Travel Award}, Yale University}{2012}
 
 \end{alignedentrieshang}
 
 
 %% Grants and Contracts
-\section{GRANTS AND CONTRACTS}
+\section{SPONSORED RESEARCH}
 
 \textit{Amounts reflect Rice portion for collaborative grants and subawards; total amount for direct awards.}
 
@@ -328,12 +348,33 @@
 
 \end{alignedentrieshang}
 
+%% Languages
+\section{LANGUAGE SKILLS}
+
+\textit{Proficiency levels based on \href{https://www.actfl.org/proficiency-guidelines-overview}{ACTFL guidelines}.}
+
+\medskip
+
+\begin{alignedentrieshang}
+
+\hangingitem{\textbf{English}: Native}{}
+
+\hangingitem{\textbf{Spanish}: Advanced-High}{}
+
+\hangingitem{\textbf{Portuguese}: Advanced-Low}{}
+
+\hangingitem{\textbf{Italian}: Basic}{}
+
+\hangingitem{\textbf{French}: Basic}{}
+
+\end{alignedentrieshang}
+
 %% Publications
 
 \section{PUBLICATIONS}
 
 {\textcolor{RiceBlue}{\textbf{$^\mathbf{\dagger}$ denotes Rice advisee publication}}}.
-\href{https://scholar.google.com/citations?user=6ifLBBsAAAAJ}{Google Scholar \aiGoogleScholar} \textit{citations}: 577, \textit{h-index}: 11, \textit{i10-index}: 13.
+\href{https://scholar.google.com/citations?user=6ifLBBsAAAAJ}{Google Scholar \aiGoogleScholar} \textit{citations}: 607, \textit{h-index}: 11, \textit{i10-index}: 12.
 \medskip
 
 \defbibfilter{ispreprint}{%
@@ -343,20 +384,25 @@
 
 \subsection{IN PREP. / UNDER REVIEW}
 
+\setcounter{bibitemcount}{0}
 \printbibliography[filter=ispreprint, heading=none, env=hanging]
 
 \subsection{JOURNAL ARTICLES}
 
+\setcounter{bibitemcount}{0}
 \printbibliography[heading=none, type=article, env=hanging]
 
 \subsection{PEER-REVIEWED CONFERENCE PAPERS}
 
+\setcounter{bibitemcount}{0}
 \printbibliography[heading=none, type=inproceedings, env=hanging]
 
 %% Invited Talks
 \subsection{INVITED TALKS}
 
 \begin{alignedentrieshang}
+
+\hangingitem{\enquote{Statistical Modeling for Nonstationary Hydroclimate Hazards: Challenges and Opportunities}. Statistics Colloquium,  \textbf{Rice University}, Houston, TX.}{2025}
 
 \hangingitem{Panelist. Exploring Water Resilience to Emerging Challenges,  \textbf{Society for Risk Analysis}, Remote Presentation.}{2025}
 
@@ -687,9 +733,9 @@
 
 \hangingitem{\textbf{Member}, Diversity, Equity, and Inclusion Committee.}{2024}
 
-\hangingitem{\textbf{Member}, Seminar Committee.}{2023--2024}
-
 \hangingitem{\textbf{Member}, Faculty Search Committee.}{2022--2023}
+
+\hangingitem{\textbf{Member}, Seminar Committee.}{2022--2023}
 
 \end{alignedentrieshang}
 
