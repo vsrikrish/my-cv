@@ -24,12 +24,6 @@ TEMPLATES = {
         "output_pdf": "Doss-Gollin-CV.pdf",
         "copy_to_docs": True,  # This goes to GitHub Pages
     },
-    "biosketch": {
-        "template": "biosketch.latextemplate",
-        "output_tex": "Doss-Gollin-Biosketch.tex",
-        "output_pdf": "Doss-Gollin-Biosketch.pdf",
-        "copy_to_docs": False,  # Keep private
-    },
 }
 
 

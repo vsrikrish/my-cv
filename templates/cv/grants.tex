@@ -1,0 +1,12 @@
+%% Grants and Contracts
+\section{SPONSORED RESEARCH}
+
+\textit{Amounts reflect Rice portion for collaborative grants and subawards; total amount for direct awards.}
+
+\medskip
+
+\begin{alignedentrieshang}
+((* for i in data.grants_contracts | selectattr("status", "in", ["active", "complete"]) | sort(attribute="end", reverse=True) | sort(attribute="start", reverse=True) *))
+\hangingitem{\textit{(((i.sponsor | escape_tex)))}((* if i.program *))\textit{: ((( i.program | escape_tex)))}((* endif *)). ``(((i.title | escape_tex))).'' \textbf{(((i.my_role | escape_tex)))}((* if i.rice_pi *)) (Rice Lead: (((i.rice_pi | escape_tex))))((* endif *))((* if i.overall_pi and not i.rice_pi *)) (PI: (((i.overall_pi | escape_tex))))((* endif *)).((* if i.in_kind *)) \textbf{in-kind}((* elif i.total_award *)) \textbf{\$((( "{:,}".format(i.total_award | int) )))}((* endif *))((* if i.subaward_from *)). Subaward from (((i.subaward_from | escape_tex)))((* if i.total_project *)); \$((( "{:,}".format(i.total_project | int) ))) total.((* else *)).((* endif *))((* else *)).((* endif *))}{(((i.start)))--(((i.end)))}
+((* endfor *))
+\end{alignedentrieshang}

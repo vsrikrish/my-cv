@@ -1,0 +1,12 @@
+%% Languages
+\section{LANGUAGE SKILLS}
+
+\textit{Proficiency levels based on \href{https://www.actfl.org/proficiency-guidelines-overview}{ACTFL guidelines}.}
+
+\medskip
+
+\begin{alignedentrieshang}
+((* for lang in data.languages *))
+\hangingitem{\textbf{(((lang.language)))}: (((lang.proficiency)))((* if lang.note *)). (((lang.note | escape_tex)))((* endif *))}{}
+((* endfor *))
+\end{alignedentrieshang}

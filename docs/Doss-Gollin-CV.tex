@@ -115,7 +115,7 @@
   sorting=ydnt,
   defernumbers=true,
 ]{biblatex}
-\setlength{\bibhang}{15pt}
+\setlength{\bibhang}{25pt}
 
 % Force first name abbreviation for all authors in publist style
 \ExecuteBibliographyOptions{giveninits=true}
@@ -225,7 +225,6 @@
 \thispagestyle{empty}
 %% Name and contact block
 \noindent{
-  \footnotesize
   \color{RiceGray}
   \begin{tabular*}{\textwidth}{@{}p{0.5\textwidth}@{\extracolsep{\fill}}r@{}}
     Rice University       & \texttt{\href{mailto:jdossgollin@rice.edu}{jdossgollin@rice.edu}} \, \faEnvelope                                                                                  \\
@@ -240,9 +239,9 @@
 %% Name
 \noindent{\LARGE\bfseries \textcolor{RiceBlue}{James Doss-Gollin}}
 
+\bigskip
 
-
-
+% Include CV sections
 %% Appointments
 \section{APPOINTMENTS}
 
@@ -260,7 +259,6 @@
 \begin{alignedentries}[2em]
 \entryitem{\textit{Postdoctoral Scholar}, Earth \& Environmental Systems Institute}{2020}
 \end{alignedentries}
-
 
 %% Education
 \section{EDUCATION}
@@ -285,33 +283,6 @@
 \entryitem{\textit{B.S. in Mechanical Engineering}}{2015}
 
 \end{alignedentries}
-
-
-%% Awards
-\section{AWARDS}
-
-\begin{alignedentrieshang}
-
-\hangingitem{\textbf{Outstanding Reviewer Award}, Earth's Future}{2023}
-
-\hangingitem{\textbf{Nickolas and Liliana Themelis Fellowship}, Fu Foundation School of Engineering and Applied Science, Columbia University}{2018}
-
-\hangingitem{\textbf{Graduate Research Fellowship, Climate and Large-Scale Atmospheric Dynamics}, National Science Foundation}{2017}
-
-\hangingitem{\textbf{Presidential Distinguished Fellowship}, Fu Foundation School of Engineering and Applied Science, Columbia University}{2015}
-
-\hangingitem{\textbf{Distinction in Major}, Department of Mechanical Engineering and Materials Science, Yale University}{2015}
-
-\hangingitem{\textbf{Legacy Award}, New Haven Promise}{2015}
-
-\hangingitem{\textbf{Larry Coben '79 Fellowship}, Yale University}{2014}
-
-\hangingitem{\textbf{Vance-Carter Travel Award}, Yale University}{2013}
-
-\hangingitem{\textbf{Thomas C. Barry Travel Award}, Yale University}{2012}
-
-\end{alignedentrieshang}
-
 
 %% Grants and Contracts
 \section{SPONSORED RESEARCH}
@@ -347,7 +318,30 @@
 \hangingitem{\textit{Energy Foundation}. ``Synthesis of Texas Electricity Research from Rice University.'' \textbf{Co-PI} (PI: Daniel Cohan). \textbf{\$24,928}.}{2022--2023}
 
 \end{alignedentrieshang}
+%% Awards
+\section{AWARDS}
 
+\begin{alignedentrieshang}
+
+\hangingitem{\textbf{Outstanding Reviewer Award}, Earth's Future}{2023}
+
+\hangingitem{\textbf{Nickolas and Liliana Themelis Fellowship}, Fu Foundation School of Engineering and Applied Science, Columbia University}{2018}
+
+\hangingitem{\textbf{Graduate Research Fellowship, Climate and Large-Scale Atmospheric Dynamics}, National Science Foundation}{2017}
+
+\hangingitem{\textbf{Presidential Distinguished Fellowship}, Fu Foundation School of Engineering and Applied Science, Columbia University}{2015}
+
+\hangingitem{\textbf{Distinction in Major}, Department of Mechanical Engineering and Materials Science, Yale University}{2015}
+
+\hangingitem{\textbf{Legacy Award}, New Haven Promise}{2015}
+
+\hangingitem{\textbf{Larry Coben '79 Fellowship}, Yale University}{2014}
+
+\hangingitem{\textbf{Vance-Carter Travel Award}, Yale University}{2013}
+
+\hangingitem{\textbf{Thomas C. Barry Travel Award}, Yale University}{2012}
+
+\end{alignedentrieshang}
 %% Languages
 \section{LANGUAGE SKILLS}
 
@@ -368,7 +362,6 @@
 \hangingitem{\textbf{French}: Basic}{}
 
 \end{alignedentrieshang}
-
 %% Publications
 
 \section{PUBLICATIONS}
@@ -438,8 +431,8 @@
 
 \end{alignedentrieshang}
 
-%% WORKSHOPS
-\subsection{CONFERENCE AND WORKSHOP PRESENTATIONS}
+%% FIRST-AUTHOR CONFERENCE PRESENTATIONS
+\subsection{FIRST-AUTHOR CONFERENCE AND WORKSHOP PRESENTATIONS}
 
 \medskip
 
@@ -458,15 +451,11 @@
 
 
 
-\hangingitem{\textcolor{RiceBlue}{\textbf{Yuchen Lu}}$^\mathbf{\dagger}$: \enquote{TxRAIN-Observational: A Hierarchical Bayesian Spatial Framework to Assess Nonstationary Rainfall Intensity, Frequency, and Duration in Texas}. \textbf{American Geophysical Union Fall Meeting 2024}, Washington, DC [\textit{Talk}].}{2024}
-
 
 
 \hangingitem{\enquote{Assessing and Managing Climate Risks to Electricity Systems in an Era of Climate Change and Energy Transition}. \textbf{American Geophysical Union Fall Meeting 2024}, Washington, DC [\textit{Talk}].}{2024}
 
 
-
-\hangingitem{\textcolor{RiceBlue}{\textbf{Yuchen Lu}}$^\mathbf{\dagger}$: \enquote{Nonstationary Extreme Precipitation Probabilities in Texas}. \textbf{Fall Meeting}, \textit{Consortium for Enhancing Resilience and Catastrophe Modeling (CERCat)}, Bethlehem, PA [\textit{Poster}].}{2024}
 
 
 
@@ -478,11 +467,7 @@
 
 
 
-\hangingitem{\textcolor{RiceBlue}{\textbf{Yuchen Lu}}$^\mathbf{\dagger}$: \enquote{Spatially Varying and Duration Dependent Covariate Model: A Hierarchical Bayesian Framework for Multi-duration Extreme Precipitation Frequency Analysis in Texas}. \textbf{World Environmental \& Water Resources Congress 2024}, \textit{Environmental \& Water Resources Institute (EWRI) - ASCE}, Milwaukee, WI [\textit{Talk}].}{2024}
 
-
-
-\hangingitem{\textcolor{RiceBlue}{\textbf{Yuchen Lu}}$^\mathbf{\dagger}$: \enquote{H21T-1602: Spatially Varying Covariate Model: A Hierarchical Bayesian Framework for Precipitation Frequency Analysis in the Gulf Coast}. \textbf{American Geophysical Union Fall Meeting 2023}, San Francisco, CA [\textit{Talk}].}{2023}
 
 
 
@@ -493,8 +478,6 @@
 \hangingitem{\enquote{A Bayesian Spatial Hierarchical Framework for Process-Informed Nonstationary Analysis of Precipitation Frequencies}. \textbf{13th International Workshop on Statistical Hydrology}, \textit{International Association of Hydrological Sciences}, Boston, MA [\textit{Talk}].}{2023}
 
 
-
-\hangingitem{\textcolor{RiceBlue}{\textbf{Yuchen Lu}}$^\mathbf{\dagger}$: \enquote{H42E-1333: Nonstationary GEV with Hierarchical Spatial Pooling: A Spatiotemporal Bayesian Framework for Nonstationary Extreme Precipitation Frequency Analysis in the Gulf Coast}. \textbf{American Geophysical Union Fall Meeting 2022}, Chicago, IL [\textit{Talk}].}{2022}
 
 
 
@@ -563,6 +546,82 @@
 
 \end{alignedentrieshang}
 
+%% ADVISEE CONFERENCE PRESENTATIONS
+\subsection{ADVISEE CONFERENCE AND WORKSHOP PRESENTATIONS}
+
+\medskip
+
+\begin{alignedentrieshang}
+
+
+
+
+
+
+
+
+\hangingitem{\textcolor{RiceBlue}{\textbf{Yuchen Lu}}$^\mathbf{\dagger}$: \enquote{TxRAIN-Observational: A Hierarchical Bayesian Spatial Framework to Assess Nonstationary Rainfall Intensity, Frequency, and Duration in Texas}. \textbf{American Geophysical Union Fall Meeting 2024}, Washington, DC [\textit{Talk}].}{2024}
+
+
+
+
+
+\hangingitem{\textcolor{RiceBlue}{\textbf{Yuchen Lu}}$^\mathbf{\dagger}$: \enquote{Nonstationary Extreme Precipitation Probabilities in Texas}. \textbf{Fall Meeting}, \textit{Consortium for Enhancing Resilience and Catastrophe Modeling (CERCat)}, Bethlehem, PA [\textit{Poster}].}{2024}
+
+
+
+
+
+
+
+\hangingitem{\textcolor{RiceBlue}{\textbf{Yuchen Lu}}$^\mathbf{\dagger}$: \enquote{Spatially Varying and Duration Dependent Covariate Model: A Hierarchical Bayesian Framework for Multi-duration Extreme Precipitation Frequency Analysis in Texas}. \textbf{World Environmental \& Water Resources Congress 2024}, \textit{Environmental \& Water Resources Institute (EWRI) - ASCE}, Milwaukee, WI [\textit{Talk}].}{2024}
+
+
+
+\hangingitem{\textcolor{RiceBlue}{\textbf{Yuchen Lu}}$^\mathbf{\dagger}$: \enquote{H21T-1602: Spatially Varying Covariate Model: A Hierarchical Bayesian Framework for Precipitation Frequency Analysis in the Gulf Coast}. \textbf{American Geophysical Union Fall Meeting 2023}, San Francisco, CA [\textit{Talk}].}{2023}
+
+
+
+
+
+
+
+\hangingitem{\textcolor{RiceBlue}{\textbf{Yuchen Lu}}$^\mathbf{\dagger}$: \enquote{H42E-1333: Nonstationary GEV with Hierarchical Spatial Pooling: A Spatiotemporal Bayesian Framework for Nonstationary Extreme Precipitation Frequency Analysis in the Gulf Coast}. \textbf{American Geophysical Union Fall Meeting 2022}, Chicago, IL [\textit{Talk}].}{2022}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{alignedentrieshang}
 %% Media Coverage
 \section{MEDIA HIGHLIGHTS}
 
@@ -599,8 +658,6 @@
 \hangingitem{\enquote{New Study Shows Promise for Long-Term Weather Forecasts in South America.} \textbf{State of the Planet} --- Elisabeth Gawthrop [\textit{print}].}{2018}
 
 \end{alignedentrieshang}
-
-
 %% Teaching
 \section{TEACHING AND ADVISING}
 
@@ -642,6 +699,8 @@
 \hangingitem{Jonah Schaechter: \textbf{Ph.D.} in Civil and Environmental Engineering, Rice University. \textbf{Primary Advisor}.}{2024---}
 
 \hangingitem{Valeriia Sobolevskaia: \textbf{Ph.D.} in Earth, Environmental, and Planetary Sciences, Rice University. \textbf{Committee Member}.}{2020---}
+
+\hangingitem{Jiayue Yin: \textbf{Ph.D.} in Earth, Environmental, and Planetary Sciences, Rice University. \textbf{Committee Member}.}{2023---}
 
 \end{alignedentrieshang}
 
@@ -707,7 +766,7 @@
 
 \hangingitem{\textbf{Flood Sight | Advancing Real-Time Flood Predictions for Situational Awareness}: Rice Data to Knowledge (D2K) Lab.}{Spring 2025}
 
-\hangingitem{\textbf{[TBD]}: Rice Data to Knowledge (D2K) Lab.}{Fall 2025}
+\hangingitem{\textbf{Predicting Streamflow for Hill Country Gauges Using a Transformer-based Model}: Rice Data to Knowledge (D2K) Lab.}{Fall 2025}
 
 \end{alignedentrieshang}
 
@@ -721,8 +780,6 @@
 \hangingitem{\textbf{Yuchen Lu}: H.W. Reeves Endowed Scholarship.}{2022}
 
 \end{alignedentrieshang}
-
-
 %% Service
 \section{SERVICE ACTIVITIES}
 
@@ -787,7 +844,6 @@
 \hangingitem{\textbf{Student Organizer}. \textit{Earth and Environmental Engineering Student Research Symposium}. \textbf{Columbia University}, New York, NY.}{2017}
 
 \end{alignedentrieshang}
-
 %% Additional Experience and Training
 \section{ADDITIONAL EXPERIENCE}
 

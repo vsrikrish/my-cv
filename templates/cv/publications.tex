@@ -1,0 +1,62 @@
+%% Publications
+
+\section{PUBLICATIONS}
+
+{\textcolor{RiceBlue}{\textbf{$^\mathbf{\dagger}$ denotes Rice advisee publication}}}.
+\href{https://scholar.google.com/citations?user=(((data.person.googlescholar)))}{Google Scholar \aiGoogleScholar}((* if data.person.scholar_metrics *)) \textit{citations}: (((data.person.scholar_metrics.citations))), \textit{h-index}: (((data.person.scholar_metrics.h_index))), \textit{i10-index}: (((data.person.scholar_metrics.i10_index))).((* endif *))
+\medskip
+
+\defbibfilter{ispreprint}{%
+    type=misc
+    or type=online
+}
+
+\subsection{IN PREP. / UNDER REVIEW}
+
+\setcounter{bibitemcount}{0}
+\printbibliography[filter=ispreprint, heading=none, env=hanging]
+
+\subsection{JOURNAL ARTICLES}
+
+\setcounter{bibitemcount}{0}
+\printbibliography[heading=none, type=article, env=hanging]
+
+\subsection{PEER-REVIEWED CONFERENCE PAPERS}
+
+\setcounter{bibitemcount}{0}
+\printbibliography[heading=none, type=inproceedings, env=hanging]
+
+%% Invited Talks
+\subsection{INVITED TALKS}
+
+\begin{alignedentrieshang}
+((* for i in data.invited_talks | sort(attribute="date", reverse=True) *))
+\hangingitem{((* if i.title == "Panelist" *))(((i.title | escape_tex)))((* else *))\enquote{(((i.title | escape_tex)))}((* endif *)). ((* if i.event *))(((i.event | escape_tex))), ((* endif *)) \textbf{(((i.org | escape_tex)))}((* if i.location *)), (((i.location))).((* else *)).((* endif *))}{(((i.date | extract_year)))}
+((* endfor *))
+\end{alignedentrieshang}
+
+%% FIRST-AUTHOR CONFERENCE PRESENTATIONS
+\subsection{FIRST-AUTHOR CONFERENCE AND WORKSHOP PRESENTATIONS}
+
+\medskip
+
+\begin{alignedentrieshang}
+((* for i in data.workshop_presentations | sort(attribute="date", reverse=True) *))
+((* if i.presenter == "James Doss-Gollin" *))
+\hangingitem{\enquote{(((i.title | escape_tex)))}. \textbf{(((i.event | escape_tex)))}((* if i.org *)), \textit{(((i.org | escape_tex)))}((* endif *)), (((i.location)))((* if i.format *)) [\textit{(((i.format)))}]((* endif *)).}{(((i.date | extract_year)))}
+((* endif *))
+((* endfor *))
+\end{alignedentrieshang}
+
+%% ADVISEE CONFERENCE PRESENTATIONS
+\subsection{ADVISEE CONFERENCE AND WORKSHOP PRESENTATIONS}
+
+\medskip
+
+\begin{alignedentrieshang}
+((* for i in data.workshop_presentations | sort(attribute="date", reverse=True) *))
+((* if i.presenter != "James Doss-Gollin" *))
+\hangingitem{\textcolor{RiceBlue}{\textbf{(((i.presenter | escape_tex)))}}$^\mathbf{\dagger}$: \enquote{(((i.title | escape_tex)))}. \textbf{(((i.event | escape_tex)))}((* if i.org *)), \textit{(((i.org | escape_tex)))}((* endif *)), (((i.location)))((* if i.format *)) [\textit{(((i.format)))}]((* endif *)).}{(((i.date | extract_year)))}
+((* endif *))
+((* endfor *))
+\end{alignedentrieshang}

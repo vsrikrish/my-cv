@@ -1,0 +1,8 @@
+%% Awards
+\section{AWARDS}
+
+\begin{alignedentrieshang}
+((* for award in data.awards | sort(attribute="year", reverse=True) *))
+\hangingitem{\textbf{(((award.title)))}, (((award.org)))}{(((award.year)))}
+((* endfor *))
+\end{alignedentrieshang}

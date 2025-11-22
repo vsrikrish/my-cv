@@ -1,0 +1,11 @@
+%% Appointments
+\section{APPOINTMENTS}
+
+((* for pos in data.appointments | sort(attribute="start", reverse=True) *))
+
+\noindent\textbf{(((pos.organization | escape_tex)))}
+
+\begin{alignedentries}[2em]
+\entryitem{\textit{(((pos.role | escape_tex)))}((* if pos.dept *)), (((pos.dept | escape_tex)))((* endif *))}{((* if pos.end *))((* if pos.start == pos.end *))((( pos.start )))((* else *))((( pos.start )))--((( pos.end )))((* endif *))((* else *))((( pos.start )))---((* endif *))}((* if not loop.last *))\entrybreak((* endif *))
+\end{alignedentries}
+((* endfor *))

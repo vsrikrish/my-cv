@@ -1,0 +1,8 @@
+%% Media Coverage
+\section{MEDIA HIGHLIGHTS}
+
+\begin{alignedentrieshang}
+((* for i in data.media_coverage | sort(attribute="date", reverse=True) *))
+\hangingitem{\enquote{(((i.title | escape_tex))).} \textbf{(((i.publication | escape_tex)))}((* if i.author *)) --- (((i.author | escape_tex)))((* endif *))((* if i.format *)) [\textit{((( i.format | lower )))}]((* endif *)).}{(((i.date | extract_year)))}
+((* endfor *))
+\end{alignedentrieshang}

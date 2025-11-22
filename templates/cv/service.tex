@@ -1,0 +1,40 @@
+%% Service
+\section{SERVICE ACTIVITIES}
+
+\subsection{DEPARTMENTAL SERVICE}
+\begin{alignedentrieshang}
+((* for service in data.department_service | sort(attribute="start_year", reverse=True) *))
+\hangingitem{\textbf{(((service.role | escape_tex)))}((* if service.program *)), (((service.program | escape_tex)))((* endif *))((* if service.description *)) (((service.description | escape_tex)))((* endif *)).}{((* if service.end_year *))((* if service.start_year == service.end_year *))(((service.start_year)))((* else *))(((service.start_year)))--(((service.end_year)))((* endif *))((* else *))(((service.start_year)))---((* endif *))}
+((* endfor *))
+\end{alignedentrieshang}
+
+\subsection{UNIVERSITY SERVICE}
+\begin{alignedentrieshang}
+((* for service in data.university_service | sort(attribute="start_year", reverse=True) *))
+\hangingitem{\textbf{(((service.role | escape_tex)))}((* if service.program *)), (((service.program | escape_tex)))((* endif *)). (((service.organization | escape_tex)))((* if service.description *)). (((service.description | escape_tex)))((* endif *)).}{((* if service.end_year *))((* if service.start_year == service.end_year *))(((service.start_year)))((* else *))(((service.start_year)))--(((service.end_year)))((* endif *))((* else *))(((service.start_year)))---((* endif *))}
+((* endfor *))
+\end{alignedentrieshang}
+
+\subsection{PROFESSIONAL SERVICE}
+\begin{alignedentrieshang}
+((* for service in data.professional_service | sort(attribute="start_year", reverse=True) *))
+\hangingitem{\textbf{(((service.role | escape_tex)))}((* if service.program *)), (((service.program | escape_tex)))((* endif *)). (((service.organization | escape_tex)))((* if service.description *)). (((service.description | escape_tex)))((* endif *)).}{((* if service.end_year *))((* if service.start_year == service.end_year *))(((service.start_year)))((* else *))(((service.start_year)))--(((service.end_year)))((* endif *))((* else *))(((service.start_year)))---((* endif *))}
+((* endfor *))
+\end{alignedentrieshang}
+
+\subsection{PEER REVIEW}
+\begin{alignedentrieshang}[2em]
+  \hangingitem{\textbf{Journals:} ((* for i in data.review_activities | selectattr("type", "equalto", "journal") | sort(attribute="name") *))(((i.name | escape_tex)))((* if not loop.last *)); ((* endif *))((* endfor *)).
+  }{}
+  \hangingitem{\textbf{Funding Agencies:} ((* for i in data.review_activities | selectattr("type", "equalto", "funding") | sort(attribute="name") *))(((i.name | escape_tex)))((* if not loop.last *)); ((* endif *))((* endfor *)).
+  }{}
+  \hangingitem{\textbf{Other:} ((* for i in data.review_activities | selectattr("type", "equalto", "external") | sort(attribute="name") *))(((i.name | escape_tex)))((* if not loop.last *)); ((* endif *))((* endfor *)).
+  }{}
+\end{alignedentrieshang}
+%
+\subsection{SESSIONS CONVENED}
+\begin{alignedentrieshang}
+((* for i in data.sessions_organized | sort(attribute="date", reverse=True) *))
+\hangingitem{\textbf{(((i.role)))}. \textit{(((i.session | escape_tex)))}. \textbf{(((i.event | escape_tex)))}, (((i.location))).}{(((i.date | extract_year)))}
+((* endfor *))
+\end{alignedentrieshang}

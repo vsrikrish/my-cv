@@ -1,0 +1,8 @@
+%% Additional Experience and Training
+\section{ADDITIONAL EXPERIENCE}
+
+\begin{alignedentrieshang}
+((* for i in data.additional_experience | sort(attribute="end", reverse=True) *))
+\hangingitem{\textbf{(((i.title | escape_tex)))} --- \textit{(((i.org | escape_tex)))}.}{((* if i.end == i.start *))(((i.end)))((* else *))(((i.start)))--(((i.end)))((* endif *))}
+((* endfor *))
+\end{alignedentrieshang}

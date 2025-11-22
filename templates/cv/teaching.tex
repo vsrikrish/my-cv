@@ -1,0 +1,58 @@
+%% Teaching
+\section{TEACHING AND ADVISING}
+
+\subsection{COURSES TAUGHT}
+
+((* for univ, course_list in data.teaching | groupby("university") *))
+\begin{alignedentrieshang}
+((* for course in course_list | sort(attribute="course") | sort(attribute="semester") | sort(attribute="year", reverse=True) *))
+\hangingitem{(((univ | trim_university | escape_tex))) (((course.course))): \textit{(((course.title | escape_tex)))}.}{(((course.semester))) (((course.year)))}
+((* endfor *))
+\end{alignedentrieshang}
+((* endfor *))
+
+%% Advising
+\subsection{CURRENT GRADUATE STUDENTS}
+
+\begin{alignedentrieshang}
+((* for advisee in data.advising | rejectattr("degree_year") | rejectattr("degree", "equalto", "B.S.") | sort(attribute="lastname") *))
+\hangingitem{(((advisee.firstname))) (((advisee.lastname))): \textbf{(((advisee.degree)))} in (((advisee.field))), (((advisee.university))).((* if advisee.thesis_title *)) Thesis: \enquote{((( advisee.thesis_title )))}.((* endif *)) \textbf{((* if advisee.role == "primary" *))Primary Advisor((* else *))Committee Member((* endif *))}.}{((* if advisee.join_year *))(((advisee.join_year)))---((* endif *))}
+((* endfor *))
+\end{alignedentrieshang}
+
+\subsection{PAST GRADUATE STUDENTS}
+
+\begin{alignedentrieshang}
+((* for advisee in data.advising | selectattr("degree_year") | rejectattr("degree", "equalto", "B.S.") | sort(attribute="lastname") | sort(attribute="degree_year", reverse=True) *))
+\hangingitem{(((advisee.firstname))) (((advisee.lastname))): \textbf{(((advisee.degree)))} in (((advisee.field))), (((advisee.university))).((* if advisee.thesis_title *)) Thesis: \enquote{((( advisee.thesis_title )))}.((* endif *)) \textbf{((* if advisee.role == "primary" *))Primary Advisor((* else *))Committee Member((* endif *))}.}{((((advisee.degree_year))))}
+((* endfor *))
+\end{alignedentrieshang}
+
+\subsection{UNDERGRADUATE RESEARCHERS}
+
+\textit{Year indicates graduation year.}
+
+\medskip
+
+\begin{alignedentrieshang}
+((* for advisee in data.advising | selectattr("degree", "equalto", "B.S.") | sort(attribute="degree_year", reverse=True) *))
+\hangingitem{(((advisee.firstname))) (((advisee.lastname))): \textit{(((advisee.degree))) in (((advisee.field)))}, (((advisee.university))).}{(((advisee.degree_year)))}
+((* endfor *))
+\end{alignedentrieshang}
+
+\subsection{TEAMS ADVISED}
+
+\begin{alignedentrieshang}
+((* for team in data.teams_advised | sort(attribute="year", reverse=True) *))
+\hangingitem{\textbf{(((team.project_title)))}: (((team.program))).}{(((team.period)))}
+((* endfor *))
+\end{alignedentrieshang}
+
+%% Advisee Awards
+\subsection{ADVISEE AWARDS}
+
+\begin{alignedentrieshang}
+((* for award in data.advisee_awards | sort(attribute="year", reverse=True) *))
+\hangingitem{\textbf{(((award.recipient | escape_tex)))}: (((award.award | escape_tex))).}{(((award.year)))}
+((* endfor *))
+\end{alignedentrieshang}

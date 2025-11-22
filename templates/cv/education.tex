@@ -1,0 +1,13 @@
+%% Education
+\section{EDUCATION}
+
+((* for univ, degree_list in data.education | groupby("university") *))
+
+\noindent\textbf{(((univ | escape_tex)))}
+
+\begin{alignedentries}[2em]
+((* for deg in degree_list | sort(attribute="year", reverse=True) *))
+\entryitem{\textit{(((deg.degree | escape_tex))) in ((( deg.subject | escape_tex )))}}{((( deg.year )))}((* if not loop.last *))\entrybreak((* endif *))
+((* endfor *))
+\end{alignedentries}
+((* endfor *))
