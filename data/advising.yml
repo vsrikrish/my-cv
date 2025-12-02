@@ -49,30 +49,47 @@ advising:
     university: Cornell University
     role: Advisor, Committee Chair
     start: 2023
-    end: present
+    end: 2025
     type: Graduate
     thesis: |-
       Economic and Environmental Impacts of Co-Located and Grid-Connected Hydrogen Production
   - name: Demola Ogunnaike
     degree: M.S./Ph.D.
     field: Systems Engineering
+    university: Cornell University
     start: 2024
     end: present
     type: Graduate
-    role: Committee Chair
+    role: Committee Chair, Co-Advisor
+  - name: Luan Brito
+    degree: Ph.D.
+    field: Atmospheric Science
+    university: Cornell University
+    start: 2024
+    end: present
+    type: Graduate
+    role: Advisor, Committee Chair
+  - name: Nino Kacharava
+    degree: Ph.D.
+    field: Civil \& Environmental Engineering
+    university: Cornell University
+    role: Advisor, Committee Chair
+    type: Graduate
+    start: 2024
+    end: present
   - name: Cella Schnabel
     field: Civil \& Environmental Engineering
     university: Cornell University
     role: Research Advisor
     start: 2023
-    end: present
+    end: 2025
     type: Undergraduate
   - name: Cannon Cline
     field: Earth \& Atmospheric Science
     university: Cornell University
     role: Research Advisor
     start: 2023
-    end: present
+    end: 2025
     type: Undergraduate
   - name: Reynolds Li
     field: Information Science
@@ -128,4 +145,6 @@ advising:
     field: Systems Engineering
     role: Committee Chair
     start: 2024
-    end: present
+    end: 2025
+    thesis: |-
+      Integrating Extreme Weather Hazard Assessment into Agrivoltaic Suitability Analysis: A Multi-Criteria Decision Framework for the Contiguous United States
