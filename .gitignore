@@ -7,6 +7,9 @@ docs/cover-letter.*
 docs/*-CV-short.*
 *-CV-short.*
 
+# Claude Code settings (machine-specific)
+.claude/
+
 # Temporary build directory
 temp_output/
 
