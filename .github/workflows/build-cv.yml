@@ -1,19 +1,50 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-# This workflow will download a prebuilt Ruby version, install dependencies and build the site with Rake.
-# For more information see: https://github.com/marketplace/actions/setup-ruby-jruby-and-truffleruby
+# Build CV PDF and deploy to GitHub Pages
+# Runs tests first, then builds and deploys
 
 name: build-cv-pdf
 
 on:
-  repository_dispatch:
   push:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
+  # Run tests first
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -el {0}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          submodules: false
+
+      - name: Update public bibliography submodule
+        run: git submodule update --init --recursive my-papers
+
+      - name: Update private CV data submodule
+        run: |
+          git config --global url."https://${{ secrets.PAT_TOKEN }}@github.com/".insteadOf "https://github.com/"
+          git submodule update --init --recursive my-cv-data
+
+      - name: Set up Conda Environment
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          activate-environment: cv
+          environment-file: environment.yml
+          python-version: "3.12"
+          auto-activate-base: false
+
+      - name: Run Tests
+        run: pytest tests/ -v --tb=short
+
+  # Build PDF only after tests pass
   build:
+    needs: test
     runs-on: ubuntu-latest
     defaults:
       run:

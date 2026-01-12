@@ -1,0 +1,60 @@
+# Automatically create a PR when my-cv-data submodule is updated
+# Triggered via repository_dispatch from the my-cv-data repo
+
+name: submodule-update-pr
+
+on:
+  repository_dispatch:
+    types: [submodule-update]
+
+jobs:
+  create-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          submodules: false
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git config --global url."https://${{ secrets.PAT_TOKEN }}@github.com/".insteadOf "https://github.com/"
+
+      - name: Create update branch and PR
+        env:
+          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
+        run: |
+          BRANCH_NAME="update-cv-data-$(date +%Y%m%d-%H%M%S)"
+          git checkout -b $BRANCH_NAME
+
+          # Update the submodules
+          git submodule update --init --recursive my-cv-data
+          git submodule update --remote my-cv-data
+
+          # Check if there are changes
+          if git diff --quiet --submodule; then
+            echo "No submodule changes detected"
+            exit 0
+          fi
+
+          # Commit and push
+          git add my-cv-data
+          git commit -m "Update my-cv-data submodule
+
+          Triggered by: ${{ github.event.client_payload.ref }}"
+          git push origin $BRANCH_NAME
+
+          # Create PR
+          gh pr create \
+            --title "Update CV data submodule" \
+            --body "Automated PR to update the my-cv-data submodule.
+
+          Triggered by commit: \`${{ github.event.client_payload.ref }}\`
+
+          **Please review and merge if tests pass.**" \
+            --base main \
+            --head $BRANCH_NAME
