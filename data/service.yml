@@ -44,6 +44,11 @@ service:
   - title: Member
     org: Environmental Engineering Program Curriculum Committee
     start: 2022
+    end: 2026
+    tag: univ
+  - title: Co-Chair
+    org: Environmental Engineering Program Curriculum Committee
+    start: 2026
     end: present
     tag: univ
   - title: Member
