@@ -58,7 +58,7 @@ advising:
     field: Systems Engineering
     university: Cornell University
     start: 2024
-    end: present
+    end: 2026
     type: Graduate
     role: Committee Chair, Co-Advisor
   - name: Luan Brito
@@ -95,6 +95,13 @@ advising:
     field: Information Science
     university: Cornell University
     role: Research Advisor
+    start: 2025
+    end: present
+    type: Undergraduate
+  - name: Anna Levy
+    field: Information Science
+    university: Cornell University
+    role: Research Advisor, Academic Advisor
     start: 2025
     end: present
     type: Undergraduate

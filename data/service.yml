@@ -32,7 +32,7 @@ service:
     start: 2020
     end: 2024
   - title: Co-Convener
-    org: European Social Simulation Association Meeting Session on Uncertainty in Agent-Based simulation
+    org: European Social Simulation Conference Session on Uncertainty in Agent-Based simulation
     start: 2024
   - title: Co-Guest Editor
     journal: Water
