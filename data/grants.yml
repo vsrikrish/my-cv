@@ -46,11 +46,37 @@ grants:
     total: 90,000
   - title: |-
       Climate-Resilient Energy Systems: Integrating Power System Analysis with Community-Based Insights
-    funder: Cornell Atkinson
+    funder: Cornell Atkinson Center for Sustainability
     PI: C. Lindsay Anderson
     role: Co-PI
     start: 2024
     end: 2025
     amount: 20,336
     total: 116,582
-  
+  - title: |-
+      R2I2: Maximizing resilience to winter weather in future electric power systems
+    funder: NSF
+    PI: Ana Dyreson
+    role: Co-PI
+    start: 2025
+    end: 2027
+    amount: 77,314
+    total: 499,314  
+  - title: |-
+      Reducing extreme-heat deaths by enhancing disaster scenarios and training    
+    funder: Cornell Atkinson Center for Sustainability
+    PI: Alistair Hayden
+    role: Co-PI
+    start: 2025
+    end: 2027
+    amount: 4,680
+    total: 149,690  
+  - title: |-
+      Bridging Economics and Climate to Build a Durable Case for Mitigating Hydrogen Emissions
+    funder: Cornell Atkinson Center for Sustainability
+    PI: Vivek Srikrishnan
+    role: PI
+    start: 2026
+    end: 2027
+    amount: 92,500
+      
