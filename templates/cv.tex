@@ -440,7 +440,7 @@ UprightFont=*-Regular]{Inconsolata}
 ((* endfor *))
 ((* else *))
 ((* for x in i | sort_by_attr(["end", "start"], reverse=True) *))
-\item (((x.name))). (((x.field))). (((x.role))). (((x.start)))--(((x.end))). ((*if x.thesis *)) Thesis: "((( x.thesis | capitalize )))."((* endif *)) ((*if x.current *)) Current: (((x.current))).((* endif *))
+\item (((x.name))). (((x.field))). (((x.role))). (((x.start)))--(((x.end))). ((* if x.thesis *)) Thesis: "((( x.thesis | capitalize )))."((* endif *)) ((*if x.current *)) Current: (((x.current))).((* endif *))
 ((* endfor *))
 ((* endif *))
 \end{itemize}
@@ -480,7 +480,7 @@ UprightFont=*-Regular]{Inconsolata}
 
 \begin{itemize}[label={}]
 ((* for i in sect.entries.outreach | sort_last_year("year", reverse=True) *))
-\item (((i.activity))), (((i.org))),  (((i.role))). (((i.year))).
+\item (((i.activity))), ((* if i.url *)) \url{i.url} ((* endif *)) (((i.org))),  (((i.role))). (((i.year))).
 ((* endfor *))
 \end{itemize}
 
