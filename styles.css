@@ -164,6 +164,26 @@ ul li:has(.cv-num) {
   width: 1em;
 }
 
+/* table of contents */
+#TOC {
+  font-family: "Lato", sans-serif;
+}
+#TOC > h2, #TOC > .h2 {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--cornell-gray);
+}
+#TOC a {
+  color: var(--cornell-gray);
+}
+#TOC a:hover {
+  color: var(--cornell-red);
+}
+#TOC .active {
+  border-left-color: var(--cornell-red) !important;
+  color: var(--cornell-red) !important;
+}
+
 @media print {
   body {
     max-width: none;

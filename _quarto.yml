@@ -46,7 +46,9 @@ format:
     filecolor: CornellRed
   html:
     css: styles.css
-    toc: false
+    toc: true
+    toc-depth: 1
+    toc-title: Contents
     page-layout: article
     output-file: cv
     embed-resources: true
