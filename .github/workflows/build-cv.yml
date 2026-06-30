@@ -8,7 +8,7 @@ name: Build CV
 on:
   workflow_dispatch:
   repository_dispatch:
-    types: [ push-bib ]
+    types: [ push-bib, push-cv-data ]
   push:
     branches: [ main ]
 
