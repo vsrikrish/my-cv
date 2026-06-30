@@ -283,5 +283,12 @@ TSWLatexianTemp*
 # Uncomment the next line to have this generated file ignored.
 #*Notes.bib
 
-__pycache__/*
-Srikrishnan-CV.tex
+## Quarto build artifacts
+/.quarto/
+/.quarto-cache/
+*_files/
+/cv.tex
+
+**/*.quarto_ipynb
+
+/.luarc.json

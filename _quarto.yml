@@ -1,0 +1,52 @@
+project:
+  type: default
+  render:
+    - cv.qmd
+
+metadata-files:
+  - data/person.yml
+  - data/interests.yml
+  - data/appointments.yml
+  - data/education.yml
+  - data/talks.yml
+  - data/workshops.yml
+  - data/grants.yml
+  - data/projects.yml
+  - data/teaching.yml
+  - data/advising.yml
+  - data/committee.yml
+  - data/awards.yml
+  - data/outreach.yml
+  - data/service.yml
+  - data/experience.yml
+
+shortcodes:
+  - filters/cv-sections.lua
+  - filters/cv-bibliography.lua
+
+format:
+  pdf:
+    documentclass: memoir
+    classoption: [11pt, article, oneside]
+    geometry:
+      - left=1.5in
+      - right=1.75in
+      - top=1in
+      - bottom=0.75in
+    pdf-engine: xelatex
+    top-level-division: section
+    include-in-header: templates/preamble.tex
+    output-file: Srikrishnan-CV
+    keep-tex: true
+    fig-format: png
+    colorlinks: true
+    linkcolor: CornellRed
+    urlcolor: CornellRed
+    citecolor: CornellRed
+    filecolor: CornellRed
+  html:
+    css: styles.css
+    toc: false
+    page-layout: article
+    output-file: cv
+    embed-resources: true

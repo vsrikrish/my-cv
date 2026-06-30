@@ -1,0 +1,82 @@
+% Curriculum Vitae preamble (header-includes for the Quarto PDF format)
+% Ported from the previous templates/cv.tex preamble, with the
+% biblatex/biber machinery removed -- publications are now formatted by
+% filters/cv-bibliography.lua at the Pandoc-AST level.
+
+\definecolor{CornellRed}{HTML}{b31b1b} % official Cornell red color -- use for text etc
+\definecolor{CornellGray}{HTML}{222222} % official Cornell gray -- use for Section
+\definecolor{LightGray}{HTML}{F7F7F7} % background color -- do not use for anything else
+\definecolor{BrickRed}{HTML}{C04829} % backup color
+\definecolor{GrassGreen}{HTML}{359245}
+\definecolor{WarmYellow}{HTML}{E9A139}
+
+%% Choose fonts for use with xelatex
+\setmainfont[Path=fonts/,
+Mapping={tex-text},
+Numbers={OldStyle},
+Ligatures={Common},
+UprightFont=*-Regular,
+BoldFont=*-Bold,
+ItalicFont=*-Italic,
+BoldItalicFont=*-BoldItalic
+]{CrimsonText}
+\setsansfont[Path=fonts/,
+Mapping=tex-text,
+Colour=b31b1b,
+UprightFont=*-Regular,
+BoldFont=*-Bold,
+ItalicFont=*-Italic]{Lato}
+\setmonofont[Path=fonts/,
+Mapping=tex-text,
+Scale=0.9,
+UprightFont=*-Regular]{Inconsolata}
+
+%%------------------------------------------------------------------------
+%% Section styling
+%%------------------------------------------------------------------------
+
+% Section styling -- full-width heading (not in the margin), unnumbered
+% (headings carry the .unnumbered class in cv.qmd/cv-sections.lua).
+% titlesec is not used here: memoir warns against it, and its non-
+% [leftmargin] shapes silently fell back to memoir's own (tiny) section
+% style. \sffamily (Lato) is avoided for headings too -- at larger sizes
+% it was rendering far smaller than \fontsize requested, for reasons that
+% didn't repay further digging; bold Crimson Text in Cornell red reads
+% clearly and keeps a single font family in headings.
+\setsecheadstyle{\color{CornellRed}\bfseries\fontsize{14}{17}\selectfont}
+\setbeforesecskip{2.5ex plus 1ex minus .2ex}
+\setaftersecskip{1.5ex plus .2ex}
+
+\setsubsecheadstyle{\itshape\normalsize}
+\setbeforesubsecskip{2ex plus .5ex}
+\setaftersubsecskip{1ex}
+
+\raggedbottom
+
+% better lists
+\usepackage{enumitem}
+\setlist[itemize, 1]{label={}, nosep, noitemsep, labelsep=-5pt, leftmargin=*, after=\vspace{\baselineskip}, itemindent=-15pt, labelindent=5pt}
+
+\usepackage[autostyle=true, autopunct=true, english=american]{csquotes}
+
+%% icons for the contact info
+\usepackage{fontawesome5}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\rfoot{Current as of \today}
+\cfoot{}
+\lfoot{Page \thepage}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead{}
+
+% link styling beyond what Quarto's colorlinks/linkcolor/urlcolor metadata
+% already configures via \hypersetup (hyperref isn't loaded yet at
+% header-includes time, so this is deferred)
+\AtBeginDocument{\hypersetup{
+  breaklinks=true,
+  pdfnewwindow=true,
+  pdftitle={Vivek Srikrishnan -- CV},
+  pdfauthor={Vivek Srikrishnan}
+}}

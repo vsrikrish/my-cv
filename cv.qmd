@@ -1,0 +1,87 @@
+---
+pagetitle: "Vivek Srikrishnan — CV"
+---
+
+{{< cv-header >}}
+
+# Research Interests {.unnumbered}
+
+{{< cv-section interests >}}
+
+# Appointments {.unnumbered}
+
+{{< cv-section appointments >}}
+
+# Education {.unnumbered}
+
+{{< cv-section education >}}
+
+# Publications {.unnumbered}
+
+## Peer-Reviewed Journal Articles {.unnumbered}
+
+{{< cv-bibliography papers >}}
+
+## Articles Under Review or Forthcoming {.unnumbered}
+
+{{< cv-bibliography inpress >}}
+
+## Reports {.unnumbered}
+
+{{< cv-bibliography reports >}}
+
+## Books {.unnumbered}
+
+{{< cv-bibliography books >}}
+
+## Conference Proceedings {.unnumbered}
+
+{{< cv-bibliography conferences >}}
+
+## Conference Presentations {.unnumbered}
+
+{{< cv-bibliography talks >}}
+
+## Conference Posters {.unnumbered}
+
+{{< cv-bibliography posters >}}
+
+# Invited Talks {.unnumbered}
+
+{{< cv-section talks >}}
+
+# Grants and Contracts {.unnumbered}
+
+{{< cv-section grants >}}
+
+# Networks and Projects {.unnumbered}
+
+{{< cv-section projects >}}
+
+# Teaching {.unnumbered}
+
+{{< cv-section teaching >}}
+
+# Advising {.unnumbered}
+
+{{< cv-section advising >}}
+
+# Committee Member {.unnumbered}
+
+{{< cv-section committee >}}
+
+# Awards {.unnumbered}
+
+{{< cv-section awards >}}
+
+# Outreach {.unnumbered}
+
+{{< cv-section outreach >}}
+
+# Service {.unnumbered}
+
+{{< cv-section service >}}
+
+# Professional Experience {.unnumbered}
+
+{{< cv-section experience >}}
